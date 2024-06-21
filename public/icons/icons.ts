@@ -1,3 +1,10 @@
 import star from "./star.svg";
-
-export { star };
+import design from "./design.svg";
+import develop from "./develop.svg";
+import marketing from "./marketing.svg";
+import business from "./business.svg";
+import economic from "./economic.svg";
+import language from "./language.svg";
+import certificate from "./certificate.svg";
+import selfDevelop from "./self-develop.svg";
+export { star, develop, design, marketing, business, economic, language, certificate, selfDevelop };
