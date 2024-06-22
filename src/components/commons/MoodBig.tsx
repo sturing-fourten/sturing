@@ -18,7 +18,7 @@ export function MoodBigBase(props: IMoodBigBaseProps) {
   const { children, imageSrc, imageAlt, className } = props;
   return (
     <span
-      className={`inline-flex items-center justify-center gap-[10px] w-[164px] h-[70px] px-2 border rounded-[3px] text-[16px] tracking-[-0.32px] ${className}`}>
+      className={`inline-flex items-center justify-center gap-[10px] w-full h-[70px] px-2 border rounded-[3px] text-[16px] tracking-[-0.32px] ${className}`}>
       <Image src={imageSrc} alt={imageAlt} width={30} height={30} />
       {children}
     </span>
