@@ -412,16 +412,15 @@ export default function page() {
       </div>
       <div className="p-4">
         <h1 className="font-bold">StudyRecruitCard</h1>
-        {/* <div className="flex"> */}
         <StudyRecruitCard isMini={false} isScraped={true} />
         <StudyRecruitCard isMini={false} isScraped={false} />
         <StudyRecruitCard isMini={true} isScraped={true} />
         <StudyRecruitCard isMini={true} isScraped={false} />
-        {/* </div> */}
       </div>
       <div className="p-4">
         <h1 className="font-bold">Lecture Card</h1>
-        <LectureCard />
+        <LectureCard isScraped={true} />
+        <LectureCard isScraped={false} />
       </div>
     </>
   );
