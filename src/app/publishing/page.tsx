@@ -1,4 +1,4 @@
-import { StudyCategoryButton } from "@/components/commons/StudyCategoryButton";
+import { StudyCategoryButton, StudyCategoryToggle } from "@/components/commons/StudyCategorys";
 import { TagLight, TagMain, TagRate } from "@/components/commons/Tags";
 import { STUDY_CATEGORY_MENU } from "@/constant/study";
 
@@ -22,6 +22,7 @@ export default function page() {
         <TagLight>디자인</TagLight>
         <TagLight>6월 7일</TagLight>
       </div>
+
       <div className="p-4">
         <h1 className="font-bold">StudyCategoryButton</h1>
         <StudyCategoryButton
@@ -64,6 +65,33 @@ export default function page() {
           imageAlt={`${STUDY_CATEGORY_MENU.selfDevelop.name} 아이콘`}>
           {STUDY_CATEGORY_MENU.selfDevelop.name}
         </StudyCategoryButton>
+      </div>
+      <div className="p-4">
+        <h1 className="font-bold">StudyCategoryToggle</h1>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.design.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.design.name}</StudyCategoryToggle>
+        <br />
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.develop.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.develop.name}</StudyCategoryToggle>
+        <br />
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.marketing.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.marketing.name}</StudyCategoryToggle>
+        <br />
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.business.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.business.name}</StudyCategoryToggle>
+        <br />
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.economic.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.economic.name}</StudyCategoryToggle>
+        <br />
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.language.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.language.name}</StudyCategoryToggle>
+        <br />
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.certificate.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.certificate.name}</StudyCategoryToggle>
+        <br />
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.selfDevelop.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.selfDevelop.name}</StudyCategoryToggle>
+        <br />
       </div>
     </>
   );
