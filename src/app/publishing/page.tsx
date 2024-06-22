@@ -8,6 +8,7 @@ import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "@/constant/study"
 import StudyOnGoingCard from "@/components/commons/study/StudyOnGoingCard";
 import StudyAppliedCard from "@/components/commons/study/StudyAppliedCard";
 import StudyAcceptCard from "@/components/commons/study/StudyAcceptCard";
+import StudyDoneCard from "@/components/commons/study/StudyDoneCard";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {
@@ -446,6 +447,13 @@ export default function page() {
         <StudyAcceptCard status={"APPLIED"} />
         <StudyAcceptCard status={"APPLIED_VIEW"} />
         <StudyAcceptCard status={"ACCEPTED"} />
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">StudyDoneCard</h1>
+        <StudyDoneCard />
+        <StudyDoneCard />
+        <StudyDoneCard />
       </div>
     </>
   );
