@@ -1,10 +1,15 @@
 import star from "./star.svg";
+import date from "./date.svg";
+import location from "./location.svg";
+import teammate from "./teammate.svg";
+import schedule from "./schedule.svg";
+import checkSquare from "./check-square.svg";
+
+// bookmark
 import bookmarkGrayOn from "./bookmark-gray-on.svg";
 import bookmarkGrayOff from "./bookmark-gray-off.svg";
 import bookmarkWhiteOn from "./bookmark-white-on.svg";
 import bookmarkWhiteOff from "./bookmark-white-off.svg";
-import date from "./date.svg";
-import location from "./location.svg";
 
 // study category
 import design from "./design.svg";
@@ -30,12 +35,15 @@ import freewheeling from "./freewheeling.svg";
 
 export {
   star,
+  date,
+  location,
+  teammate,
+  schedule,
+  checkSquare,
   bookmarkGrayOn,
   bookmarkGrayOff,
   bookmarkWhiteOn,
   bookmarkWhiteOff,
-  date,
-  location,
   develop,
   design,
   marketing,

@@ -1,10 +1,11 @@
 import LectureCard from "@/components/commons/LectureCard";
 import { MoodBigToggle } from "@/components/commons/MoodBig";
 import { MoodMiniToggle, MoodMiniTag } from "@/components/commons/MoodMini";
-import { StudyRecruitCard } from "@/components/commons/StudyRecruitCard";
-import { StudyCategoryButton, StudyCategoryToggle } from "@/components/commons/StudyCategorys";
+import { StudyRecruitCard } from "@/components/commons/study/StudyRecruitCard";
+import { StudyCategoryButton, StudyCategoryToggle } from "@/components/commons/study/StudyCategories";
 import { TagLight, TagMain, TagRate } from "@/components/commons/Tags";
 import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
+import StudyOnGoingCard from "@/components/commons/study/StudyOnGoingCard";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {
@@ -410,6 +411,7 @@ export default function page() {
           </MoodBigToggle>
         </div>
       </div>
+
       <div className="p-4">
         <h1 className="font-bold">StudyRecruitCard</h1>
         <StudyRecruitCard isMini={false} isScraped={true} />
@@ -417,10 +419,17 @@ export default function page() {
         <StudyRecruitCard isMini={true} isScraped={true} />
         <StudyRecruitCard isMini={true} isScraped={false} />
       </div>
+
       <div className="p-4">
         <h1 className="font-bold">Lecture Card</h1>
         <LectureCard isScraped={true} />
         <LectureCard isScraped={false} />
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">StudyOnGoingCard</h1>
+        <StudyOnGoingCard isStarted={true} />
+        <StudyOnGoingCard isStarted={false} />
       </div>
     </>
   );
