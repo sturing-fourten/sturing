@@ -1,3 +1,4 @@
+import LectureCard from "@/components/commons/LectureCard";
 import { MoodBigToggle } from "@/components/commons/MoodBig";
 import { MoodMiniToggle, MoodMiniTag } from "@/components/commons/MoodMini";
 import { StudyCategoryButton, StudyCategoryToggle } from "@/components/commons/StudyCategorys";
@@ -8,7 +9,7 @@ import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "@/constant/study"
 export const SAMPLE_PROGRESS_WAY_TYPE = {
   online: "온라인",
   offline: "오프라인",
-  mix: "온/오프라인",
+  mix: "온∙오프라인",
 };
 
 export default function page() {
@@ -415,6 +416,13 @@ export default function page() {
           {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
         </MoodBigToggle>
         <br />
+      </div>
+      <div className="p-4">
+        <h1 className="font-bold">Study Card</h1>
+      </div>
+      <div className="p-4">
+        <h1 className="font-bold">Lecture Card</h1>
+        <LectureCard />
       </div>
     </>
   );

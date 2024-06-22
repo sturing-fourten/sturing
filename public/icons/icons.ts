@@ -1,4 +1,5 @@
 import star from "./star.svg";
+import bookmark from "./bookmark.svg";
 
 // study category
 import design from "./design.svg";
@@ -24,6 +25,7 @@ import freewheeling from "./freewheeling.svg";
 
 export {
   star,
+  bookmark,
   develop,
   design,
   marketing,
