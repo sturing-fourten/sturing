@@ -1,6 +1,7 @@
 import LectureCard from "@/components/commons/LectureCard";
 import { MoodBigToggle } from "@/components/commons/MoodBig";
 import { MoodMiniToggle, MoodMiniTag } from "@/components/commons/MoodMini";
+import { StudyCard } from "@/components/commons/StudyCards";
 import { StudyCategoryButton, StudyCategoryToggle } from "@/components/commons/StudyCategorys";
 import { TagLight, TagMain, TagRate } from "@/components/commons/Tags";
 import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
@@ -419,6 +420,7 @@ export default function page() {
       </div>
       <div className="p-4">
         <h1 className="font-bold">Study Card</h1>
+        <StudyCard />
       </div>
       <div className="p-4">
         <h1 className="font-bold">Lecture Card</h1>
