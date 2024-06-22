@@ -7,6 +7,16 @@ import {
   language,
   certificate,
   selfDevelop,
+  friendly,
+  professional,
+  serious,
+  systematic,
+  passionate,
+  responsible,
+  learningFocused,
+  collaborative,
+  proactive,
+  freewheeling,
 } from "../../public/icons/icons";
 
 export const STUDY_CATEGORY_MENU = {
@@ -41,5 +51,48 @@ export const STUDY_CATEGORY_MENU = {
   selfDevelop: {
     imageSrc: selfDevelop,
     name: "자기 계발",
+  },
+};
+
+export const USER_FAVORITE_FIELD_TYPE = {
+  friendly: {
+    name: "친근한",
+    imageSrc: friendly,
+  },
+  professional: {
+    name: "전문적인",
+    imageSrc: professional,
+  },
+  serious: {
+    name: "진지한",
+    imageSrc: serious,
+  },
+  systematic: {
+    name: "체계적인",
+    imageSrc: systematic,
+  },
+  passionate: {
+    name: "열정적인",
+    imageSrc: passionate,
+  },
+  responsible: {
+    name: "책임감있는",
+    imageSrc: responsible,
+  },
+  learningFocused: {
+    name: "학습중심적",
+    imageSrc: learningFocused,
+  },
+  collaborative: {
+    name: "협력적인",
+    imageSrc: collaborative,
+  },
+  proactive: {
+    name: "자기주도적",
+    imageSrc: proactive,
+  },
+  freewheeling: {
+    name: "자유로운",
+    imageSrc: freewheeling,
   },
 };

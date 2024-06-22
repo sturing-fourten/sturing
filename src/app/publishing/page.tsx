@@ -1,6 +1,8 @@
+import { MoodBigToggle } from "@/components/commons/MoodBig";
+import { MoodMiniToggle, MoodMiniTag } from "@/components/commons/MoodMini";
 import { StudyCategoryButton, StudyCategoryToggle } from "@/components/commons/StudyCategorys";
 import { TagLight, TagMain, TagRate } from "@/components/commons/Tags";
-import { STUDY_CATEGORY_MENU } from "@/constant/study";
+import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {
@@ -91,6 +93,327 @@ export default function page() {
         <br />
         <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.selfDevelop.name}</StudyCategoryToggle>
         <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.selfDevelop.name}</StudyCategoryToggle>
+        <br />
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">Mood Mini Tag</h1>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.friendly.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.professional.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.serious.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.systematic.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.passionate.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.responsible.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.proactive.name}
+        </MoodMiniTag>
+        <MoodMiniTag
+          imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+        </MoodMiniTag>
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">Mood Mini Toggle</h1>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.friendly.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.friendly.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.professional.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.professional.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.serious.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.serious.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.systematic.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.systematic.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.passionate.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.passionate.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.responsible.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.responsible.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.proactive.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.proactive.name}
+        </MoodMiniToggle>
+        <br />
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+        </MoodMiniToggle>
+        <MoodMiniToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+        </MoodMiniToggle>
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">Mood Big Toggle</h1>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.friendly.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.friendly.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.professional.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.professional.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.serious.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.serious.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.systematic.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.systematic.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.passionate.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.passionate.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.responsible.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.responsible.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.proactive.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.proactive.name}
+        </MoodBigToggle>
+        <br />
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}
+          isActive={true}>
+          {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+        </MoodBigToggle>
+        <MoodBigToggle
+          imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
+          imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}
+          isActive={false}>
+          {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+        </MoodBigToggle>
         <br />
       </div>
     </>
