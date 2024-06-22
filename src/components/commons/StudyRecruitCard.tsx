@@ -1,18 +1,30 @@
 import Image from "next/image";
-import { bookmark, date, location } from "../../../public/icons/icons";
+import { bookmarkWhiteOn, bookmarkWhiteOff, date, location } from "../../../public/icons/icons";
 import { TagLight, TagMain } from "./Tags";
 import { SAMPLE_PROGRESS_WAY_TYPE } from "@/app/publishing/page";
 
-export function StudyCard() {
+interface IStudyRecruitCardProps {
+  isMini: boolean;
+  isScraped: boolean;
+}
+
+export function StudyRecruitCard({ isMini, isScraped }: IStudyRecruitCardProps) {
   return (
-    <div className="flex flex-col gap-3 w-[185px]">
-      <div className={`relative h-[100px] rounded-[8px] bg-[url('https://picsum.photos/200/300')] overflow-hidden`}>
-        <Image className="absolute right-[8px] top-[8px] cursor-pointer" src={bookmark} alt="bookmark icon" />
+    <article className={`flex flex-col gap-3 ${isMini ? "w-[168px]" : "w-[185px]"}`}>
+      <section
+        className={`relative rounded-[8px] bg-[url('https://picsum.photos/200/300')] overflow-hidden  ${
+          isMini ? "h-[92px]" : "h-[100px]"
+        }`}>
+        <Image
+          className="absolute right-[8px] top-[8px] cursor-pointer"
+          src={isScraped ? bookmarkWhiteOn : bookmarkWhiteOff}
+          alt="bookmark icon"
+        />
         <p className="absolute bottom-0 w-full py-[3px] bg-black/[.8] text-[12px] text-semibold text-center tracking-[-0.36px] text-white">
           {"매주 목 오후 8:00"}
         </p>
-      </div>
-      <div>
+      </section>
+      <section>
         <div className="flex gap-1 mb-1">
           <TagMain>{SAMPLE_PROGRESS_WAY_TYPE.mix}</TagMain>
           <TagLight>{"디자인"}</TagLight>
@@ -29,7 +41,7 @@ export function StudyCard() {
         </div>
         <hr className="my-[8px] bg-gray-300" />
         <p className="text-[12px] font-medium tracking-[-0.36px] text-gray-700">{"모집 중 1/4"}</p>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 }

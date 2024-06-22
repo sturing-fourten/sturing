@@ -1,5 +1,7 @@
 import star from "./star.svg";
 import bookmark from "./bookmark.svg";
+import bookmarkWhiteOn from "./bookmark-white-on.svg";
+import bookmarkWhiteOff from "./bookmark-white-off.svg";
 import date from "./date.svg";
 import location from "./location.svg";
 
@@ -28,6 +30,8 @@ import freewheeling from "./freewheeling.svg";
 export {
   star,
   bookmark,
+  bookmarkWhiteOn,
+  bookmarkWhiteOff,
   date,
   location,
   develop,
