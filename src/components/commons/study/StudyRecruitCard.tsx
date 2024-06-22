@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { bookmarkWhiteOn, bookmarkWhiteOff, date, location } from "../../../public/icons/icons";
-import { TagLight, TagMain } from "./Tags";
+import { bookmarkWhiteOn, bookmarkWhiteOff, date, location } from "../../../../public/icons/icons";
+import { TagLight, TagMain } from "../Tags";
 import { SAMPLE_PROGRESS_WAY_TYPE } from "@/app/publishing/page";
 
 interface IStudyRecruitCardProps {
@@ -12,7 +12,7 @@ export function StudyRecruitCard({ isMini, isScraped }: IStudyRecruitCardProps) 
   return (
     <article className={`flex flex-col gap-3 ${isMini ? "w-[168px]" : "w-[185px]"}`}>
       <section
-        className={`relative rounded-[8px] bg-[url('https://picsum.photos/200/300')] overflow-hidden  ${
+        className={`relative rounded-lg bg-[url('https://picsum.photos/200/300')] overflow-hidden  ${
           isMini ? "h-[92px]" : "h-[100px]"
         }`}>
         <Image
