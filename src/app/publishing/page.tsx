@@ -6,6 +6,7 @@ import { StudyCategoryButton, StudyCategoryToggle } from "@/components/commons/s
 import { TagLight, TagMain, TagRate } from "@/components/commons/Tags";
 import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
 import StudyOnGoingCard from "@/components/commons/study/StudyOnGoingCard";
+import StudyAppliedCard from "@/components/commons/study/StudyAppliedCard";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {
@@ -430,6 +431,13 @@ export default function page() {
         <h1 className="font-bold">StudyOnGoingCard</h1>
         <StudyOnGoingCard isStarted={true} />
         <StudyOnGoingCard isStarted={false} />
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">StudyAppliedCard</h1>
+        <StudyAppliedCard status={"APPLIED"} />
+        <StudyAppliedCard status={"APPLIED_VIEW"} />
+        <StudyAppliedCard status={"ACCEPTED"} />
       </div>
     </>
   );
