@@ -9,6 +9,7 @@ import StudyOnGoingCard from "@/components/commons/study/StudyOnGoingCard";
 import StudyAppliedCard from "@/components/commons/study/StudyAppliedCard";
 import StudyAcceptCard from "@/components/commons/study/StudyAcceptCard";
 import StudyDoneCard from "@/components/commons/study/StudyDoneCard";
+import StudyUpcomingCard from "@/components/commons/study/StudyUpcomingCard";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {
@@ -452,8 +453,11 @@ export default function page() {
       <div className="p-4">
         <h1 className="font-bold">StudyDoneCard</h1>
         <StudyDoneCard />
-        <StudyDoneCard />
-        <StudyDoneCard />
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">StudyUpcomingCard</h1>
+        <StudyUpcomingCard />
       </div>
     </>
   );
