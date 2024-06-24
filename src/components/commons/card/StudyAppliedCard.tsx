@@ -1,6 +1,6 @@
-import StudyApplyInfo from "./StudyApplyInfo";
-import StudyCardButton from "./StudyCardButton";
-import StudyMeetingInfo from "./StudyMeetingInfo";
+import StudyApplyInfo from "./element/StudyApplyInfo";
+import StudyCardButton from "./element/StudyCardButton";
+import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
 export default function StudyAppliedCard({ status }: { status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED" }) {
   return (

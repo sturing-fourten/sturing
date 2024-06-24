@@ -1,15 +1,18 @@
-import LectureCard from "@/components/commons/LectureCard";
-import { MoodBigToggle } from "@/components/commons/MoodBig";
-import { MoodMiniToggle, MoodMiniTag } from "@/components/commons/MoodMini";
-import { StudyRecruitCard } from "@/components/commons/study/StudyRecruitCard";
-import { StudyCategoryButton, StudyCategoryToggle } from "@/components/commons/study/StudyCategories";
-import { TagLight, TagMain, TagRate } from "@/components/commons/Tags";
+import { StudyCategoryButton } from "@/components/commons/StudyCategoryButton";
+import LectureCard from "@/components/commons/card/LectureCard";
+import StudyAcceptCard from "@/components/commons/card/StudyAcceptCard";
+import StudyAppliedCard from "@/components/commons/card/StudyAppliedCard";
+import StudyDoneCard from "@/components/commons/card/StudyDoneCard";
+import StudyOnGoingCard from "@/components/commons/card/StudyOnGoingCard";
+import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
+import StudyUpcomingCard from "@/components/commons/card/StudyUpcomingCard";
+import { MoodMiniTag } from "@/components/commons/tag/MoodMiniTag";
+import { TagLight } from "@/components/commons/tag/TagLight";
+import { TagMain } from "@/components/commons/tag/TagMain";
+import { TagRate } from "@/components/commons/tag/TagRate";
+import { MoodBigToggle, MoodMiniToggle } from "@/components/commons/toggle/MoodToggle";
+import { StudyCategoryToggle } from "@/components/commons/toggle/StudyCategoryToggle";
 import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
-import StudyOnGoingCard from "@/components/commons/study/StudyOnGoingCard";
-import StudyAppliedCard from "@/components/commons/study/StudyAppliedCard";
-import StudyAcceptCard from "@/components/commons/study/StudyAcceptCard";
-import StudyDoneCard from "@/components/commons/study/StudyDoneCard";
-import StudyUpcomingCard from "@/components/commons/study/StudyUpcomingCard";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {

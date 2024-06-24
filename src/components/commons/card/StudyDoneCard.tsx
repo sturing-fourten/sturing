@@ -1,5 +1,5 @@
-import StudyCardButton from "./StudyCardButton";
-import StudyMeetingInfo from "./StudyMeetingInfo";
+import StudyCardButton from "./element/StudyCardButton";
+import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
 export default function StudyDoneCard() {
   return (

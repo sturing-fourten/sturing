@@ -1,7 +1,10 @@
 import { SAMPLE_PROGRESS_WAY_TYPE } from "@/app/publishing/page";
-import { TagLight, TagMain, TagRate } from "./Tags";
-import { bookmarkGrayOn, bookmarkGrayOff } from "../../../public/icons/icons";
+
+import { bookmarkGrayOn, bookmarkGrayOff } from "../../../../public/icons/icons";
 import Image from "next/image";
+import { TagMain } from "../tag/TagMain";
+import { TagLight } from "../tag/TagLight";
+import { TagRate } from "../tag/TagRate";
 
 export default function LectureCard({ isScraped }: { isScraped: boolean }) {
   return (

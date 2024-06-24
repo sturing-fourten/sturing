@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { bookmarkWhiteOn, bookmarkWhiteOff, date, location } from "../../../../public/icons/icons";
-import { TagLight, TagMain } from "../Tags";
+
 import { SAMPLE_PROGRESS_WAY_TYPE } from "@/app/publishing/page";
+import { TagMain } from "../tag/TagMain";
+import { TagLight } from "../tag/TagLight";
 
 interface IStudyRecruitCardProps {
   isMini: boolean;

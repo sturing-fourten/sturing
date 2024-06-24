@@ -1,6 +1,6 @@
 import Image from "next/image";
-import StudyMeetingInfo from "./StudyMeetingInfo";
 import { teammate, schedule, checkSquare } from "../../../../public/icons/icons";
+import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
 interface IStudyOnGoingCardProps {
   isStarted: boolean;

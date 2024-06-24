@@ -1,5 +1,5 @@
-import { SAMPLE_PROGRESS_WAY_TYPE } from "@/app/publishing/page";
-import { TagLight, TagMain } from "../Tags";
+import { TagLight } from "../tag/TagLight";
+import { TagMain } from "../tag/TagMain";
 
 export default function StudyUpcomingCard() {
   return (
