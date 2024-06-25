@@ -13,7 +13,7 @@ export default function Gnb() {
   const [sideBar, setSideBar, handleSideBar] = useToggle(false);
 
   return (
-    <div className="sticky top-0 bg-white w-[375px] h-[54px] flex justify-between items-center px-4 border-b border-gray-300">
+    <div className="sticky top-0 bg-white w-full h-[54px] flex justify-between items-center px-4 border-b border-gray-300">
       <div className="flex justify-center items-center gap-2">
         <button onClick={handleSideBar}>
           <Image src="icons/menu.svg" alt="menu 아이콘" width={24} height={24} />
