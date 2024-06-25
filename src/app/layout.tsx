@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Gnb from "@/components/commons/Gnb";
 
 export const metadata: Metadata = {
   title: {
@@ -24,8 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} font-pretendard min-h-screen flex flex-col items-center`}>
-        {children}
+      <body className={`${pretendard.variable} font-pretendard bg-[#f5f5f5] min-w-screen flex flex-col items-center`}>
+        <main className="w-screen sm:w-[600px] bg-white min-h-screen shadow-xl">{children}</main>
       </body>
     </html>
   );
