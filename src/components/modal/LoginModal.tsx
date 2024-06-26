@@ -40,7 +40,10 @@ export default function LoginModal({ onClose }: LoginModalProps) {
             </>
           )}
           <form action={githubLogin}>
-            <button className="absolute bottom-2" onMouseEnter={hoverToggle} onMouseLeave={hoverToggle}>
+            <button
+              className="absolute bottom-2 left-1/2 transform -translate-x-1/2"
+              onMouseEnter={hoverToggle}
+              onMouseLeave={hoverToggle}>
               로그인 버튼 추가
             </button>
           </form>
