@@ -1,4 +1,5 @@
 import Button from "@/components/commons/Button";
+import CreateButton from "@/components/commons/CreateButton";
 import Gnb from "@/components/commons/Gnb";
 import SearchBar from "@/components/commons/SearchBar";
 import TapBar from "@/components/commons/TapBar";
@@ -20,10 +21,7 @@ export default function Home() {
       <div className="flex w-full">
         <Contents />
       </div>
-
-      <Button varient="circle" addStyle="w-[56px] h-[56px] shrink-0 fixed sm:absolute bottom-[20px] right-[20px] z-10">
-        <Image src="icons/add.svg" alt="> 아이콘" width={32} height={32} />
-      </Button>
+      <CreateButton />
     </div>
   );
 }
