@@ -1,6 +1,6 @@
 import Image from "next/image";
 import StudyApplyInfo from "./element/StudyApplyInfo";
-import { business as sampleImage } from "../../../../public/icons/icons";
+import { business as sampleImage } from "@/../public/icons/icons";
 import StudyCardButton from "./element/StudyCardButton";
 
 export default function StudyAcceptCard({ status }: { status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED" }) {

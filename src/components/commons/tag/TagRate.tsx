@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ITagProps } from "../TagBase";
 import { TagLight } from "./TagLight";
-import { star } from "../../../../public/icons/icons";
+import { star } from "@/../public/icons/icons";
 
 export function TagRate({ children }: ITagProps) {
   return (

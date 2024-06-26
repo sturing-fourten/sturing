@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { teammate, schedule, checkSquare } from "../../../../public/icons/icons";
+import { teammate, schedule, checkSquare } from "@/../public/icons/icons";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
 interface IStudyOnGoingCardProps {
@@ -30,7 +30,7 @@ export default function StudyOnGoingCard({ isStarted }: IStudyOnGoingCardProps) 
   return (
     <article
       className={`py-6 px-5 border border-gray-300 bg-white rounded-lg ${
-        isStarted ? "bg-gradient-to-br from-[#D9E3FF] to-[#FFE4E0]" : "bg-white"
+        isStarted ? "bg-gradient-to-br from-[#D9E3FF]/70 to-[#FFE4E0]/70" : "bg-white"
       }`}>
       <StudyMeetingInfo />
       <p className="mt-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">

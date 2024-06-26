@@ -1,9 +1,14 @@
 import { TagLight } from "../tag/TagLight";
 import { TagMain } from "../tag/TagMain";
 
-export default function StudyUpcomingCard() {
+interface IStudyUpcomingCardProps {
+  className?: string;
+}
+
+export default function StudyUpcomingCard(props: IStudyUpcomingCardProps) {
+  const { className } = props;
   return (
-    <article className="py-6 px-5">
+    <article className={`py-6 px-5 rounded-lg border border-gray-300 ${className}`}>
       <div className="flex items-center gap-1 mb-3">
         <TagMain>{"D-3"}</TagMain>
         <TagLight>{"6월 7일"}</TagLight>

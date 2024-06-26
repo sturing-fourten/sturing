@@ -4,6 +4,7 @@ import location from "./location.svg";
 import teammate from "./teammate.svg";
 import schedule from "./schedule.svg";
 import checkSquare from "./check-square.svg";
+import add from "./add.svg";
 
 // bookmark
 import bookmarkGrayOn from "./bookmark-gray-on.svg";
@@ -40,6 +41,7 @@ export {
   teammate,
   schedule,
   checkSquare,
+  add,
   bookmarkGrayOn,
   bookmarkGrayOff,
   bookmarkWhiteOn,
