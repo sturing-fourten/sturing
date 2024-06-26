@@ -1,3 +1,4 @@
+"use client";
 import { StudyCategoryButton } from "@/components/commons/StudyCategoryButton";
 import LectureCard from "@/components/commons/card/LectureCard";
 import StudyAcceptCard from "@/components/commons/card/StudyAcceptCard";
@@ -12,10 +13,12 @@ import { TagMain } from "@/components/commons/tag/TagMain";
 import { TagRate } from "@/components/commons/tag/TagRate";
 import { MoodBigToggle, MoodMiniToggle } from "@/components/commons/toggle/MoodToggle";
 import { StudyCategoryToggle } from "@/components/commons/toggle/StudyCategoryToggle";
-import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
+import { STUDY_CATEGORY_MENU, STUDY_TAB_MENU_LIST, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
 import FloatingLink from "@/components/commons/FloatingLink";
 import { add } from "@/../public/icons/icons";
 import Image from "next/image";
+import TabBarUnderlined from "@/components/commons/TabBarLinkUnderlined";
+import TabMenuButtonUnderlined from "@/components/commons/TabMenuButtonUnderlined";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {
@@ -471,6 +474,16 @@ export default function page() {
         <FloatingLink href="">
           <Image src={add} alt="add button" />
         </FloatingLink>
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">TabBarUnderlined</h1>
+        <TabBarUnderlined defaultSegment="/mystudy/" tabMenuList={STUDY_TAB_MENU_LIST} />
+        (link 버전입니다. onClick으로 구현 시 아래 컴포넌트를 사용해주세요!)
+        <nav className="flex justify-between items-center gap-3 bg-white">
+          <TabMenuButtonUnderlined onClick={() => {}} title="buttonTitle" isCurrent={true} />
+          <TabMenuButtonUnderlined onClick={() => {}} title="buttonTitle" isCurrent={false} />
+        </nav>
       </div>
     </>
   );

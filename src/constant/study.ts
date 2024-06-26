@@ -18,6 +18,7 @@ import {
   proactive,
   freewheeling,
 } from "@/../public/icons/icons";
+import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 
 export const STUDY_CATEGORY_MENU = {
   design: {
@@ -96,3 +97,10 @@ export const USER_FAVORITE_FIELD_TYPE = {
     imageSrc: freewheeling,
   },
 };
+
+export const STUDY_TAB_MENU_LIST: TTabMenuLinkUnderlinedItem[] = [
+  { id: "progress", title: "진행", href: "/mystudy/", count: 1 },
+  { id: "recruit", title: "수락", href: "/mystudy/recruit", count: 1 },
+  { id: "applied", title: "대기", href: "/mystudy/applied", count: 1 },
+  { id: "done", title: "완료", href: "/mystudy/done", count: 1 },
+];
