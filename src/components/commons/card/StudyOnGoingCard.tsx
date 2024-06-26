@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { teammate, schedule, checkSquare } from "../../../../public/icons/icons";
+import { teammate, schedule, checkSquare } from "@/../public/icons/icons";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
 interface IStudyOnGoingCardProps {

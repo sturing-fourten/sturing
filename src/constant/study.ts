@@ -17,7 +17,7 @@ import {
   collaborative,
   proactive,
   freewheeling,
-} from "../../public/icons/icons";
+} from "@/../public/icons/icons";
 
 export const STUDY_CATEGORY_MENU = {
   design: {
