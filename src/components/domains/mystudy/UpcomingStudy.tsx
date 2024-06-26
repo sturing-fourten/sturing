@@ -2,7 +2,7 @@ import StudyUpcomingCard from "@/components/commons/card/StudyUpcomingCard";
 
 export default function UpcomingStudy() {
   return (
-    <article className="w-full h-64 py-7 px-4 bg-gradient-to-br from-blue-100 to-red-100">
+    <article className="w-full h-64 py-7 px-4 bg-gradient-to-br from-blue-100/30 to-red-100/30">
       <p className="mb-4 text-black text-xl font-semibold leading-7">다가오는 스터디</p>
 
       {/* TODO 캐러셀 */}
