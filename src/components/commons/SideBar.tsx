@@ -10,19 +10,14 @@ interface SideBarProps {
 export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
   const [loginState, setLoginState] = useState(false);
 
-  useEffect(() => {
-    console.log("SideBar 상태:", sideBar);
-  }, [sideBar]);
-
   return (
     <div
-      className={`w-[323px] h-full flex flex-col gap-[40px] pt-[40px] px-6 pb-56 bg-white fixed top-0 z-overlay transition-transform duration-500 will-change-transform ease-in-out transform ${
+      className={`w-[323px] min-h-full flex flex-col gap-[40px] pt-[40px] px-6 pb-56 bg-white fixed sm:absolute top-0 left-0 z-overlay transition-transform duration-500 will-change-transform ease-in-out transform overflow-scroll sm:overflow-visible scrollbar-hide ${
         sideBar ? "translate-x-0" : "-translate-x-full"
       }`}>
       <button
         className="flex justify-end"
         onClick={() => {
-          console.log("clicked");
           setSideBar(!sideBar);
         }}>
         <Image src="icons/close.svg" alt="닫기 아이콘" width={15} height={15} />
@@ -45,13 +40,26 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
       ) : (
         <div className="flex flex-col justify-start gap-[32px]">
           <div className="flex flex-col items-center justify-center gap-[5px]">
-            <Image src="icons/textlogo.svg" alt="로고 아이콘" width={155} height={48} />
+            <Image
+              src="icons/textlogo.svg"
+              alt="로고 아이콘"
+              width={155}
+              height={48}
+              priority
+              className="w-[155px] h-[48px]"
+            />
           </div>
           <Button
             type="filled"
-            style="w-[275px] h-[46px] py-[12px] px-[14px] bg-[#FFE810] text-[14px] text-gray-1000 font-semibold rounded-[5px] gap-[16px]">
-            <Image src="icons/kakao.svg" alt="로고 아이콘" width={21} height={21} />
-            카카오로 3초 만에 시작하기
+            style="w-[275px] h-[46px] py-[12px] px-[14px] bg-gray-1000 text-[14px] text-white font-semibold rounded-[5px] gap-[10px]">
+            <Image
+              src="/icons/github-logo.svg"
+              alt="로고 아이콘"
+              width={25}
+              height={25}
+              className="w-[25px] h-[25px] bg-white rounded-[5px]"
+            />
+            GitHub로 3초 만에 시작하기
           </Button>
         </div>
       )}
