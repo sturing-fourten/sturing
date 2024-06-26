@@ -19,7 +19,16 @@ const beforeStateTitle = [
 ];
 
 export default function Contents() {
-  const [beforeState, setBeforeState] = useState(true);
+  const [isLogin, setIsLogin] = useState(true);
+  const [isMatched, setIsMatched] = useState(true);
+
+  const [userName, setUserName] = useState("웅진");
+
+  const afterStateTitle = [
+    { id: 1, text: `${userName}님을 위한 디자인 스터디` },
+    { id: 2, text: `내 주변에 새로 개설된 스터디` },
+    { id: 3, text: `${userName}님에게 딱 맞는 팀원 추천` },
+  ];
 
   return (
     <div className="flex flex-col items-center w-full pb-[32px] px-[16px]">
@@ -37,31 +46,55 @@ export default function Contents() {
       </div>
       <div className="w-full h-[8px] shrink-0 bg-[#F7F7F7] mb-[40px]" />
 
-      {beforeState &&
-        beforeStateTitle.map((title) => (
-          <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
-            <Title>{title.text}</Title>
-            <CardList>
-              {title.id === 3 ? (
-                <>
-                  <UserCard />
-                  <UserCard />
-                  <UserCard />
-                  <UserCard />
-                  <UserCard />
-                </>
-              ) : (
-                <>
-                  <StudyRecruitCard isMini={false} isScraped />
-                  <StudyRecruitCard isMini={false} isScraped />
-                  <StudyRecruitCard isMini={false} isScraped />
-                  <StudyRecruitCard isMini={false} isScraped />
-                  <StudyRecruitCard isMini={false} isScraped />
-                </>
-              )}
-            </CardList>
-          </div>
-        ))}
+      {isLogin && isMatched
+        ? afterStateTitle.map((title) => (
+            <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
+              <Title>{title.text}</Title>
+              <CardList>
+                {title.id === 3 ? (
+                  <>
+                    <UserCard />
+                    <UserCard />
+                    <UserCard />
+                    <UserCard />
+                    <UserCard />
+                  </>
+                ) : (
+                  <>
+                    <StudyRecruitCard isMini={false} isScraped />
+                    <StudyRecruitCard isMini={false} isScraped />
+                    <StudyRecruitCard isMini={false} isScraped />
+                    <StudyRecruitCard isMini={false} isScraped />
+                    <StudyRecruitCard isMini={false} isScraped />
+                  </>
+                )}
+              </CardList>
+            </div>
+          ))
+        : beforeStateTitle.map((title) => (
+            <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
+              <Title>{title.text}</Title>
+              <CardList>
+                {title.id === 3 ? (
+                  <>
+                    <UserCard />
+                    <UserCard />
+                    <UserCard />
+                    <UserCard />
+                    <UserCard />
+                  </>
+                ) : (
+                  <>
+                    <StudyRecruitCard isMini={false} isScraped />
+                    <StudyRecruitCard isMini={false} isScraped />
+                    <StudyRecruitCard isMini={false} isScraped />
+                    <StudyRecruitCard isMini={false} isScraped />
+                    <StudyRecruitCard isMini={false} isScraped />
+                  </>
+                )}
+              </CardList>
+            </div>
+          ))}
 
       <div className="flex flex-col gap-[20px] w-full">
         <div>
