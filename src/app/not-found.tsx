@@ -19,7 +19,9 @@ export default function NotFound() {
         </span>
       </div>
       <Link href="/" className="py-3 px-4 fixed bottom-0">
-        <Button type="filled" style="w-[343px] h-[50px] rounded-[5px] bg-main-500 text-white font-semibold text-[16px]">
+        <Button
+          varient="filled"
+          addStyle="w-[343px] h-[50px] rounded-[5px] bg-main-500 text-white font-semibold text-[16px]">
           홈으로 가기
         </Button>
       </Link>
