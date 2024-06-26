@@ -3,14 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "./Button";
-import { useState } from "react";
 
 import SideBar from "./SideBar";
 import useToggle from "@/hooks/useToggle";
+import useOpenToggle from "@/hooks/useOpenToggle";
+import LoginModal from "../modal/LoginModal";
+import { useSession } from "next-auth/react";
 
 export default function Gnb() {
-  const [loginState, setLoginState] = useState(false);
   const [sideBar, setSideBar, handleSideBar] = useToggle(false);
+  const { isOpen, openToggle } = useOpenToggle();
+  const { data: session } = useSession();
 
   return (
     <div className="sticky top-0 bg-white w-full h-[54px] flex justify-between items-center px-4 border-b border-gray-300">
@@ -23,7 +26,7 @@ export default function Gnb() {
         </Link>
       </div>
       {sideBar && <SideBar sideBar={sideBar} setSideBar={setSideBar} />}
-      {loginState ? (
+      {session ? (
         <div className="flex justify-center items-center gap-3">
           <button>
             <Image src="icons/alarm.svg" alt="알림 아이콘" width={24} height={24} />
@@ -35,10 +38,12 @@ export default function Gnb() {
       ) : (
         <div>
           <Button
-            type="ghost"
-            style="h-[34px] w-[71px] border-main-500 text-main-500 rounded-[5px] font-medium text-[12px]">
+            varient="ghost"
+            className="h-[34px] w-[71px] border-main-500 text-main-500 rounded-[5px] font-medium text-[12px]"
+            onClick={openToggle}>
             간편로그인
           </Button>
+          {isOpen && <LoginModal onClose={openToggle} />}
         </div>
       )}
     </div>
