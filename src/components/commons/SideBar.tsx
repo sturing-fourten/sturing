@@ -50,8 +50,8 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
             />
           </div>
           <Button
-            type="filled"
-            style="w-[275px] h-[46px] py-[12px] px-[14px] bg-gray-1000 text-[14px] text-white font-semibold rounded-[5px] gap-[10px]">
+            varient="filled"
+            addStyle="w-[275px] h-[46px] py-[12px] px-[14px] bg-gray-1000 text-[14px] text-white font-semibold rounded-[5px] gap-[10px]">
             <Image
               src="/icons/github-logo.svg"
               alt="로고 아이콘"

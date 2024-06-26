@@ -1,6 +1,7 @@
 type ButtonProps = React.ComponentProps<"button"> & {
   varient?: "filled" | "ghost" | "circle";
   addStyle?: string;
+  disabled?: boolean;
   children: React.ReactNode;
 };
 
