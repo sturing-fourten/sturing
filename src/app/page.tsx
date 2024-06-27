@@ -8,7 +8,7 @@ import Contents from "@/components/domains/home/Contents";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center w-full mb-[48px] mx-auto scroll-smooth relative">
+    <div className="flex flex-col items-center mb-[48px] mx-auto w-screen sm:w-[600px] scroll-smooth relative">
       <Gnb />
       <TapBar />
       <Banner />

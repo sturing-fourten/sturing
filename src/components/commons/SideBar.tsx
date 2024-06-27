@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Button from "./Button";
+import { close, defaultProfileImg, githubLogo, logoText } from "../../../public/icons/icons";
 
 interface SideBarProps {
   sideBar: boolean;
@@ -20,7 +21,7 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
         onClick={() => {
           setSideBar(!sideBar);
         }}>
-        <Image src="icons/close.svg" alt="닫기 아이콘" width={15} height={15} />
+        <Image src={close} alt="닫기 아이콘" width={15} height={15} />
       </button>
       {loginState ? (
         <div className="flex flex-col justify-start gap-[32px]">
@@ -31,7 +32,7 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
                 sturing@kakao.com
               </span>
             </div>
-            <Image src="icons/defaultProfileImg.svg" alt="프로필 아이콘" width={60} height={60} />
+            <Image src={defaultProfileImg} alt="프로필 아이콘" width={60} height={60} />
           </div>
           <button className="flex text-[#0D0D0D] text-[18px] font-medium leading-[24px] tracking-[-0.54px]">
             스터링 프로필
@@ -40,20 +41,13 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
       ) : (
         <div className="flex flex-col justify-start gap-[32px]">
           <div className="flex flex-col items-center justify-center gap-[5px]">
-            <Image
-              src="icons/textlogo.svg"
-              alt="로고 아이콘"
-              width={155}
-              height={48}
-              priority
-              className="w-[155px] h-[48px]"
-            />
+            <Image src={logoText} alt="로고 아이콘" width={155} height={48} priority className="w-[155px] h-[48px]" />
           </div>
           <Button
             varient="filled"
             addStyle="w-[275px] h-[46px] py-[12px] px-[14px] bg-gray-1000 text-[14px] text-white font-semibold rounded-[5px] gap-[10px]">
             <Image
-              src="/icons/github-logo.svg"
+              src={githubLogo}
               alt="로고 아이콘"
               width={25}
               height={25}

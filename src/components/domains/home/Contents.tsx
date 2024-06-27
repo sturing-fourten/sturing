@@ -11,6 +11,7 @@ import { STUDY_CATEGORY_MENU } from "@/constant/study";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import UserCard from "@/components/commons/card/UserCard";
 import CardList from "@/components/commons/CardList";
+import { challenge } from "../../../../public/images/images";
 
 const beforeStateTitle = [
   { id: 1, text: "이번주 인기 스터디" },
@@ -103,7 +104,7 @@ export default function Contents() {
             팀원과 함께 2주 집중 스터디, 성공 시 스터디원 전원 지급!
           </span>
         </div>
-        <Image src="images/challenge.svg" alt="스터링 챌린지 이미지" width={343} height={159} className="w-full" />
+        <Image src={challenge} alt="스터링 챌린지 이미지" width={343} height={159} className="w-full" />
         <Link href="/preparing">
           <Button
             varient="ghost"

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { rightArrowBlack } from "../../../../public/icons/icons";
 
 interface TitleProps {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ export default function Title({ children }: TitleProps) {
         </span>
         <Link href="">
           <button>
-            <Image src="icons/rightarrow-black.svg" alt="> 아이콘" width={24} height={24} />
+            <Image src={rightArrowBlack} alt="> 아이콘" width={24} height={24} />
           </button>
         </Link>
       </div>
