@@ -1,3 +1,4 @@
+// icon
 import star from "./star.svg";
 import date from "./date.svg";
 import location from "./location.svg";
@@ -5,6 +6,26 @@ import teammate from "./teammate.svg";
 import schedule from "./schedule.svg";
 import checkSquare from "./check-square.svg";
 import add from "./add.svg";
+import barGray from "./bar-gray.svg";
+import close from "./close.svg";
+import defaultProfileImg from "./defaultProfileImg.svg";
+import menu from "./menu.svg";
+import message from "./message.svg";
+import more from "./more.svg";
+import searchBlue from "./search-blue.svg";
+import share from "./share.svg";
+
+// arrow
+import rightArrowBlack from "./rightarrow-black.svg";
+import rightArrowwhite from "./rightarrow-white.svg";
+import back from "./back.svg";
+
+// logo
+import logoBlue from "./logo-blue.svg";
+import logoColor from "./logo-color.svg";
+import logoCreate from "./logo-create.svg";
+import logoText from "./textlogo.svg";
+import githubLogo from "./github-logo.svg";
 
 // bookmark
 import bookmarkGrayOn from "./bookmark-gray-on.svg";
@@ -33,6 +54,13 @@ import learningFocused from "./learning-focused.svg";
 import collaborative from "./collaborative.svg";
 import proactive from "./proactive.svg";
 import freewheeling from "./freewheeling.svg";
+
+// page icon
+import mypage from "./mypage.svg";
+import ready from "./ready.svg";
+import alarm from "./alarm.svg";
+import success from "./success.svg";
+import notFound from "./404.svg";
 
 export {
   star,
@@ -64,4 +92,25 @@ export {
   collaborative,
   proactive,
   freewheeling,
+  ready,
+  notFound,
+  success,
+  alarm,
+  back,
+  barGray,
+  close,
+  defaultProfileImg,
+  githubLogo,
+  logoBlue,
+  logoColor,
+  logoCreate,
+  logoText,
+  menu,
+  message,
+  more,
+  mypage,
+  rightArrowBlack,
+  rightArrowwhite,
+  searchBlue,
+  share,
 };
