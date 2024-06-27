@@ -1,8 +1,8 @@
 "use client";
 import { StudyCategoryButton } from "@/components/commons/StudyCategoryButton";
 import LectureCard from "@/components/commons/card/LectureCard";
-import StudyAcceptCard from "@/components/commons/card/StudyAcceptCard";
-import StudyAppliedCard from "@/components/commons/card/StudyAppliedCard";
+import StudyApplicationCard from "@/components/commons/card/StudyApplicationCard";
+import StudyApplyingCard from "@/components/commons/card/StudyApplyingCard";
 import StudyDoneCard from "@/components/commons/card/StudyDoneCard";
 import StudyOnGoingCard from "@/components/commons/card/StudyOnGoingCard";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
@@ -21,6 +21,7 @@ import TabBarUnderlined from "@/components/commons/TabBarLinkUnderlined";
 import TabMenuButtonUnderlined from "@/components/commons/TabMenuButtonUnderlined";
 import { AssessmentCheckboxCard } from "@/components/commons/AssessmentCheckboxCard";
 import { POSITIVE_ASSESSMENT_LIST } from "@/constant/teammate-review";
+import StudyRecruitingCard from "@/components/commons/card/StudyRecruitingCard";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {
@@ -448,17 +449,17 @@ export default function page() {
       </div>
 
       <div className="p-4">
-        <h1 className="font-bold">StudyAppliedCard</h1>
-        <StudyAppliedCard status={"APPLIED"} />
-        <StudyAppliedCard status={"APPLIED_VIEW"} />
-        <StudyAppliedCard status={"ACCEPTED"} />
+        <h1 className="font-bold">StudyApplyingCard</h1>
+        <StudyApplyingCard status={"APPLIED"} />
+        <StudyApplyingCard status={"APPLIED_VIEW"} />
+        <StudyApplyingCard status={"ACCEPTED"} />
       </div>
 
       <div className="p-4">
-        <h1 className="font-bold">StudyAcceptCard</h1>
-        <StudyAcceptCard status={"APPLIED"} />
-        <StudyAcceptCard status={"APPLIED_VIEW"} />
-        <StudyAcceptCard status={"ACCEPTED"} />
+        <h1 className="font-bold">StudyApplicationCard</h1>
+        <StudyApplicationCard status={"APPLIED"} />
+        <StudyApplicationCard status={"APPLIED_VIEW"} />
+        <StudyApplicationCard status={"ACCEPTED"} />
       </div>
 
       <div className="p-4">
@@ -495,6 +496,11 @@ export default function page() {
             <AssessmentCheckboxCard key={index} option={option} />
           ))}
         </ul>
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">StudyRecruitingCard</h1>
+        <StudyRecruitingCard />
       </div>
     </>
   );

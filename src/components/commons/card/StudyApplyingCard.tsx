@@ -2,7 +2,7 @@ import StudyApplyInfo from "./element/StudyApplyInfo";
 import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
-export default function StudyAppliedCard({ status }: { status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED" }) {
+export default function StudyApplyingCard({ status }: { status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED" }) {
   return (
     <article className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg">
       <StudyApplyInfo status={status} />
