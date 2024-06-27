@@ -12,12 +12,12 @@ export default function StudyDoneCard() {
         </p>
         <StudyCardButton>지원서 보기</StudyCardButton>
       </div>
-      <hr />
+      <hr className="bg-gray-300" />
       <div className="flex items-center justify-between">
         <p className="text-[#212121] text-[14px] font-semibold tracking-[-0.42px]">{"페퍼솔트님"}</p>
         <Link
           className="py-[6px] px-3 rounded-[5px] border border-main-500 text-main-500 text-[12px] font-medium tracking-[-0.36px]"
-          href={""}>
+          href={"/member-review"}>
           팀원 후기 작성하기
         </Link>
       </div>
@@ -33,6 +33,7 @@ export default function StudyDoneCard() {
           작성 완료
         </button>
       </div>
+      <StudyCardButton>내가 받은 후기 보기</StudyCardButton>
     </article>
   );
 }
