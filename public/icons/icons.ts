@@ -55,6 +55,18 @@ import collaborative from "./collaborative.svg";
 import proactive from "./proactive.svg";
 import freewheeling from "./freewheeling.svg";
 
+// check
+import checkOn from "./check-on.svg";
+import checkOff from "./check-off.svg";
+
+// satisfaction
+import badOn from "./bad-on.svg";
+import badOff from "./bad-off.svg";
+import goodOn from "./good-on.svg";
+import goodOff from "./good-off.svg";
+import bestOn from "./best-on.svg";
+import bestOff from "./best-off.svg";
+
 // page icon
 import mypage from "./mypage.svg";
 import ready from "./ready.svg";
@@ -92,6 +104,14 @@ export {
   collaborative,
   proactive,
   freewheeling,
+  checkOn,
+  checkOff,
+  badOn,
+  badOff,
+  goodOn,
+  goodOff,
+  bestOn,
+  bestOff,
   ready,
   notFound,
   success,

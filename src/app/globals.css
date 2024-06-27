@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+textarea {
+  @apply resize-none focus:outline-none focus:border-main-500;
+}
+
 body {
   -webkit-user-select: none;
   -moz-user-select: none;

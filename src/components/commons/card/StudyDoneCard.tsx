@@ -1,3 +1,4 @@
+import Link from "next/link";
 import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
@@ -14,9 +15,11 @@ export default function StudyDoneCard() {
       <hr />
       <div className="flex items-center justify-between">
         <p className="text-[#212121] text-[14px] font-semibold tracking-[-0.42px]">{"페퍼솔트님"}</p>
-        <button className="py-[6px] px-3 rounded-[5px] border border-main-500 text-main-500 text-[12px] font-medium tracking-[-0.36px]">
+        <Link
+          className="py-[6px] px-3 rounded-[5px] border border-main-500 text-main-500 text-[12px] font-medium tracking-[-0.36px]"
+          href={""}>
           팀원 후기 작성하기
-        </button>
+        </Link>
       </div>
       <div className="flex items-center justify-between">
         <p className="text-[#212121] text-[14px] font-semibold tracking-[-0.42px]">{"페퍼솔트님"}</p>

@@ -19,6 +19,8 @@ import { add } from "@/../public/icons/icons";
 import Image from "next/image";
 import TabBarUnderlined from "@/components/commons/TabBarLinkUnderlined";
 import TabMenuButtonUnderlined from "@/components/commons/TabMenuButtonUnderlined";
+import { AssessmentCheckboxCard } from "@/components/commons/AssessmentCheckboxCard";
+import { POSITIVE_ASSESSMENT_LIST } from "@/constant/teammate-review";
 
 // UI 확인 용
 export const SAMPLE_PROGRESS_WAY_TYPE = {
@@ -484,6 +486,15 @@ export default function page() {
           <TabMenuButtonUnderlined onClick={() => {}} title="buttonTitle" isCurrent={true} />
           <TabMenuButtonUnderlined onClick={() => {}} title="buttonTitle" isCurrent={false} />
         </nav>
+      </div>
+
+      <div className="p-4">
+        <h1 className="font-bold">AssessmentCard</h1>
+        <ul className="flex flex-col gap-3">
+          {POSITIVE_ASSESSMENT_LIST.map((option, index) => (
+            <AssessmentCheckboxCard key={index} option={option} />
+          ))}
+        </ul>
       </div>
     </>
   );
