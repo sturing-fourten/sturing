@@ -1,4 +1,4 @@
-import CreateButton from "@/components/commons/CreateButton";
+import CreateStudyButton from "@/components/commons/CreateStudyButton";
 import Gnb from "@/components/commons/Gnb";
 import SearchBar from "@/components/commons/SearchBar";
 import TapBar from "@/components/commons/TapBar";
@@ -20,7 +20,7 @@ export default function Home() {
       <div className="flex w-full">
         <Contents />
       </div>
-      <CreateButton />
+      <CreateStudyButton />
     </div>
   );
 }
