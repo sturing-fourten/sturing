@@ -4,7 +4,7 @@ import { InsideMenu } from "@/components/commons/card/element/InsideMenu";
 
 export default function AppliedTabPage() {
   return (
-    <section className="pt-5 pb-10">
+    <section className="pt-5 pb-10 px-4">
       <form className="flex gap-3 mb-4">
         <InsideMenu title="모집 중" number={2} isCurrent={true} />
         <InsideMenu title="지원 중" number={1} isCurrent={false} />

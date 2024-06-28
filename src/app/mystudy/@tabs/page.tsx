@@ -7,7 +7,7 @@ export default function ProcessTabPage() {
     { id: 2, isStarted: true },
   ];
   return (
-    <section className="pt-5 pb-10">
+    <section className="pt-5 pb-10 px-4">
       <form className="flex gap-3 mb-4">
         <InsideMenu title="진행 중" number={2} isCurrent={true} />
         <InsideMenu title="진행 예정" number={1} isCurrent={false} />
