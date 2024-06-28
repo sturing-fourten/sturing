@@ -27,7 +27,7 @@ export default function Header(props: BannerProps) {
           isStudy && "before:-z-[2] before:bg-black/20 before:inset-0 before:absolute"
         }  `}
         style={style}>
-        <TopBar varient="share" />
+        <TopBar variant="share" />
         <div className="flex items-center gap-1 mt-10 mb-4">
           <TagMain>온라인</TagMain>
           <TagLight>디자인</TagLight>
