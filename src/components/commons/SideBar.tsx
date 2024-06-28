@@ -13,7 +13,7 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
 
   return (
     <div
-      className={`w-[323px] min-h-full flex flex-col gap-[40px] pt-[40px] px-6 pb-56 bg-white fixed sm:absolute top-0 left-0 z-overlay transition-transform duration-500 will-change-transform ease-in-out transform overflow-scroll sm:overflow-visible scrollbar-hide ${
+      className={`w-[323px] h-screen flex flex-col gap-[40px] pt-[40px] px-6 pb-56 bg-white fixed sm:absolute top-0 left-0 z-overlay transition-transform duration-500 will-change-transform ease-in-out transform overflow-scroll sm:overflow-visible scrollbar-hide ${
         sideBar ? "translate-x-0" : "-translate-x-full"
       }`}>
       <button
