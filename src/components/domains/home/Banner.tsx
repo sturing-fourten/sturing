@@ -55,7 +55,7 @@ export default function Banner() {
             className="w-full h-[43px] py-[11px] pl-[16px] flex shrink-0 items-center gap-[8px] bg-[#0F0F0F] text-white text-[14px] font-medium tracking-[-0.28px] leading-[21px]">
             <Image src={logoColor} alt="로고 컬러 아이콘" width={12} height={15} />
             매칭 항목 선택하고 딱 맞는 스터디 추천받기
-            <Image src={rightArrowwhite} alt="> 흰색 아이콘" width={7} height={11} />
+            <Image src={rightArrowwhite} alt="> 흰색 아이콘" width={16} height={20} className="w-[16px] h-[20px]" />
           </button>
         </Link>
       )}
