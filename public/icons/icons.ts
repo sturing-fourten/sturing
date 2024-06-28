@@ -14,6 +14,7 @@ import message from "./message.svg";
 import more from "./more.svg";
 import searchBlue from "./search-blue.svg";
 import share from "./share.svg";
+import searchFilter from "./search_filter.svg";
 
 // arrow
 import rightArrowBlack from "./rightarrow-black.svg";
@@ -32,6 +33,7 @@ import bookmarkGrayOn from "./bookmark-gray-on.svg";
 import bookmarkGrayOff from "./bookmark-gray-off.svg";
 import bookmarkWhiteOn from "./bookmark-white-on.svg";
 import bookmarkWhiteOff from "./bookmark-white-off.svg";
+import bookmarkBlueOn from "./bookmark-blue-on.svg";
 
 // study category
 import design from "./design.svg";
@@ -74,6 +76,7 @@ export {
   bookmarkGrayOff,
   bookmarkWhiteOn,
   bookmarkWhiteOff,
+  bookmarkBlueOn,
   develop,
   design,
   marketing,
@@ -113,4 +116,5 @@ export {
   rightArrowwhite,
   searchBlue,
   share,
+  searchFilter,
 };

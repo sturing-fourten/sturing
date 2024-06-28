@@ -8,9 +8,11 @@ import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css";
 import { logoColor, rightArrowwhite } from "../../../../public/icons/icons";
-import { bannerImg } from "../../../../public/images/images";
+import { IMAGES_BANNER } from "@/constant/images";
 
 SwiperCore.use([Navigation, Scrollbar, Autoplay]);
+
+const { bannerImg } = IMAGES_BANNER;
 
 export default function Banner() {
   const [loginState, setLoginState] = useState(true);
@@ -31,13 +33,13 @@ export default function Banner() {
           }}
           onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex + 1)}>
           <SwiperSlide>
-            <Image src={bannerImg} alt="배너 사진" width={375} height={194} priority className="w-full" />
+            <Image src={bannerImg.src} alt={bannerImg.alt} width={375} height={194} priority className="w-full" />
           </SwiperSlide>
           <SwiperSlide>
-            <Image src={bannerImg} alt="배너 사진" width={375} height={194} priority className="w-full" />
+            <Image src={bannerImg.src} alt={bannerImg.alt} width={375} height={194} priority className="w-full" />
           </SwiperSlide>
           <SwiperSlide>
-            <Image src={bannerImg} alt="배너 사진" width={375} height={194} priority className="w-full" />
+            <Image src={bannerImg.src} alt={bannerImg.alt} width={375} height={194} priority className="w-full" />
           </SwiperSlide>
         </Swiper>
         <div className="absolute right-4 bottom-4 z-[1000] flex justify-center items-center w-[45px] h-[20px] bg-gray-1000 bg-opacity-50 rounded-[100px]">
