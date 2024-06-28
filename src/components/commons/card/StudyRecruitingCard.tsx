@@ -1,4 +1,5 @@
 import StudyCardButton from "./element/StudyCardButton";
+import StudyCardLink from "./element/StudyCardLink";
 import { StudyDetailInfo } from "./element/StudyDetailInfo";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
@@ -11,7 +12,7 @@ export default function StudyRecruitingCard() {
       </p>
       <hr className="my-4" />
       <StudyDetailInfo className="mb-4" />
-      <StudyCardButton>지원서 리스트 보기</StudyCardButton>
+      <StudyCardLink href="/applied-list/1">지원서 리스트 보기</StudyCardLink>
     </article>
   );
 }
