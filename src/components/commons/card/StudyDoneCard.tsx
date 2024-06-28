@@ -1,6 +1,7 @@
 import Link from "next/link";
 import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
+import StudyCardLink from "./element/StudyCardLink";
 
 export default function StudyDoneCard() {
   return (
@@ -10,7 +11,7 @@ export default function StudyDoneCard() {
         <p className="mt-2 mb-3 text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">
           {"3시간만에 끝내는 AI그림 스터디"}
         </p>
-        <StudyCardButton>지원서 보기</StudyCardButton>
+        <StudyCardLink href="/lecture/1/review">강의 후기 작성하기</StudyCardLink>
       </div>
       <hr className="bg-gray-300" />
       <div className="flex items-center justify-between">
