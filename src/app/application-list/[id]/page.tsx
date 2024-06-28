@@ -5,7 +5,7 @@ import StudyMeetingInfo from "@/components/commons/card/element/StudyMeetingInfo
 export default function AppliedListPage() {
   return (
     <>
-      <TopBar type="back">받은 스터디 지원서</TopBar>
+      <TopBar varient="back">받은 스터디 지원서</TopBar>
       <section className="py-5 px-4">
         <article className="flex flex-col gap-2 py-6 px-5 border border-gray-300 rounded-lg bg-white">
           <StudyMeetingInfo />
