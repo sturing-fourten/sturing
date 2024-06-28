@@ -13,10 +13,6 @@ import { TagMain } from "@/components/commons/tag/TagMain";
 import { TagRate } from "@/components/commons/tag/TagRate";
 import { MoodBigToggle, MoodMiniToggle } from "@/components/commons/toggle/MoodToggle";
 import { StudyCategoryToggle } from "@/components/commons/toggle/StudyCategoryToggle";
-import { STUDY_CATEGORY_MENU, STUDY_TAB_MENU_LIST, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
-import FloatingLink from "@/components/commons/FloatingLink";
-import { add } from "@/../public/icons/icons";
-import Image from "next/image";
 import TabBarUnderlined from "@/components/commons/TabBarLinkUnderlined";
 import TabMenuButtonUnderlined from "@/components/commons/TabMenuButtonUnderlined";
 import { AssessmentCheckboxCard } from "@/components/commons/AssessmentCheckboxCard";
@@ -470,13 +466,6 @@ export default function page() {
       <div className="p-4">
         <h1 className="font-bold">StudyUpcomingCard</h1>
         <StudyUpcomingCard />
-      </div>
-
-      <div className="p-4">
-        <h1 className="font-bold">FloatingLink</h1>
-        <FloatingLink href="">
-          <Image src={add} alt="add button" />
-        </FloatingLink>
       </div>
 
       <div className="p-4">
