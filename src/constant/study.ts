@@ -22,7 +22,7 @@ import {
   postInfoTask,
   postInfoLocation,
 } from "@/../public/icons/icons";
-import { StudyCategoryMenu, TTabMenuLinkUnderlinedItem } from "@/types/study";
+import { StudyCategoryMenu, UserFavoriteFieldType, TTabMenuLinkUnderlinedItem } from "@/types/study";
 
 export const STUDY_CATEGORY_MENU: StudyCategoryMenu = {
   design: {
@@ -59,14 +59,7 @@ export const STUDY_CATEGORY_MENU: StudyCategoryMenu = {
   },
 };
 
-interface FavoriteFieldType {
-  [key: string]: {
-    name: string;
-    imageSrc: string;
-  };
-}
-
-export const USER_FAVORITE_FIELD_TYPE: FavoriteFieldType = {
+export const USER_FAVORITE_FIELD_TYPE: UserFavoriteFieldType = {
   friendly: {
     name: "친근한",
     imageSrc: friendly,

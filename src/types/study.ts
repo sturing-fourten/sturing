@@ -26,3 +26,16 @@ export type StudyCategoryMenu = {
   certificate: StudyCategory;
   selfDevelop: StudyCategory;
 };
+
+export type UserFavoriteFieldType = {
+  friendly: StudyCategory;
+  professional: StudyCategory;
+  serious: StudyCategory;
+  systematic: StudyCategory;
+  passionate: StudyCategory;
+  responsible: StudyCategory;
+  learningFocused: StudyCategory;
+  collaborative: StudyCategory;
+  proactive: StudyCategory;
+  freewheeling: StudyCategory;
+};
