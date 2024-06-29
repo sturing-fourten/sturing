@@ -22,16 +22,9 @@ import {
   postInfoTask,
   postInfoLocation,
 } from "@/../public/icons/icons";
-import { TTabMenuLinkUnderlinedItem } from "@/types/study";
+import { StudyCategoryMenu, TTabMenuLinkUnderlinedItem } from "@/types/study";
 
-interface StudyCategoryType {
-  [key: string]: {
-    imageSrc: string;
-    name: string;
-  };
-}
-
-export const STUDY_CATEGORY_MENU: StudyCategoryType = {
+export const STUDY_CATEGORY_MENU: StudyCategoryMenu = {
   design: {
     imageSrc: design,
     name: "디자인",
