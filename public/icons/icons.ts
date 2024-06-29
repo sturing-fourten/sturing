@@ -25,6 +25,8 @@ import rightArrowwhite from "./rightarrow-white.svg";
 import rightArrowGray from "./rightarrow_gray.svg";
 import back from "./back.svg";
 import backWhite from "./back_white.svg";
+import upArrowGray from "./up-arrow-gray.svg";
+import downArrowGray from "./down-arrow-gray.svg";
 
 // logo
 import logoBlue from "./logo-blue.svg";
@@ -161,4 +163,6 @@ export {
   backWhite,
   shareWhite,
   moreWhite,
+  upArrowGray,
+  downArrowGray,
 };
