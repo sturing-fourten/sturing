@@ -91,6 +91,10 @@ import postInfoLocation from "./post_info_location.svg";
 import postInfoInstructor from "./post_info_instructor.svg";
 import postInfoLevel from "./post_info_level.svg";
 
+// study dashboard
+import addBlue from "./add-blue.svg";
+import deleteBlue from "./delete-blue.svg";
+
 export {
   star,
   date,
@@ -165,4 +169,6 @@ export {
   moreWhite,
   upArrowGray,
   downArrowGray,
+  addBlue,
+  deleteBlue,
 };
