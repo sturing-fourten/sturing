@@ -18,6 +18,8 @@ import share from "./share.svg";
 import shareWhite from "./share_white.svg";
 import searchFilter from "./search_filter.svg";
 import sendComment from "./send_comment.svg";
+import checkGray from "./check-gray.svg";
+import checkBlue from "./check-blue.svg";
 
 // arrow
 import rightArrowBlack from "./rightarrow-black.svg";
@@ -161,4 +163,6 @@ export {
   backWhite,
   shareWhite,
   moreWhite,
+  checkGray,
+  checkBlue,
 };
