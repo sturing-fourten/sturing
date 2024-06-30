@@ -12,14 +12,19 @@ import defaultProfileImg from "./defaultProfileImg.svg";
 import menu from "./menu.svg";
 import message from "./message.svg";
 import more from "./more.svg";
+import moreWhite from "./more_white.svg";
 import searchBlue from "./search-blue.svg";
 import share from "./share.svg";
+import shareWhite from "./share_white.svg";
 import searchFilter from "./search_filter.svg";
+import sendComment from "./send_comment.svg";
 
 // arrow
 import rightArrowBlack from "./rightarrow-black.svg";
 import rightArrowwhite from "./rightarrow-white.svg";
+import rightArrowGray from "./rightarrow_gray.svg";
 import back from "./back.svg";
+import backWhite from "./back_white.svg";
 
 // logo
 import logoBlue from "./logo-blue.svg";
@@ -122,6 +127,7 @@ export {
   mypage,
   rightArrowBlack,
   rightArrowwhite,
+  rightArrowGray,
   searchBlue,
   share,
   searchFilter,
@@ -131,4 +137,8 @@ export {
   postInfoMeeting,
   postInfoTask,
   postInfoTeamMember,
+  sendComment,
+  backWhite,
+  shareWhite,
+  moreWhite,
 };

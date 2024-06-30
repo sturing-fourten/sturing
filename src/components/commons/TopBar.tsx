@@ -5,27 +5,32 @@ import { ICONS, BOOKMARK } from "@/constant/icons";
 interface TopBarProps {
   variant: "share" | "chat" | "back" | "save";
   showMore?: boolean;
+  isWhite?: boolean;
   children?: React.ReactNode;
 }
 
-const { back, share, more, message } = ICONS;
+const { back, share, more, message, backWhite, shareWhite, moreWhite } = ICONS;
 
-export default function TopBar({ variant, children, showMore = false }: TopBarProps) {
+export default function TopBar({ variant, children, isWhite, showMore }: TopBarProps) {
+  const backIcon = isWhite ? backWhite : back;
+  const shareIcon = isWhite ? shareWhite : share;
+  const moreIcon = isWhite ? moreWhite : more;
+
   return (
     <div className="w-full h-[54px] flex justify-between items-center px-4">
       {(variant === "share" || variant === "chat" || variant === "back") && (
         <Link href="">
-          <Image src={back.src} alt={back.alt} width={24} height={24} />
+          <Image src={backIcon.src} alt={backIcon.alt} width={24} height={24} />
         </Link>
       )}
       {variant === "share" && (
         <div className="flex justify-center items-center gap-3">
           <button>
-            <Image src={share.src} alt={share.alt} width={24} height={24} />
+            <Image src={shareIcon.src} alt={shareIcon.alt} width={24} height={24} />
           </button>
           {showMore && (
             <button>
-              <Image src={more.src} alt={more.alt} width={24} height={24} />
+              <Image src={moreIcon.src} alt={moreIcon.alt} width={24} height={24} />
             </button>
           )}
         </div>
