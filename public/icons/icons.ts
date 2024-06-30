@@ -64,6 +64,14 @@ import alarm from "./alarm.svg";
 import success from "./success.svg";
 import notFound from "./404.svg";
 
+// study , lecture info icon
+import postInfoTeamMember from "./post_info_team_member.svg";
+import postInfoMeeting from "./post_info_meeting.svg";
+import postInfoTask from "./post_info_task.svg";
+import postInfoLocation from "./post_info_location.svg";
+import postInfoInstructor from "./post_info_instructor.svg";
+import postInfoLevel from "./post_info_level.svg";
+
 export {
   star,
   date,
@@ -117,4 +125,10 @@ export {
   searchBlue,
   share,
   searchFilter,
+  postInfoInstructor,
+  postInfoLevel,
+  postInfoLocation,
+  postInfoMeeting,
+  postInfoTask,
+  postInfoTeamMember,
 };

@@ -51,7 +51,7 @@ export default function Contents() {
         ? afterStateTitle.map((title) => (
             <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
               <Title>{title.text}</Title>
-              <CardList>
+              <CardList isSingleLine>
                 {title.id === 3 ? (
                   <>
                     <UserCard />
@@ -75,7 +75,7 @@ export default function Contents() {
         : beforeStateTitle.map((title) => (
             <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
               <Title>{title.text}</Title>
-              <CardList>
+              <CardList isSingleLine>
                 {title.id === 3 ? (
                   <>
                     <UserCard />

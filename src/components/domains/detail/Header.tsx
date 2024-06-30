@@ -19,6 +19,7 @@ export default function Header(props: BannerProps) {
   const style = {
     backgroundImage: `url(${imageUrl || defaultImageUrl})`,
   };
+  const isLeader = true; //
 
   return (
     <>
@@ -27,7 +28,7 @@ export default function Header(props: BannerProps) {
           isStudy && "before:-z-[2] before:bg-black/20 before:inset-0 before:absolute"
         }  `}
         style={style}>
-        <TopBar variant="share" />
+        <TopBar variant="share" showMore={isStudy && isLeader} />
         <div className="flex items-center gap-1 mt-10 mb-4">
           <TagMain>온라인</TagMain>
           <TagLight>디자인</TagLight>
@@ -41,7 +42,7 @@ export default function Header(props: BannerProps) {
         <h1
           className="mx-11 text-center text-[18px] font-semibold leading-[150%] tracking-[0.6px] break-keep"
           style={{ color: isStudy ? "white" : "black" }}>
-          AI 활용 UXUI 포트폴리오 스터디 모집
+          UXUI 디자이너가 피그마를 활용해 포트폴리오를 쌓는 법 A to Z
         </h1>
         {isStudy && (
           <div className="mt-6 w-[149px] h-[18px] flex justify-start items-center gap-2.5 leading-[150%] tracking-[-0.36px] text-gray-400 text-[12px] font-medium text-nowrap ">
@@ -52,7 +53,7 @@ export default function Header(props: BannerProps) {
         )}
       </section>
       <section className="px-4 py-5">
-        <LectureLinkBanner href="" />
+        <LectureLinkBanner href="" title="UXUI 디자이너가 피그마를 활용해 포트폴리오를 쌓는 법 A to Z" />
       </section>
     </>
   );

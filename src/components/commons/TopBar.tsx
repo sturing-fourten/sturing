@@ -4,12 +4,13 @@ import { ICONS, BOOKMARK } from "@/constant/icons";
 
 interface TopBarProps {
   variant: "share" | "chat" | "back" | "save";
+  showMore?: boolean;
   children?: React.ReactNode;
 }
 
 const { back, share, more, message } = ICONS;
 
-export default function TopBar({ variant, children, ...props }: TopBarProps) {
+export default function TopBar({ variant, children, showMore = false }: TopBarProps) {
   return (
     <div className="w-full h-[54px] flex justify-between items-center px-4">
       {(variant === "share" || variant === "chat" || variant === "back") && (
@@ -22,9 +23,11 @@ export default function TopBar({ variant, children, ...props }: TopBarProps) {
           <button>
             <Image src={share.src} alt={share.alt} width={24} height={24} />
           </button>
-          <button>
-            <Image src={more.src} alt={more.alt} width={24} height={24} />
-          </button>
+          {showMore && (
+            <button>
+              <Image src={more.src} alt={more.alt} width={24} height={24} />
+            </button>
+          )}
         </div>
       )}
       {variant === "chat" && (
