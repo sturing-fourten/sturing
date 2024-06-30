@@ -16,15 +16,15 @@ export const MATCHING_CONFIG = {
       },
       newcomer: {
         name: "신입",
-        explanation: "관련 분야에서 일한지 아직 1년이 안됐어요",
+        explanation: "관련 분야에서 일한 지 아직 1년이 안 됐어요",
       },
       junior: {
         name: "주니어",
-        explanation: "1-3년 정도 관련 분야 업무경험이 있어요",
+        explanation: "1-3년 정도 관련 분야 업무 경험이 있어요",
       },
       senior: {
         name: "시니어",
-        explanation: "4년 이상의 관련 분야 업무경험이 있어요",
+        explanation: "4년 이상의 관련 분야 업무 경험이 있어요",
       },
     },
   },
