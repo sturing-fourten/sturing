@@ -8,6 +8,7 @@ import checkSquare from "./check-square.svg";
 import add from "./add.svg";
 import barGray from "./bar-gray.svg";
 import close from "./close.svg";
+import closeBlue from "./close-blue.svg";
 import defaultProfileImg from "./defaultProfileImg.svg";
 import menu from "./menu.svg";
 import message from "./message.svg";
@@ -136,6 +137,7 @@ export {
   alarm,
   back,
   barGray,
+  closeBlue,
   close,
   defaultProfileImg,
   githubLogo,
