@@ -7,7 +7,7 @@ export default function LectureDetail() {
     <>
       <Header page="lecture" />
       <Contents />
-      <FixedBottomBar />
+      <FixedBottomBar page="lecture" />
     </>
   );
 }

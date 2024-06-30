@@ -11,8 +11,7 @@ interface BannerProps {
 
 const { study, lecture } = IMAGES_DEFAUlT;
 
-export default function Header(props: BannerProps) {
-  const { page } = props;
+export default function Header({ page }: BannerProps) {
   const imageUrl = "";
   const isStudy = page === "study";
   const defaultImageUrl = isStudy ? study.src : lecture.src;
@@ -28,7 +27,7 @@ export default function Header(props: BannerProps) {
           isStudy && "before:-z-[2] before:bg-black/20 before:inset-0 before:absolute"
         }  `}
         style={style}>
-        <TopBar variant="share" showMore={isStudy && isLeader} />
+        <TopBar variant="share" showMore={isStudy && isLeader} isWhite />
         <div className="flex items-center gap-1 mt-10 mb-4">
           <TagMain>온라인</TagMain>
           <TagLight>디자인</TagLight>
