@@ -20,11 +20,7 @@ export default function Tab1() {
 
       <div className="flex flex-col gap-4">
         {data.progress ? <StudyMemberProgressCard /> : <StudyAddFunctionCard title="진척도" />}
-        {data.attendance ? (
-          <article className="py-6 px-4 bg-white rounded border border-gray-300">출석체크</article>
-        ) : (
-          <StudyAddFunctionCard title="출석체크" />
-        )}
+        {data.attendance ? <StudyMemberAttendanceCard /> : <StudyAddFunctionCard title="출석체크" />}
         {data.checkList.length > 0 ? <StudyMemberChecklistCard /> : <StudyAddFunctionCard title="체크리스트" />}
         {data.proofList.length > 0 ? (
           <article className="py-6 px-4 bg-white rounded border border-gray-300">사진 인증</article>

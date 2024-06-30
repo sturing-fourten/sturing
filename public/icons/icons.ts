@@ -94,6 +94,7 @@ import postInfoLevel from "./post_info_level.svg";
 // study dashboard
 import addBlue from "./add-blue.svg";
 import deleteBlue from "./delete-blue.svg";
+import checkBlueOn from "./check-blue-on.svg";
 
 export {
   star,
@@ -171,4 +172,5 @@ export {
   downArrowGray,
   addBlue,
   deleteBlue,
+  checkBlueOn,
 };
