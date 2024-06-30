@@ -14,7 +14,7 @@ export default function AlertMessage({ varient }: AlertMessageProps) {
   ));
 
   return (
-    <>
+    <div className="flex flex-col justify-center items-center gap-[10px]">
       <Image
         src={ALERT_MESSAGE_CONFIG[varient].src}
         alt={ALERT_MESSAGE_CONFIG[varient].alt}
@@ -28,6 +28,6 @@ export default function AlertMessage({ varient }: AlertMessageProps) {
         </h1>
         <div className="mt-[8px] text-center">{formattedText}</div>
       </div>
-    </>
+    </div>
   );
 }
