@@ -27,6 +27,7 @@ import back from "./back.svg";
 import backWhite from "./back_white.svg";
 import upArrowGray from "./up-arrow-gray.svg";
 import downArrowGray from "./down-arrow-gray.svg";
+import downArrowDark from "./down-arrow-dark.svg";
 
 // logo
 import logoBlue from "./logo-blue.svg";
@@ -95,7 +96,6 @@ import postInfoLevel from "./post_info_level.svg";
 import addBlue from "./add-blue.svg";
 import deleteBlue from "./delete-blue.svg";
 import checkBlueOn from "./check-blue-on.svg";
-
 export {
   star,
   date,
@@ -173,4 +173,5 @@ export {
   addBlue,
   deleteBlue,
   checkBlueOn,
+  downArrowDark,
 };
