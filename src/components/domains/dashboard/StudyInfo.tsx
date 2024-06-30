@@ -23,7 +23,7 @@ export default function StudyInfo() {
 
       {/* TODO 강의 컴포넌트 추가 */}
       <details className="">
-        <summary className="absolute bottom-0 flex items-center justify-center w-full h-11 text-center list-none cursor-pointer">
+        <summary className="absolute bottom-0 flex items-center justify-center w-[calc(100%-16px)] h-11 text-center list-none cursor-pointer">
           <Image src={downArrowGray} alt="" width={12} height={6} />
         </summary>
 
