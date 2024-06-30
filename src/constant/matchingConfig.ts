@@ -1,5 +1,6 @@
 import { NextStepList } from "@/types/matching";
 import { STUDY_CATEGORY_MENU, USER_FAVORITE_FIELD_TYPE } from "./study";
+import KOREA_CITY_LIST from "./city";
 
 export const MATCHING_CONFIG = {
   interests: {
@@ -37,6 +38,7 @@ export const MATCHING_CONFIG = {
   },
   location: {
     title: `이 선호하는\n스터디 장소을 선택해 주세요.`,
+    city: KOREA_CITY_LIST,
   },
   mood: {
     title: `이 선호하는\n스터디 분위기를 선택해 주세요.`,

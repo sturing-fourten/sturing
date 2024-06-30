@@ -11,7 +11,9 @@ export default function Home() {
       <Gnb />
       <TapBar />
       <Banner />
-      <SearchBar />
+      <div className="flex w-full py-[32px] px-[16px]">
+        <SearchBar placeholder="관심 스터디 분야나 강의명을 검색해 보세요." />
+      </div>
       <Contents />
       <CreateStudyButton />
     </>
