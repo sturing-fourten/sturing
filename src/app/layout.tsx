@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="ko">
       <SessionProvider>
         <body className={`${pretendard.variable} font-pretendard bg-[#f5f5f5] min-w-screen flex flex-col items-center`}>
-          <main className="w-screen sm:w-[600px] bg-white min-h-screen shadow-xl">{children}</main>
+          <main className="w-screen sm:w-[600px] bg-white min-h-screen shadow-xl relative">{children}</main>
           <div id="modal"></div>
         </body>
       </SessionProvider>

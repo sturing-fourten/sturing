@@ -17,6 +17,10 @@ import {
   collaborative,
   proactive,
   freewheeling,
+  postInfoTeamMember,
+  postInfoMeeting,
+  postInfoTask,
+  postInfoLocation,
 } from "@/../public/icons/icons";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 
@@ -103,3 +107,10 @@ export const STUDY_TAB_MENU_LIST: TTabMenuLinkUnderlinedItem[] = [
   { id: "applying", title: "대기", href: "/mystudy/applying", count: 1 },
   { id: "done", title: "완료", href: "/mystudy/done", count: 1 },
 ];
+
+export const STUDY_RECRUIT_INFO = {
+  teamMember: { title: "팀원", icon: { src: postInfoTeamMember.src, alt: "모집하는 팀원 수" } },
+  meeting: { title: "일정", icon: { src: postInfoMeeting.src, alt: "스터디 일정" } },
+  task: { title: "과제", icon: { src: postInfoTask.src, alt: "스터디 과제" } },
+  location: { title: "위치", icon: { src: postInfoLocation.src, alt: "스터디 장소" } },
+};

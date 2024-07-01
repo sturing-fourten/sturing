@@ -434,8 +434,8 @@ export default function page() {
 
       <div className="p-4">
         <h1 className="font-bold">Lecture Card</h1>
-        <LectureCard isScraped={true} />
-        <LectureCard isScraped={false} />
+        <LectureCard variant="card" isScraped={true} />
+        <LectureCard variant="card" isScraped={false} />
       </div>
 
       <div className="p-4">
