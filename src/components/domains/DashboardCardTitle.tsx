@@ -9,7 +9,7 @@ interface IDashboardCardTitleProps {
 export default function DashboardCardTitle(props: IDashboardCardTitleProps) {
   const { title, children, isEditing } = props;
   return (
-    <div>
+    <>
       <div className="flex items-center gap-2">
         <span className="text-black text-base font-semibold leading-normal">{title}</span>
         {children}
@@ -20,6 +20,6 @@ export default function DashboardCardTitle(props: IDashboardCardTitleProps) {
         )}
       </div>
       <hr className="mt-3 bg-gray-300" />
-    </div>
+    </>
   );
 }
