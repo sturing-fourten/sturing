@@ -1,10 +1,12 @@
 import Checkbox from "./Checkbox";
+import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 
 export default function StudyMemberAttendanceCard() {
   const isEditing = true;
+
   return (
-    <article className="py-6 px-4 bg-white rounded border border-gray-300">
+    <DashboardCardLayout>
       <DashboardCardTitle isEditing={isEditing} title="출석체크">
         <span className="text-gray-600 text-sm font-medium leading-snug">06.03(월)</span>
       </DashboardCardTitle>
@@ -14,7 +16,7 @@ export default function StudyMemberAttendanceCard() {
           <MemberItem key={index} />
         ))}
       </ul>
-    </article>
+    </DashboardCardLayout>
   );
 }
 

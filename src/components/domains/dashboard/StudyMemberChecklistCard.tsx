@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Checkbox from "./Checkbox";
+import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 
 export default function StudyMemberChecklistCard() {
   const isEditing = true;
 
   return (
-    <article className="py-6 px-4 bg-white rounded border border-gray-300">
+    <DashboardCardLayout>
       <DashboardCardTitle isEditing={isEditing} title="체크리스트">
         <span className="text-main-500 text-sm font-semibold leading-snug">3/4</span>
       </DashboardCardTitle>
@@ -22,7 +23,7 @@ export default function StudyMemberChecklistCard() {
           <TodoItem key={index} />
         ))}
       </ul>
-    </article>
+    </DashboardCardLayout>
   );
 }
 

@@ -1,4 +1,5 @@
 import ProgressItem from "./ProgressItem";
+import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 
 const MEMBER_SAMPLE_LIST = [
@@ -38,15 +39,15 @@ const MEMBER_SAMPLE_LIST = [
 
 export default function StudyMemberProgressCard() {
   const isEditing = true;
-  return (
-    <article className="py-6 px-4 bg-white rounded border border-gray-300">
-      <DashboardCardTitle isEditing={isEditing} title="진척도" />
 
-      <ul className="flex flex-col gap-3 mt-4">
+  return (
+    <DashboardCardLayout>
+      <DashboardCardTitle isEditing={isEditing} title="진척도" />
+      <ul className="flex flex-col gap-3">
         {MEMBER_SAMPLE_LIST.map((memberData, index) => (
           <ProgressItem data={memberData} key={index} />
         ))}
       </ul>
-    </article>
+    </DashboardCardLayout>
   );
 }

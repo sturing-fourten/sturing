@@ -1,11 +1,12 @@
 import Image from "next/image";
-import DashboardCardTitle from "../DashboardCardTitle";
-import { addBlue } from "../../../../public/icons/icons";
+import { addBlue } from "@/../public/icons/icons";
 import Checkbox from "./Checkbox";
+import DashboardCardLayout from "./DashboardCardLayout";
+import DashboardCardTitle from "../DashboardCardTitle";
 
 export default function ChecklistCard() {
   return (
-    <article className="flex flex-col justify-center py-6 px-5 rounded-lg border border-gray-300">
+    <DashboardCardLayout>
       <DashboardCardTitle title="06.08 (토)">
         <span className="text-main-500 text-sm font-medium leading-snug">2/3</span>
         <button className="ml-auto">
@@ -18,7 +19,7 @@ export default function ChecklistCard() {
           <TodoItem key={index} />
         ))}
       </ul>
-    </article>
+    </DashboardCardLayout>
   );
 }
 

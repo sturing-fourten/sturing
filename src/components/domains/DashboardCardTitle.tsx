@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { deleteBlue } from "../../../public/icons/icons";
+import { deleteBlue } from "@/../public/icons/icons";
 
 interface IDashboardCardTitleProps {
   title: string;
@@ -19,7 +19,7 @@ export default function DashboardCardTitle(props: IDashboardCardTitleProps) {
           </button>
         )}
       </div>
-      <hr className="mt-3 bg-gray-300" />
+      <hr className="w-full my-3 bg-gray-300" />
     </>
   );
 }
