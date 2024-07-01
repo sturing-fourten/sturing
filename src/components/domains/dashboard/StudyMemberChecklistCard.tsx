@@ -1,25 +1,17 @@
-import { checkBlueOn, deleteBlue } from "@/../public/icons/icons";
 import Image from "next/image";
 import Checkbox from "./Checkbox";
+import DashboardCardTitle from "../DashboardCardTitle";
 
 export default function StudyMemberChecklistCard() {
   const isEditing = true;
 
   return (
     <article className="py-6 px-4 bg-white rounded border border-gray-300">
-      <div className="flex items-center gap-2">
-        <span className="text-black text-base font-semibold leading-normal">체크리스트</span>
-        <span className="text-gray-600 text-sm font-medium leading-snug">06.03(월)</span>
-        {isEditing && (
-          <button className="ml-auto">
-            <Image src={deleteBlue} alt="" width={24} height={24} />
-          </button>
-        )}
-      </div>
+      <DashboardCardTitle isEditing={isEditing} title="체크리스트">
+        <span className="text-main-500 text-sm font-semibold leading-snug">3/4</span>
+      </DashboardCardTitle>
 
-      <hr className="mt-3 mb-4 bg-gray-300" />
-
-      <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide mb-4">
+      <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide my-4">
         {[1, 2, 3, 4, 5, 6].map((member, index) => (
           <MemberItem key={index} />
         ))}

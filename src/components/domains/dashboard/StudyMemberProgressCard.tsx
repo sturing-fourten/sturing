@@ -1,6 +1,5 @@
-import Image from "next/image";
 import ProgressItem from "./ProgressItem";
-import { deleteBlue } from "@/../public/icons/icons";
+import DashboardCardTitle from "../DashboardCardTitle";
 
 const MEMBER_SAMPLE_LIST = [
   {
@@ -38,20 +37,12 @@ const MEMBER_SAMPLE_LIST = [
 ];
 
 export default function StudyMemberProgressCard() {
+  const isEditing = true;
   return (
     <article className="py-6 px-4 bg-white rounded border border-gray-300">
-      <div className="flex items-center justify-between">
-        <p className="text-black text-base font-semibold leading-normal">진척도</p>
-        {true && (
-          <button>
-            <Image src={deleteBlue} alt="" width={24} height={24} />
-          </button>
-        )}
-      </div>
+      <DashboardCardTitle isEditing={isEditing} title="진척도" />
 
-      <hr className="mt-3 mb-4 bg-gray-300" />
-
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-3 mt-4">
         {MEMBER_SAMPLE_LIST.map((memberData, index) => (
           <ProgressItem data={memberData} key={index} />
         ))}
