@@ -27,7 +27,7 @@ export default function Header({ page }: BannerProps) {
           isStudy && "before:-z-[2] before:bg-black/20 before:inset-0 before:absolute"
         }  `}
         style={style}>
-        <TopBar variant="share" showMore={isStudy && isLeader} isWhite />
+        <TopBar variant="share" showMore={isStudy && isLeader} isWhite={isStudy} />
         <div className="flex items-center gap-1 mt-10 mb-4">
           <TagMain>온라인</TagMain>
           <TagLight>디자인</TagLight>
