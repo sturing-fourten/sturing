@@ -16,7 +16,7 @@ export default function TabBarLinkUnderlined(props: ITabBarUnderlined) {
   const currentTab = useSelectedLayoutSegment("tabs") ?? "";
 
   return (
-    <nav className="flex justify-between items-center gap-3 bg-white">
+    <nav className="flex justify-between items-center bg-white">
       {tabMenuList.map((item) => (
         <TabMenuLinkUnderlined
           key={item.id}

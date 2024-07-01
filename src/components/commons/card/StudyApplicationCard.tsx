@@ -3,14 +3,11 @@ import StudyApplyInfo from "./element/StudyApplyInfo";
 import { business as sampleImage } from "@/../public/icons/icons";
 import StudyCardButton from "./element/StudyCardButton";
 
-export default function StudyAcceptCard({ status }: { status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED" }) {
+export default function StudyApplicationCard({ status }: { status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED" }) {
   return (
     <article className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg">
       <StudyApplyInfo status={status} />
-      <p className="text-gray-1000 text-[14px] font-semibold tracking-[-0.42px]">
-        {"소카 5개 프로젝트 디자인 실무 마스터 스터디"}
-      </p>
-      <hr className="bg-gray-300" />
+
       <section className="flex items-center justify-stretch gap-3">
         <Image
           className="rounded-[40px] overflow-hidden"
@@ -30,6 +27,7 @@ export default function StudyAcceptCard({ status }: { status: "APPLIED" | "APPLI
           </p>
         </div>
       </section>
+
       <StudyCardButton>지원서 보기</StudyCardButton>
     </article>
   );

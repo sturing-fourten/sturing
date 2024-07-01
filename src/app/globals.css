@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+textarea {
+  @apply resize-none focus:outline-none focus:border-main-500;
+}
+
+/* star rate custom */
+.rc-rate-star-half .rc-rate-star-first svg,
+.rc-rate-star-full .rc-rate-star-second svg,
+.rc-rate-star-half:hover .rc-rate-star-first svg,
+.rc-rate-star-full:hover .rc-rate-star-second svg {
+  @apply fill-main-500;
+}
+.rc-rate-star-half .rc-rate-star-first path,
+.rc-rate-star-full .rc-rate-star-second path,
+.rc-rate-star-half:hover .rc-rate-star-first path,
+.rc-rate-star-full:hover .rc-rate-star-second path {
+  @apply stroke-none;
+}
+
 body {
   -webkit-user-select: none;
   -moz-user-select: none;

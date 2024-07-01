@@ -7,8 +7,8 @@ interface IStudyListProps {
 
 export default function StudyList({ children }: IStudyListProps) {
   return (
-    <article className="w-full pt-10 px-4">
-      <p className="mb-4 text-black text-xl font-semibold leading-7">스터디 리스트</p>
+    <article className="w-full pt-10">
+      <p className="mb-4 px-4 text-black text-xl font-semibold leading-7">스터디 리스트</p>
 
       <TabBarUnderlined defaultSegment="/mystudy/" tabMenuList={STUDY_TAB_MENU_LIST} />
       {children}
