@@ -16,10 +16,10 @@ export default function DashboardLayout({ params, tabs }: IDashboardProps) {
   const hrefBase = `/study/${id}/dashboard/`;
 
   const MY_STUDY_DASHBOARD_TAB_MENU_LIST: TTabMenuLinkUnderlinedItem[] = [
-    { id: "1", title: "1", href: `${hrefBase}` },
-    { id: "2", title: "2", href: `${hrefBase}second` },
-    { id: "3", title: "3", href: `${hrefBase}third` },
-    { id: "4", title: "4", href: `${hrefBase}fourth` },
+    { id: "team", title: "팀", href: `${hrefBase}` },
+    { id: "me", title: "개인", href: `${hrefBase}me` },
+    { id: "schedule", title: "일정", href: `${hrefBase}schedule` },
+    { id: "board", title: "게시판", href: `${hrefBase}board` },
   ];
 
   return (
