@@ -5,9 +5,13 @@ import Contents from "@/components/domains/detail/study/Contents";
 export default function StudyDetail() {
   return (
     <>
-      <Header page="study" />
-      <Contents />
-      <FixedBottomBar page="study" />
+      <div className="flex-col inline-flex w-full h-dvh">
+        <div className="flex-1 overflow-auto scrollbar-hide">
+          <Header page="study" />
+          <Contents />
+        </div>
+        <FixedBottomBar page="study" />
+      </div>
     </>
   );
 }

@@ -31,7 +31,7 @@ export function StudyRecruitCard({ isMini, isScraped }: IStudyRecruitCardProps) 
           <TagMain>{"온라인"}</TagMain>
           <TagLight>{"디자인"}</TagLight>
         </div>
-        <p className="mb-3 text-4 font-semibold tracking-[-0.32px] text-black loading truncate">
+        <p className="mb-3 text-4 font-semibold tracking-[-0.32px] text-black loading line-clamp-2">
           {"기획안 작성 노하우 강의 들을 취준생 구해요!"}
         </p>
         <div className="flex items-center text-[12px] font-medium tracking-[-0.36px] text-gray-600">
