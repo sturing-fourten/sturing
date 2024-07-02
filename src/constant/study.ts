@@ -1,104 +1,81 @@
-import {
-  design,
-  develop,
-  marketing,
-  business,
-  economic,
-  language,
-  certificate,
-  selfDevelop,
-  friendly,
-  professional,
-  serious,
-  systematic,
-  passionate,
-  responsible,
-  learningFocused,
-  collaborative,
-  proactive,
-  freewheeling,
-  postInfoTeamMember,
-  postInfoMeeting,
-  postInfoTask,
-  postInfoLocation,
-} from "@/../public/icons/icons";
+import { STUDY_CATEGORY, MOOD, ICONS } from "@/constant/icons";
 import { StudyCategoryMenu, UserFavoriteFieldType, TTabMenuLinkUnderlinedItem } from "@/types/study";
 
 export const STUDY_CATEGORY_MENU: StudyCategoryMenu = {
   design: {
-    imageSrc: design,
-    name: "디자인",
+    imageSrc: STUDY_CATEGORY.design.src,
+    imageAlt: STUDY_CATEGORY.design.alt,
   },
   develop: {
-    imageSrc: develop,
-    name: "개발 · 테크",
+    imageSrc: STUDY_CATEGORY.develop.src,
+    imageAlt: STUDY_CATEGORY.develop.alt,
   },
   marketing: {
-    imageSrc: marketing,
-    name: "마케팅",
+    imageSrc: STUDY_CATEGORY.marketing.src,
+    imageAlt: STUDY_CATEGORY.marketing.alt,
   },
   business: {
-    imageSrc: business,
-    name: "비즈니스",
+    imageSrc: STUDY_CATEGORY.business.src,
+    imageAlt: STUDY_CATEGORY.business.alt,
   },
   economic: {
-    imageSrc: economic,
-    name: "경제",
+    imageSrc: STUDY_CATEGORY.economic.src,
+    imageAlt: STUDY_CATEGORY.economic.alt,
   },
   language: {
-    imageSrc: language,
-    name: "외국어",
+    imageSrc: STUDY_CATEGORY.language.src,
+    imageAlt: STUDY_CATEGORY.language.alt,
   },
   certificate: {
-    imageSrc: certificate,
-    name: "자격증",
+    imageSrc: STUDY_CATEGORY.certificate.src,
+    imageAlt: STUDY_CATEGORY.certificate.alt,
   },
   selfDevelop: {
-    imageSrc: selfDevelop,
-    name: "자기 계발",
+    imageSrc: STUDY_CATEGORY.selfDevelop.src,
+    imageAlt: STUDY_CATEGORY.selfDevelop.alt,
   },
 };
 
 export const USER_FAVORITE_FIELD_TYPE: UserFavoriteFieldType = {
   friendly: {
-    name: "친근한",
-    imageSrc: friendly,
+    imageSrc: MOOD.friendly.src,
+    imageAlt: MOOD.friendly.alt,
   },
   professional: {
-    name: "전문적인",
-    imageSrc: professional,
+    imageSrc: MOOD.professional.src,
+    imageAlt: MOOD.professional.alt,
   },
   serious: {
-    name: "진지한",
-    imageSrc: serious,
+    imageSrc: MOOD.serious.src,
+    imageAlt: MOOD.serious.alt,
   },
   systematic: {
-    name: "체계적인",
-    imageSrc: systematic,
+    imageSrc: MOOD.systematic.src,
+    imageAlt: MOOD.systematic.alt,
   },
   passionate: {
-    name: "열정적인",
-    imageSrc: passionate,
+    imageSrc: MOOD.passionate.src,
+    imageAlt: MOOD.passionate.alt,
   },
   responsible: {
-    name: "책임감있는",
-    imageSrc: responsible,
+    imageSrc: MOOD.responsible.src,
+    imageAlt: MOOD.responsible.alt,
   },
   learningFocused: {
-    name: "학습중심적",
-    imageSrc: learningFocused,
+    imageSrc: MOOD.learningFocused.src,
+    imageAlt: MOOD.learningFocused.alt,
   },
   collaborative: {
-    name: "협력적인",
-    imageSrc: collaborative,
+    imageSrc: MOOD.collaborative.src,
+    imageAlt: MOOD.collaborative.alt,
   },
   proactive: {
-    name: "자기주도적",
-    imageSrc: proactive,
+    imageSrc: MOOD.proactive.src,
+    imageAlt: MOOD.proactive.alt,
   },
   freewheeling: {
-    name: "자유로운",
-    imageSrc: freewheeling,
+    imageSrc: MOOD.freewheeling.src,
+    imageAlt: MOOD.freewheeling.alt,
   },
 };
 
@@ -109,8 +86,8 @@ export const STUDY_TAB_MENU_LIST: TTabMenuLinkUnderlinedItem[] = [
 ];
 
 export const STUDY_RECRUIT_INFO = {
-  teamMember: { title: "팀원", icon: { src: postInfoTeamMember.src, alt: "모집하는 팀원 수" } },
-  meeting: { title: "일정", icon: { src: postInfoMeeting.src, alt: "스터디 일정" } },
-  task: { title: "과제", icon: { src: postInfoTask.src, alt: "스터디 과제" } },
-  location: { title: "위치", icon: { src: postInfoLocation.src, alt: "스터디 장소" } },
+  teamMember: { title: "팀원", icon: { src: ICONS.postInfoTeamMember.src, alt: ICONS.postInfoTeamMember.alt } },
+  meeting: { title: "일정", icon: { src: ICONS.postInfoMeeting.src, alt: ICONS.postInfoMeeting.alt } },
+  task: { title: "과제", icon: { src: ICONS.postInfoTask.src, alt: ICONS.postInfoTask.alt } },
+  location: { title: "위치", icon: { src: ICONS.postInfoLocation.src, alt: ICONS.postInfoLocation.alt } },
 };

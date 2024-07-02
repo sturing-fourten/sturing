@@ -22,6 +22,11 @@ import sendComment from "./send_comment.svg";
 import checkGray from "./check-gray.svg";
 import checkBlue from "./check-blue.svg";
 import question from "./question.svg";
+import mypage from "./mypage.svg";
+import ready from "./ready.svg";
+import alarm from "./alarm.svg";
+import success from "./success.svg";
+import notFound from "./404.svg";
 
 // arrow
 import rightArrowBlack from "./rightarrow-black.svg";
@@ -77,13 +82,6 @@ import goodOn from "./good-on.svg";
 import goodOff from "./good-off.svg";
 import bestOn from "./best-on.svg";
 import bestOff from "./best-off.svg";
-
-// page icon
-import mypage from "./mypage.svg";
-import ready from "./ready.svg";
-import alarm from "./alarm.svg";
-import success from "./success.svg";
-import notFound from "./404.svg";
 
 // study , lecture info icon
 import postInfoTeamMember from "./post_info_team_member.svg";

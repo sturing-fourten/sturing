@@ -2,9 +2,8 @@
 
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { CityList } from "@/types/citiy";
-import Image from "next/image";
+import { ICONS } from "@/constant/icons";
 import { useState } from "react";
-import { checkBlue, checkGray, closeBlue } from "../../../public/icons/icons";
 
 const content = MATCHING_CONFIG.location.city;
 
@@ -66,7 +65,12 @@ export default function SelectLocation() {
                     }`}
                     onClick={() => handleDistrictClick(selectedCity, district)}>
                     {district}
-                    <Image src={isSelected ? checkBlue : checkGray} alt="체크 아이콘" width={24} height={24} />
+                    <img
+                      src={isSelected ? ICONS.checkBlue.src : ICONS.checkGray.src}
+                      alt="체크 아이콘"
+                      width={24}
+                      height={24}
+                    />
                   </button>
                 );
               })}
@@ -83,7 +87,7 @@ export default function SelectLocation() {
                 className="flex justify-center items-center h-10 py-[9px] px-[3px] sm:px-[14px] gap-2 bg-main-100 border border-main-500 rounded-[8px] text-main-500 text-[14px] font-medium tracking-[-0.28px] leading-[21px]">
                 {location.city} {location.district}
                 <button type="button" onClick={() => handleRemoveLocation(location.district)}>
-                  <Image src={closeBlue} alt="닫기 아이콘" width={18} height={18} />
+                  <img src={ICONS.closeBlue.src} alt={ICONS.closeBlue.alt} width={18} height={18} />
                 </button>
               </div>
             ))}

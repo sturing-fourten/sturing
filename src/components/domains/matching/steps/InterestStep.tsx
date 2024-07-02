@@ -3,7 +3,7 @@
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { StudyCategoryMenu } from "@/types/study";
 import Button from "@/components/commons/Button";
-import Image from "next/image";
+import { ICONS } from "@/constant/icons";
 import { useState } from "react";
 import TopBar from "@/components/commons/TopBar";
 import Title from "../Title";
@@ -42,8 +42,8 @@ export default function InterestStep() {
                   isSelected ? "border-main-500 text-main-500 bg-main-100" : "text-gray-700 border-gray-300 bg-white"
                 }`}
                 onClick={() => handleCategoryClick(key)}>
-                <Image src={interest.imageSrc} alt={`${interest.name} icon`} width={28} height={28} />
-                {interest.name}
+                <img src={interest.imageSrc} alt={`${interest.imageAlt} icon`} width={28} height={28} />
+                {interest.imageAlt}
               </Button>
             );
           })}

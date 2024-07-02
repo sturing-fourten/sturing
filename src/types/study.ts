@@ -13,7 +13,7 @@ export type TTabMenuButtonUnderlinedItem = {
 
 type StudyCategory = {
   imageSrc: string;
-  name: string;
+  imageAlt: string;
 };
 
 export type StudyCategoryMenu = {
