@@ -11,7 +11,7 @@ export default function DashboardCardPaginationLayout(props: IDashboardCardLayou
 
   return (
     <article
-      className={`pt-6 px-5 rounded-lg border border-gray-300 ${
+      className={`pt-6 px-5 rounded-lg border border-gray-300 bg-white ${
         hasMore
           ? "relative pb-[6px] before:absolute before:content-[''] before:bg-gradient-to-b before:from-transparent before:to-white before:bottom-[-1px] before:left-[-1px] before:z-[1] before:w-[calc(100%+2px)] before:h-[30%] before:min-h-[70px] before:max-h-[calc(100%-70px)] before:rounded-lg"
           : "pb-6"
