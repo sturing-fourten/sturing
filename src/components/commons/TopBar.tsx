@@ -17,7 +17,7 @@ export default function TopBar({ variant, children, isWhite, showMore }: TopBarP
   const moreIcon = isWhite ? moreWhite : more;
 
   return (
-    <div className="w-full h-[54px] flex justify-between items-center">
+    <div className="w-full h-[54px] flex justify-between items-center px-4">
       {(variant === "share" || variant === "chat" || variant === "back") && (
         <Link href="">
           <Image src={backIcon.src} alt={backIcon.alt} width={24} height={24} />

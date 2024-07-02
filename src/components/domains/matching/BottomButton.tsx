@@ -4,7 +4,7 @@ import { rightArrowwhite } from "../../../../public/icons/icons";
 
 export default function BottomButton() {
   return (
-    <footer className="flex justify-between items-center w-full py-[9px]">
+    <footer className="flex justify-between items-center w-full py-3 px-4">
       <Button
         varient="circle"
         type="button"
