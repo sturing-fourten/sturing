@@ -4,8 +4,10 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="h-screen min-w-screen flex flex-col justify-center items-center">
-      <AlertMessage varient="notFound" />
+    <div className="h-dvh flex flex-col justify-center items-center">
+      <div className="flex-1 flex justify-center items-center">
+        <AlertMessage varient="notFound" />
+      </div>
       <Link href="/" className="py-3 px-4 fixed bottom-0 w-screen sm:w-[600px]">
         <Button
           varient="filled"
