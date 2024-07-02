@@ -1,3 +1,4 @@
+import FreeCard from "@/components/domains/dashboard/FreeCard";
 import NoticeCard from "@/components/domains/dashboard/NoticeCard";
 import TaskCard from "@/components/domains/dashboard/TaskCard";
 
@@ -11,6 +12,7 @@ export default function BoardTab() {
       <TaskCard />
 
       {/* Free */}
+      <FreeCard />
     </section>
   );
 }
