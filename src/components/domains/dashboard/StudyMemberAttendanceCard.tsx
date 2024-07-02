@@ -32,11 +32,11 @@ function MemberItem() {
           출석 알리기
         </button>
       )}
-      <form className="flex flex-col justify-center items-center gap-2">
-        <label htmlFor={""}>
-          <input id={""} type="hidden" checked={isChecked} />
+      <form className="flex flex-col justify-center items-center gap-2" action={""}>
+        <input id={""} type="hidden" checked={isChecked} />
+        <button>
           <Checkbox isChecked={isChecked} />
-        </label>
+        </button>
         <div
           className={`text-center text-[14px] font-medium leading-tight tracking-[-0.28px] ${
             isMe ? "text-main-500" : "text-black"

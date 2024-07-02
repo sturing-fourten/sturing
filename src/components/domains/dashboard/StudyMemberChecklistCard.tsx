@@ -62,11 +62,11 @@ function TodoItem() {
 
   return (
     <li className="flex justify-between items-center py-2 rounded-sm">
-      <form className="flex justify-start items-center gap-2">
-        <label className="" htmlFor={""}>
-          <input id={""} type="hidden" checked={isChecked} />
+      <form className="flex justify-start items-center gap-2" action={""}>
+        <input id={""} type="hidden" checked={isChecked} />
+        <button>
           <Checkbox isChecked={isChecked} />
-        </label>
+        </button>
         <div className="text-gray-900 text-sm font-medium leading-tight">2강 듣고 과제노트 작성하기</div>
       </form>
       <form>

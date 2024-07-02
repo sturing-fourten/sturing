@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { checkBlueOn } from "../../../../public/icons/icons";
+import { checkBlueOn } from "@/../public/icons/icons";
 
 export default function Checkbox({ isChecked }: { isChecked: boolean }) {
   return (
