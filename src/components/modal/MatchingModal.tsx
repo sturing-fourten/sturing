@@ -19,7 +19,7 @@ export default function MatchingModal({ onClose }: MatchingModalProps) {
         </p>
         <Button
           varient="filled"
-          className="w-64 h-12 bg-blue-500 rounded text-white text-base font-semibold font-['Pretendard Variable'] leading-normal">
+          addStyle="w-64 h-12 bg-blue-500 rounded text-white text-base font-semibold font-['Pretendard Variable'] leading-normal">
           매칭 항목 선택 바로가기
         </Button>
       </div>
