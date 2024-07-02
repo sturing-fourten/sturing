@@ -8,7 +8,11 @@ const SAMPLE_TASK_LIST: any[] = [];
 
 export default function FreeCard() {
   return (
-    <DashboardCardPaginationLayout hasMore={false} title="자유 게시판">
+    <DashboardCardPaginationLayout hasMore={false}>
+      <DashboardCardTitle title="자유 게시판">
+        <WriteBoardLink />
+      </DashboardCardTitle>
+
       <ul className="flex flex-col gap-[1px]">
         {SAMPLE_TASK_LIST?.length > 0 ? SAMPLE_TASK_LIST.map((item, index) => <TaskItem key={index} />) : <NoBoard />}
       </ul>

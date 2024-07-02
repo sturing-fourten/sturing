@@ -8,9 +8,13 @@ const SAMPLE_NOTICE_LIST = [{ important: false }, { important: true }, { importa
 
 export default function NoticeCard() {
   return (
-    <DashboardCardPaginationLayout hasMore={true} title="공지사항">
+    <DashboardCardPaginationLayout hasMore={true}>
+      <DashboardCardTitle title="공지사항">
+        <WriteBoardLink />
+      </DashboardCardTitle>
+
       <ul className="flex flex-col gap-2 mb-3">
-        {SAMPLE_NOTICE_LIST ? (
+        {SAMPLE_NOTICE_LIST?.length > 0 ? (
           SAMPLE_NOTICE_LIST.map((item, index) => <NoticeItem key={index} important={item.important} />)
         ) : (
           <NoBoard />
