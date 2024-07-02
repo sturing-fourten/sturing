@@ -35,7 +35,11 @@ export default function DashboardLayout({ params, tabs }: IDashboardProps) {
       </section>
 
       {/* Tab Menu */}
-      <TabBarLinkUnderlined defaultSegment={hrefBase} tabMenuList={MY_STUDY_DASHBOARD_TAB_MENU_LIST} />
+      <TabBarLinkUnderlined
+        defaultSegment={hrefBase}
+        tabMenuList={MY_STUDY_DASHBOARD_TAB_MENU_LIST}
+        stickyOption="sticky top-[54px] z-[1]"
+      />
 
       {/* Tab Panel */}
       {tabs}
