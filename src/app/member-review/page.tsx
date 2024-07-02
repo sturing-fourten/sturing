@@ -13,7 +13,7 @@ export default function MemberReviewPage() {
   return (
     <>
       <section>
-        <TopBar varient="back">팀원 후기 작성하기</TopBar>
+        <TopBar variant="back">팀원 후기 작성하기</TopBar>
 
         <form className="mb-20">
           <section className="flex justify-start items-center gap-3 h-24 py-5 px-4">

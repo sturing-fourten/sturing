@@ -7,7 +7,7 @@ export default function LectureReviewPage() {
   return (
     <>
       <section>
-        <TopBar varient="back">강의 후기 작성하기</TopBar>
+        <TopBar variant="share" showMore={false} isWhite={false} />
         <form>
           <section className="flex flex-col justify-start items-start py-5 px-4">
             <p className="text-gray-1000 text-base font-semibold leading-normal">{"user Id"}</p>
