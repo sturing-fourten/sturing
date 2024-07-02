@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function SuccessStep() {
   return (
-    <div className="h-dvh flex flex-col justify-center items-center">
+    <div className="flex flex-col gap-[50px] h-dvh w-full">
       <div className="flex-1 flex justify-center items-center">
         <AlertMessage varient="apply" />
       </div>

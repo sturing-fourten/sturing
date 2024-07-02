@@ -1,10 +1,5 @@
-import TopBar from "@/components/commons/TopBar";
+import { ReactNode } from "react";
 
-export default function Layout({ steps }: { steps: React.ReactNode }) {
-  return (
-    <>
-      <TopBar variant="back" />
-      <div className="flex flex-col py-5 px-4 min-h-screen relative w-screen sm:w-[600px]">{steps}</div>
-    </>
-  );
+export default function layout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
 }
