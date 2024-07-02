@@ -18,7 +18,8 @@ export default function ProgressItem({ data }: { data: any }) {
             {data.nickname}
           </span>
           <span className="text-gray-700 text-xs font-normal">{data.role}</span>
-          {data.isLeader && <Image src="" alt="" width={17} height={12} />}
+          {/* TODO leader icon */}
+          {data.isLeader && <img src="/icons/leader.svg" alt="리더 아이콘" width={17} height={12} />}
           <span className="ml-auto text-gray-900 text-sm font-semibold">{data.progress}%</span>
         </div>
         <div className="w-full h-2 bg-indigo-50 rounded-full relative">
