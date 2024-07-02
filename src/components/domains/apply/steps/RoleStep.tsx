@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Title from "@/components/domains/apply/Title";
-import { checkBlue, question } from "../../../../public/icons/icons";
+import { ICONS } from "@/constant/icons";
 import Link from "next/link";
-import Image from "next/image";
 import Button from "@/components/commons/Button";
 import TopBar from "@/components/commons/TopBar";
 
@@ -88,7 +87,9 @@ export default function RoleStep() {
                       <span>{role.name}</span>
                       <span>{role.content}</span>
                     </div>
-                    {selectedRole === key && <Image src={checkBlue} alt="체크 아이콘" className="w-6 h-6" />}
+                    {selectedRole === key && (
+                      <img src={ICONS.checkBlue.src} alt={ICONS.checkBlue.alt} className="w-6 h-6" />
+                    )}
                   </div>
                 </Button>
               );
@@ -96,7 +97,7 @@ export default function RoleStep() {
           </div>
           <div className="w-full">
             <button type="button" className="flex justify-center items-center gap-[6px]">
-              <Image src={question} alt="물음표 아이콘" width={13} height={13} />
+              <img src={ICONS.question.src} alt={ICONS.question.alt} width={13} height={13} />
               <span className="text-gray-500 text-center text-[12px] font-normal tracking-[-0.36px] leading-[18px]">
                 역할에 대한 정보가 궁금하다면?
               </span>

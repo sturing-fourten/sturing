@@ -3,7 +3,6 @@
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { UserFavoriteFieldType } from "@/types/study";
 import Button from "@/components/commons/Button";
-import Image from "next/image";
 import { useState } from "react";
 import Title from "../Title";
 import TopBar from "@/components/commons/TopBar";
@@ -43,8 +42,8 @@ export default function MoodStep() {
                   isSelected ? "border-main-500 text-main-500 bg-main-100" : "text-gray-700 border-gray-300 bg-white"
                 }`}
                 onClick={() => handleCategoryClick(key)}>
-                <Image src={mood.imageSrc} alt={`${mood.name} icon`} width={28} height={28} />
-                {mood.name}
+                <img src={mood.imageSrc} alt={`${mood.imageAlt} icon`} width={28} height={28} />
+                {mood.imageAlt}
               </Button>
             );
           })}

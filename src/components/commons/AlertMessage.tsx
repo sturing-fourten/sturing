@@ -1,5 +1,4 @@
 import { ALERT_MESSAGE_CONFIG } from "@/constant/alertMessageConfig";
-import Image from "next/image";
 
 interface AlertMessageProps {
   varient: "matching" | "recruit" | "apply" | "notFound" | "preparing";
@@ -15,7 +14,7 @@ export default function AlertMessage({ varient }: AlertMessageProps) {
 
   return (
     <div className="flex flex-col justify-center items-center gap-[10px]">
-      <Image
+      <img
         src={ALERT_MESSAGE_CONFIG[varient].src}
         alt={ALERT_MESSAGE_CONFIG[varient].alt}
         width={62}

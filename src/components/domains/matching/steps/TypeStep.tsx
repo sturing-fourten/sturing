@@ -3,11 +3,10 @@
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { TypeContentConfig } from "@/types/matching";
 import { useState } from "react";
-import { checkBlue, checkGray } from "../../../../../public/icons/icons";
 import TopBar from "@/components/commons/TopBar";
 import Title from "../Title";
 import Button from "@/components/commons/Button";
-import Image from "next/image";
+import { ICONS } from "@/constant/icons";
 import BottomButton from "../BottomButton";
 
 const content = MATCHING_CONFIG.type.content;
@@ -40,8 +39,8 @@ export default function TypeStep() {
                 onClick={() => handleButtonClick(key)}>
                 <div className="flex justify-between items-center w-full">
                   <span>{type}</span>
-                  <Image
-                    src={!isSelected || selectedType === null ? checkGray : checkBlue}
+                  <img
+                    src={!isSelected || selectedType === null ? ICONS.checkGray.src : ICONS.checkBlue.src}
                     alt="check icon"
                     width={24}
                     height={24}

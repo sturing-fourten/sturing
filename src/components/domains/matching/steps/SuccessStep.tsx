@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import TopBar from "@/components/commons/TopBar";
 import AlertMessage from "@/components/commons/AlertMessage";
 import CardList from "@/components/commons/CardList";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";

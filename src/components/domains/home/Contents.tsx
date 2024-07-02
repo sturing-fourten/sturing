@@ -11,7 +11,7 @@ import { STUDY_CATEGORY_MENU } from "@/constant/study";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import UserCard from "@/components/commons/card/UserCard";
 import CardList from "@/components/commons/CardList";
-import { challenge } from "../../../../public/images/images";
+import { IMAGES_BANNER } from "@/constant/images";
 
 const beforeStateTitle = [
   { id: 1, text: "이번주 인기 스터디" },
@@ -37,9 +37,9 @@ export default function Contents() {
         <Title>분야별 스터디 탐색하기</Title>
         <div className="flex items-center whitespace-nowrap scrollbar-hide overflow-auto overflow-x-scroll mb-[40px]">
           <div className="inline-block">
-            {Object.entries(STUDY_CATEGORY_MENU).map(([key, { imageSrc, name }]) => (
-              <StudyCategoryButton key={key} imageSrc={imageSrc} imageAlt={name} addStyle="mr-[8px]">
-                {name}
+            {Object.entries(STUDY_CATEGORY_MENU).map(([key, { imageSrc, imageAlt }]) => (
+              <StudyCategoryButton key={key} imageSrc={imageSrc} imageAlt={imageAlt} addStyle="mr-[8px]">
+                {imageAlt}
               </StudyCategoryButton>
             ))}
           </div>
@@ -104,7 +104,13 @@ export default function Contents() {
             팀원과 함께 2주 집중 스터디, 성공 시 스터디원 전원 지급!
           </span>
         </div>
-        <Image src={challenge} alt="스터링 챌린지 이미지" width={343} height={159} className="w-full" />
+        <Image
+          src={IMAGES_BANNER.challenge.src}
+          alt={IMAGES_BANNER.challenge.alt}
+          width={343}
+          height={159}
+          className="w-full"
+        />
         <Link href="/preparing">
           <Button
             varient="ghost"
