@@ -96,6 +96,8 @@ import postInfoLevel from "./post_info_level.svg";
 import addBlue from "./add-blue.svg";
 import deleteBlue from "./delete-blue.svg";
 import checkBlueOn from "./check-blue-on.svg";
+import writeBoard from "./write-board.svg";
+import comment from "./comment.svg";
 export {
   star,
   date,
@@ -174,4 +176,6 @@ export {
   deleteBlue,
   checkBlueOn,
   downArrowDark,
+  writeBoard,
+  comment,
 };
