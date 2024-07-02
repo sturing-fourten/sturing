@@ -112,7 +112,7 @@ export default function Recruit() {
   return (
     <form>
       <div className="w-full h-dvh flex-col inline-flex">
-        <TopBar type="save" />
+        <TopBar variant="save" />
         <ProgressBar maxSteps={4} steps={steps} />
         <div className="overflow-auto flex-1">
           {steps === 1 && <SelectLecture onLectureChange={handleLectureChange} />}

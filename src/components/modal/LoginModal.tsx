@@ -1,6 +1,7 @@
 import { githubLogin } from "@/lib/database/action/login";
 import ModalContainer from "./ModalContainer";
 import { useToggle } from "usehooks-ts";
+import GitHubLoginButton from "../commons/GitHubLoginButton";
 
 interface LoginModalProps {
   onClose: () => void;
@@ -23,29 +24,16 @@ export default function LoginModal({ onClose }: LoginModalProps) {
             </div>
           </div>
           {isHovered && (
-            <>
-              <div className="shadow flex-col justify-start items-center flex relative">
-                <div className="w-48 h-14 pl-3.5 pr-5 pt-2.5 pb-3 bg-white rounded-lg justify-start items-center inline-flex text-center z-[1]">
-                  <div className="text-stone-500 text-xs font-medium font-['Pretendard Variable'] leading-4">
-                    {"지금 회원가입하고"}
-                    <br />
-                    <span className="text-blue-500 text-xs font-semibold font-['Pretendard Variable'] leading-4">
-                      {"나와 맞는 스터디에 "}
-                    </span>
-                    {"참가해보세요!"}
-                  </div>
-                </div>
-                <div className="w-[13px] h-[13px] bg-white rounded-[2px] shadow-[1px_-2px_1px_rgba(178,178,178,0.3)] transform rotate-[135deg] absolute -bottom-[0.3rem]"></div>
-              </div>
-            </>
+            <div className="w-[186px] absolute bottom-12 left-1/2 transform -translate-x-1/2">
+              <img src="/icons/login-message.svg" alt="로그인 메세지" />
+            </div>
           )}
           <form action={githubLogin}>
-            <button
-              className="absolute bottom-2 left-1/2 transform -translate-x-1/2"
+            <GitHubLoginButton
+              addStyle="absolute bottom-0 left-1/2 transform -translate-x-1/2"
               onMouseEnter={hoverToggle}
-              onMouseLeave={hoverToggle}>
-              로그인 버튼 추가
-            </button>
+              onMouseLeave={hoverToggle}
+            />
           </form>
         </div>
       </div>
