@@ -1,4 +1,5 @@
 import { AssessmentCheckboxCard } from "@/components/commons/AssessmentCheckboxCard";
+import Avatar from "@/components/commons/Avatar";
 import Button from "@/components/commons/Button";
 import TopBar from "@/components/commons/TopBar";
 import SectionTitle from "@/components/domains/mystudy/SectionTitle";
@@ -17,7 +18,8 @@ export default function MemberReviewPage() {
 
         <form className="mb-20">
           <section className="flex justify-start items-center gap-3 h-24 py-5 px-4">
-            <Image src={""} alt="profile image" width={60} height={60} />
+            <Avatar width={60} height={60} profileImageUrl={"https://picsum.photos/200/30"} hasBorder={true} />
+
             <div className="flex flex-col justify-start items-start">
               <p className="text-gray-1000 text-base font-semibold leading-normal">{"user Id"}</p>
               <p className="text-gray-600 text-xs font-medium leading-snug">{"study Name"}</p>

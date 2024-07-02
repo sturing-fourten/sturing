@@ -1,17 +1,11 @@
-import Image from "next/image";
+import Avatar from "@/components/commons/Avatar";
 
 export default function ProgressItem({ data }: { data: any }) {
   const progressWidth = `${data.progress}%`;
 
   return (
     <li className="flex items-center gap-3">
-      <Image
-        className="w-10 h-10 rounded-full border border-gray-300"
-        src={data.profileImage}
-        alt=""
-        width={40}
-        height={40}
-      />
+      <Avatar width={40} height={40} profileImageUrl={data.profileImage} hasBorder={true} />
       <div className="grow grid grid-row-2 gap-1 h-9">
         <div className="flex items-center gap-1">
           <span className={`text-sm font-semibold ${data.isMe ? "text-main-500" : "text-gray-900"}`}>

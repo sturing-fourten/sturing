@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Checkbox from "./Checkbox";
 import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
+import Avatar from "@/components/commons/Avatar";
 
 export default function StudyMemberChecklistCard() {
   const isEditing = true;
@@ -43,7 +43,8 @@ function MemberItem() {
         className={`flex flex-col justify-center items-center gap-1 py-[10px] px-2 rounded border ${
           isCurrent && "border-main-500 bg-main-100"
         }`}>
-        <Image src="" alt="" width={40} height={40} />
+        <Avatar width={40} height={40} profileImageUrl={""} hasBorder={true} />
+
         <div
           className={`text-center text-[14px] font-medium leading-tight tracking-[-0.28px] ${
             isMe ? "text-main-500" : "text-black"

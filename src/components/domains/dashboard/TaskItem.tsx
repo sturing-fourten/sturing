@@ -1,19 +1,17 @@
 import Image from "next/image";
 import EmojiTag from "./EmojiTag";
 import Link from "next/link";
+import Avatar from "@/components/commons/Avatar";
 
 export default function TaskItem() {
   return (
     <li>
       <Link className="flex flex-col gap-4 py-[18px] bg-white" href="">
         <div className="flex items-center">
-          <Image
-            className="w-6 h-6 mr-2 rounded-full border border-gray-300"
-            src="https://picsum.photos/200/300"
-            alt=""
-            width={28}
-            height={28}
-          />
+          <div className="mr-2">
+            <Avatar width={24} height={24} profileImageUrl={"https://picsum.photos/200/30"} hasBorder={true} />
+          </div>
+
           <span className="mr-1 text-gray-900 text-sm font-semibold leading-snug">갓생살자</span>
           <span className="text-gray-700 text-xs font-normal leading-normal">일정팀장</span>
           <span className="ml-auto text-gray-600 text-xs font-medium leading-normal">11시간 전</span>
