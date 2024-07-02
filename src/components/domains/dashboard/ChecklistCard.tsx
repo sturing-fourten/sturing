@@ -7,7 +7,7 @@ import DashboardCardTitle from "../DashboardCardTitle";
 export default function ChecklistCard() {
   return (
     <DashboardCardLayout>
-      <DashboardCardTitle title="06.08 (토)">
+      <DashboardCardTitle title="체크리스트">
         <span className="text-main-500 text-sm font-medium leading-snug">2/3</span>
         <button className="ml-auto">
           <Image src={addBlue} alt="" width={24} height={24} />
