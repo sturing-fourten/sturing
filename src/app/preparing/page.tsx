@@ -4,8 +4,10 @@ import Link from "next/link";
 
 export default function PreparingPage() {
   return (
-    <div className="h-screen min-w-screen flex flex-col justify-center items-center relative">
-      <AlertMessage varient="preparing" />
+    <div className="h-dvh flex flex-col justify-center items-center">
+      <div className="flex-1 flex justify-center items-center">
+        <AlertMessage varient="preparing" />
+      </div>
       <Link href="/" className="py-3 px-4 flex justify-center fixed bottom-0 w-screen sm:w-[600px]">
         <Button
           varient="filled"
