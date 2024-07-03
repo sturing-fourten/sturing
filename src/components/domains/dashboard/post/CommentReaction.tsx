@@ -1,6 +1,7 @@
 import { TComment, TCommentType, TNestedComment } from "@/types/board";
 import { LikeButton } from "./LikeButton";
 import { NestedCommentItem } from "./NestedCommentItem";
+import PostNestedCommentForm from "./PostNestedCommentForm";
 
 export default function CommentReaction({
   type,
@@ -33,13 +34,13 @@ export default function CommentReaction({
         )}
       </div>
 
-      <ul className="flex flex-col gap-2 mt-4 mb-2">
+      <ul className="flex flex-col gap-2 mt-4 mb-">
         {nestedComments.length > 0 &&
           isOpenedNestedComment &&
           nestedComments.map((nestedComment, index) => <NestedCommentItem nestedComment={nestedComment} />)}
       </ul>
 
-      <div>댓글창</div>
+      <PostNestedCommentForm />
     </div>
   );
 }
