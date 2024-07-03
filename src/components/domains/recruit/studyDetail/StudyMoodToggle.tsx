@@ -12,11 +12,11 @@ export default function StudyMoodToggle({ selectedMood, handleMoodToggle }: Stud
       {Object.keys(USER_FAVORITE_FIELD_TYPE).map((key) => (
         <MoodMiniToggle
           key={key}
-          imageSrc={USER_FAVORITE_FIELD_TYPE[key].imageSrc}
-          imageAlt={USER_FAVORITE_FIELD_TYPE[key].name}
-          isActive={selectedMood.includes(USER_FAVORITE_FIELD_TYPE[key].name)}
-          onClick={() => handleMoodToggle(USER_FAVORITE_FIELD_TYPE[key].name)}>
-          {USER_FAVORITE_FIELD_TYPE[key].name}
+          src={USER_FAVORITE_FIELD_TYPE[key].src}
+          alt={USER_FAVORITE_FIELD_TYPE[key].alt}
+          isActive={selectedMood.includes(USER_FAVORITE_FIELD_TYPE[key].alt)}
+          onClick={() => handleMoodToggle(USER_FAVORITE_FIELD_TYPE[key].alt)}>
+          {USER_FAVORITE_FIELD_TYPE[key].alt}
         </MoodMiniToggle>
       ))}
     </div>

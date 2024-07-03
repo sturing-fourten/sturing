@@ -1,4 +1,5 @@
 "use client";
+
 import { StudyCategoryButton } from "@/components/commons/StudyCategoryButton";
 import LectureCard from "@/components/commons/card/LectureCard";
 import StudyApplicationCard from "@/components/commons/card/StudyApplicationCard";
@@ -43,259 +44,247 @@ export default function page() {
 
       <div className="p-4">
         <h1 className="font-bold">StudyCategoryButton</h1>
-        <StudyCategoryButton
-          imageSrc={STUDY_CATEGORY_MENU.design.imageSrc}
-          imageAlt={`${STUDY_CATEGORY_MENU.design.name} 아이콘`}>
-          {STUDY_CATEGORY_MENU.design.name}
+        <StudyCategoryButton src={STUDY_CATEGORY_MENU.design.src} alt={`${STUDY_CATEGORY_MENU.design.alt} 아이콘`}>
+          {STUDY_CATEGORY_MENU.design.alt}
+        </StudyCategoryButton>
+        <StudyCategoryButton src={STUDY_CATEGORY_MENU.develop.src} alt={`${STUDY_CATEGORY_MENU.develop.alt} 아이콘`}>
+          {STUDY_CATEGORY_MENU.develop.alt}
         </StudyCategoryButton>
         <StudyCategoryButton
-          imageSrc={STUDY_CATEGORY_MENU.develop.imageSrc}
-          imageAlt={`${STUDY_CATEGORY_MENU.develop.name} 아이콘`}>
-          {STUDY_CATEGORY_MENU.develop.name}
+          src={STUDY_CATEGORY_MENU.marketing.src}
+          alt={`${STUDY_CATEGORY_MENU.marketing.alt} 아이콘`}>
+          {STUDY_CATEGORY_MENU.marketing.alt}
+        </StudyCategoryButton>
+        <StudyCategoryButton src={STUDY_CATEGORY_MENU.business.src} alt={`${STUDY_CATEGORY_MENU.business.alt} 아이콘`}>
+          {STUDY_CATEGORY_MENU.business.alt}
+        </StudyCategoryButton>
+        <StudyCategoryButton src={STUDY_CATEGORY_MENU.economic.src} alt={`${STUDY_CATEGORY_MENU.economic.alt} 아이콘`}>
+          {STUDY_CATEGORY_MENU.economic.alt}
+        </StudyCategoryButton>
+        <StudyCategoryButton src={STUDY_CATEGORY_MENU.language.src} alt={`${STUDY_CATEGORY_MENU.language.alt} 아이콘`}>
+          {STUDY_CATEGORY_MENU.language.alt}
         </StudyCategoryButton>
         <StudyCategoryButton
-          imageSrc={STUDY_CATEGORY_MENU.marketing.imageSrc}
-          imageAlt={`${STUDY_CATEGORY_MENU.marketing.name} 아이콘`}>
-          {STUDY_CATEGORY_MENU.marketing.name}
+          src={STUDY_CATEGORY_MENU.certificate.src}
+          alt={`${STUDY_CATEGORY_MENU.certificate.alt} 아이콘`}>
+          {STUDY_CATEGORY_MENU.certificate.alt}
         </StudyCategoryButton>
         <StudyCategoryButton
-          imageSrc={STUDY_CATEGORY_MENU.business.imageSrc}
-          imageAlt={`${STUDY_CATEGORY_MENU.business.name} 아이콘`}>
-          {STUDY_CATEGORY_MENU.business.name}
-        </StudyCategoryButton>
-        <StudyCategoryButton
-          imageSrc={STUDY_CATEGORY_MENU.economic.imageSrc}
-          imageAlt={`${STUDY_CATEGORY_MENU.economic.name} 아이콘`}>
-          {STUDY_CATEGORY_MENU.economic.name}
-        </StudyCategoryButton>
-        <StudyCategoryButton
-          imageSrc={STUDY_CATEGORY_MENU.language.imageSrc}
-          imageAlt={`${STUDY_CATEGORY_MENU.language.name} 아이콘`}>
-          {STUDY_CATEGORY_MENU.language.name}
-        </StudyCategoryButton>
-        <StudyCategoryButton
-          imageSrc={STUDY_CATEGORY_MENU.certificate.imageSrc}
-          imageAlt={`${STUDY_CATEGORY_MENU.certificate.name} 아이콘`}>
-          {STUDY_CATEGORY_MENU.certificate.name}
-        </StudyCategoryButton>
-        <StudyCategoryButton
-          imageSrc={STUDY_CATEGORY_MENU.selfDevelop.imageSrc}
-          imageAlt={`${STUDY_CATEGORY_MENU.selfDevelop.name} 아이콘`}>
-          {STUDY_CATEGORY_MENU.selfDevelop.name}
+          src={STUDY_CATEGORY_MENU.selfDevelop.src}
+          alt={`${STUDY_CATEGORY_MENU.selfDevelop.alt} 아이콘`}>
+          {STUDY_CATEGORY_MENU.selfDevelop.alt}
         </StudyCategoryButton>
       </div>
       <div className="p-4">
         <h1 className="font-bold">StudyCategoryToggle</h1>
-        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.design.name}</StudyCategoryToggle>
-        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.design.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.design.alt}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.design.alt}</StudyCategoryToggle>
         <br />
-        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.develop.name}</StudyCategoryToggle>
-        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.develop.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.develop.alt}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.develop.alt}</StudyCategoryToggle>
         <br />
-        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.marketing.name}</StudyCategoryToggle>
-        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.marketing.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.marketing.alt}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.marketing.alt}</StudyCategoryToggle>
         <br />
-        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.business.name}</StudyCategoryToggle>
-        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.business.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.business.alt}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.business.alt}</StudyCategoryToggle>
         <br />
-        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.economic.name}</StudyCategoryToggle>
-        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.economic.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.economic.alt}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.economic.alt}</StudyCategoryToggle>
         <br />
-        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.language.name}</StudyCategoryToggle>
-        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.language.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.language.alt}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.language.alt}</StudyCategoryToggle>
         <br />
-        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.certificate.name}</StudyCategoryToggle>
-        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.certificate.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.certificate.alt}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.certificate.alt}</StudyCategoryToggle>
         <br />
-        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.selfDevelop.name}</StudyCategoryToggle>
-        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.selfDevelop.name}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={true}>{STUDY_CATEGORY_MENU.selfDevelop.alt}</StudyCategoryToggle>
+        <StudyCategoryToggle isActive={false}>{STUDY_CATEGORY_MENU.selfDevelop.alt}</StudyCategoryToggle>
         <br />
       </div>
 
       <div className="p-4">
         <h1 className="font-bold">Mood Mini Tag</h1>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.friendly.name}
+          src={USER_FAVORITE_FIELD_TYPE.friendly.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.friendly.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.friendly.alt}
         </MoodMiniTag>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.professional.name}
+          src={USER_FAVORITE_FIELD_TYPE.professional.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.professional.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.professional.alt}
+        </MoodMiniTag>
+        <MoodMiniTag src={USER_FAVORITE_FIELD_TYPE.serious.src} alt={`${USER_FAVORITE_FIELD_TYPE.serious.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.serious.alt}
         </MoodMiniTag>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.serious.name}
+          src={USER_FAVORITE_FIELD_TYPE.systematic.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.systematic.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.systematic.alt}
         </MoodMiniTag>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.systematic.name}
+          src={USER_FAVORITE_FIELD_TYPE.passionate.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.passionate.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.passionate.alt}
         </MoodMiniTag>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.passionate.name}
+          src={USER_FAVORITE_FIELD_TYPE.responsible.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.responsible.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.responsible.alt}
         </MoodMiniTag>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.responsible.name}
+          src={USER_FAVORITE_FIELD_TYPE.learningFocused.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.learningFocused.alt}
         </MoodMiniTag>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+          src={USER_FAVORITE_FIELD_TYPE.collaborative.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.collaborative.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.collaborative.alt}
         </MoodMiniTag>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+          src={USER_FAVORITE_FIELD_TYPE.proactive.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.proactive.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.proactive.alt}
         </MoodMiniTag>
         <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.proactive.name}
-        </MoodMiniTag>
-        <MoodMiniTag
-          imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}>
-          {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+          src={USER_FAVORITE_FIELD_TYPE.freewheeling.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.alt} 아이콘`}>
+          {USER_FAVORITE_FIELD_TYPE.freewheeling.alt}
         </MoodMiniTag>
       </div>
 
       <div className="p-4">
         <h1 className="font-bold">Mood Mini Toggle</h1>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.friendly.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.friendly.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.friendly.name}
+          {USER_FAVORITE_FIELD_TYPE.friendly.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.friendly.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.friendly.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.friendly.name}
+          {USER_FAVORITE_FIELD_TYPE.friendly.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.professional.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.professional.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.professional.name}
+          {USER_FAVORITE_FIELD_TYPE.professional.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.professional.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.professional.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.professional.name}
+          {USER_FAVORITE_FIELD_TYPE.professional.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.serious.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.serious.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.serious.name}
+          {USER_FAVORITE_FIELD_TYPE.serious.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.serious.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.serious.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.serious.name}
+          {USER_FAVORITE_FIELD_TYPE.serious.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.systematic.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.systematic.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.systematic.name}
+          {USER_FAVORITE_FIELD_TYPE.systematic.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.systematic.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.systematic.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.systematic.name}
+          {USER_FAVORITE_FIELD_TYPE.systematic.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.passionate.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.passionate.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.passionate.name}
+          {USER_FAVORITE_FIELD_TYPE.passionate.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.passionate.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.passionate.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.passionate.name}
+          {USER_FAVORITE_FIELD_TYPE.passionate.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.responsible.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.responsible.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.responsible.name}
+          {USER_FAVORITE_FIELD_TYPE.responsible.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.responsible.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.responsible.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.responsible.name}
+          {USER_FAVORITE_FIELD_TYPE.responsible.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.learningFocused.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+          {USER_FAVORITE_FIELD_TYPE.learningFocused.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.learningFocused.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+          {USER_FAVORITE_FIELD_TYPE.learningFocused.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.collaborative.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.collaborative.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+          {USER_FAVORITE_FIELD_TYPE.collaborative.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.collaborative.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.collaborative.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+          {USER_FAVORITE_FIELD_TYPE.collaborative.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.proactive.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.proactive.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.proactive.name}
+          {USER_FAVORITE_FIELD_TYPE.proactive.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.proactive.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.proactive.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.proactive.name}
+          {USER_FAVORITE_FIELD_TYPE.proactive.alt}
         </MoodMiniToggle>
         <br />
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.freewheeling.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.alt} 아이콘`}
           isActive={true}>
-          {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+          {USER_FAVORITE_FIELD_TYPE.freewheeling.alt}
         </MoodMiniToggle>
         <MoodMiniToggle
-          imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
-          imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}
+          src={USER_FAVORITE_FIELD_TYPE.freewheeling.src}
+          alt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.alt} 아이콘`}
           isActive={false}>
-          {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+          {USER_FAVORITE_FIELD_TYPE.freewheeling.alt}
         </MoodMiniToggle>
       </div>
 
@@ -303,124 +292,124 @@ export default function page() {
         <h1 className="font-bold">Mood Big Toggle</h1>
         <div className="grid grid-cols-2 gap-4">
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.friendly.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.friendly.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.friendly.name}
+            {USER_FAVORITE_FIELD_TYPE.friendly.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.friendly.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.friendly.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.friendly.name}
+            {USER_FAVORITE_FIELD_TYPE.friendly.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.professional.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.professional.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.professional.name}
+            {USER_FAVORITE_FIELD_TYPE.professional.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.professional.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.professional.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.professional.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.professional.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.professional.name}
+            {USER_FAVORITE_FIELD_TYPE.professional.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.serious.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.serious.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.serious.name}
+            {USER_FAVORITE_FIELD_TYPE.serious.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.serious.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.serious.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.serious.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.serious.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.serious.name}
+            {USER_FAVORITE_FIELD_TYPE.serious.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.systematic.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.systematic.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.systematic.name}
+            {USER_FAVORITE_FIELD_TYPE.systematic.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.systematic.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.systematic.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.systematic.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.systematic.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.systematic.name}
+            {USER_FAVORITE_FIELD_TYPE.systematic.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.passionate.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.passionate.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.passionate.name}
+            {USER_FAVORITE_FIELD_TYPE.passionate.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.passionate.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.passionate.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.passionate.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.passionate.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.passionate.name}
+            {USER_FAVORITE_FIELD_TYPE.passionate.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.responsible.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.responsible.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.responsible.name}
+            {USER_FAVORITE_FIELD_TYPE.responsible.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.responsible.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.responsible.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.responsible.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.responsible.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.responsible.name}
+            {USER_FAVORITE_FIELD_TYPE.responsible.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.learningFocused.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+            {USER_FAVORITE_FIELD_TYPE.learningFocused.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.learningFocused.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.learningFocused.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.learningFocused.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.learningFocused.name}
+            {USER_FAVORITE_FIELD_TYPE.learningFocused.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.collaborative.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.collaborative.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+            {USER_FAVORITE_FIELD_TYPE.collaborative.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.collaborative.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.collaborative.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.collaborative.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.collaborative.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.collaborative.name}
+            {USER_FAVORITE_FIELD_TYPE.collaborative.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.proactive.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.proactive.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.proactive.name}
+            {USER_FAVORITE_FIELD_TYPE.proactive.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.proactive.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.proactive.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.proactive.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.proactive.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.proactive.name}
+            {USER_FAVORITE_FIELD_TYPE.proactive.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.freewheeling.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.alt} 아이콘`}
             isActive={true}>
-            {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+            {USER_FAVORITE_FIELD_TYPE.freewheeling.alt}
           </MoodBigToggle>
           <MoodBigToggle
-            imageSrc={USER_FAVORITE_FIELD_TYPE.freewheeling.imageSrc}
-            imageAlt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.name} 아이콘`}
+            src={USER_FAVORITE_FIELD_TYPE.freewheeling.src}
+            alt={`${USER_FAVORITE_FIELD_TYPE.freewheeling.alt} 아이콘`}
             isActive={false}>
-            {USER_FAVORITE_FIELD_TYPE.freewheeling.name}
+            {USER_FAVORITE_FIELD_TYPE.freewheeling.alt}
           </MoodBigToggle>
         </div>
       </div>

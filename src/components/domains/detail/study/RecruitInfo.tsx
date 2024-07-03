@@ -31,19 +31,19 @@ export default function RecruitInfo() {
           <HorizontalDivider addStyle="my-4" />
           <TagsLayout>
             <MoodMiniTag
-              imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
-              imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}>
-              {USER_FAVORITE_FIELD_TYPE.friendly.name}
+              src={USER_FAVORITE_FIELD_TYPE.friendly.src}
+              alt={`${USER_FAVORITE_FIELD_TYPE.friendly.alt} 아이콘`}>
+              {USER_FAVORITE_FIELD_TYPE.friendly.alt}
             </MoodMiniTag>
             <MoodMiniTag
-              imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
-              imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}>
-              {USER_FAVORITE_FIELD_TYPE.friendly.name}
+              src={USER_FAVORITE_FIELD_TYPE.friendly.src}
+              alt={`${USER_FAVORITE_FIELD_TYPE.friendly.alt} 아이콘`}>
+              {USER_FAVORITE_FIELD_TYPE.friendly.alt}
             </MoodMiniTag>
             <MoodMiniTag
-              imageSrc={USER_FAVORITE_FIELD_TYPE.friendly.imageSrc}
-              imageAlt={`${USER_FAVORITE_FIELD_TYPE.friendly.name} 아이콘`}>
-              {USER_FAVORITE_FIELD_TYPE.friendly.name}
+              src={USER_FAVORITE_FIELD_TYPE.friendly.src}
+              alt={`${USER_FAVORITE_FIELD_TYPE.friendly.alt} 아이콘`}>
+              {USER_FAVORITE_FIELD_TYPE.friendly.alt}
             </MoodMiniTag>
           </TagsLayout>
         </StudyDetailCardLayout>
