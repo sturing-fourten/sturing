@@ -36,7 +36,6 @@ function TodoItem() {
   return (
     <li className="flex justify-between items-center py-2 rounded-sm">
       <form className="flex justify-start items-center gap-2" action={""}>
-        <input id={""} type="hidden" checked={isChecked} />
         <button>
           <Checkbox isChecked={isChecked} />
         </button>
