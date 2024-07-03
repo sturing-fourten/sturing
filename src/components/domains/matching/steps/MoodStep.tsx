@@ -42,8 +42,8 @@ export default function MoodStep() {
                   isSelected ? "border-main-500 text-main-500 bg-main-100" : "text-gray-700 border-gray-300 bg-white"
                 }`}
                 onClick={() => handleCategoryClick(key)}>
-                <img src={mood.imageSrc} alt={`${mood.imageAlt} icon`} width={28} height={28} />
-                {mood.imageAlt}
+                <img src={mood.src} alt={`${mood.alt} icon`} width={28} height={28} />
+                {mood.alt}
               </Button>
             );
           })}

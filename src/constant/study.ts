@@ -3,79 +3,79 @@ import { StudyCategoryMenu, UserFavoriteFieldType, TTabMenuLinkUnderlinedItem } 
 
 export const STUDY_CATEGORY_MENU: StudyCategoryMenu = {
   design: {
-    imageSrc: STUDY_CATEGORY.design.src,
-    imageAlt: STUDY_CATEGORY.design.alt,
+    src: STUDY_CATEGORY.design.src,
+    alt: STUDY_CATEGORY.design.alt,
   },
   develop: {
-    imageSrc: STUDY_CATEGORY.develop.src,
-    imageAlt: STUDY_CATEGORY.develop.alt,
+    src: STUDY_CATEGORY.develop.src,
+    alt: STUDY_CATEGORY.develop.alt,
   },
   marketing: {
-    imageSrc: STUDY_CATEGORY.marketing.src,
-    imageAlt: STUDY_CATEGORY.marketing.alt,
+    src: STUDY_CATEGORY.marketing.src,
+    alt: STUDY_CATEGORY.marketing.alt,
   },
   business: {
-    imageSrc: STUDY_CATEGORY.business.src,
-    imageAlt: STUDY_CATEGORY.business.alt,
+    src: STUDY_CATEGORY.business.src,
+    alt: STUDY_CATEGORY.business.alt,
   },
   economic: {
-    imageSrc: STUDY_CATEGORY.economic.src,
-    imageAlt: STUDY_CATEGORY.economic.alt,
+    src: STUDY_CATEGORY.economic.src,
+    alt: STUDY_CATEGORY.economic.alt,
   },
   language: {
-    imageSrc: STUDY_CATEGORY.language.src,
-    imageAlt: STUDY_CATEGORY.language.alt,
+    src: STUDY_CATEGORY.language.src,
+    alt: STUDY_CATEGORY.language.alt,
   },
   certificate: {
-    imageSrc: STUDY_CATEGORY.certificate.src,
-    imageAlt: STUDY_CATEGORY.certificate.alt,
+    src: STUDY_CATEGORY.certificate.src,
+    alt: STUDY_CATEGORY.certificate.alt,
   },
   selfDevelop: {
-    imageSrc: STUDY_CATEGORY.selfDevelop.src,
-    imageAlt: STUDY_CATEGORY.selfDevelop.alt,
+    src: STUDY_CATEGORY.selfDevelop.src,
+    alt: STUDY_CATEGORY.selfDevelop.alt,
   },
 };
 
 export const USER_FAVORITE_FIELD_TYPE: UserFavoriteFieldType = {
   friendly: {
-    imageSrc: MOOD.friendly.src,
-    imageAlt: MOOD.friendly.alt,
+    src: MOOD.friendly.src,
+    alt: MOOD.friendly.alt,
   },
   professional: {
-    imageSrc: MOOD.professional.src,
-    imageAlt: MOOD.professional.alt,
+    src: MOOD.professional.src,
+    alt: MOOD.professional.alt,
   },
   serious: {
-    imageSrc: MOOD.serious.src,
-    imageAlt: MOOD.serious.alt,
+    src: MOOD.serious.src,
+    alt: MOOD.serious.alt,
   },
   systematic: {
-    imageSrc: MOOD.systematic.src,
-    imageAlt: MOOD.systematic.alt,
+    src: MOOD.systematic.src,
+    alt: MOOD.systematic.alt,
   },
   passionate: {
-    imageSrc: MOOD.passionate.src,
-    imageAlt: MOOD.passionate.alt,
+    src: MOOD.passionate.src,
+    alt: MOOD.passionate.alt,
   },
   responsible: {
-    imageSrc: MOOD.responsible.src,
-    imageAlt: MOOD.responsible.alt,
+    src: MOOD.responsible.src,
+    alt: MOOD.responsible.alt,
   },
   learningFocused: {
-    imageSrc: MOOD.learningFocused.src,
-    imageAlt: MOOD.learningFocused.alt,
+    src: MOOD.learningFocused.src,
+    alt: MOOD.learningFocused.alt,
   },
   collaborative: {
-    imageSrc: MOOD.collaborative.src,
-    imageAlt: MOOD.collaborative.alt,
+    src: MOOD.collaborative.src,
+    alt: MOOD.collaborative.alt,
   },
   proactive: {
-    imageSrc: MOOD.proactive.src,
-    imageAlt: MOOD.proactive.alt,
+    src: MOOD.proactive.src,
+    alt: MOOD.proactive.alt,
   },
   freewheeling: {
-    imageSrc: MOOD.freewheeling.src,
-    imageAlt: MOOD.freewheeling.alt,
+    src: MOOD.freewheeling.src,
+    alt: MOOD.freewheeling.alt,
   },
 };
 

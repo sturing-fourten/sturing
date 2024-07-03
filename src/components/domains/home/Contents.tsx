@@ -35,11 +35,11 @@ export default function Contents() {
     <div className="flex flex-col items-center w-full pb-[32px] px-[16px]">
       <div className="flex flex-col w-full gap-[20px]">
         <Title>분야별 스터디 탐색하기</Title>
-        <div className="flex items-center whitespace-nowrap scrollbar-hide overflow-auto overflow-x-scroll mb-[40px]">
+        <div className="flex items-center whitespace-nowrap srcollbar-hide overflow-auto overflow-x-scroll mb-[40px]">
           <div className="inline-block">
-            {Object.entries(STUDY_CATEGORY_MENU).map(([key, { imageSrc, imageAlt }]) => (
-              <StudyCategoryButton key={key} imageSrc={imageSrc} imageAlt={imageAlt} addStyle="mr-[8px]">
-                {imageAlt}
+            {Object.entries(STUDY_CATEGORY_MENU).map(([key, { src, alt }]) => (
+              <StudyCategoryButton key={key} src={src} alt={alt} addStyle="mr-[8px]">
+                {alt}
               </StudyCategoryButton>
             ))}
           </div>
