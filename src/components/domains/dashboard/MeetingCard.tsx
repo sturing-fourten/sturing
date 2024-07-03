@@ -1,7 +1,13 @@
 import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 
-export default function MeetingCard() {
+interface IMeetingCardProps {
+  date: Date | undefined;
+}
+export default function MeetingCard(props: IMeetingCardProps) {
+  const { date } = props;
+  console.log("date:", date);
+
   return (
     <DashboardCardLayout>
       <DashboardCardTitle title="06.08 (토)" />
