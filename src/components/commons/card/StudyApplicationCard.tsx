@@ -1,7 +1,6 @@
-import Image from "next/image";
 import StudyApplyInfo from "./element/StudyApplyInfo";
-import { business as sampleImage } from "@/../public/icons/icons";
 import StudyCardButton from "./element/StudyCardButton";
+import Avatar from "../Avatar";
 
 export default function StudyApplicationCard({ status }: { status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED" }) {
   return (
@@ -9,13 +8,8 @@ export default function StudyApplicationCard({ status }: { status: "APPLIED" | "
       <StudyApplyInfo status={status} />
 
       <section className="flex items-center justify-stretch gap-3">
-        <Image
-          className="rounded-[40px] overflow-hidden"
-          src={sampleImage}
-          alt="스터디 개설자 유저 프로필"
-          width={40}
-          height={40}
-        />
+        <Avatar width={40} height={40} profileImageUrl={"https://picsum.photos/200/30"} hasBorder={true} />
+
         <div>
           <div className="flex items-center gap-2 text-[12px] font-medium tracking-[-0.36px]">
             <span className="text-gray-700">{"피그마마스터"}</span>
