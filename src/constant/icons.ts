@@ -22,6 +22,7 @@ import {
   moreWhite,
   backWhite,
   shareWhite,
+  moreVertical,
 } from "../../public/icons/icons";
 
 //북마크 아이콘, 뒤로가기, 알람 , 사람 , 공유하기 아이콘 등등 기본적인 icons
@@ -64,6 +65,8 @@ export const ICONS = {
   message: { src: message.src, alt: "메세지" },
 
   more: { src: more.src, alt: "더보기" },
+
+  moreVertical: { src: moreVertical.src, alt: "더보기 세로 아이콘" },
 
   moreWhite: { src: moreWhite.src, alt: "더보기" },
 

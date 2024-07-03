@@ -98,6 +98,7 @@ import deleteBlue from "./delete-blue.svg";
 import checkBlueOn from "./check-blue-on.svg";
 import writeBoard from "./write-board.svg";
 import comment from "./comment.svg";
+import moreVertical from "./more-vertical.svg";
 export {
   star,
   date,
@@ -178,4 +179,5 @@ export {
   downArrowDark,
   writeBoard,
   comment,
+  moreVertical,
 };
