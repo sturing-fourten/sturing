@@ -1,5 +1,6 @@
 import { StudyCategoryToggle } from "@/components/commons/toggle/StudyCategoryToggle";
 import { STUDY_CATEGORY_MENU } from "@/constant/study";
+import { StudyCategoryMenu } from "@/types/study";
 
 interface CategoryListProps {
   selectedCategory: string;
@@ -12,7 +13,7 @@ export default function CategoryList({ selectedCategory, handleCategoryToggle }:
       <div className="flex-wrap gap-2 inline-flex">
         {Object.keys(STUDY_CATEGORY_MENU).map((key) => (
           <StudyCategoryToggle key={key} isActive={selectedCategory === key} onClick={() => handleCategoryToggle(key)}>
-            {STUDY_CATEGORY_MENU[key].name}
+            {STUDY_CATEGORY_MENU[key as keyof StudyCategoryMenu].alt}
           </StudyCategoryToggle>
         ))}
       </div>

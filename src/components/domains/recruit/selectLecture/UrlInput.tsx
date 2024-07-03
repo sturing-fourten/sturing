@@ -1,3 +1,5 @@
+import { ICONS } from "@/constant/icons";
+
 interface UrlInputProps {
   isLectureValid: boolean;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -10,7 +12,7 @@ export default function UrlInput({ isLectureValid, onBlur }: UrlInputProps) {
         className={`p-2.5 border ${isLectureValid ? "border-neutral-200 " : "border-red-600"}`}
         style={{ borderStyle: "dashed" }}>
         <div className="flex gap-0.5 items-center">
-          <img className="w-5 h-5" src="/icons/add-gray.svg" alt="add" />
+          <img className="w-5 h-5" src={ICONS.addGray.src} alt={ICONS.addGray.alt} />
           <input
             type="text"
             name="url"

@@ -1,3 +1,5 @@
+import { ICONS } from "@/constant/icons";
+
 interface NumberOfTeamMemberProps {
   isInfinity: boolean;
   handleMinusNumber: () => void;
@@ -14,9 +16,9 @@ export default function NumberOfTeamMember(props: NumberOfTeamMemberProps) {
           "제한없음"
         ) : (
           <>
-            <img src="/icons/minus-circle-icon.svg" alt="minus" onClick={() => handleMinusNumber()} />
+            <img src={ICONS.minusCircle.src} alt={ICONS.minusCircle.alt} onClick={() => handleMinusNumber()} />
             <div className="flex">{`${numberOfTeamMembers}명`}</div>
-            <img src="/icons/plus-circle-icon.svg" alt="plus" onClick={() => handlePlusNumber()} />
+            <img src={ICONS.plusCircle.src} alt={ICONS.plusCircle.alt} onClick={() => handlePlusNumber()} />
           </>
         )}
       </div>

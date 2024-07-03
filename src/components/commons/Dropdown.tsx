@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TextField from "./TextField";
+import { ICONS } from "@/constant/icons";
 
 interface DropdownProps {
   type: string;
@@ -34,8 +35,8 @@ export default function Dropdown(props: DropdownProps) {
       <button type="button" className="absolute top-[11px] right-4" onClick={handleDropdown}>
         <img
           className={`w-6 h-6 ${openDropdown ? "-rotate-90" : "rotate-90"}`}
-          src="/icons/arrow-gray.svg"
-          alt="dropdown arrow"
+          src={ICONS.rightArrowDarkGray.src}
+          alt={ICONS.rightArrowDarkGray.alt}
         />
       </button>
     </div>

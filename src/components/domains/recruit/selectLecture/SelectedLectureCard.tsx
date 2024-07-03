@@ -1,3 +1,5 @@
+import { ICONS } from "@/constant/icons";
+
 interface SelectedLectureCardProps {
   onClick: () => void;
 }
@@ -12,7 +14,7 @@ export default function SelectedLectureCard({ onClick }: SelectedLectureCardProp
         <p className="text-neutral-400 text-xs font-medium leading-none">GameDev.tv Team</p>
       </div>
       <button onClick={onClick}>
-        <img src="/icons/close.svg" alt="선택 취소하기" />
+        <img src={ICONS.close.src} alt={ICONS.close.alt} />
       </button>
     </article>
   );

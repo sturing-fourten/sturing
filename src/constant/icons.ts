@@ -9,6 +9,7 @@ import {
   share,
   alarm,
   close,
+  imageCancel,
   location,
   message,
   more,
@@ -17,6 +18,8 @@ import {
   rightArrowBlack,
   rightArrowwhite,
   rightArrowGray,
+  rightArrowDarkGray,
+  search,
   searchFilter,
   sendComment,
   moreWhite,
@@ -30,6 +33,7 @@ import {
   checkGray,
   checkBlue,
   add,
+  addGray,
   barGray,
   closeBlue,
   defaultProfileImg,
@@ -74,9 +78,12 @@ import {
   postInfoLocation,
   postInfoInstructor,
   postInfoLevel,
-
   moreVertical,
-
+  camera,
+  toggleCheckBlue,
+  toggleCheckGray,
+  minusCircle,
+  plusCircle,
 } from "../../public/icons/icons";
 
 //북마크 아이콘, 뒤로가기, 알람 , 사람 , 공유하기 아이콘 등등 기본적인 icons
@@ -99,6 +106,10 @@ export const ICONS = {
     src: closeBlue.src,
     alt: "파란색 닫기",
   },
+  imageCancel: {
+    src: imageCancel.src,
+    alt: "이미지 취소",
+  },
   back: { src: back.src, alt: "뒤로가기" },
   backWhite: { src: backWhite.src, alt: "뒤로가기" },
   mypage: { src: mypage.src, alt: "마이페이지" },
@@ -117,10 +128,12 @@ export const ICONS = {
   },
   message: { src: message.src, alt: "메세지" },
   more: { src: more.src, alt: "더보기" },
-  
   moreVertical: { src: moreVertical.src, alt: "더보기 세로 아이콘" },
-
   moreWhite: { src: moreWhite.src, alt: "더보기" },
+  search: {
+    src: search.src,
+    alt: "검색",
+  },
   searchBlue: {
     src: searchBlue.src,
     alt: "검색",
@@ -140,6 +153,10 @@ export const ICONS = {
   rightArrowGray: {
     src: rightArrowGray.src,
     alt: "링크로 가기",
+  },
+  rightArrowDarkGray: {
+    src: rightArrowDarkGray.src,
+    alt: "찜 목록 열기",
   },
   sendComment: {
     src: sendComment.src,
@@ -184,6 +201,10 @@ export const ICONS = {
   add: {
     src: add.src,
     alt: "추가",
+  },
+  addGray: {
+    src: addGray.src,
+    alt: "url 추가",
   },
   barGray: {
     src: barGray.src,
@@ -233,6 +254,26 @@ export const ICONS = {
     src: postInfoLevel.src,
     alt: "난이도",
   },
+  camera: {
+    src: camera.src,
+    alt: "카메라",
+  },
+  toggleCheckBlue: {
+    src: toggleCheckBlue.src,
+    alt: "토글 활성화",
+  },
+  toggleCheckGray: {
+    src: toggleCheckGray.src,
+    alt: "토글 비활성화",
+  },
+  minusCircle: {
+    src: minusCircle.src,
+    alt: "마이너스",
+  },
+  plusCircle: {
+    src: plusCircle.src,
+    alt: "플러스",
+  },
 };
 
 export const LOGO = {
@@ -269,7 +310,7 @@ export const STUDY_CATEGORY = {
   },
   marketing: {
     src: marketing.src,
-    alt: "마켓팅",
+    alt: "마케팅",
   },
   business: {
     src: business.src,

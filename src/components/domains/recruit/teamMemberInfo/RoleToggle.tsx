@@ -1,3 +1,4 @@
+import { ICONS } from "@/constant/icons";
 import DefaultToggle from "../../../commons/toggle/DefaultToggle";
 
 interface IRoleToggleProps {
@@ -21,7 +22,7 @@ export default function RoleToggle(props: IRoleToggleProps) {
           </div>
         </div>
       </div>
-      {isActive && <img src="/icons/check.svg" alt="체크" />}
+      {isActive && <img src={ICONS.checkBlue.src} alt={ICONS.checkBlue.alt} />}
     </DefaultToggle>
   );
 }

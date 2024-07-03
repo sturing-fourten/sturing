@@ -6,7 +6,7 @@ import TopBar from "@/components/commons/TopBar";
 import FindTeamMember from "@/components/domains/recruit/FindTeamMember";
 import SelectLecture from "@/components/domains/recruit/selectLecture/SelectLecture";
 import StudyDetail from "@/components/domains/recruit/studyDetail/StudyDetail";
-import StudyIntroduction from "@/components/domains/recruit/studyContent/StudyContent";
+import StudyContent from "@/components/domains/recruit/studyContent/StudyContent";
 import TeamMemberInfo from "@/components/domains/recruit/teamMemberInfo/TeamMemberInfo";
 import { LectureType, StudyContentType, StudyDetailType, TeamMemberInfoType } from "@/types/recruit";
 import { useState } from "react";
@@ -116,7 +116,7 @@ export default function Recruit() {
         <ProgressBar maxSteps={4} steps={steps} />
         <div className="overflow-auto flex-1">
           {steps === 1 && <SelectLecture onLectureChange={handleLectureChange} />}
-          {steps === 2 && <StudyIntroduction onIntroduceChange={handleIntroduceChange} />}
+          {steps === 2 && <StudyContent onIntroduceChange={handleIntroduceChange} />}
           {steps === 3 && <StudyDetail onDetailChange={handleDetailChange} />}
           {steps === 4 && <TeamMemberInfo onTeamMemberInfoChange={handleTeamMemberInfoChange} />}
         </div>
