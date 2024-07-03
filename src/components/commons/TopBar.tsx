@@ -55,7 +55,7 @@ export default function TopBar({ variant, children, isWhite, showMore, showBookm
       )}
       {variant === "back" && (
         <>
-          <span className="text-[18px] font-semibold tracking-[-0.36px] leading-[27px]">{children}</span>
+          <span className="text-[18px] font-semibold tracking-[-0.36px] leading-[27px] mr-6">{children}</span>
           <span></span>
         </>
       )}
