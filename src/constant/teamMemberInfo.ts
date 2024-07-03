@@ -1,9 +1,19 @@
-interface RoleType {
-  [key: string]: {
+export type TRole =
+  | "leader"
+  | "viceLeader"
+  | "assignment"
+  | "notification"
+  | "record"
+  | "environment"
+  | "schedule"
+  | "attendance";
+
+type RoleType = {
+  [key in TRole]: {
     name: string;
     role: string;
   };
-}
+};
 
 export const CAREER_LIST: { [key: string]: string } = {
   beginner: "비기너",
