@@ -4,7 +4,14 @@ import Checkbox from "./Checkbox";
 import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 
-export default function ChecklistCard() {
+interface IChecklistCardProps {
+  date: Date | undefined;
+}
+
+export default function ChecklistCard(props: IChecklistCardProps) {
+  const { date } = props;
+  console.log("date:", date);
+
   return (
     <DashboardCardLayout>
       <DashboardCardTitle title="체크리스트">
