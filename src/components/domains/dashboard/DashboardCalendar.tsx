@@ -6,6 +6,7 @@ import { DayPicker, Matcher } from "react-day-picker";
 import { ko } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/shadcn/ui/button";
+import { EventDayContent } from "./EventDayContent";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -60,6 +61,7 @@ function DashboardCalendar({ classNames, showOutsideDays = true, ...props }: Cal
       components={{
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
+        DayContent: EventDayContent,
       }}
       {...props}
     />
