@@ -9,7 +9,7 @@ export default function PostCommentForm() {
           type="text"
           name="comment"
           placeholder="댓글을 입력해주세요."
-          className="py-2 px-4 border border-gray-300 bg-gray-100 rounded-[80px] text-sm font-medium leading-snug placeholder:text-gray-600 focus:border-main-600 outline-none"
+          className="py-2 px-4 border border-gray-300 bg-gray-200 rounded-[80px] text-sm font-medium leading-snug placeholder:text-gray-600 focus:border-main-600 outline-none"
         />
 
         <button type="submit" className="flex justify-center items-center">
