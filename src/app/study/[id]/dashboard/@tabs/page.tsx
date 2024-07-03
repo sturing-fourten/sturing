@@ -5,7 +5,7 @@ import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMember
 import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMemberAttendanceCard";
 import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 
-export default function Tab1() {
+export default function TeamTab() {
   const data = {
     progress: {}, // "진척도"
     attendance: {}, // "출석체크"
@@ -20,10 +20,17 @@ export default function Tab1() {
       {isAnyFeatureActive && <StudyFunctionEditButton />}
 
       <div className="flex flex-col gap-4">
-        {data.progress ? <StudyMemberProgressCard /> : <StudyAddFunctionCard title="진척도" />}
-        {data.attendance ? <StudyMemberAttendanceCard /> : <StudyAddFunctionCard title="출석체크" />}
-        {data.checkList.length > 0 ? <StudyMemberChecklistCard /> : <StudyAddFunctionCard title="체크리스트" />}
-        {data.proofList.length > 0 ? <StudyPhotoProof /> : <StudyAddFunctionCard title="사진 인증" />}
+        {data.progress && <StudyMemberProgressCard />}
+        {data.attendance && <StudyMemberAttendanceCard />}
+        {data.checkList.length > 0 && <StudyMemberChecklistCard />}
+        {data.proofList.length > 0 && <StudyPhotoProof />}
+      </div>
+
+      <div className="flex flex-col gap-4">
+        {!data.progress && <StudyAddFunctionCard title="진척도" />}
+        {!data.attendance && <StudyAddFunctionCard title="출석체크" />}
+        {data.checkList.length === 0 && <StudyAddFunctionCard title="체크리스트" />}
+        {data.proofList.length === 0 && <StudyAddFunctionCard title="사진 인증" />}
       </div>
     </section>
   );
