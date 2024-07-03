@@ -34,6 +34,9 @@ import rightArrowwhite from "./rightarrow-white.svg";
 import rightArrowGray from "./rightarrow_gray.svg";
 import back from "./back.svg";
 import backWhite from "./back_white.svg";
+import upArrowGray from "./up-arrow-gray.svg";
+import downArrowGray from "./down-arrow-gray.svg";
+import downArrowDark from "./down-arrow-dark.svg";
 
 // logo
 import logoBlue from "./logo-blue.svg";
@@ -91,6 +94,13 @@ import postInfoLocation from "./post_info_location.svg";
 import postInfoInstructor from "./post_info_instructor.svg";
 import postInfoLevel from "./post_info_level.svg";
 
+// study dashboard
+import addBlue from "./add-blue.svg";
+import deleteBlue from "./delete-blue.svg";
+import checkBlueOn from "./check-blue-on.svg";
+import writeBoard from "./write-board.svg";
+import comment from "./comment.svg";
+import moreVertical from "./more-vertical.svg";
 export {
   star,
   date,
@@ -167,4 +177,13 @@ export {
   checkGray,
   checkBlue,
   question,
+  upArrowGray,
+  downArrowGray,
+  addBlue,
+  deleteBlue,
+  checkBlueOn,
+  downArrowDark,
+  writeBoard,
+  comment,
+  moreVertical,
 };

@@ -40,3 +40,27 @@ body {
   width: 100%;
   height: 100%;
 }
+
+details {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s;
+}
+
+details[open] {
+  max-height: none;
+}
+
+summary img {
+  transform: rotate(0);
+  transform-origin: 0.2rem 50%;
+  transition: 0.25s transform ease;
+}
+
+details[open] summary img {
+  transform: rotate(180deg);
+}
