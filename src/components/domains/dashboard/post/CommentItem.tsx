@@ -1,6 +1,7 @@
 import { TComment } from "@/types/board";
 import CommentHeader from "./CommentHeader";
 import CommentContent from "./CommentContent";
+import CommentReaction from "./CommentReaction";
 
 interface ICommentItemProps {
   isQualified: boolean;
@@ -19,6 +20,8 @@ export default function CommentItem(props: ICommentItemProps) {
       {isQualified ? <CommentContent content={comment.content} /> : <div> 더미 이미지</div>}
 
       <span></span>
+
+      <CommentReaction type={"comment"} like={comment.like} nestedComments={comment.nestedComments} />
     </div>
   );
 }
