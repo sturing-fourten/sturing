@@ -7,7 +7,7 @@ import SturingIndex from "@/components/domains/userProfile/SturingIndex";
 export default function page() {
   return (
     <>
-      <div className="px-4 py-5">
+      <div className="px-4 pt-5 pb-7">
         <ProfileCard page="profile" />
       </div>
       <div className="bg-white pb-10">

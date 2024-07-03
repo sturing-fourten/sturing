@@ -13,7 +13,7 @@ export default function SturingProgressBar({ progress }: ProgressBarProps) {
             <div
               className={`h-full bg-gradient-to-r from-gradient-to to-gradient-blue rounded-full relative`}
               style={{ width: `${progress}%` }}>
-              <div className="absolute bottom-4 -right-7">
+              <div className="absolute bottom-4 -right-[27px]">
                 <div className="relative ">
                   <img src={ICONS.toolTipBlue.src} alt={ICONS.toolTipBlue.alt} />
                   <span className="text-white text-base font-medium absolute inset-y-0 top-1 left-[11px]">

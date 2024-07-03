@@ -3,7 +3,7 @@ import Button from "@/components/commons/Button";
 export default function StudyOverview() {
   return (
     <>
-      <article className="mb-7 flex flex-col gap-3 items-center">
+      <article className="mt-7 flex flex-col gap-3 items-center">
         <section className="py-4">
           <div className="flex items-center gap-[23px]">
             <div className="flex flex-col gap-1 items-center">
