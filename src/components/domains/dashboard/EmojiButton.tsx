@@ -8,7 +8,7 @@ interface IEmojiButtonProps {
 
 export default function EmojiButton(props: IEmojiButtonProps) {
   return (
-    <form action={""}>
+    <form className="text-[0px]" action={""}>
       <button>
         <EmojiTag {...props} />
       </button>
