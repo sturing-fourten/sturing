@@ -3,7 +3,7 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker, Matcher } from "react-day-picker";
-
+import { ko } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/shadcn/ui/button";
 
@@ -16,6 +16,7 @@ function DashboardCalendar({ classNames, showOutsideDays = true, ...props }: Cal
 
   return (
     <DayPicker
+      locale={ko}
       showOutsideDays={showOutsideDays}
       classNames={{
         months: "inline-flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
