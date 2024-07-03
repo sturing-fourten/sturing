@@ -31,6 +31,7 @@ import alarm from "./alarm.svg";
 import success from "./success.svg";
 import notFound from "./404.svg";
 import camera from "./camera.svg";
+import cameraCircle from "./camera-circle.svg";
 import toggleCheckBlue from "./toggle-active-icon.svg";
 import toggleCheckGray from "./toggle-inactive-icon.svg";
 import minusCircle from "./minus-circle-icon.svg";
@@ -200,6 +201,7 @@ export {
   rightArrowDarkGray,
   imageCancel,
   camera,
+  cameraCircle,
   toggleCheckBlue,
   toggleCheckGray,
   minusCircle,

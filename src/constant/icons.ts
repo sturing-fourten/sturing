@@ -80,6 +80,7 @@ import {
   postInfoLevel,
   moreVertical,
   camera,
+  cameraCircle,
   toggleCheckBlue,
   toggleCheckGray,
   minusCircle,
@@ -257,6 +258,10 @@ export const ICONS = {
   camera: {
     src: camera.src,
     alt: "카메라",
+  },
+  cameraCircle: {
+    src: cameraCircle.src,
+    alt: "카메라_원형배경",
   },
   toggleCheckBlue: {
     src: toggleCheckBlue.src,

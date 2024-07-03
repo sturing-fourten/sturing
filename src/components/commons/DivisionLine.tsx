@@ -1,3 +1,7 @@
-export default function DivisionLine() {
-  return <div className="w-full h-px bg-zinc-100"></div>;
+interface DivisionLineProps {
+  profileEdit?: boolean;
+}
+
+export default function DivisionLine({ profileEdit }: DivisionLineProps) {
+  return <div className={`w-full bg-zinc-100 ${profileEdit ? "h-2" : "h-px"}`}></div>;
 }
