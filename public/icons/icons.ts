@@ -8,6 +8,7 @@ import checkSquare from "./check-square.svg";
 import add from "./add.svg";
 import barGray from "./bar-gray.svg";
 import close from "./close.svg";
+import closeBlue from "./close-blue.svg";
 import defaultProfileImg from "./defaultProfileImg.svg";
 import menu from "./menu.svg";
 import message from "./message.svg";
@@ -18,6 +19,14 @@ import share from "./share.svg";
 import shareWhite from "./share_white.svg";
 import searchFilter from "./search_filter.svg";
 import sendComment from "./send_comment.svg";
+import checkGray from "./check-gray.svg";
+import checkBlue from "./check-blue.svg";
+import question from "./question.svg";
+import mypage from "./mypage.svg";
+import ready from "./ready.svg";
+import alarm from "./alarm.svg";
+import success from "./success.svg";
+import notFound from "./404.svg";
 
 // arrow
 import rightArrowBlack from "./rightarrow-black.svg";
@@ -74,13 +83,6 @@ import goodOff from "./good-off.svg";
 import bestOn from "./best-on.svg";
 import bestOff from "./best-off.svg";
 
-// page icon
-import mypage from "./mypage.svg";
-import ready from "./ready.svg";
-import alarm from "./alarm.svg";
-import success from "./success.svg";
-import notFound from "./404.svg";
-
 // study , lecture info icon
 import postInfoTeamMember from "./post_info_team_member.svg";
 import postInfoMeeting from "./post_info_meeting.svg";
@@ -134,6 +136,7 @@ export {
   alarm,
   back,
   barGray,
+  closeBlue,
   close,
   defaultProfileImg,
   githubLogo,
@@ -161,4 +164,7 @@ export {
   backWhite,
   shareWhite,
   moreWhite,
+  checkGray,
+  checkBlue,
+  question,
 };

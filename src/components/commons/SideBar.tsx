@@ -1,7 +1,6 @@
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "./Button";
-import { close, defaultProfileImg, githubLogo, logoText } from "../../../public/icons/icons";
+import { ICONS, LOGO } from "@/constant/icons";
 
 interface SideBarProps {
   sideBar: boolean;
@@ -13,7 +12,7 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
 
   return (
     <div
-      className={`w-[323px] min-h-full flex flex-col gap-[40px] pt-[40px] px-6 pb-56 bg-white fixed sm:absolute top-0 left-0 z-overlay transition-transform duration-500 will-change-transform ease-in-out transform overflow-scroll sm:overflow-visible scrollbar-hide ${
+      className={`w-[323px] h-screen flex flex-col gap-[40px] pt-[40px] px-6 pb-56 bg-white fixed sm:absolute top-0 left-0 z-overlay transition-transform duration-500 will-change-transform ease-in-out transform overflow-scroll sm:overflow-visible scrollbar-hide ${
         sideBar ? "translate-x-0" : "-translate-x-full"
       }`}>
       <button
@@ -21,7 +20,7 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
         onClick={() => {
           setSideBar(!sideBar);
         }}>
-        <Image src={close} alt="닫기 아이콘" width={15} height={15} />
+        <img src={ICONS.close.src} alt={ICONS.close.alt} width={15} height={15} />
       </button>
       {loginState ? (
         <div className="flex flex-col justify-start gap-[32px]">
@@ -32,7 +31,7 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
                 sturing@kakao.com
               </span>
             </div>
-            <Image src={defaultProfileImg} alt="프로필 아이콘" width={60} height={60} />
+            <img src={ICONS.defaultProfileImg.src} alt={ICONS.defaultProfileImg.alt} width={60} height={60} />
           </div>
           <button className="flex text-[#0D0D0D] text-[18px] font-medium leading-[24px] tracking-[-0.54px]">
             스터링 프로필
@@ -41,14 +40,14 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
       ) : (
         <div className="flex flex-col justify-start gap-[32px]">
           <div className="flex flex-col items-center justify-center gap-[5px]">
-            <Image src={logoText} alt="로고 아이콘" width={155} height={48} priority className="w-[155px] h-[48px]" />
+            <img src={LOGO.logoText.src} alt={LOGO.logoText.alt} width={155} height={48} />
           </div>
           <Button
             varient="filled"
             addStyle="w-[275px] h-[46px] py-[12px] px-[14px] bg-gray-1000 text-[14px] text-white font-semibold rounded-[5px] gap-[10px]">
-            <Image
-              src={githubLogo}
-              alt="로고 아이콘"
+            <img
+              src={LOGO.githubLogo.src}
+              alt={LOGO.githubLogo.alt}
               width={25}
               height={25}
               className="w-[25px] h-[25px] bg-white rounded-[5px]"

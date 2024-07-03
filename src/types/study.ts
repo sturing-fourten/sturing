@@ -12,8 +12,8 @@ export type TTabMenuButtonUnderlinedItem = {
 };
 
 type StudyCategory = {
-  imageSrc: string;
-  imageAlt: string;
+  src: string;
+  alt: string;
 };
 
 export type StudyCategoryMenu = {
