@@ -13,8 +13,8 @@ export default function LectureCard({ isScraped, variant }: LectureCardProps) {
   const isCard = variant === "card";
   return (
     <article className={isCard ? "py-[13px] px-[17px] border border-gray-300 rounded-[5px] bg-white" : ""}>
-      <section className="flex justify-between">
-        <div className="flex items-center gap-1 mb-3">
+      <section className="flex justify-between items-center mb-3">
+        <div className="flex items-center gap-1">
           <TagMain>{"온라인"}</TagMain>
           <TagLight>{"디자인"}</TagLight>
           <TagLight>{"유데미"}</TagLight>
