@@ -39,7 +39,7 @@ export default function Gnb() {
         <div>
           <Button
             varient="ghost"
-            className="h-[34px] w-[71px] border border-main-500 text-main-500 rounded-[5px] font-medium text-[12px]"
+            addStyle="h-[34px] w-[71px] border border-main-500 text-main-500 rounded-[5px] font-medium text-[12px]"
             onClick={openToggle}>
             간편로그인
           </Button>
