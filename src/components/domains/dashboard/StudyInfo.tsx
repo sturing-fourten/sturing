@@ -31,10 +31,10 @@ export default function StudyInfo() {
           <Image src={downArrowGray} alt="" width={12} height={6} />
         </summary>
 
-        <section className="flex flex-col gap-2 justify-start pt-4 text-white">
-          <DetailInfo icon={meeting.icon} title={meeting.title} content="토요일 오후 8:00 온라인 진행" />
-          <DetailInfo icon={task.icon} title={task.title} content="스터디 게시판 사진 인증" />
-          <DetailInfo icon={location.icon} title={location.title} content="서울특별시 중구" />
+        <section className="flex flex-col gap-2 justify-start pt-4">
+          <DetailInfo icon={meeting.icon} title={meeting.title} content="토요일 오후 8:00 온라인 진행" isWhite={true} />
+          <DetailInfo icon={task.icon} title={task.title} content="스터디 게시판 사진 인증" isWhite={true} />
+          <DetailInfo icon={location.icon} title={location.title} content="서울특별시 중구" isWhite={true} />
         </section>
       </details>
     </div>
