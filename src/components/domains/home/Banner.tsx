@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css";
-import { logoColor, rightArrowwhite } from "../../../../public/icons/icons";
+import { ICONS, LOGO } from "@/constant/icons";
 import { IMAGES_BANNER } from "@/constant/images";
 
 SwiperCore.use([Navigation, Scrollbar, Autoplay]);
@@ -53,9 +53,15 @@ export default function Banner() {
           <button
             type="button"
             className="w-full h-[43px] py-[11px] pl-[16px] flex shrink-0 items-center gap-[8px] bg-[#0F0F0F] text-white text-[14px] font-medium tracking-[-0.28px] leading-[21px]">
-            <Image src={logoColor} alt="로고 컬러 아이콘" width={12} height={15} />
+            <img src={LOGO.logoColor.src} alt={LOGO.logoColor.alt} width={12} height={15} />
             매칭 항목 선택하고 딱 맞는 스터디 추천받기
-            <Image src={rightArrowwhite} alt="> 흰색 아이콘" width={7} height={11} />
+            <img
+              src={ICONS.rightArrowWhite.src}
+              alt={ICONS.rightArrowWhite.alt}
+              width={16}
+              height={20}
+              className="w-[16px] h-[20px]"
+            />
           </button>
         </Link>
       )}
