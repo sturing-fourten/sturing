@@ -43,7 +43,7 @@ export default function StudyMemberProgressCard() {
   return (
     <DashboardCardLayout>
       <DashboardCardTitle isEditing={isEditing} title="진척도" />
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-3 max-h-[196px] overflow-y-scroll scrollbar-hide">
         {MEMBER_SAMPLE_LIST.map((memberData, index) => (
           <ProgressItem data={memberData} key={index} />
         ))}

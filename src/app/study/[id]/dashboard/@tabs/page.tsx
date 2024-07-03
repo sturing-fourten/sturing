@@ -9,13 +9,13 @@ import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardCo
 export default function TeamTab() {
   const data = {
     progress: {}, // "진척도"
-    attendance: null, // "출석체크"
+    attendance: {}, // "출석체크"
     checkList: [{}], // "체크리스트"
-    proofList: [], // "사진 인증"
+    proofList: [{}], // "사진 인증"
   };
 
-  const isProgressExist = data.progress === null;
-  const isAttendanceExist = data.attendance === null;
+  const isProgressExist = data.progress !== null;
+  const isAttendanceExist = data.attendance !== null;
   const isCheckListExist = data.checkList.length > 0;
   const isProofListExist = data.proofList.length > 0;
 
