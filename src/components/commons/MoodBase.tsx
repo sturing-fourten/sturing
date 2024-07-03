@@ -23,13 +23,15 @@ export interface IMoodMiniBaseProps {
   imageSrc: string;
   imageAlt: string;
   className: string;
+  onClick: () => void;
 }
 
 export function MoodMiniBase(props: IMoodMiniBaseProps) {
-  const { children, imageSrc, imageAlt, className } = props;
+  const { children, imageSrc, imageAlt, className, onClick } = props;
   return (
     <span
-      className={`inline-flex items-center gap-[3px] h-[33px] px-2 border rounded-[3px] text-[14px] font-medium tracking-[-0.42px] ${className}`}>
+      className={`inline-flex items-center gap-[3px] h-[33px] px-2 border rounded-[3px] text-[14px] font-medium tracking-[-0.42px] ${className}`}
+      onClick={onClick}>
       <Image src={imageSrc} alt={imageAlt} width={16} height={16} />
       {children}
     </span>

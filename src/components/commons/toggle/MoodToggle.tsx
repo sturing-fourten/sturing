@@ -19,8 +19,8 @@ export function MoodBigToggle(props: IMoodBigTagProps) {
         imageAlt={imageAlt}
         className={
           isActive
-            ? "border-gray-300 bg-white text-gray-600 font-medium"
-            : "border-main-500 bg-main-100 text-main-500 font-semibold"
+            ? "border-main-500 bg-main-100 text-main-500 font-semibold"
+            : "border-gray-300 bg-white text-gray-600 font-medium"
         }>
         {children}
       </MoodBigBase>
@@ -30,10 +30,11 @@ export function MoodBigToggle(props: IMoodBigTagProps) {
 
 interface IMoodMiniToggleProps extends Omit<IMoodMiniBaseProps, "className"> {
   isActive: boolean;
+  onClick: () => void;
 }
 
 export function MoodMiniToggle(props: IMoodMiniToggleProps) {
-  const { children, imageSrc, imageAlt, isActive } = props;
+  const { children, imageSrc, imageAlt, isActive, onClick } = props;
 
   return (
     <label className="cursor-pointer">
@@ -41,7 +42,8 @@ export function MoodMiniToggle(props: IMoodMiniToggleProps) {
       <MoodMiniBase
         imageSrc={imageSrc}
         imageAlt={imageAlt}
-        className={isActive ? "border-gray-300 bg-white text-gray-600" : "border-main-500 bg-main-100 text-main-500"}>
+        className={isActive ? "border-main-500 bg-main-100 text-main-500" : "border-gray-300 bg-white text-gray-600"}
+        onClick={onClick}>
         {children}
       </MoodMiniBase>
     </label>

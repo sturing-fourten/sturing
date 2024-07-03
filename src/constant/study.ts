@@ -24,7 +24,14 @@ import {
 } from "@/../public/icons/icons";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 
-export const STUDY_CATEGORY_MENU = {
+interface StudyCategoryType {
+  [key: string]: {
+    imageSrc: string;
+    name: string;
+  };
+}
+
+export const STUDY_CATEGORY_MENU: StudyCategoryType = {
   design: {
     imageSrc: design,
     name: "디자인",
@@ -59,7 +66,14 @@ export const STUDY_CATEGORY_MENU = {
   },
 };
 
-export const USER_FAVORITE_FIELD_TYPE = {
+interface FavoriteFieldType {
+  [key: string]: {
+    name: string;
+    imageSrc: string;
+  };
+}
+
+export const USER_FAVORITE_FIELD_TYPE: FavoriteFieldType = {
   friendly: {
     name: "친근한",
     imageSrc: friendly,
