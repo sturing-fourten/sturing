@@ -12,6 +12,7 @@ interface ICommentHeaderProps {
 
 export default function CommentHeader(props: ICommentHeaderProps) {
   const { user, created_at, type } = props;
+  const isMyComment = true;
 
   return (
     <>
@@ -31,10 +32,11 @@ export default function CommentHeader(props: ICommentHeaderProps) {
             <span>{created_at}</span>
           </span>
         </div>
-
-        <button className="self-center">
-          <img src={moreVertical.src} alt={moreVertical.alt} width={24} height={24} />
-        </button>
+        {isMyComment && (
+          <button className="self-center">
+            <img src={moreVertical.src} alt={moreVertical.alt} width={24} height={24} />
+          </button>
+        )}
       </div>
     </>
   );
