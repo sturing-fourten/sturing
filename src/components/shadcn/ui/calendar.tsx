@@ -3,7 +3,7 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker, Matcher } from "react-day-picker";
-
+import { ko } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/shadcn/ui/button";
 
@@ -16,6 +16,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
 
   return (
     <DayPicker
+      locale={ko}
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       classNames={{
@@ -45,7 +46,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         day: cn(buttonVariants({ variant: "ghost" }), "h-9 w-9 p-0 font-normal aria-selected:opacity-100"),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
-        day_selected: "bg-blue-500 text-white hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white",
+        day_selected: "bg-blue-500 text-white hover:bg-blue-500 focus:bg-blue-500 focus:text-white",
         day_today: "bg-slate-100 text-slate-900",
         day_outside:
           "day-outside text-slate-500 opacity-50 aria-selected:bg-slate-100/50 aria-selected:text-slate-500 aria-selected:opacity-30",
