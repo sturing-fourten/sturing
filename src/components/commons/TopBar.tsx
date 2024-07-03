@@ -7,11 +7,12 @@ interface TopBarProps {
   showMore?: boolean;
   isWhite?: boolean;
   children?: React.ReactNode;
+  showBookmark?: boolean;
 }
 
 const { back, share, more, message, backWhite, shareWhite, moreWhite } = ICONS;
 
-export default function TopBar({ variant, children, isWhite, showMore }: TopBarProps) {
+export default function TopBar({ variant, children, isWhite, showMore, showBookmark }: TopBarProps) {
   const backIcon = isWhite ? backWhite : back;
   const shareIcon = isWhite ? shareWhite : share;
   const moreIcon = isWhite ? moreWhite : more;
@@ -37,14 +38,18 @@ export default function TopBar({ variant, children, isWhite, showMore }: TopBarP
       )}
       {variant === "chat" && (
         <>
-          <span className="text-[18px] font-semibold tracking-[-0.36px] leading-[27px]">{children}</span>
+          <span className={`text-[18px] font-semibold tracking-[-0.36px] leading-[27px] ${showBookmark && "ml-8"}`}>
+            {children}
+          </span>
           <div className="flex justify-center items-center gap-3">
             <button>
               <Image src={message.src} alt={message.alt} width={24} height={24} />
             </button>
-            <button>
-              <Image src={BOOKMARK.grayOff.src} alt={BOOKMARK.grayOff.alt} width={24} height={24} />
-            </button>
+            {showBookmark && (
+              <button>
+                <Image src={BOOKMARK.grayOff.src} alt={BOOKMARK.grayOff.alt} width={24} height={24} />
+              </button>
+            )}
           </div>
         </>
       )}
