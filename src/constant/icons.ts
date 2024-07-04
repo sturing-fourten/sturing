@@ -85,11 +85,19 @@ import {
   toggleCheckGray,
   minusCircle,
   plusCircle,
+  rightArrowBlackBold,
+  locationBlack,
+  toolTipBlue,
 } from "../../public/icons/icons";
+
+type TIcon = {
+  src: string;
+  alt: string;
+};
 
 //북마크 아이콘, 뒤로가기, 알람 , 사람 , 공유하기 아이콘 등등 기본적인 icons
 
-export const BOOKMARK = {
+export const BOOKMARK: { [key: string]: TIcon } = {
   whiteOn: { src: bookmarkWhiteOn.src, alt: "Bookmark On" },
   whiteOff: { src: bookmarkWhiteOff.src, alt: "Bookmark Off" },
   grayOn: { src: bookmarkGrayOn.src, alt: "Bookmark On" },
@@ -97,7 +105,7 @@ export const BOOKMARK = {
   blueOn: { src: bookmarkBlueOn.src, alt: "Bookmark On" },
 };
 
-export const ICONS = {
+export const ICONS: { [key: string]: TIcon } = {
   menu: {
     src: menu.src,
     alt: "메뉴",
@@ -125,6 +133,10 @@ export const ICONS = {
   alarm: { src: alarm.src, alt: "알람" },
   location: {
     src: location.src,
+    alt: "위치",
+  },
+  locationBlack: {
+    src: locationBlack.src,
     alt: "위치",
   },
   message: { src: message.src, alt: "메세지" },
@@ -158,6 +170,9 @@ export const ICONS = {
   rightArrowDarkGray: {
     src: rightArrowDarkGray.src,
     alt: "찜 목록 열기",
+  rightArrowBlackBold: {
+    src: rightArrowBlackBold.src,
+    alt: "링크로 가기",
   },
   sendComment: {
     src: sendComment.src,
@@ -278,6 +293,9 @@ export const ICONS = {
   plusCircle: {
     src: plusCircle.src,
     alt: "플러스",
+  toolTipBlue: {
+    src: toolTipBlue.src,
+    alt: "말풍선",
   },
 };
 

@@ -2,6 +2,7 @@
 import star from "./star.svg";
 import date from "./date.svg";
 import location from "./location.svg";
+import locationBlack from "./location_black.svg";
 import teammate from "./teammate.svg";
 import schedule from "./schedule.svg";
 import checkSquare from "./check-square.svg";
@@ -36,11 +37,13 @@ import toggleCheckBlue from "./toggle-active-icon.svg";
 import toggleCheckGray from "./toggle-inactive-icon.svg";
 import minusCircle from "./minus-circle-icon.svg";
 import plusCircle from "./plus-circle-icon.svg";
+import toolTipBlue from "./tooltip_blue.svg";
 
 // arrow
 import rightArrowBlack from "./rightarrow-black.svg";
 import rightArrowwhite from "./rightarrow-white.svg";
 import rightArrowGray from "./rightarrow_gray.svg";
+import rightArrowBlackBold from "./rightarrow_black_bold.svg";
 import back from "./back.svg";
 import backWhite from "./back_white.svg";
 import upArrowGray from "./up-arrow-gray.svg";
@@ -206,4 +209,7 @@ export {
   toggleCheckGray,
   minusCircle,
   plusCircle,
+  rightArrowBlackBold,
+  locationBlack,
+  toolTipBlue,
 };
