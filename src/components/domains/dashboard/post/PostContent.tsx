@@ -51,7 +51,7 @@ function EmojiReaction() {
       </button>
       <ul className="flex gap-2 overflow-x-scroll scrollbar-hide">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((emoji, index) => (
-          <span className="flex-shrink-0">
+          <span className="flex-shrink-0" key={index}>
             <EmojiButton isIncludingMe={true} emoji="🖤" count={10} />
           </span>
         ))}

@@ -29,9 +29,9 @@ export default function Dropdown(props: DropdownProps) {
         }`}
         onBlur={onBlur}
         value={value}
-        onChange={onChange}
-        children={openDropdown ? children : undefined}
-      />
+        onChange={onChange}>
+        {openDropdown ? children : undefined}
+      </TextField>
       <button type="button" className="absolute top-[11px] right-4" onClick={handleDropdown}>
         <img
           className={`w-6 h-6 ${openDropdown ? "-rotate-90" : "rotate-90"}`}

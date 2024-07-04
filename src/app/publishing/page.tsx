@@ -22,7 +22,13 @@ import StudyRecruitingCard from "@/components/commons/card/StudyRecruitingCard";
 import { STUDY_CATEGORY_MENU, STUDY_TAB_MENU_LIST, USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
 
 // UI 확인 용
-export const SAMPLE_PROGRESS_WAY_TYPE = {
+type SAMPLE_PROGRESS_WAY_TYPE = {
+  online: string;
+  offline: string;
+  mix: string;
+};
+
+const SAMPLE_PROGRESS_WAY_TYPE: SAMPLE_PROGRESS_WAY_TYPE = {
   online: "온라인",
   offline: "오프라인",
   mix: "온∙오프라인",

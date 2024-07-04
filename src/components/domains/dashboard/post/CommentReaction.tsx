@@ -37,7 +37,7 @@ export default function CommentReaction({
       <ul className="flex flex-col gap-2 mt-4 mb-">
         {nestedComments.length > 0 &&
           isOpenedNestedComment &&
-          nestedComments.map((nestedComment, index) => <NestedCommentItem nestedComment={nestedComment} />)}
+          nestedComments.map((nestedComment, index) => <NestedCommentItem nestedComment={nestedComment} key={index} />)}
       </ul>
 
       <PostNestedCommentForm />

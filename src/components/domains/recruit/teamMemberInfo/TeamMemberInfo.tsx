@@ -104,7 +104,9 @@ export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInf
           handlePlusNumber={handlePlusNumber}
           numberOfTeamMembers={numberOfTeamMembers}
         />
-        <OptionalToggle isActive={isInfinity} onClick={() => handleInfiniteNumber()} children="제한없음" />
+        <OptionalToggle isActive={isInfinity} onClick={() => handleInfiniteNumber()}>
+          제한없음
+        </OptionalToggle>
       </div>
       <DivisionLine />
       <div className="flex-col inline-flex gap-[13px]">
