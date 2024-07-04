@@ -1,3 +1,4 @@
+import { ICONS } from "@/constant/icons";
 import Image from "next/image";
 import { SetStateAction, useRef } from "react";
 
@@ -29,7 +30,7 @@ export default function ImageUpload(props: ImageUploadProps) {
           onChange={handleFileChange}
           style={{ display: "none" }}
         />
-        <img src="/icons/camera.svg" width={16} height={16} alt="사진 등록 아이콘" />
+        <img src={ICONS.camera.src} width={16} height={16} alt={ICONS.camera.alt} />
       </button>
       {image ? (
         <div className="relative">
@@ -37,7 +38,7 @@ export default function ImageUpload(props: ImageUploadProps) {
             <Image src={image} alt="업로드된 사진 미리보기" width={70} height={70} />
           </div>
           <button className="absolute -top-1.5 -right-1.5" onClick={() => setImage("")}>
-            <img src="/icons/image-cancle.svg" alt="이미지 취소" />
+            <img src={ICONS.imageCancel.src} alt={ICONS.imageCancel.alt} />
           </button>
         </div>
       ) : (

@@ -7,14 +7,17 @@ import teammate from "./teammate.svg";
 import schedule from "./schedule.svg";
 import checkSquare from "./check-square.svg";
 import add from "./add.svg";
+import addGray from "./add-gray.svg";
 import barGray from "./bar-gray.svg";
 import close from "./close.svg";
 import closeBlue from "./close-blue.svg";
+import imageCancel from "./image-cancel.svg";
 import defaultProfileImg from "./defaultProfileImg.svg";
 import menu from "./menu.svg";
 import message from "./message.svg";
 import more from "./more.svg";
 import moreWhite from "./more_white.svg";
+import search from "./search.svg";
 import searchBlue from "./search-blue.svg";
 import share from "./share.svg";
 import shareWhite from "./share_white.svg";
@@ -28,6 +31,12 @@ import ready from "./ready.svg";
 import alarm from "./alarm.svg";
 import success from "./success.svg";
 import notFound from "./404.svg";
+import camera from "./camera.svg";
+import cameraCircle from "./camera-circle.svg";
+import toggleCheckBlue from "./toggle-active-icon.svg";
+import toggleCheckGray from "./toggle-inactive-icon.svg";
+import minusCircle from "./minus-circle-icon.svg";
+import plusCircle from "./plus-circle-icon.svg";
 import toolTipBlue from "./tooltip_blue.svg";
 
 // arrow
@@ -40,6 +49,7 @@ import backWhite from "./back_white.svg";
 import upArrowGray from "./up-arrow-gray.svg";
 import downArrowGray from "./down-arrow-gray.svg";
 import downArrowDark from "./down-arrow-dark.svg";
+import rightArrowDarkGray from "./arrow-gray.svg";
 
 // logo
 import logoBlue from "./logo-blue.svg";
@@ -165,6 +175,7 @@ export {
   rightArrowwhite,
   rightArrowGray,
   searchBlue,
+  search,
   share,
   searchFilter,
   postInfoInstructor,
@@ -189,6 +200,15 @@ export {
   writeBoard,
   comment,
   moreVertical,
+  addGray,
+  rightArrowDarkGray,
+  imageCancel,
+  camera,
+  cameraCircle,
+  toggleCheckBlue,
+  toggleCheckGray,
+  minusCircle,
+  plusCircle,
   rightArrowBlackBold,
   locationBlack,
   toolTipBlue,

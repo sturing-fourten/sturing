@@ -1,3 +1,5 @@
+import { ICONS } from "@/constant/icons";
+
 interface OptionalToggle {
   onClick: () => void;
   children: React.ReactNode;
@@ -8,9 +10,9 @@ export default function OptionalToggle({ onClick, children, isActive }: Optional
   return (
     <div className="flex gap-[6px] text-neutral-400 text-sm font-normal leading-snug" onClick={onClick}>
       {isActive ? (
-        <img src="/icons/toggle-active-icon.svg" alt="토글 활성화" />
+        <img src={ICONS.toggleCheckBlue.src} alt={ICONS.toggleCheckBlue.alt} />
       ) : (
-        <img src="/icons/toggle-inactive-icon.svg" alt="토글 비활성화" />
+        <img src={ICONS.toggleCheckGray.src} alt={ICONS.toggleCheckGray.alt} />
       )}
       {children}
     </div>

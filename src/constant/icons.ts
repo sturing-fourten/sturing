@@ -9,6 +9,7 @@ import {
   share,
   alarm,
   close,
+  imageCancel,
   location,
   message,
   more,
@@ -17,6 +18,8 @@ import {
   rightArrowBlack,
   rightArrowwhite,
   rightArrowGray,
+  rightArrowDarkGray,
+  search,
   searchFilter,
   sendComment,
   moreWhite,
@@ -30,6 +33,7 @@ import {
   checkGray,
   checkBlue,
   add,
+  addGray,
   barGray,
   closeBlue,
   defaultProfileImg,
@@ -75,6 +79,12 @@ import {
   postInfoInstructor,
   postInfoLevel,
   moreVertical,
+  camera,
+  cameraCircle,
+  toggleCheckBlue,
+  toggleCheckGray,
+  minusCircle,
+  plusCircle,
   rightArrowBlackBold,
   locationBlack,
   toolTipBlue,
@@ -105,6 +115,10 @@ export const ICONS: { [key: string]: TIcon } = {
     src: closeBlue.src,
     alt: "파란색 닫기",
   },
+  imageCancel: {
+    src: imageCancel.src,
+    alt: "이미지 취소",
+  },
   back: { src: back.src, alt: "뒤로가기" },
   backWhite: { src: backWhite.src, alt: "뒤로가기" },
   mypage: { src: mypage.src, alt: "마이페이지" },
@@ -127,10 +141,12 @@ export const ICONS: { [key: string]: TIcon } = {
   },
   message: { src: message.src, alt: "메세지" },
   more: { src: more.src, alt: "더보기" },
-
   moreVertical: { src: moreVertical.src, alt: "더보기 세로 아이콘" },
-
   moreWhite: { src: moreWhite.src, alt: "더보기" },
+  search: {
+    src: search.src,
+    alt: "검색",
+  },
   searchBlue: {
     src: searchBlue.src,
     alt: "검색",
@@ -151,7 +167,9 @@ export const ICONS: { [key: string]: TIcon } = {
     src: rightArrowGray.src,
     alt: "링크로 가기",
   },
-
+  rightArrowDarkGray: {
+    src: rightArrowDarkGray.src,
+    alt: "찜 목록 열기",
   rightArrowBlackBold: {
     src: rightArrowBlackBold.src,
     alt: "링크로 가기",
@@ -199,6 +217,10 @@ export const ICONS: { [key: string]: TIcon } = {
   add: {
     src: add.src,
     alt: "추가",
+  },
+  addGray: {
+    src: addGray.src,
+    alt: "url 추가",
   },
   barGray: {
     src: barGray.src,
@@ -248,6 +270,29 @@ export const ICONS: { [key: string]: TIcon } = {
     src: postInfoLevel.src,
     alt: "난이도",
   },
+  camera: {
+    src: camera.src,
+    alt: "카메라",
+  },
+  cameraCircle: {
+    src: cameraCircle.src,
+    alt: "카메라_원형배경",
+  },
+  toggleCheckBlue: {
+    src: toggleCheckBlue.src,
+    alt: "토글 활성화",
+  },
+  toggleCheckGray: {
+    src: toggleCheckGray.src,
+    alt: "토글 비활성화",
+  },
+  minusCircle: {
+    src: minusCircle.src,
+    alt: "마이너스",
+  },
+  plusCircle: {
+    src: plusCircle.src,
+    alt: "플러스",
   toolTipBlue: {
     src: toolTipBlue.src,
     alt: "말풍선",
@@ -288,7 +333,7 @@ export const STUDY_CATEGORY = {
   },
   marketing: {
     src: marketing.src,
-    alt: "마켓팅",
+    alt: "마케팅",
   },
   business: {
     src: business.src,

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ICONS, BOOKMARK } from "@/constant/icons";
 
 interface TopBarProps {
-  variant: "share" | "chat" | "back" | "save";
+  variant: "share" | "chat" | "back" | "save" | "edit";
   showMore?: boolean;
   isWhite?: boolean;
   children?: React.ReactNode;
@@ -19,7 +19,7 @@ export default function TopBar({ variant, children, isWhite, showMore, showBookm
 
   return (
     <div className="w-full h-[54px] flex justify-between items-center px-4">
-      {(variant === "share" || variant === "chat" || variant === "back") && (
+      {(variant === "share" || variant === "chat" || variant === "back" || variant === "edit") && (
         <Link href="">
           <Image src={backIcon.src} alt={backIcon.alt} width={24} height={24} />
         </Link>
@@ -63,6 +63,14 @@ export default function TopBar({ variant, children, isWhite, showMore, showBookm
         <>
           <button className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">취소</button>
           <button className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">임시저장</button>
+        </>
+      )}
+      {variant === "edit" && (
+        <>
+          <span className="text-[18px] font-semibold tracking-[-0.36px] leading-[27px]">{children}</span>
+          <button type="submit" className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">
+            완료
+          </button>
         </>
       )}
     </div>
