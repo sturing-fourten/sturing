@@ -74,14 +74,20 @@ import {
   postInfoLocation,
   postInfoInstructor,
   postInfoLevel,
-
   moreVertical,
-
+  rightArrowBlackBold,
+  locationBlack,
+  toolTipBlue,
 } from "../../public/icons/icons";
+
+type TIcon = {
+  src: string;
+  alt: string;
+};
 
 //북마크 아이콘, 뒤로가기, 알람 , 사람 , 공유하기 아이콘 등등 기본적인 icons
 
-export const BOOKMARK = {
+export const BOOKMARK: { [key: string]: TIcon } = {
   whiteOn: { src: bookmarkWhiteOn.src, alt: "Bookmark On" },
   whiteOff: { src: bookmarkWhiteOff.src, alt: "Bookmark Off" },
   grayOn: { src: bookmarkGrayOn.src, alt: "Bookmark On" },
@@ -89,7 +95,7 @@ export const BOOKMARK = {
   blueOn: { src: bookmarkBlueOn.src, alt: "Bookmark On" },
 };
 
-export const ICONS = {
+export const ICONS: { [key: string]: TIcon } = {
   menu: {
     src: menu.src,
     alt: "메뉴",
@@ -115,9 +121,13 @@ export const ICONS = {
     src: location.src,
     alt: "위치",
   },
+  locationBlack: {
+    src: locationBlack.src,
+    alt: "위치",
+  },
   message: { src: message.src, alt: "메세지" },
   more: { src: more.src, alt: "더보기" },
-  
+
   moreVertical: { src: moreVertical.src, alt: "더보기 세로 아이콘" },
 
   moreWhite: { src: moreWhite.src, alt: "더보기" },
@@ -139,6 +149,11 @@ export const ICONS = {
   },
   rightArrowGray: {
     src: rightArrowGray.src,
+    alt: "링크로 가기",
+  },
+
+  rightArrowBlackBold: {
+    src: rightArrowBlackBold.src,
     alt: "링크로 가기",
   },
   sendComment: {
@@ -232,6 +247,10 @@ export const ICONS = {
   postInfoLevel: {
     src: postInfoLevel.src,
     alt: "난이도",
+  },
+  toolTipBlue: {
+    src: toolTipBlue.src,
+    alt: "말풍선",
   },
 };
 

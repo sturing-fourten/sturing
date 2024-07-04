@@ -17,7 +17,7 @@ export default function Avatar({
   return (
     <>
       <div
-        className={`relative overflow-hidden rounded-full ${hasBorder && "border border-gray-300"}`}
+        className={`relative overflow-hidden rounded-full shrink-0 ${hasBorder && "border border-gray-300"}`}
         style={{ width: `${width}px`, height: `${height}px` }}>
         <Image src={imageSrc} alt="프로필 이미지" sizes={`${width}px`} fill style={{ objectFit: "cover" }} />
       </div>
