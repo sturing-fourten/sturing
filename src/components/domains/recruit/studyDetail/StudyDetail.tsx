@@ -88,7 +88,9 @@ export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
             <TimesDropdown time={time} setTime={setTime} />
           </div>
         </div>
-        <OptionalToggle isActive={isDayAndTimeLater} onClick={() => handleDayAndTimeLater()} children="추후협의" />
+        <OptionalToggle isActive={isDayAndTimeLater} onClick={() => handleDayAndTimeLater()}>
+          추후협의
+        </OptionalToggle>
       </div>
       <DivisionLine />
       <div className="flex-col inline-flex gap-3">
@@ -102,7 +104,9 @@ export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
           selectedAssignment={selectedAssignment}
           handleAssignmentToggle={handleAssignmentToggle}
         />
-        <OptionalToggle isActive={isAssignmentLater} onClick={() => handleAssignmentLater()} children="추후협의" />
+        <OptionalToggle isActive={isAssignmentLater} onClick={() => handleAssignmentLater()}>
+          추후협의
+        </OptionalToggle>
       </div>
     </div>
   );

@@ -170,6 +170,7 @@ export const ICONS: { [key: string]: TIcon } = {
   rightArrowDarkGray: {
     src: rightArrowDarkGray.src,
     alt: "찜 목록 열기",
+  },
   rightArrowBlackBold: {
     src: rightArrowBlackBold.src,
     alt: "링크로 가기",
@@ -293,6 +294,7 @@ export const ICONS: { [key: string]: TIcon } = {
   plusCircle: {
     src: plusCircle.src,
     alt: "플러스",
+  },
   toolTipBlue: {
     src: toolTipBlue.src,
     alt: "말풍선",

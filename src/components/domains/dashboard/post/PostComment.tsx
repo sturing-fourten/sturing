@@ -11,7 +11,7 @@ export default function PostComment({ commentList }: { commentList: TCommentList
 
       <ul className="flex flex-col gap-8 mb-5">
         {commentList.map((comment, index) => (
-          <CommentItem isQualified={isQualified} comment={comment} />
+          <CommentItem isQualified={isQualified} comment={comment} key={index} />
         ))}
       </ul>
     </article>
