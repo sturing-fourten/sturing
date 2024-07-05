@@ -5,11 +5,22 @@ import TopBar from "@/components/commons/TopBar";
 import EditInput from "@/components/domains/mypageEdit/EditInput";
 import ProfileImageUpload from "@/components/domains/mypageEdit/ProfileImageUpload";
 import Title from "@/components/domains/mypageEdit/Title";
+import { PROFILE_AGES, PROFILE_GENDER } from "@/constant/profileEdit";
 import { useEffect, useState } from "react";
 
 export default function MypageEdit() {
   const [image, setImage] = useState<string>();
   const [fileToRead, setFileToRead] = useState<File | null>(null);
+
+  const dropdownAges = Object.entries(PROFILE_AGES).map(([key, value]) => ({
+    key,
+    value,
+  }));
+
+  const dropdownGender = Object.entries(PROFILE_GENDER).map(([key, value]) => ({
+    key,
+    value,
+  }));
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -53,15 +64,21 @@ export default function MypageEdit() {
               로그인 이메일
             </EditInput>
             <EditInput maxLength={8}>닉네임</EditInput>
-            <EditInput>직업</EditInput>
+            <EditInput readOnly>직업 수준</EditInput>
           </div>
           <div className="w-full my-[38px]">
             <DivisionLine profileEdit />
           </div>
           <div className="flex-1 w-full flex-col inline-flex justify-start items-start gap-6 px-4">
-            <EditInput toggle>나이</EditInput>
-            <EditInput toggle>성별</EditInput>
-            <EditInput toggle>선호지역</EditInput>
+            <EditInput readOnly toggle dropdown dropdownContent={dropdownAges}>
+              나이
+            </EditInput>
+            <EditInput readOnly toggle dropdown dropdownContent={dropdownGender}>
+              성별
+            </EditInput>
+            <EditInput readOnly toggle>
+              선호지역
+            </EditInput>
           </div>
         </div>
       </div>
