@@ -2,7 +2,7 @@
 
 import Avatar from "@/components/commons/Avatar";
 import { ICONS } from "@/constant/icons";
-import { SetStateAction, useRef } from "react";
+import { useRef } from "react";
 
 interface ProfileImageUploadProps {
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -29,7 +29,7 @@ export default function ProfileImageUpload(props: ProfileImageUploadProps) {
           onChange={handleFileChange}
           style={{ display: "none" }}
         />
-        <Avatar profileImageUrl={image ? image : ""} width={90} height={90} />
+        <Avatar profileImageUrl={image || ""} width={90} height={90} />
         <img className="w-6 h-6 absolute right-0 bottom-0" src={ICONS.cameraCircle.src} alt={ICONS.cameraCircle.alt} />
       </button>
     </div>
