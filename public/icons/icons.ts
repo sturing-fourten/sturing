@@ -11,6 +11,7 @@ import addGray from "./add-gray.svg";
 import barGray from "./bar-gray.svg";
 import close from "./close.svg";
 import closeBlue from "./close-blue.svg";
+import closeBright from "./close-bright.svg";
 import imageCancel from "./image-cancel.svg";
 import defaultProfileImg from "./defaultProfileImg.svg";
 import menu from "./menu.svg";
@@ -160,6 +161,7 @@ export {
   back,
   barGray,
   closeBlue,
+  closeBright,
   close,
   defaultProfileImg,
   githubLogo,

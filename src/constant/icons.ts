@@ -88,6 +88,7 @@ import {
   rightArrowBlackBold,
   locationBlack,
   toolTipBlue,
+  closeBright,
 } from "../../public/icons/icons";
 
 type TIcon = {
@@ -111,9 +112,11 @@ export const ICONS: { [key: string]: TIcon } = {
     alt: "메뉴",
   },
   close: { src: close.src, alt: "닫기" },
+
+  closeBright: { src: closeBright.src, alt: "삭제하기" },
   closeBlue: {
     src: closeBlue.src,
-    alt: "파란색 닫기",
+    alt: "닫기",
   },
   imageCancel: {
     src: imageCancel.src,
