@@ -11,14 +11,14 @@ import BottomButton from "../BottomButton";
 const content = MATCHING_CONFIG.mood.content;
 
 export default function MoodStep() {
-  const [selectedMood, setSelectedMood] = useState<string[]>([]);
+  const [selectedMoods, setSelectedMoods] = useState<string[]>([]);
 
   const handleCategoryClick = (key: string) => {
-    if (selectedMood.includes(key)) {
-      setSelectedMood(selectedMood.filter((item) => item !== key));
+    if (selectedMoods.includes(key)) {
+      setSelectedMoods(selectedMoods.filter((item) => item !== key));
     } else {
-      if (selectedMood.length < 3) {
-        setSelectedMood([...selectedMood, key]);
+      if (selectedMoods.length < 3) {
+        setSelectedMoods([...selectedMoods, key]);
       }
     }
   };
@@ -26,12 +26,12 @@ export default function MoodStep() {
   return (
     <div className="flex flex-col w-full min-h-screen sm:h-dvh gap-5">
       <TopBar variant="back" />
-      <div className="flex flex-1 flex-col gap-10 px-4">
+      <div className="flex flex-1 flex-col px-4">
         <Title subTitle>{`웅진님 ${MATCHING_CONFIG.mood.title}`}</Title>
-        <div className="grid grid-cols-2 gap-[15px] mb-[30px]">
+        <div className="grid grid-cols-2 gap-[15px] mt-10 mb-5">
           {Object.keys(content).map((key) => {
             const mood = content[key as keyof UserFavoriteFieldType];
-            const isSelected = selectedMood.includes(key);
+            const isSelected = selectedMoods.includes(key);
 
             return (
               <Button
@@ -44,9 +44,22 @@ export default function MoodStep() {
                 onClick={() => handleCategoryClick(key)}>
                 <img src={mood.src} alt={`${mood.alt} icon`} width={28} height={28} />
                 {mood.alt}
+                {selectedMoods[0] === key && (
+                  <span className="absolute top-1 sm:top-2 left-1 sm:left-2 flex justify-center items-center bg-main-500 rounded-full py-[2px] px-[6px] text-white text-[11px] tracking-[-0.22px] leading-[16px] font-semibold">
+                    대표
+                  </span>
+                )}
               </Button>
             );
           })}
+        </div>
+        <div className="flex items-center gap-[6px] w-full">
+          <span className="flex justify-center items-center text-center text-[11px] tracking-[-0.22px] leading-[16px] font-semibold bg-main-100 text-main-500 rounded-full w-[13px] h-[13px]">
+            !
+          </span>
+          <span className="text-[13px] tracking-[-0.22px] leading-[16px] text-gray-900">
+            첫 번째로 선택한 분위기가 대표 분위기로 설정됩니다.
+          </span>
         </div>
       </div>
 

@@ -21,7 +21,7 @@ export default function Banner() {
 
   return (
     <>
-      <div className="flex w-full justify-center items-center relative">
+      <div className="flex w-full h-full justify-center items-center relative">
         <Swiper
           loop={true}
           spaceBetween={0}
