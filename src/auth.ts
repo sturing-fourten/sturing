@@ -15,7 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: async ({ user, account }: { user: any; account: any }) => {
       console.log("signIn", user, account); // 임시
       if (account?.provider === "github") {
-        const { name, email } = user;
+        const { name, email, image } = user;
         await connectDB();
         const existingUser = await User.findOne({
           email,
@@ -26,6 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             name,
             email,
             nickname: generateRandomNickName(),
+            profileImageUrl: image,
             authProvider: "github",
           }).save();
         }

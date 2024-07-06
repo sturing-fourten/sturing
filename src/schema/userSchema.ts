@@ -6,8 +6,10 @@ const userSchema = new mongoose.Schema(
     nickname: { type: String, required: true }, //github
     email: { type: String, default: "" }, //github
     profileImageUrl: String, //github
-    age: { value: { type: String, default: "" }, isVisible: { type: Boolean, default: true } },
-    gender: { value: { type: String, default: "" }, isVisible: { type: Boolean, default: true } },
+    age: { type: String, default: "" },
+    ageIsVisible: { type: Boolean, default: false },
+    gender: { type: String, default: "" },
+    genderIsVisible: { type: Boolean, default: false },
     authProvider: { type: String, enum: ["github"], default: "github" },
   },
   { timestamps: true },

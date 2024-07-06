@@ -3,6 +3,8 @@ export interface EditProfileType {
   email: string;
   nickname: string;
   profileImageUrl: string;
-  age: { value: "20대" | "30대" | "40대" | "50대"; isVisible: boolean };
-  gender: { value: "남" | "여"; isVisible: boolean };
+  age: "20대" | "30대" | "40대" | "50대" | "";
+  ageIsVisible: boolean;
+  gender: "남" | "여" | "";
+  genderIsVisible: boolean;
 }
