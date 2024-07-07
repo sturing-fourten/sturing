@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import connectDB from "./lib/database/db";
-import { User } from "./lib/database/schema.ts/user";
 import generateRandomNickName from "random-korean-nickname-generator";
+import { User } from "./schema/userSchema";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -15,18 +15,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: async ({ user, account }: { user: any; account: any }) => {
       console.log("signIn", user, account); // 임시
       if (account?.provider === "github") {
-        const { name, email } = user;
+        const { name, email, image } = user;
         await connectDB();
         const existingUser = await User.findOne({
           email,
-          authProviderId: "github",
+          authProvider: "github",
         });
         if (!existingUser) {
           await new User({
             name,
             email,
             nickname: generateRandomNickName(),
-            authProviderId: "github",
+            profileImageUrl: image,
+            authProvider: "github",
           }).save();
         }
         return true;
