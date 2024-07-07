@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import { ICONS, BOOKMARK } from "@/constant/icons";
+import GoBackButton from "./GoBackButton";
 
 interface TopBarProps {
   variant: "share" | "chat" | "back" | "save" | "edit";
@@ -10,19 +11,16 @@ interface TopBarProps {
   showBookmark?: boolean;
 }
 
-const { back, share, more, message, backWhite, shareWhite, moreWhite } = ICONS;
+const { share, more, message, shareWhite, moreWhite } = ICONS;
 
-export default function TopBar({ variant, children, isWhite, showMore, showBookmark }: TopBarProps) {
-  const backIcon = isWhite ? backWhite : back;
+export default function TopBar({ variant, children, isWhite = false, showMore, showBookmark }: TopBarProps) {
   const shareIcon = isWhite ? shareWhite : share;
   const moreIcon = isWhite ? moreWhite : more;
 
   return (
     <div className="w-full h-[54px] flex justify-between items-center px-4">
       {(variant === "share" || variant === "chat" || variant === "back" || variant === "edit") && (
-        <Link href="">
-          <Image src={backIcon.src} alt={backIcon.alt} width={24} height={24} />
-        </Link>
+        <GoBackButton isWhite={isWhite} />
       )}
       {variant === "share" && (
         <div className="flex justify-center items-center gap-3">
