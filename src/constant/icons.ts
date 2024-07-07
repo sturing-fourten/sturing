@@ -63,6 +63,8 @@ import {
   freewheeling,
   checkOn,
   checkOff,
+  checkSquareOn,
+  checkSquareOff,
   badOn,
   badOff,
   goodOn,
@@ -89,6 +91,7 @@ import {
   locationBlack,
   toolTipBlue,
   closeBright,
+  reset,
 } from "../../public/icons/icons";
 
 type TIcon = {
@@ -168,7 +171,7 @@ export const ICONS: { [key: string]: TIcon } = {
   },
   rightArrowGray: {
     src: rightArrowGray.src,
-    alt: "링크로 가기",
+    alt: "자세히 보기",
   },
   rightArrowDarkGray: {
     src: rightArrowDarkGray.src,
@@ -218,6 +221,14 @@ export const ICONS: { [key: string]: TIcon } = {
     src: checkOff.src,
     alt: "체크 비활성화",
   },
+  checkSquareOn: {
+    src: checkSquareOn.src,
+    alt: "체크 활성화",
+  },
+  checkSquareOff: {
+    src: checkSquareOff.src,
+    alt: "체크 비활성화",
+  },
   add: {
     src: add.src,
     alt: "추가",
@@ -229,6 +240,10 @@ export const ICONS: { [key: string]: TIcon } = {
   barGray: {
     src: barGray.src,
     alt: "회색 바",
+  },
+  reset: {
+    src: reset.src,
+    alt: "초기화",
   },
   defaultProfileImg: {
     src: defaultProfileImg.src,

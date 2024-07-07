@@ -39,6 +39,7 @@ import toggleCheckGray from "./toggle-inactive-icon.svg";
 import minusCircle from "./minus-circle-icon.svg";
 import plusCircle from "./plus-circle-icon.svg";
 import toolTipBlue from "./tooltip_blue.svg";
+import reset from "./reset.svg";
 
 // arrow
 import rightArrowBlack from "./rightarrow-black.svg";
@@ -91,6 +92,8 @@ import freewheeling from "./freewheeling.svg";
 // check
 import checkOn from "./check-on.svg";
 import checkOff from "./check-off.svg";
+import checkSquareOn from "./check-square-on.svg";
+import checkSquareOff from "./check-square-off.svg";
 
 // satisfaction
 import badOn from "./bad-on.svg";
@@ -148,6 +151,8 @@ export {
   freewheeling,
   checkOn,
   checkOff,
+  checkSquareOn,
+  checkSquareOff,
   badOn,
   badOff,
   goodOn,
@@ -214,4 +219,5 @@ export {
   rightArrowBlackBold,
   locationBlack,
   toolTipBlue,
+  reset,
 };
