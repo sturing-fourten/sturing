@@ -6,12 +6,12 @@ import EditInput from "@/components/domains/mypageEdit/EditInput";
 import ProfileImageUpload from "@/components/domains/mypageEdit/ProfileImageUpload";
 import Title from "@/components/domains/mypageEdit/Title";
 import { editProfile } from "@/lib/database/action/edit";
-import { EditProfileType } from "@/types/editProfile";
 import { PROFILE_AGES, PROFILE_GENDER } from "@/constant/profileEdit";
 import { useEffect, useState } from "react";
+import { useUserStore } from "@/store/userStore";
 
 export default function MypageEdit() {
-  const [user, setUser] = useState<EditProfileType | null>(null);
+  const { user, fetchUser } = useUserStore();
   const [image, setImage] = useState<string>("");
   const [fileToRead, setFileToRead] = useState<File | null>(null);
 
@@ -49,27 +49,18 @@ export default function MypageEdit() {
   }, [fileToRead, setImage]);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await fetch("/api/userProfile");
-        if (!response.ok) {
-          throw new Error("사용자 정보를 가져오는 데 실패했습니다.");
-        }
-        const data = await response.json();
-        setUser(data);
-        setName(data.name);
-        setNickname(data.nickname);
-        setImage(data.profileImageUrl);
-        setAge(data.age);
-        setGender(data.gender);
-        setAgeIsVisible(data.ageIsVisible);
-        setGenderIsVisible(data.genderIsVisible);
-      } catch (error) {
-        console.error("사용자 정보 가져오기 실패:", error);
-      }
-    };
-    fetchUser();
-  }, []);
+    if (!user) {
+      fetchUser();
+    } else {
+      setName(user.name);
+      setNickname(user.nickname);
+      setImage(user.profileImageUrl);
+      setAge(user.age);
+      setGender(user.gender);
+      setAgeIsVisible(user.ageIsVisible);
+      setGenderIsVisible(user.genderIsVisible);
+    }
+  }, [user, fetchUser]);
 
   return (
     <form action={editProfile}>

@@ -22,7 +22,7 @@ export default function ProfileImageUpload(props: ProfileImageUploadProps) {
   return (
     <div className="w-fit relative">
       <button type="button" onClick={handleUploadClick}>
-        <input hidden name="profileImageUrl" value={image} />
+        <input hidden name="profileImageUrl" value={image} onChange={handleFileChange} />
         <input
           type="file"
           ref={fileInputRef}

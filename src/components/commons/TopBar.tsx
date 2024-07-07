@@ -68,9 +68,11 @@ export default function TopBar({ variant, children, isWhite, showMore, showBookm
       {variant === "edit" && (
         <>
           <span className="text-[18px] font-semibold tracking-[-0.36px] leading-[27px]">{children}</span>
-          <button type="submit" className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">
-            완료
-          </button>
+          <Link href="/mypage">
+            <button type="submit" className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">
+              완료
+            </button>
+          </Link>
         </>
       )}
     </div>
