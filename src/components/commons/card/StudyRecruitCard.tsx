@@ -10,7 +10,7 @@ interface IStudyRecruitCardProps {
 
 export function StudyRecruitCard({ isMini, isScraped }: IStudyRecruitCardProps) {
   return (
-    <article className={`flex flex-col gap-3 ${isMini ? "w-full" : "w-[185px]"}`}>
+    <article className={`flex flex-col gap-3 shrink-0 ${isMini ? "w-full" : "w-[185px]"}`}>
       <section
         className={`relative rounded-lg bg-[url('https://picsum.photos/200/300')] bg-cover bg-center bg-no-repeat overflow-hidden  ${
           isMini ? "h-[92px] sm:h-[150px]" : "h-[100px]"
@@ -32,7 +32,7 @@ export function StudyRecruitCard({ isMini, isScraped }: IStudyRecruitCardProps) 
           <TagLight>{"디자인"}</TagLight>
         </div>
         <p className="mb-3 text-4 font-semibold tracking-[-0.32px] text-black loading line-clamp-2">
-          {"기획안 작성 노하우 강의 들을 취준생 구해요!"}
+          {"기획안 작성 노하우 강의 들을 취준생 구해요!기획안 작성 노하우 강의 들을 취준생 구해요!"}
         </p>
         <div className="flex items-center text-[12px] font-medium tracking-[-0.36px] text-gray-600">
           <Image className="mr-[2px]" src={date} alt="date icon" width={18} height={18} />
