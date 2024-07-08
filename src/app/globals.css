@@ -64,3 +64,12 @@ summary img {
 details[open] summary img {
   transform: rotate(180deg);
 }
+
+/* Scroll Bar Custom _ Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-blue-500;
+}
