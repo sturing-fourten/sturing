@@ -12,6 +12,7 @@ import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import UserCard from "@/components/commons/card/UserCard";
 import CardList from "@/components/commons/CardList";
 import { IMAGES_BANNER } from "@/constant/images";
+import { useSession } from "next-auth/react";
 
 const beforeStateTitle = [
   { id: 1, text: "이번주 인기 스터디" },
@@ -20,8 +21,9 @@ const beforeStateTitle = [
 ];
 
 export default function Contents() {
-  const [isLogin, setIsLogin] = useState(true);
   const [isMatched, setIsMatched] = useState(true);
+
+  const { data: session } = useSession();
 
   const [userName, setUserName] = useState("웅진");
 
@@ -47,7 +49,7 @@ export default function Contents() {
       </div>
       <div className="w-full h-[8px] shrink-0 bg-[#F7F7F7] mb-[40px]" />
 
-      {isLogin && isMatched
+      {session && isMatched
         ? afterStateTitle.map((title) => (
             <div key={title.id} className="flex flex-col gap-5 w-full h-full mb-[50px]">
               <Title>{title.text}</Title>

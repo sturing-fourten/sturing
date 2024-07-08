@@ -13,6 +13,7 @@ import { ICONS, LOGO } from "@/constant/icons";
 export default function Gnb() {
   const [sideBar, setSideBar, handleSideBar] = useToggle(false);
   const { isOpen, openToggle } = useOpenToggle();
+
   const { data: session } = useSession();
 
   return (
@@ -31,7 +32,7 @@ export default function Gnb() {
           <button>
             <img src={ICONS.alarm.src} alt={ICONS.alarm.alt} width={24} height={24} />
           </button>
-          <Link href="">
+          <Link href="/mypage">
             <img src={ICONS.mypage.src} alt={ICONS.mypage.alt} width={24} height={24} />
           </Link>
         </div>
