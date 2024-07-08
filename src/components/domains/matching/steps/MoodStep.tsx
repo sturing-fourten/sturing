@@ -3,14 +3,15 @@
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { UserFavoriteFieldType } from "@/types/study";
 import Button from "@/components/commons/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../Title";
 import TopBar from "@/components/commons/TopBar";
 import BottomButton from "../BottomButton";
+import { StepsProps } from "@/types/matching";
 
 const content = MATCHING_CONFIG.mood.content;
 
-export default function MoodStep() {
+export default function MoodStep({ setIsSelected }: StepsProps) {
   const [selectedMoods, setSelectedMoods] = useState<string[]>([]);
 
   const handleCategoryClick = (key: string) => {
@@ -21,11 +22,16 @@ export default function MoodStep() {
         setSelectedMoods([...selectedMoods, key]);
       }
     }
+
+    setIsSelected(selectedMoods.length > 0);
   };
 
+  useEffect(() => {
+    setIsSelected(selectedMoods.length > 0);
+  }, [selectedMoods, setIsSelected]);
+
   return (
-    <div className="flex flex-col w-full min-h-screen sm:h-dvh gap-5">
-      <TopBar variant="back" />
+    <div className="flex flex-col w-full h-dvh gap-5">
       <div className="flex flex-1 flex-col px-4">
         <Title subTitle>{`웅진님 ${MATCHING_CONFIG.mood.title}`}</Title>
         <div className="grid grid-cols-2 gap-[15px] mt-10 mb-5">
@@ -62,8 +68,6 @@ export default function MoodStep() {
           </span>
         </div>
       </div>
-
-      <BottomButton />
     </div>
   );
 }

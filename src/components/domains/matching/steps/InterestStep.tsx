@@ -1,31 +1,34 @@
 "use client";
 
+import { StepsProps } from "@/types/matching";
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { StudyCategoryMenu } from "@/types/study";
 import Button from "@/components/commons/Button";
-import { useState } from "react";
-import TopBar from "@/components/commons/TopBar";
+import { useEffect, useState } from "react";
 import Title from "../Title";
-import BottomButton from "../BottomButton";
 
 const content = MATCHING_CONFIG.interests.content;
 
-export default function InterestStep() {
+export default function InterestStep({ setIsSelected }: StepsProps) {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
   const handleCategoryClick = (key: string) => {
+    let updatedInterests;
     if (selectedInterests.includes(key)) {
-      setSelectedInterests(selectedInterests.filter((item) => item !== key));
+      updatedInterests = selectedInterests.filter((item) => item !== key);
     } else {
-      if (selectedInterests.length < 3) {
-        setSelectedInterests([...selectedInterests, key]);
-      }
+      updatedInterests = [...selectedInterests, key];
     }
+    setSelectedInterests(updatedInterests);
+    setIsSelected(updatedInterests.length > 0);
   };
 
+  useEffect(() => {
+    setIsSelected(selectedInterests.length > 0);
+  }, [selectedInterests, setIsSelected]);
+
   return (
-    <div className="flex flex-col w-full min-h-screen sm:h-dvh gap-5">
-      <TopBar variant="back" />
+    <>
       <div className="flex flex-1 flex-col w-full px-4">
         <Title subTitle>{`웅진님 ${MATCHING_CONFIG.interests.title}`}</Title>
         <div className="grid grid-rows-4 grid-cols-2 gap-[15px] mt-10 mb-5">
@@ -61,7 +64,6 @@ export default function InterestStep() {
           </span>
         </div>
       </div>
-      <BottomButton />
-    </div>
+    </>
   );
 }

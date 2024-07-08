@@ -1,13 +1,15 @@
 "use client";
 
+// SelectLocation 컴포넌트 코드
+import { useState, useEffect } from "react";
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { CityList } from "@/types/citiy";
 import { ICONS } from "@/constant/icons";
-import { useState } from "react";
+import { StepsProps } from "@/types/matching";
 
 const content = MATCHING_CONFIG.location.city;
 
-export default function SelectLocation() {
+export default function SelectLocation({ setIsSelected }: StepsProps) {
   const [selectedCity, setSelectedCity] = useState<string>("서울");
   const [selectedLocations, setSelectedLocations] = useState<{ city: string; district: string }[]>([]);
 
@@ -18,20 +20,25 @@ export default function SelectLocation() {
   const handleDistrictClick = (city: string, district: string) => {
     const newLocation = { city, district };
 
-    if (selectedLocations.some((location) => location.city === city && location.district === district)) {
-      setSelectedLocations(
-        selectedLocations.filter((location) => !(location.city === city && location.district === district)),
-      );
-    } else {
-      if (selectedLocations.length < 3) {
-        setSelectedLocations([...selectedLocations, newLocation]);
+    setSelectedLocations((prevLocations) => {
+      if (prevLocations.some((location) => location.city === city && location.district === district)) {
+        return prevLocations.filter((location) => !(location.city === city && location.district === district));
+      } else {
+        if (prevLocations.length < 3) {
+          return [...prevLocations, newLocation];
+        }
       }
-    }
+      return prevLocations;
+    });
   };
 
   const handleRemoveLocation = (district: string) => {
     setSelectedLocations(selectedLocations.filter((location) => location.district !== district));
   };
+
+  useEffect(() => {
+    setIsSelected(selectedLocations.length > 0);
+  }, [selectedLocations, setIsSelected]);
 
   return (
     <div className="flex flex-col gap-[20px]">
