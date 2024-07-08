@@ -373,7 +373,7 @@ export const STUDY_CATEGORY = {
   },
   selfDevelop: {
     src: selfDevelop.src,
-    alt: "자기개발",
+    alt: "자기 계발",
   },
 };
 

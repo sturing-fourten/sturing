@@ -1,12 +1,10 @@
 "use client";
 
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
-import { LevelContentConfig } from "@/types/matching";
-import { useState } from "react";
+import { LevelContentConfig, StepsProps } from "@/types/matching";
+import { useEffect, useState } from "react";
 import Button from "@/components/commons/Button";
 import Title from "@/components/domains/matching/Title";
-import TopBar from "@/components/commons/TopBar";
-import BottomButton from "../BottomButton";
 
 const LEVEL_TAB_MENU_LIST = [
   { id: "디자인", title: "디자인" },
@@ -16,7 +14,7 @@ const LEVEL_TAB_MENU_LIST = [
 
 const content = MATCHING_CONFIG.level.content;
 
-export default function LevelStep() {
+export default function LevelStep({ setIsSelected }: StepsProps) {
   const initialSelectedLevels = {
     디자인: null,
     "기획 · 마케팅": null,
@@ -33,12 +31,20 @@ export default function LevelStep() {
   const handleButtonClick = (key: string) => {
     const updatedLevels = { ...selectedLevels, [selectedTab]: key === selectedLevels[selectedTab] ? null : key };
     setSelectedLevels(updatedLevels);
-    console.log(updatedLevels);
   };
+
+  useEffect(() => {
+    const allSelected = Object.values(selectedLevels).every((level) => level !== null);
+    setIsSelected((prevIsSelected) => {
+      if (prevIsSelected !== allSelected) {
+        return allSelected;
+      }
+      return prevIsSelected;
+    });
+  }, [selectedLevels, setIsSelected]);
 
   return (
     <div className="flex flex-col w-full h-dvh gap-5">
-      <TopBar variant="back" />
       <div className="flex flex-1 flex-col gap-10 w-full px-4">
         <Title>{MATCHING_CONFIG.level.title}</Title>
         <div className="flex flex-col gap-5">
@@ -81,7 +87,6 @@ export default function LevelStep() {
           </div>
         </div>
       </div>
-      <BottomButton />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type NextStepList = {
   id: string;
   href: string;
@@ -19,4 +21,8 @@ export type LevelContentConfig = {
   newcomer: LevelConfig;
   junior: LevelConfig;
   senior: LevelConfig;
+};
+
+export type StepsProps = {
+  setIsSelected: Dispatch<SetStateAction<boolean>>;
 };

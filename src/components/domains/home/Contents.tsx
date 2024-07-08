@@ -32,7 +32,7 @@ export default function Contents() {
   ];
 
   return (
-    <div className="flex flex-col items-center w-full pb-[32px] px-[16px]">
+    <div className="flex flex-col items-center w-full pb-[32px] pl-[16px]">
       <div className="flex flex-col w-full gap-[20px]">
         <Title>분야별 스터디 탐색하기</Title>
         <div className="flex items-center whitespace-nowrap scrollbar-hide overflow-auto overflow-x-scroll mb-[40px]">
@@ -49,11 +49,12 @@ export default function Contents() {
 
       {isLogin && isMatched
         ? afterStateTitle.map((title) => (
-            <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
+            <div key={title.id} className="flex flex-col gap-5 w-full h-full mb-[50px]">
               <Title>{title.text}</Title>
               <CardList isSingleLine>
                 {title.id === 3 ? (
                   <>
+                    <UserCard />
                     <UserCard />
                     <UserCard />
                     <UserCard />
@@ -73,11 +74,12 @@ export default function Contents() {
             </div>
           ))
         : beforeStateTitle.map((title) => (
-            <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
+            <div key={title.id} className="flex flex-col gap-5 w-full h-full mb-[50px]">
               <Title>{title.text}</Title>
               <CardList isSingleLine>
                 {title.id === 3 ? (
                   <>
+                    <UserCard />
                     <UserCard />
                     <UserCard />
                     <UserCard />
@@ -97,9 +99,11 @@ export default function Contents() {
             </div>
           ))}
 
-      <div className="flex flex-col gap-[20px] w-full">
-        <div>
-          <Title>스터링 환급 챌린지</Title>
+      <div className="flex flex-col gap-[20px] w-full pr-[16px]">
+        <div className="flex flex-col full gap-1">
+          <span className="text-gray-1000 text-[18px] font-semibold tracking-[-0.54px] leading-[24px]">
+            스터링 환급 챌린지
+          </span>
           <span className="text-[12px] text-gray-700 font-normal leading-[18px] tracking-[-0.24px]">
             팀원과 함께 2주 집중 스터디, 성공 시 스터디원 전원 지급!
           </span>
