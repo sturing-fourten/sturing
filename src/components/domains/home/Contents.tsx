@@ -49,11 +49,12 @@ export default function Contents() {
 
       {isLogin && isMatched
         ? afterStateTitle.map((title) => (
-            <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
+            <div key={title.id} className="flex flex-col gap-5 w-full h-full mb-[50px]">
               <Title>{title.text}</Title>
               <CardList isSingleLine>
                 {title.id === 3 ? (
                   <>
+                    <UserCard />
                     <UserCard />
                     <UserCard />
                     <UserCard />
@@ -73,11 +74,12 @@ export default function Contents() {
             </div>
           ))
         : beforeStateTitle.map((title) => (
-            <div key={title.id} className="flex flex-col gap-[20px] w-full mb-[50px]">
+            <div key={title.id} className="flex flex-col gap-5 w-full h-full mb-[50px]">
               <Title>{title.text}</Title>
               <CardList isSingleLine>
                 {title.id === 3 ? (
                   <>
+                    <UserCard />
                     <UserCard />
                     <UserCard />
                     <UserCard />
