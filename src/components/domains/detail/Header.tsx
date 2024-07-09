@@ -1,24 +1,28 @@
+import { LectureData } from "@/app/lecture/[id]/page";
 import LectureLinkBanner from "@/components/commons/LectureLinkBanner";
 import TopBar from "@/components/commons/TopBar";
 import { TagLight } from "@/components/commons/tag/TagLight";
 import { TagMain } from "@/components/commons/tag/TagMain";
 import { TagRate } from "@/components/commons/tag/TagRate";
 import { IMAGES_DEFAUlT } from "@/constant/images";
+import { CATEGORY } from "@/constant/category";
 
 interface BannerProps {
   page: "study" | "lecture";
+  lectureData: LectureData;
 }
 
 const { study, lecture } = IMAGES_DEFAUlT;
 
-export default function Header({ page }: BannerProps) {
+export default function Header({ page, lectureData }: BannerProps) {
+  const { online, platform, category, rating, title, link } = lectureData;
   const imageUrl = "";
   const isStudy = page === "study";
   const defaultImageUrl = isStudy ? study.src : lecture.src;
   const style = {
     backgroundImage: `url(${imageUrl || defaultImageUrl})`,
   };
-  const isLeader = true; //
+  const isLeader = true;
 
   return (
     <>
@@ -29,19 +33,19 @@ export default function Header({ page }: BannerProps) {
         style={style}>
         <TopBar variant="share" showMore={isStudy && isLeader} isWhite={isStudy} />
         <div className="flex items-center gap-1 mt-10 mb-4">
-          <TagMain>온라인</TagMain>
-          <TagLight>디자인</TagLight>
+          <TagMain>{online ? "온라인" : "오프라인"}</TagMain>
+          <TagLight>{CATEGORY(category)}</TagLight>
           {!isStudy && (
             <>
-              <TagLight>유데미</TagLight>
-              <TagRate>4.5</TagRate>
+              <TagLight>{platform}</TagLight>
+              <TagRate>{rating}</TagRate>
             </>
           )}
         </div>
         <h1
           className="mx-11 text-center text-[18px] font-semibold leading-[150%] tracking-[0.6px] break-keep"
           style={{ color: isStudy ? "white" : "black" }}>
-          UXUI 디자이너가 피그마를 활용해 포트폴리오를 쌓는 법 A to Z
+          {title}
         </h1>
         {isStudy && (
           <div className="mt-6 w-[149px] h-[18px] flex justify-start items-center gap-2.5 leading-[150%] tracking-[-0.36px] text-gray-400 text-[12px] font-medium text-nowrap ">
@@ -52,7 +56,7 @@ export default function Header({ page }: BannerProps) {
         )}
       </section>
       <section className="px-4 py-5">
-        <LectureLinkBanner href="" title="UXUI 디자이너가 피그마를 활용해 포트폴리오를 쌓는 법 A to Z" />
+        <LectureLinkBanner href={link} title={title} />
       </section>
     </>
   );

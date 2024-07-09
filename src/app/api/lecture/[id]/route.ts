@@ -8,7 +8,6 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     await connectDB();
 
     const lecture = await getLectureAction(id as string);
-    console.log(lecture);
 
     return Response.json({ lecture });
   } catch (error: any) {
