@@ -1,8 +1,7 @@
 "use server";
 
-import { Lecture, LectureReview } from "@/schema/lectureSchema";
+import { Lecture } from "@/schema/lectureSchema";
 import { redirect } from "next/navigation";
-import connectDB from "../db";
 
 export const getLectureListAction = async () => {
   try {
@@ -31,20 +30,28 @@ export const getLectureAction = async (id: string) => {
   }
 };
 
-export const createLectureReviewAction = async (formData: FormData) => {
-  try {
-    const rating = formData.get("rating");
-    const comment = formData.get("comment");
+export const createLectureReviewAction = async (lectureId: string, formData: FormData) => {
+  const newReview = {
+    reviewerId: "668bcc45f6265b4ece271a16",
+    reviewer: "모몽가",
+    rating: Number(formData.get("rating")),
+    comment: formData.get("comment"),
+    createdAt: new Date(),
+  };
 
-    await connectDB();
+  const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${lectureId}/review`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newReview),
+  });
 
-    await LectureReview.findOneAndUpdate({
-      rating: rating,
-      comment: comment,
-    });
+  console.log(response);
 
-    redirect("/mystudy");
-  } catch (error: any) {
-    console.log("error", error.message);
+  if (!response.ok) {
+    throw new Error("Failed to create lecture review");
   }
+
+  redirect("/mystudy");
 };

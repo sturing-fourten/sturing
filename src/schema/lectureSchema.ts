@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
 const lectureReviewSchema = new mongoose.Schema({
-  lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
-  reviewerId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  reviewer: { type: String, required: true },
+  reviewerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  reviewer: { type: String, ref: "User" },
   rating: { type: Number, required: true },
   comment: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
@@ -33,4 +32,3 @@ const lectureBookmarkSchema = new mongoose.Schema({
 export const Lecture = mongoose.models.Lecture || mongoose.model("Lecture", lectureSchema);
 export const LectureBookmark =
   mongoose.models.LectureBookmark || mongoose.model("LectureBookmark", lectureBookmarkSchema);
-export const LectureReview = mongoose.models.LectureReview || mongoose.model("LectureReview", lectureReviewSchema);

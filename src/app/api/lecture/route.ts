@@ -8,7 +8,7 @@ export async function GET(req: Request) {
     return Response.json({ lectures });
   } catch (error: any) {
     console.error("Error fetching lectures:", error);
-    return new Response(JSON.stringify({ error: "Failed to fetch lectures" }), {
+    return new Response(JSON.stringify({ error: "강의 리스트를 불러오는데 실패하였습니다." }), {
       status: 500,
     });
   }
