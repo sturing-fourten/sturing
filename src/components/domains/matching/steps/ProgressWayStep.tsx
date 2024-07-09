@@ -1,34 +1,33 @@
-"use client";
-
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { StepsProps, TypeContentConfig } from "@/types/matching";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Title from "../Title";
 import Button from "@/components/commons/Button";
 import { ICONS } from "@/constant/icons";
+import { useProgressWayStore } from "@/store/matchingStore";
 
-const content = MATCHING_CONFIG.type.content;
+export default function ProgressWayStep({ userNickname, setIsSelected }: StepsProps) {
+  const content = MATCHING_CONFIG.type.content;
+  const selectedProgressWay = useProgressWayStore((state) => state.progressWay);
+  const setSelectedProgressWay = useProgressWayStore((state) => state.setProgressWay);
 
-export default function TypeStep({ setIsSelected }: StepsProps) {
-  const [selectedType, setSelectedType] = useState<string | null>(null);
-
-  const handleButtonClick = (key: string) => {
-    setSelectedType(key === selectedType ? null : key);
-    setIsSelected(true);
+  const handleButtonClick = (key: string): void => {
+    const newSelectedProgressWay = key === selectedProgressWay ? null : key;
+    setSelectedProgressWay(newSelectedProgressWay || "");
   };
 
   useEffect(() => {
-    setIsSelected(selectedType !== null);
-  }, [selectedType, setIsSelected]);
+    setIsSelected(selectedProgressWay !== "");
+  }, [selectedProgressWay, setIsSelected]);
 
   return (
     <div className="flex flex-col w-full h-dvh gap-5">
       <div className="flex flex-1 flex-col gap-10 px-4">
-        <Title>{`웅진님${MATCHING_CONFIG.type.title}`}</Title>
+        <Title>{`${userNickname}님 ${MATCHING_CONFIG.type.title}`}</Title>
         <div className="flex flex-col gap-[15px]">
           {Object.keys(content).map((key) => {
             const type = content[key as keyof TypeContentConfig];
-            const isSelected = key === selectedType;
+            const isSelected = key === selectedProgressWay;
 
             return (
               <Button
@@ -42,7 +41,7 @@ export default function TypeStep({ setIsSelected }: StepsProps) {
                 <div className="flex justify-between items-center w-full">
                   <span>{type}</span>
                   <img
-                    src={!isSelected || selectedType === null ? ICONS.checkGray.src : ICONS.checkBlue.src}
+                    src={!isSelected || selectedProgressWay === null ? ICONS.checkGray.src : ICONS.checkBlue.src}
                     alt="check icon"
                     width={24}
                     height={24}

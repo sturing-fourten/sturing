@@ -1,18 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
-import { UserFavoriteFieldType } from "@/types/study";
 import Button from "@/components/commons/Button";
-import { useEffect, useState } from "react";
 import Title from "../Title";
-import TopBar from "@/components/commons/TopBar";
-import BottomButton from "../BottomButton";
 import { StepsProps } from "@/types/matching";
+import { UserFavoriteFieldType } from "@/types/study";
+import { useMoodsStore } from "@/store/matchingStore";
 
-const content = MATCHING_CONFIG.mood.content;
+export default function MoodStep({ userNickname, setIsSelected }: StepsProps) {
+  const content = MATCHING_CONFIG.mood.content;
 
-export default function MoodStep({ setIsSelected }: StepsProps) {
-  const [selectedMoods, setSelectedMoods] = useState<string[]>([]);
+  const selectedMoods = useMoodsStore((state) => state.moods);
+  const setSelectedMoods = useMoodsStore((state) => state.setMoods);
 
   const handleCategoryClick = (key: string) => {
     if (selectedMoods.includes(key)) {
@@ -20,10 +20,10 @@ export default function MoodStep({ setIsSelected }: StepsProps) {
     } else {
       if (selectedMoods.length < 3) {
         setSelectedMoods([...selectedMoods, key]);
+      } else {
+        alert("최대 3개의 분위기만 선택할 수 있습니다.");
       }
     }
-
-    setIsSelected(selectedMoods.length > 0);
   };
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function MoodStep({ setIsSelected }: StepsProps) {
   return (
     <div className="flex flex-col w-full h-dvh gap-5">
       <div className="flex flex-1 flex-col px-4">
-        <Title subTitle>{`웅진님 ${MATCHING_CONFIG.mood.title}`}</Title>
+        <Title subTitle>{`${userNickname}님 ${MATCHING_CONFIG.mood.title}`}</Title>
         <div className="grid grid-cols-2 gap-[15px] mt-10 mb-5">
           {Object.keys(content).map((key) => {
             const mood = content[key as keyof UserFavoriteFieldType];

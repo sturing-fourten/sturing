@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { ICONS, BOOKMARK } from "@/constant/icons";
 import GoBackButton from "./GoBackButton";
+import Link from "next/link";
 
 interface TopBarProps {
   variant: "share" | "chat" | "back" | "save" | "edit";
