@@ -29,7 +29,6 @@ export default function MatchingPage() {
   const selectedProgressWay = useProgressWayStore((state) => state.progressWay);
   const selectedLocations = useLocationsStore((state) => state.locations);
   const selectedMoods = useMoodsStore((state) => state.moods);
-  console.log(selectedLevel, selectedProgressWay, selectedLocations, selectedMoods);
 
   const handlePrevSection = () => {
     if (steps !== 1) setSteps((prevSteps) => prevSteps - 1);
@@ -93,6 +92,7 @@ export default function MatchingPage() {
       <input hidden name="levels" value={JSON.stringify(selectedLevel)} onChange={(e) => e.target.value} />
       <input hidden name="progressWay" value={selectedProgressWay} onChange={(e) => e.target.value} />
       <input hidden name="locations" value={JSON.stringify(selectedLocations)} onChange={(e) => e.target.value} />
+      <input hidden name="locationIsVisible" value="false" onChange={(e) => e.target.value} />
       <input hidden name="moods" value={JSON.stringify(selectedMoods)} onChange={(e) => e.target.value} />
       {isSubmitted && <button id="submitButton" type="submit" hidden></button>}
     </form>

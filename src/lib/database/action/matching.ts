@@ -9,6 +9,7 @@ export async function matching(formData: FormData) {
   const levels = formData.get("levels");
   const progressWay = formData.get("progressWay");
   const locations = formData.get("locations");
+  const locationIsVisible = formData.get("locationIsVisible");
   const moods = formData.get("moods");
 
   connectDB();
@@ -24,6 +25,7 @@ export async function matching(formData: FormData) {
       levels: levels,
       progressWay: progressWay,
       locations: locations,
+      locationIsVisible: locationIsVisible,
       moods: moods,
     });
 

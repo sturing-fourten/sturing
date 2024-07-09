@@ -4,9 +4,10 @@ const matchingSchema = new mongoose.Schema(
   {
     userEmail: { type: String },
     levels: { type: String },
-    locations: { type: String, isVisible: { type: Boolean, default: false } },
-    progressWay: { type: String, enum: ["online", "offline", "both"] },
-    moods: [{ type: String }],
+    progressWay: { type: String, enum: ["online", "offline", "irrelevant"] },
+    locations: { type: String },
+    locationIsVisible: { type: Boolean, default: "false" },
+    moods: { type: String },
   },
   { timestamps: true },
 );
