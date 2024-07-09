@@ -51,7 +51,7 @@ export const createStudyAction = async () => {
       task: SAMPLE_STUDY.task,
     };
 
-    const response = await fetch(`${process.env.LOCAL_URL}/api/study-list`, {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/study`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const deleteStudyAction = async (formData: FormData) => {
     const _id = formData.get("_id");
     if (!_id) throw new Error("스터디 정보가 없습니다.");
 
-    const response = await fetch(`${process.env.LOCAL_URL}/api/study-list`, {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/study`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
