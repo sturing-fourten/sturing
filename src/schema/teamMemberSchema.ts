@@ -9,7 +9,7 @@ const teamMembersSchema = new mongoose.Schema(
         userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
         role: {
           type: String,
-          enum: ["팀장", "부팀장", "과제팀장", "출결팀장", "기록팀장", "일정팀장"],
+          enum: ["팀장", "부팀장", "과제팀장", "출결팀장", "기록팀장", "일정팀장", "팀원"],
           required: true,
         },
         isOwner: { type: Boolean, required: true },
