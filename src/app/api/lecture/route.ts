@@ -4,9 +4,12 @@ import { Lecture } from "@/schema/lectureSchema";
 export async function GET(req: Request) {
   try {
     await connectDB();
-    const lecture = await Lecture.find({});
-    return Response.json(lecture);
+    const lectures = await Lecture.find({});
+    return Response.json({ lectures });
   } catch (error: any) {
-    throw new Error(error);
+    console.error("Error fetching lectures:", error);
+    return new Response(JSON.stringify({ error: "Failed to fetch lectures" }), {
+      status: 500,
+    });
   }
 }

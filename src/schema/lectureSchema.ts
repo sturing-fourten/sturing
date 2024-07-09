@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const lectureReviewSchema = new mongoose.Schema({
+  lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
   reviewerId: { type: mongoose.Schema.Types.ObjectId, required: true },
   reviewer: { type: String, required: true },
   rating: { type: Number, required: true },
