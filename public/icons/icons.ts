@@ -1,5 +1,6 @@
 // icon
 import star from "./star.svg";
+import starEmpty from "./star-empty.svg";
 import date from "./date.svg";
 import location from "./location.svg";
 import locationBlack from "./location_black.svg";
@@ -120,6 +121,7 @@ import comment from "./comment.svg";
 import moreVertical from "./more-vertical.svg";
 export {
   star,
+  starEmpty,
   date,
   location,
   teammate,
