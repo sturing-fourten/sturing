@@ -1,42 +1,16 @@
 import mongoose from "mongoose";
 
 const studySchema = new mongoose.Schema({
-  /**
-   * @todo _id도 따로 명시해줘야 하는지 확인 후 수정 예정
-   * 몽고DB에서 주는 거랑 다른 id 생성해서 쓸 필요가 있을듯 + 보안 문제?
-   */
-  id: {
-    /**
-     * @todo user id 타입 확인 후 수정 예정
-     */
-    type: Number,
-    required: true,
-  },
   category: {
     type: String,
     enum: ["DESIGN", "DEVELOP", "BUSINESS", "MARKETING", "ECONOMY", "LANGUAGE", "LICENSE", "SELF-DEVELOPMENT"],
   },
-  ownerId: {
-    /**
-     * @todo user id 타입 확인 후 수정 예정
-     */
-    type: Number,
-    required: true,
-  },
-  dashboardId: {
-    /**
-     * @todo dashboard 샘플 데이터 생성 후 타입 수정 예정
-     */
-    type: Number,
-    required: true,
-  },
-  lectureId: {
-    /**
-     * @todo lecture 샘플 데이터 생성 후 타입 수정 예정
-     */
-    type: Number,
-    required: true,
-  },
+  ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
+  /**
+   * @todo dashboard 작업 이후 추가 예정
+   */
+  // dashboardId: { type: mongoose.Schema.Types.ObjectId, ref: "Dashboard", required: true },
   title: {
     type: String,
     required: true,
@@ -101,6 +75,7 @@ const studySchema = new mongoose.Schema({
   task: {
     type: [String],
   },
+  teamMembersId: { type: mongoose.Schema.Types.ObjectId, ref: "TeamMembers" },
 });
 
 export const Study = mongoose.models.Study || mongoose.model("Study", studySchema);
