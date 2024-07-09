@@ -353,7 +353,7 @@ export const STUDY_CATEGORY = {
   },
   marketing: {
     src: marketing.src,
-    alt: "마케팅",
+    alt: "기획 · 마케팅",
   },
   business: {
     src: business.src,
