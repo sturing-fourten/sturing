@@ -47,47 +47,45 @@ export default function LevelStep({ setIsSelected }: StepsProps) {
   }, [setIsSelected, filteredTabMenuList]);
 
   return (
-    <div className="flex flex-col w-full h-dvh gap-5">
-      <div className="flex flex-1 flex-col gap-10 w-full px-4">
-        <Title>{MATCHING_CONFIG.level.title}</Title>
-        <div className="flex flex-col gap-5">
-          <nav className="flex justify-between items-center gap-3 bg-white">
-            {filteredTabMenuList.map((tab) => (
-              <button
-                key={tab.id}
+    <div className="flex flex-1 flex-col gap-10 w-full px-4">
+      <Title>{MATCHING_CONFIG.level.title}</Title>
+      <div className="flex flex-col gap-5">
+        <nav className="flex justify-between items-center gap-3 bg-white">
+          {filteredTabMenuList.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              className={`w-full flex justify-center items-center gap-3 py-3 text-4 text-gray-700 font-semibold leading-[22px] tracking-[-0.42px] ${
+                selectedTab === tab.id ? "text-main-500 border-main-500 border-b-2" : "border-b-2 border-gray-300"
+              }`}
+              onClick={() => handleTabClick(tab.id)}>
+              <span>{tab.title}</span>
+            </button>
+          ))}
+        </nav>
+        <div className="flex flex-col gap-[15px]">
+          {Object.keys(content).map((key) => {
+            const level = content[key as keyof LevelContentConfig];
+            const currentLevel = selectedLevels.find((item) => item.interest === selectedTab)?.level;
+            const isSelected = currentLevel === key;
+            return (
+              <Button
+                key={key}
                 type="button"
-                className={`w-full flex justify-center items-center gap-3 py-3 text-4 text-gray-700 font-semibold leading-[22px] tracking-[-0.42px] ${
-                  selectedTab === tab.id ? "text-main-500 border-main-500 border-b-2" : "border-b-2 border-gray-300"
-                }`}
-                onClick={() => handleTabClick(tab.id)}>
-                <span>{tab.title}</span>
-              </button>
-            ))}
-          </nav>
-          <div className="flex flex-col gap-[15px]">
-            {Object.keys(content).map((key) => {
-              const level = content[key as keyof LevelContentConfig];
-              const currentLevel = selectedLevels.find((item) => item.interest === selectedTab)?.level;
-              const isSelected = currentLevel === key;
-              return (
-                <Button
-                  key={key}
-                  type="button"
-                  varient="ghost"
-                  addStyle={`w-full h-[64px] px-6 shrink-0 rounded-[8px] border-gray-300 text-gray-700 text-4 tracking-[-0.28px] leading-[21px] ${
-                    isSelected
-                      ? "text-main-500 bg-main-100 border-main-500 font-semibold"
-                      : "bg-white text-gray-700 border-gray-300 font-medium"
-                  } transform transition-transform duration-200 hover:scale-105`}
-                  onClick={() => handleButtonClick(selectedTab, key)}>
-                  <div className="flex gap-[10px] items-center w-full">
-                    <div className="flex w-[41px]">{level.name}</div>
-                    <span>{level.explanation}</span>
-                  </div>
-                </Button>
-              );
-            })}
-          </div>
+                varient="ghost"
+                addStyle={`w-full h-[64px] px-6 shrink-0 rounded-[8px] border-gray-300 text-gray-700 text-4 tracking-[-0.28px] leading-[21px] ${
+                  isSelected
+                    ? "text-main-500 bg-main-100 border-main-500 font-semibold"
+                    : "bg-white text-gray-700 border-gray-300 font-medium"
+                } transform transition-transform duration-200 hover:scale-105`}
+                onClick={() => handleButtonClick(selectedTab, key)}>
+                <div className="flex gap-[10px] items-center w-full">
+                  <div className="flex w-[41px]">{level.name}</div>
+                  <span>{level.explanation}</span>
+                </div>
+              </Button>
+            );
+          })}
         </div>
       </div>
     </div>
