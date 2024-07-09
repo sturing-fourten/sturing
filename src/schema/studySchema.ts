@@ -26,31 +26,33 @@ const studySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  meetingFormat: {
-    type: String,
-    enum: ["ONLINE", "OFFLINE"],
-    required: true,
-  },
-  meetingPlatform: {
-    type: String,
-    /**
-     * @todo sessionFormat.type === "ONLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
-     */
-  },
-  meetingLocation: {
-    type: String,
-    /**
-     * @todo sessionFormat.type === "OFFLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
-     */
-  },
-  meetingSchedule: {
-    day: {
+  meeting: {
+    format: {
       type: String,
+      enum: ["ONLINE", "OFFLINE"],
       required: true,
     },
-    time: {
+    platform: {
       type: String,
-      required: true,
+      /**
+       * @todo sessionFormat.type === "ONLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
+       */
+    },
+    location: {
+      type: String,
+      /**
+       * @todo sessionFormat.type === "OFFLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
+       */
+    },
+    schedule: {
+      day: {
+        type: String,
+        required: true,
+      },
+      time: {
+        type: String,
+        required: true,
+      },
     },
   },
   startDate: {

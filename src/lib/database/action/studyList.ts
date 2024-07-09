@@ -2,29 +2,53 @@
 
 import { revalidatePath } from "next/cache";
 import mongoose from "mongoose";
+import { getSession } from "../getSession";
 
+const SAMPLE_STUDY = {
+  category: "DEVELOP",
+  lectureId: "668a69466e35d46f28129a90",
+  title: `예시 스터디 ${new Date().toTimeString()}`,
+  imageUrl: "https://picsum.photos/200/300",
+  description: "이 스터디에 대한 소개",
+  meeting: {
+    format: "ONLINE",
+    platform: "Zoom",
+    schedule: {
+      day: "월요일",
+      time: "오전 10시",
+    },
+  },
+  startDate: new Date("2024-07-15"),
+  endDate: new Date("2024-08-30"),
+  status: "RECRUIT_START",
+  moodKeywords: ["열정적인 분위기", "친절한 분위기"],
+  task: ["과제1", "과제1"],
+};
 export const createStudyAction = async () => {
   try {
+    const session = await getSession();
+    const userId = session?.user?.id;
+    if (!userId) throw new Error("유저 정보가 없습니다.");
+
     const newStudy = {
-      category: "DEVELOP",
-      lectureId: new mongoose.Types.ObjectId("668a69466e35d46f28129a90"),
+      ownerId: userId,
       /**
-       * @todo dashboard 작업 이후 dashboardId 추가 예정
+       * @todo SAMPLE_STUDY 실 입력 데이터로 변경
        */
-      title: `예시 스터디 ${new Date().toTimeString()}`,
-      imageUrl: "https://picsum.photos/200/300",
-      description: "이 스터디에 대한 소개",
-      meetingFormat: "ONLINE",
-      meetingPlatform: "Zoom",
-      meetingSchedule: {
-        day: "월요일",
-        time: "오전 10시",
-      },
-      startDate: new Date("2024-07-15"),
-      endDate: new Date("2024-08-30"),
-      status: "RECRUIT_START",
-      moodKeywords: ["열정적인 분위기", "친절한 분위기"],
-      task: ["과제1", "과제1"],
+      category: SAMPLE_STUDY.category,
+      lectureId: SAMPLE_STUDY.lectureId,
+      /**
+       * @todo dashboard 작업 이후 dashboardId 추가
+       */
+      title: SAMPLE_STUDY.title,
+      imageUrl: SAMPLE_STUDY.imageUrl,
+      description: SAMPLE_STUDY.description,
+      meeting: SAMPLE_STUDY.meeting,
+      startDate: SAMPLE_STUDY.startDate,
+      endDate: SAMPLE_STUDY.endDate,
+      status: SAMPLE_STUDY.status,
+      moodKeywords: SAMPLE_STUDY.moodKeywords,
+      task: SAMPLE_STUDY.task,
     };
 
     const response = await fetch(`${process.env.LOCAL_URL}/api/study-list`, {
