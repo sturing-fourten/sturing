@@ -1,4 +1,4 @@
-import { CityList } from "@/types/citiy";
+import { CityList } from "@/types/city";
 
 const KOREA_CITY_LIST: CityList = {
   서울: [
