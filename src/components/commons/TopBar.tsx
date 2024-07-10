@@ -4,8 +4,10 @@ import { ICONS, BOOKMARK } from "@/constant/icons";
 import GoBackButton from "./GoBackButton";
 import Link from "next/link";
 
+export type TopBarVariant = "share" | "chat" | "back" | "save" | "edit";
+
 interface TopBarProps {
-  variant: "share" | "chat" | "back" | "save" | "edit";
+  variant: TopBarVariant;
   showMore?: boolean;
   isWhite?: boolean;
   children?: React.ReactNode;
@@ -26,11 +28,11 @@ export default function TopBar({ variant, children, isWhite = false, showMore, s
       {variant === "share" && (
         <div className="flex justify-center items-center gap-3">
           <button>
-            <Image src={shareIcon.src} alt={shareIcon.alt} width={24} height={24} />
+            <img src={shareIcon.src} alt={shareIcon.alt} width={24} height={24} />
           </button>
           {showMore && (
             <button>
-              <Image src={moreIcon.src} alt={moreIcon.alt} width={24} height={24} />
+              <img src={moreIcon.src} alt={moreIcon.alt} width={24} height={24} />
             </button>
           )}
         </div>
@@ -41,13 +43,17 @@ export default function TopBar({ variant, children, isWhite = false, showMore, s
             {children}
           </span>
           <div className="flex justify-center items-center gap-3">
-            <button>
-              <Image src={message.src} alt={message.alt} width={24} height={24} />
-            </button>
-            {showBookmark && (
+            <Link href={""}>
               <button>
-                <Image src={BOOKMARK.grayOff.src} alt={BOOKMARK.grayOff.alt} width={24} height={24} />
+                <img src={message.src} alt={message.alt} width={24} height={24} />
               </button>
+            </Link>
+            {showBookmark && (
+              <Link href={"/mypage/scrap"}>
+                <button>
+                  <img src={BOOKMARK.grayOff.src} alt={BOOKMARK.grayOff.alt} width={24} height={24} />
+                </button>
+              </Link>
             )}
           </div>
         </>
