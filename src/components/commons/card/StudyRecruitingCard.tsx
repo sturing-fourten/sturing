@@ -1,9 +1,9 @@
-import StudyCardButton from "./element/StudyCardButton";
 import StudyCardLink from "./element/StudyCardLink";
 import { StudyDetailInfo } from "./element/StudyDetailInfo";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 
 export default function StudyRecruitingCard() {
+  const sampleStudyId = "668d090f4e443fcaa9fc38b2";
   return (
     <article className="py-6 px-5 border border-gray-300 bg-white rounded-lg">
       <StudyMeetingInfo />
@@ -12,7 +12,7 @@ export default function StudyRecruitingCard() {
       </p>
       <hr className="my-4" />
       <StudyDetailInfo className="mb-4" />
-      <StudyCardLink href="/application-list/1">지원서 리스트 보기</StudyCardLink>
+      <StudyCardLink href={`/application-list/${sampleStudyId}`}>지원서 리스트 보기</StudyCardLink>
     </article>
   );
 }

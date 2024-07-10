@@ -13,7 +13,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   callbacks: {
     signIn: async ({ user, account }: { user: any; account: any }) => {
-      console.log("signIn", user, account); // 임시
       if (account?.provider === "github") {
         const { name, email, image } = user;
         await connectDB();
@@ -22,13 +21,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           authProvider: "github",
         });
         if (!existingUser) {
-          await new User({
+          const newUser = await new User({
             name,
             email,
             nickname: generateRandomNickName(),
             profileImageUrl: image,
             authProvider: "github",
           }).save();
+          user.id = newUser._id;
+        } else {
+          user.id = existingUser._id;
         }
         return true;
       } else {
@@ -36,15 +38,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
     },
     async jwt({ token, user, account }: { token: any; user: any; account: any }) {
-      if (user) {
+      if (user && user.id) {
         token.id = user.id;
         token.accessToken = account.access_token;
       }
-      console.log("jwt", token, user, account); // 임시
       return token;
     },
     async session({ session, token }: { session: any; token: any }) {
-      if (token) {
+      if (token && token.id) {
         session = token;
       }
       return session;
