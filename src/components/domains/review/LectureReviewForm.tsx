@@ -20,10 +20,10 @@ export default function LectureReviewForm({ lectureId }: { lectureId: string }) 
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-1 flex-col">
+      <form onSubmit={handleSubmit} className="flex flex-col h-full">
         <LectureStarAssessment onRatingChange={setRating} />
 
-        <section className="pt-11 px-4">
+        <section className="pt-11 px-4 flex flex-col flex-1">
           <SectionTitle className="mb-5">강의 후기를 알려주세요.</SectionTitle>
           <textarea
             maxLength={500}
@@ -33,6 +33,7 @@ export default function LectureReviewForm({ lectureId }: { lectureId: string }) 
             onChange={(e) => setComment(e.target.value)}
           />
         </section>
+
         <footer className="w-full py-3 px-4 bg-white">
           <Button
             type="submit"

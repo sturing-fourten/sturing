@@ -29,7 +29,6 @@ export default async function LectureDetail({ params }: { params: { id: string }
   const { id } = params;
   const lectureData = await getLectureAction(id);
   const lectureId = lectureData._id.toString();
-  // console.log(lectureId);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import connectDB from "@/lib/database/db";
 import { Lecture } from "@/schema/lectureSchema";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET({ params }: { params: { id: string } }) {
   const id = params.id;
 
   try {

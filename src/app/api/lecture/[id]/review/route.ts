@@ -3,6 +3,7 @@ import { Lecture } from "@/schema/lectureSchema";
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   const lectureId = params.id;
+
   try {
     await connectDB();
 
