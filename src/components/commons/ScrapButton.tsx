@@ -1,20 +1,39 @@
+"use client";
+
 import Image from "next/image";
 import { BOOKMARK } from "@/constant/icons";
+import {
+  createLectureBookmarkAction,
+  deleteLectureBookmarkAction,
+  getLecturebookmarks,
+} from "@/lib/database/action/lecture";
+import { useEffect, useState } from "react";
 
 interface ScrapButtonProps {
-  isChecked: boolean;
   variant: "detail" | "card";
+  lectureId: string;
 }
 
-export default function ScrapButton({ isChecked, variant }: ScrapButtonProps) {
+export default function ScrapButton({ variant, lectureId }: ScrapButtonProps) {
+  // const lectureBookmarkData = await getLecturebookmarks(lectureId);
+  const [isChecked, setChecked] = useState<boolean>();
+  // const scrapCount = lectureBookmarkData.length;
   const isDetail = variant === "detail";
-  const scrapCount = 34;
+  const sampleUserId = "668bcc45f6265b4ece271a16";
+
+  // const handleBookmark = async () => {
+  //   if (isChecked) {
+  //     await createLectureBookmarkAction(lectureId, sampleUserId);
+  //   } else {
+  //     await deleteLectureBookmarkAction(lectureId, lectureBookmarkData._id);
+  //   }
+  // };
 
   return (
     <>
       <div className={isDetail ? "w-[52px] h-[50px] flex flex-col items-center justify-center" : ""}>
-        <form action="" className="w-[26px] h-[26px]">
-          <button>
+        <form className="w-[26px] h-[26px]">
+          <button type="button">
             {isChecked ? (
               <Image src={BOOKMARK.blueOn.src} alt={BOOKMARK.blueOn.alt} width={26} height={26} />
             ) : (
@@ -27,7 +46,7 @@ export default function ScrapButton({ isChecked, variant }: ScrapButtonProps) {
             className={`text-[12px] leading-[150%] tracking-tight font-normal ${
               isChecked ? "text-main-500" : "text-gray-700"
             }`}>
-            {scrapCount}
+            {/* {scrapCount} */}
           </span>
         )}
       </div>

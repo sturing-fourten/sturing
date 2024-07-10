@@ -5,11 +5,26 @@ import CardList from "@/components/commons/CardList";
 import TabMenuButton from "@/components/commons/TabMenuButton";
 import LectureCard from "@/components/commons/card/LectureCard";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SortFilterButton from "./SortFilterButton";
+import { getLectureListAction } from "@/lib/database/action/lecture";
+import { LectureData } from "@/app/lecture/[id]/page";
 
 export default function Content() {
   const [menu, setMenu] = useState("lecture");
+  const [lectures, setLectures] = useState([]);
+
+  useEffect(() => {
+    const fetchLectureListData = async () => {
+      try {
+        const data = await getLectureListAction();
+        setLectures(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLectureListData();
+  }, []);
 
   return (
     <>
@@ -50,8 +65,13 @@ export default function Content() {
               <h1 className="text-base text-gray-1000 font-semibold leading-snug mb-[17px]">강의</h1>
             )}
             <div className="flex flex-col gap-[14px]">
-              <LectureCard variant="card" />
-              <LectureCard variant="card" />
+              {menu === "total"
+                ? lectures
+                    .slice(0, 2)
+                    .map((lecture: LectureData) => <LectureCard key={lecture._id} lecture={lecture} variant="card" />)
+                : lectures.map((lecture: LectureData) => (
+                    <LectureCard key={lecture._id} lecture={lecture} variant="card" />
+                  ))}
             </div>
             {menu === "total" && (
               <Button

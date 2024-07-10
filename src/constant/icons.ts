@@ -92,6 +92,7 @@ import {
   toolTipBlue,
   closeBright,
   reset,
+  starEmpty,
 } from "../../public/icons/icons";
 
 type TIcon = {
@@ -188,6 +189,10 @@ export const ICONS: { [key: string]: TIcon } = {
   star: {
     src: star.src,
     alt: "별점",
+  },
+  starEmpty: {
+    src: starEmpty.src,
+    alt: "빈 별점",
   },
   date: {
     src: date.src,

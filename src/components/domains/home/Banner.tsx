@@ -6,16 +6,18 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
 import SwiperCore from "swiper";
-import "swiper/css";
 import { ICONS, LOGO } from "@/constant/icons";
 import { IMAGES_BANNER } from "@/constant/images";
+import { useSession } from "next-auth/react";
+import "swiper/css";
 
 SwiperCore.use([Navigation, Scrollbar, Autoplay]);
 
 const { bannerImg } = IMAGES_BANNER;
 
 export default function Banner() {
-  const [loginState, setLoginState] = useState(true);
+  const [isMatched, setIsMatched] = useState(true);
+  const { data: session } = useSession();
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = 3;
 
@@ -48,8 +50,8 @@ export default function Banner() {
           </span>
         </div>
       </div>
-      {loginState && (
-        <Link href="" className="w-full">
+      {session && isMatched && (
+        <Link href="/matching" className="w-full">
           <button
             type="button"
             className="w-full h-[43px] py-[11px] pl-[16px] flex shrink-0 items-center gap-[8px] bg-[#0F0F0F] text-white text-[14px] font-medium tracking-[-0.28px] leading-[21px]">

@@ -2,8 +2,13 @@ import Button from "@/components/commons/Button";
 import { StudyRecruitCard } from "../../../commons/card/StudyRecruitCard";
 import CardList from "../../../commons/CardList";
 import Title from "../Title";
+import { LectureData } from "@/app/lecture/[id]/page";
 
-export default function LectureRelatedStudies() {
+interface LectureRelatedStudiesProps {
+  lectureData: LectureData;
+}
+
+export default function LectureRelatedStudies({ lectureData }: LectureRelatedStudiesProps) {
   return (
     <>
       <section className="mb-[50px]" id="related_study">

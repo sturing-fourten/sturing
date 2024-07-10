@@ -1,6 +1,8 @@
-import { useState } from "react";
-import Button from "./Button";
+import { useSession } from "next-auth/react";
 import { ICONS, LOGO } from "@/constant/icons";
+import Link from "next/link";
+import GitHubLoginButton from "./GitHubLoginButton";
+import { githubLogin } from "@/lib/database/action/login";
 
 interface SideBarProps {
   sideBar: boolean;
@@ -8,7 +10,7 @@ interface SideBarProps {
 }
 
 export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
-  const [loginState, setLoginState] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <div
@@ -22,8 +24,8 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
         }}>
         <img src={ICONS.close.src} alt={ICONS.close.alt} width={15} height={15} />
       </button>
-      {loginState ? (
-        <div className="flex flex-col justify-start gap-[32px]">
+      {session ? (
+        <div className="flex flex-col gap-[32px]">
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-[6px]">
               <span className="text-[#0D0D0D] text-[24px] font-semibold leading-[36px]">웅진님</span>
@@ -33,44 +35,45 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
             </div>
             <img src={ICONS.defaultProfileImg.src} alt={ICONS.defaultProfileImg.alt} width={60} height={60} />
           </div>
-          <button className="flex text-[#0D0D0D] text-[18px] font-medium leading-[24px] tracking-[-0.54px]">
-            스터링 프로필
-          </button>
+          <Link href="/mypage">
+            <button className="flex text-[#0D0D0D] text-[18px] font-medium leading-[24px] tracking-[-0.54px]">
+              스터링 프로필
+            </button>
+          </Link>
         </div>
       ) : (
-        <div className="flex flex-col justify-start gap-[32px]">
+        <div className="flex flex-col gap-[32px]">
           <div className="flex flex-col items-center justify-center gap-[5px]">
             <img src={LOGO.logoText.src} alt={LOGO.logoText.alt} width={155} height={48} />
           </div>
-          <Button
-            varient="filled"
-            addStyle="w-[275px] h-[46px] py-[12px] px-[14px] bg-gray-1000 text-[14px] text-white font-semibold rounded-[5px] gap-[10px]">
-            <img
-              src={LOGO.githubLogo.src}
-              alt={LOGO.githubLogo.alt}
-              width={25}
-              height={25}
-              className="w-[25px] h-[25px] bg-white rounded-[5px]"
-            />
-            GitHub로 3초 만에 시작하기
-          </Button>
+          <form action={githubLogin}>
+            <GitHubLoginButton />
+          </form>
         </div>
       )}
       <div className="flex flex-col gap-[24px] border-t border-gray-300 pt-[40px]">
-        <button className="flex text-gray-1000 text-[18px] font-semibold leading-[24px] tracking-[-0.54px]">
-          추천
-        </button>
-        <button className="flex text-gray-1000 text-[18px] font-semibold leading-[24px] tracking-[-0.54px]">
-          검색
-        </button>
-        {loginState && (
+        <Link href="/">
           <button className="flex text-gray-1000 text-[18px] font-semibold leading-[24px] tracking-[-0.54px]">
-            내 스터디
+            추천
           </button>
+        </Link>
+        <Link href="/search">
+          <button className="flex text-gray-1000 text-[18px] font-semibold leading-[24px] tracking-[-0.54px]">
+            검색
+          </button>
+        </Link>
+        {session && (
+          <Link href="/mystudy">
+            <button className="flex text-gray-1000 text-[18px] font-semibold leading-[24px] tracking-[-0.54px]">
+              내 스터디
+            </button>
+          </Link>
         )}
-        <button className="flex text-gray-1000 text-[18px] font-semibold leading-[24px] tracking-[-0.54px]">
-          분야
-        </button>
+        <Link href="/">
+          <button className="flex text-gray-1000 text-[18px] font-semibold leading-[24px] tracking-[-0.54px]">
+            분야
+          </button>
+        </Link>
       </div>
       <div className="flex flex-col gap-[22px] border-t border-gray-300 pt-[40px]">
         <button className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">
@@ -80,7 +83,7 @@ export default function SideBar({ sideBar, setSideBar }: SideBarProps) {
           고객센터
         </button>
         <button className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">설정</button>
-        {loginState && (
+        {session && (
           <button className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">
             로그아웃
           </button>
