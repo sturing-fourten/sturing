@@ -27,7 +27,7 @@ export default function TeamTab() {
   const checkListExist = isProofListExist;
 
   return (
-    <section className="flex flex-col py-7 px-4">
+    <section className="flex flex-col py-7 px-4 relative z-[1]">
       {isAnyFeatureExist && <StudyFunctionEditButton />}
 
       <div className="flex flex-col gap-4">
