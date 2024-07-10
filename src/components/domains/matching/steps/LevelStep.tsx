@@ -52,22 +52,27 @@ export default function LevelStep({ setIsSelected }: StepsProps) {
       <Title>{MATCHING_CONFIG.level.title}</Title>
       <div className="flex flex-col gap-5">
         <nav className="flex justify-between items-center gap-3 bg-white">
-          {filteredTabMenuList.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              className={`w-full flex justify-center items-center gap-3 py-3 text-4 text-gray-700 font-semibold leading-[22px] tracking-[-0.42px] relative ${
-                selectedTab === tab.id ? "text-main-500 border-main-500 border-b-2" : "border-b-2 border-gray-300"
-              }`}
-              onClick={() => handleTabClick(tab.id)}>
-              <span>{tab.title}</span>
-              {storedInterests[0] === tab.id && (
-                <span className="absolute top-2 left-2 flex justify-center items-center bg-main-500 rounded-full py-[2px] px-[6px] text-white text-[11px] tracking-[-0.22px] leading-[16px] font-semibold">
-                  대표
-                </span>
-              )}
-            </button>
-          ))}
+          {filteredTabMenuList.map((tab) => {
+            const currentLevel = selectedLevels.find((item) => item.interest === tab.id)?.level;
+            const hasLevel = currentLevel && currentLevel !== "";
+
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                className={`w-full flex justify-center items-center gap-3 py-3 text-4 font-semibold leading-[22px] tracking-[-0.42px] relative ${
+                  selectedTab === tab.id ? "border-main-500 border-b-2" : "border-b-2 border-gray-300"
+                } ${hasLevel ? "text-main-500" : "text-gray-700"}`}
+                onClick={() => handleTabClick(tab.id)}>
+                <span>{tab.title}</span>
+                {storedInterests[0] === tab.id && (
+                  <span className="absolute top-2 left-2 flex justify-center items-center bg-main-500 rounded-full py-[2px] px-[6px] text-white text-[11px] tracking-[-0.22px] leading-[16px] font-semibold">
+                    대표
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </nav>
         <div className="flex flex-col gap-[15px]">
           {Object.keys(content).map((key) => {
