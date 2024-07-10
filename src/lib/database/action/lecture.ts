@@ -67,8 +67,8 @@ export const getLecturebookmarks = async (lectureId: string) => {
       throw new Error("강의 찜 리스트 불러오기 실패");
     }
 
-    const { lectureBookmarks } = await response.json();
-    return lectureBookmarks;
+    const data = await response.json();
+    return data.lectureBookmark;
   } catch (error: any) {
     console.error("Error fetching lecture:", error.message);
     throw error;
@@ -91,12 +91,13 @@ export const createLectureBookmarkAction = async (lectureId: string, userId: str
     });
 
     if (!response.ok) {
-      throw new Error("Failed to create lecture review");
+      throw new Error("강의 북마크 실패");
     }
 
     revalidatePath(`/lecture/${lectureId}`);
-  } catch (error: any) {
-    console.log("error", error.message);
+    revalidatePath(`/search/result`);
+  } catch (error) {
+    console.log("error", error);
   }
 };
 
@@ -107,15 +108,16 @@ export const deleteLectureBookmarkAction = async (lectureId: string, _id: string
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(_id),
+      body: JSON.stringify({ _id }),
     });
 
     if (!response.ok) {
-      throw new Error("Failed to create lecture review");
+      throw new Error("강의 북마크 삭제 실패");
     }
 
-    // revalidatePath(`/lecture/${lectureId}`);
-  } catch (error: any) {
-    console.log("error", error.message);
+    revalidatePath(`/lecture/${lectureId}`);
+    revalidatePath(`/search/result`);
+  } catch (error) {
+    console.log("error", error);
   }
 };

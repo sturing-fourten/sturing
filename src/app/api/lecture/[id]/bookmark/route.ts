@@ -19,6 +19,12 @@ export async function POST(req: Request) {
 
     const { lectureId, userId } = await req.json();
 
+    const existingBookmark = await LectureBookmark.findOne({ lectureId, userId });
+
+    if (existingBookmark) {
+      throw new Error("이미 해당 강의를 찜한 사용자입니다.");
+    }
+
     const newLectureBookmark = {
       lectureId: lectureId,
       userId: userId,
@@ -32,7 +38,7 @@ export async function POST(req: Request) {
         status: 200,
       },
     );
-  } catch (error: any) {
+  } catch (error) {
     return Response.json(
       { error: error },
       {
@@ -42,13 +48,11 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(request: Request) {
-  connectDB();
-
+export async function DELETE(req: Request) {
   try {
-    const { _id } = await request.json();
+    await connectDB();
 
-    if (!_id) throw new Error("찜이 없습니다.");
+    const { _id } = await req.json();
 
     await LectureBookmark.findByIdAndDelete(_id);
 
