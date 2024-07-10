@@ -1,17 +1,17 @@
 "use client";
 
-// SelectLocation 컴포넌트 코드
 import { useState, useEffect } from "react";
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
-import { CityList } from "@/types/citiy";
+import { CityList } from "@/types/city";
 import { ICONS } from "@/constant/icons";
 import { StepsProps } from "@/types/matching";
-
-const content = MATCHING_CONFIG.location.city;
+import { useLocationsStore } from "@/store/matchingStore";
 
 export default function SelectLocation({ setIsSelected }: StepsProps) {
-  const [selectedCity, setSelectedCity] = useState<string>("서울");
-  const [selectedLocations, setSelectedLocations] = useState<{ city: string; district: string }[]>([]);
+  const content = MATCHING_CONFIG.location.city;
+  const [selectedCity, setSelectedCity] = useState("서울");
+  const selectedLocations = useLocationsStore((state) => state.locations);
+  const setSelectedLocations = useLocationsStore((state) => state.setLocations);
 
   const handleCityClick = (key: string) => {
     setSelectedCity(key);
@@ -19,21 +19,27 @@ export default function SelectLocation({ setIsSelected }: StepsProps) {
 
   const handleDistrictClick = (city: string, district: string) => {
     const newLocation = { city, district };
-
-    setSelectedLocations((prevLocations) => {
-      if (prevLocations.some((location) => location.city === city && location.district === district)) {
-        return prevLocations.filter((location) => !(location.city === city && location.district === district));
+    if (city && district) {
+      const isSelected = selectedLocations.some((location) => location.city === city && location.district === district);
+      if (isSelected) {
+        const updatedLocations = selectedLocations.filter(
+          (location) => !(location.city === city && location.district === district),
+        );
+        setSelectedLocations(updatedLocations);
       } else {
-        if (prevLocations.length < 3) {
-          return [...prevLocations, newLocation];
+        if (selectedLocations.length >= 3) {
+          alert("최대 3개의 지역만 선택할 수 있습니다.");
+        } else {
+          setSelectedLocations([...selectedLocations, newLocation]);
         }
       }
-      return prevLocations;
-    });
+    }
   };
 
   const handleRemoveLocation = (district: string) => {
-    setSelectedLocations(selectedLocations.filter((location) => location.district !== district));
+    const updatedLocations = selectedLocations.filter((location) => location.district !== district);
+
+    setSelectedLocations(updatedLocations);
   };
 
   useEffect(() => {

@@ -2,16 +2,12 @@ import mongoose from "mongoose";
 
 const matchingSchema = new mongoose.Schema(
   {
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    location: { type: String, default: "", isVisible: { type: Boolean, default: true } },
-    progressWay: { type: String, enum: ["online", "offline", "both"], default: "online" },
-    favorite: [
-      {
-        field: { type: String, default: "" },
-        career: { type: String, default: "" },
-      },
-    ],
-    mood: [{ type: String, default: "" }],
+    userEmail: { type: String },
+    levels: { type: String },
+    progressWay: { type: String, enum: ["online", "offline", "irrelevant"] },
+    locations: { type: String },
+    locationIsVisible: { type: Boolean, default: "false" },
+    moods: { type: String },
   },
   { timestamps: true },
 );
