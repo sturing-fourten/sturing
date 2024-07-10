@@ -1,8 +1,8 @@
 import connectDB from "@/lib/database/db";
 import { Lecture } from "@/schema/lectureSchema";
 
-export async function POST(req: Request, { params }: { params: { lectureId: string } }) {
-  const lectureId = params.lectureId;
+export async function POST(req: Request, { params }: { params: { id: string } }) {
+  const lectureId = params.id;
   try {
     await connectDB();
 

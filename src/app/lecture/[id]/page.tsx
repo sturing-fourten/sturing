@@ -28,6 +28,8 @@ export interface LectureData {
 export default async function LectureDetail({ params }: { params: { id: string } }) {
   const { id } = params;
   const lectureData = await getLectureAction(id);
+  const lectureId = lectureData._id.toString();
+  // console.log(lectureId);
 
   return (
     <>
@@ -36,7 +38,7 @@ export default async function LectureDetail({ params }: { params: { id: string }
           <Header page="lecture" lectureData={lectureData} />
           <Contents lectureData={lectureData} />
         </div>
-        <FixedBottomBar page="lecture" />
+        <FixedBottomBar page="lecture" lectureId={lectureId} />
       </div>
     </>
   );
