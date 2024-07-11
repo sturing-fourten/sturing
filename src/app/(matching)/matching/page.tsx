@@ -83,10 +83,10 @@ export default function MatchingPage() {
         fetchMatching();
       }
     } else {
-      setSelectedLevel(JSON.parse(matching?.levels || ""));
+      setSelectedLevel(JSON.parse(matching?.levels || "[]"));
       setSelectedProgressWay(matching?.progressWay || "");
-      setSelectedLocations(JSON.parse(matching?.locations || ""));
-      setSelectedMoods(JSON.parse(matching?.moods || ""));
+      setSelectedLocations(JSON.parse(matching?.locations || "[]"));
+      setSelectedMoods(JSON.parse(matching?.moods || "[]"));
     }
   }, [user, fetchUser, fetchMatching]);
 

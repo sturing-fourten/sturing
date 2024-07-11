@@ -9,12 +9,27 @@ import useOpenToggle from "@/hooks/useOpenToggle";
 import LoginModal from "../modal/LoginModal";
 import { useSession } from "next-auth/react";
 import { ICONS, LOGO } from "@/constant/icons";
+import { useEffect, useImperativeHandle, useState } from "react";
+import { useMatchingStore } from "@/store/matchingStore";
+import MatchingModal from "../modal/MatchingModal";
 
 export default function Gnb() {
   const [sideBar, setSideBar, handleSideBar] = useToggle(false);
   const { isOpen, openToggle } = useOpenToggle();
-
+  const { matching, fetchMatching } = useMatchingStore();
   const { data: session } = useSession();
+  const [showMatchingModal, setShowMatchingModal] = useState(false);
+
+  useEffect(() => {
+    const checkMatching = async () => {
+      await fetchMatching();
+      if (!matching) {
+        setShowMatchingModal(true);
+      }
+    };
+
+    checkMatching();
+  }, []);
 
   return (
     <div className="sticky top-0 bg-white w-full h-[54px] z-[1100] flex justify-between items-center px-4 border-b border-gray-300">
@@ -47,6 +62,7 @@ export default function Gnb() {
           {isOpen && <LoginModal onClose={openToggle} />}
         </div>
       )}
+      {showMatchingModal && <MatchingModal onClose={openToggle} />}
     </div>
   );
 }
