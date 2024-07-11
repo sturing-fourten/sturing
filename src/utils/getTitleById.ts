@@ -15,7 +15,7 @@ export const getLevelTitleById = (id: string): string => {
 };
 
 export const getIntrestsTitleById = (id: string) => {
-  const item = LEVEL_TAB_MENU_LIST.find((menu) => menu.id);
+  const item = LEVEL_TAB_MENU_LIST.find((menu) => menu.id === id);
   return item ? item.title : id;
 };
 

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { ICONS, BOOKMARK } from "@/constant/icons";
 import GoBackButton from "./GoBackButton";
 import Link from "next/link";
@@ -73,11 +71,9 @@ export default function TopBar({ variant, children, isWhite = false, showMore, s
       {variant === "edit" && (
         <>
           <span className="text-[18px] font-semibold tracking-[-0.36px] leading-[27px]">{children}</span>
-          <Link href="/mypage">
-            <button type="submit" className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">
-              완료
-            </button>
-          </Link>
+          <button type="submit" className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">
+            완료
+          </button>
         </>
       )}
     </div>

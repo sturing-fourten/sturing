@@ -36,3 +36,39 @@ export interface MatchingType {
   locationIsVisible: boolean;
   moods: string;
 }
+
+export interface level {
+  interest: string;
+  level: string;
+}
+
+export interface location {
+  city: string;
+  district: string;
+}
+
+export interface LevelsState {
+  levels: level[];
+  setLevels: (levels: level[]) => void;
+}
+
+export interface ProgressWayState {
+  progressWay: string;
+  setProgressWay: (progressWay: string) => void;
+}
+
+export interface LocationsState {
+  locations: location[];
+  setLocations: (locations: location[]) => void;
+}
+
+export interface MoodsState {
+  moods: string[];
+  setMoods: (moods: string[]) => void;
+}
+
+export interface MatchingState {
+  matching: MatchingType | null;
+  fetchMatching: () => Promise<void>;
+  setMatching: (matching: MatchingType) => void;
+}

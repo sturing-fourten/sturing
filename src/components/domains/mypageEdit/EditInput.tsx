@@ -1,11 +1,16 @@
-import React, { ChangeEvent, SetStateAction, useEffect, useState } from "react";
+import React, { ChangeEvent, SetStateAction, useState } from "react";
 import Subtitle from "./Subtitle";
 import { ToggleButton } from "./ToggleButton";
+import { getIntrestsTitleById, getLevelTitleById } from "@/utils/getTitleById";
+import { level, location } from "@/types/matching";
 
 interface EditInputProps extends React.ComponentProps<"input"> {
   children: React.ReactNode;
   inputValue?: string;
   setInputValue?: React.Dispatch<SetStateAction<string>>;
+  matching?: boolean;
+  levelData?: level[];
+  locationData?: location[];
   toggle?: boolean;
   toggleInputName?: string;
   isVisible?: boolean;
@@ -19,6 +24,9 @@ export default function EditInput(props: EditInputProps) {
     children,
     inputValue,
     setInputValue,
+    matching,
+    levelData,
+    locationData,
     toggle,
     toggleInputName,
     isVisible,
@@ -51,15 +59,39 @@ export default function EditInput(props: EditInputProps) {
     <div className="w-full relative">
       <Subtitle>{children}</Subtitle>
       <div className="h-12 flex justify-between border-b border-neutral-200 py-3.5 gap-2">
-        <input
-          className={`flex-1 focus:outline-none text-stone-950 text-base font-medium leading-normal disabled:bg-white disabled:text-zinc-400 ${
-            dropdown ? "cursor-pointer" : "cursor-auto"
-          }`}
-          defaultValue={inputValue}
-          onClick={handleDropdown}
-          onChange={handleChange}
-          {...inputProps}
-        />
+        {matching ? (
+          <div className="flex gap-[10px]">
+            {levelData
+              ? levelData.map((item) => (
+                  <div
+                    key={item.interest}
+                    className="flex justify-center items-center h-6 px-2 gap-1 bg-main-100 border border-main-500 rounded-md text-main-500 text-[14px] font-medium tracking-[-0.28px] leading-[21px]">
+                    <span>{getIntrestsTitleById(item.interest)}</span>
+                    <span>·</span>
+                    <span>{getLevelTitleById(item.level)}</span>
+                  </div>
+                ))
+              : locationData?.map((item) => (
+                  <div
+                    key={item.district}
+                    className="flex justify-center items-center h-6 px-2 gap-2 bg-main-100 border border-main-500 rounded-md text-main-500 text-[14px] font-medium tracking-[-0.28px] leading-[21px]">
+                    <div>
+                      {item.city} {item.district}
+                    </div>
+                  </div>
+                ))}
+          </div>
+        ) : (
+          <input
+            className={`flex-1 focus:outline-none text-stone-950 text-base font-medium leading-normal disabled:bg-white disabled:text-zinc-400 ${
+              dropdown ? "cursor-pointer" : "cursor-auto"
+            }`}
+            defaultValue={inputValue}
+            onClick={handleDropdown}
+            onChange={handleChange}
+            {...inputProps}
+          />
+        )}
         {toggle && (
           <ToggleButton toggleInputName={toggleInputName || ""} isVisible={isVisible} setIsVisible={setIsVisible} />
         )}

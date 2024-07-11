@@ -3,6 +3,8 @@
 import connectDB from "../db";
 import { User } from "@/schema/userSchema";
 import { getSession } from "../getSession";
+import { redirect } from "next/navigation";
+import { Matching } from "@/schema/matchingSchema";
 
 export async function editProfile(formData: FormData) {
   const name = formData.get("name");
@@ -12,13 +14,14 @@ export async function editProfile(formData: FormData) {
   const gender = formData.get("gender");
   const ageIsVisible = formData.get("ageIsVisible");
   const genderIsVisible = formData.get("genderIsVisible");
+  const locationIsVisible = formData.get("locationIsVisible");
 
   connectDB();
 
   const session = await getSession();
-  const email = session?.user?.email;
+  const id = session?.user?.id;
   await User.findOneAndUpdate(
-    { email: email },
+    { _id: id },
     {
       name: name,
       nickname: nickname,
@@ -29,4 +32,11 @@ export async function editProfile(formData: FormData) {
       genderIsVisible: genderIsVisible,
     },
   );
+  await Matching.findOneAndUpdate(
+    { userId: id },
+    {
+      locationIsVisible: locationIsVisible,
+    },
+  );
+  redirect("/mypage");
 }
