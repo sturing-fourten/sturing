@@ -18,7 +18,6 @@ const lectureSchema = new mongoose.Schema({
   instructor: { type: String, required: true },
   level: { type: String, required: true },
   tag: [String],
-  lectureStudyList: [], // 강의에 해당하는 스터디 리스트 추가해야됨
   review: [lectureReviewSchema],
   createdAt: { type: Date, default: Date.now },
 });
