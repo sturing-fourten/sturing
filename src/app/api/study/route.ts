@@ -40,32 +40,44 @@ export async function POST(request: Request) {
     // 3) Dashboard 생성
     const newDashboard = {
       studyId: newStudyId,
-      progressGauge: [
-        {
-          teamMemberId: members[0]._id,
-          data: 0,
-        },
-      ],
       isQualified: [
         {
           teamMemberId: members[0]._id,
           data: false,
         },
       ],
-      attendance: {
-        teamMemberId: members[0]._id,
-        data: generateDateList(newStudy.startDate, newStudy.endDate, "isAttended"),
+      progressGauge: {
+        isActive: false,
+        list: [
+          {
+            teamMemberId: members[0]._id,
+            data: 0,
+          },
+        ],
       },
-      checkList: [],
+      attendance: {
+        isActive: false,
+        list: [
+          {
+            teamMemberId: members[0]._id,
+            data: generateDateList(newStudy.startDate, newStudy.endDate, "isAttended"),
+          },
+        ],
+      },
+      checkList: {
+        isActive: false,
+        list: [
+          {
+            teamMemberId: members[0]._id,
+            data: [],
+          },
+        ],
+      },
     };
     const { _id: dashboardId } = await Dashboard.create(newDashboard);
 
     // 4) Study에 teamMembersId, dashboardId 추가
-    await Study.findOneAndUpdate(
-      { _id: newStudyId },
-      { $push: { teamMembersId: teamMembersId, dashboardId: dashboardId } },
-      { new: true },
-    );
+    await Study.findOneAndUpdate({ _id: newStudyId }, { $push: { teamMembersId: dashboardId } }, { new: true });
 
     // 5) Study에 관련 강의 추가
     const lectureId = newStudyResult.lectureId;
