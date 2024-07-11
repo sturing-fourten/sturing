@@ -1,8 +1,4 @@
-import HorizontalDivider from "@/components/commons/HorizontalDivider";
-import TopBar from "@/components/commons/TopBar";
 import type { Metadata } from "next";
-import { headers } from "next/headers";
-import { TopBarVariant } from "@/components/commons/TopBar";
 
 export const metadata: Metadata = {
   title: "my page",

@@ -1,4 +1,3 @@
-import { MOOD } from "@/constant/icons";
 import { LEVEL_TAB_MENU_LIST, MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
 

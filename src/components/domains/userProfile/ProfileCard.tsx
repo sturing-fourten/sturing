@@ -62,11 +62,13 @@ export default function ProfileCard({ page }: ProfileCardProps) {
           </p>
         </div>
         <div className="flex items-center gap-[10px]">
-          <div className="flex gap-1 text-xs text-gray-700 font-semibold">
-            <span>{user?.ageIsVisible && user?.age}</span>
-            <span>·</span>
-            <span>{user?.genderIsVisible && user?.gender}</span>
-          </div>
+          {(user?.ageIsVisible || user?.genderIsVisible) && (
+            <div className="flex gap-1 text-xs text-gray-700 font-semibold">
+              {user?.ageIsVisible && <span>{user?.age}</span>}
+              {user?.ageIsVisible && user?.genderIsVisible && <span>·</span>}
+              {user?.genderIsVisible && <span>{user?.gender}</span>}
+            </div>
+          )}
           <div className="flex gap-1 text-xs text-gray-1000 font-semibold">
             <span>{getIntrestsTitleById(interest)}</span>
             <span>·</span>
@@ -74,7 +76,7 @@ export default function ProfileCard({ page }: ProfileCardProps) {
           </div>
         </div>
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide min-w-full">
-          <InfoTag icon={ICONS.locationBlack}>{`${city}시 ${district}`}</InfoTag>
+          {matching?.locationIsVisible && <InfoTag icon={ICONS.locationBlack}>{`${city}시 ${district}`}</InfoTag>}
           <InfoTag>{getMoodAltById(repMood)}</InfoTag>
         </div>
       </div>

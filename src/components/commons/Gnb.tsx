@@ -7,7 +7,6 @@ import SideBar from "./SideBar";
 import useToggle from "@/hooks/useToggle";
 import useOpenToggle from "@/hooks/useOpenToggle";
 import LoginModal from "../modal/LoginModal";
-import { useSession } from "next-auth/react";
 import { ICONS, LOGO } from "@/constant/icons";
 import { useEffect, useState } from "react";
 import { useMatchingStore } from "@/store/matchingStore";
