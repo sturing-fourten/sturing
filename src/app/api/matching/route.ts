@@ -14,15 +14,6 @@ export async function GET(reqest: Request) {
 
   if (existing !== null) {
     matching = existing;
-  } else {
-    matching = {
-      userId: `${userId}`,
-      levels: "",
-      progressWay: "",
-      locations: "",
-      locationIsVisible: Boolean,
-      moods: "",
-    };
   }
 
   return new Response(JSON.stringify(matching), {

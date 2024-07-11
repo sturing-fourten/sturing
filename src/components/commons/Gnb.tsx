@@ -9,27 +9,39 @@ import useOpenToggle from "@/hooks/useOpenToggle";
 import LoginModal from "../modal/LoginModal";
 import { useSession } from "next-auth/react";
 import { ICONS, LOGO } from "@/constant/icons";
-import { useEffect, useImperativeHandle, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMatchingStore } from "@/store/matchingStore";
 import MatchingModal from "../modal/MatchingModal";
 
+// user session 받아올때 로딩 과정 추가해야함.
 export default function Gnb() {
   const [sideBar, setSideBar, handleSideBar] = useToggle(false);
   const { isOpen, openToggle } = useOpenToggle();
   const { matching, fetchMatching } = useMatchingStore();
   const { data: session } = useSession();
   const [showMatchingModal, setShowMatchingModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const checkMatching = async () => {
+    if (session) {
+      await fetchMatching();
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const checkMatching = async () => {
-      await fetchMatching();
-      if (!matching) {
+    checkMatching();
+  }, [session]);
+
+  useEffect(() => {
+    if (matching) {
+      setShowMatchingModal(false);
+    } else {
+      if (!loading && session) {
         setShowMatchingModal(true);
       }
-    };
-
-    checkMatching();
-  }, []);
+    }
+  }, [matching, loading, session]);
 
   return (
     <div className="sticky top-0 bg-white w-full h-[54px] z-[1100] flex justify-between items-center px-4 border-b border-gray-300">
@@ -62,7 +74,7 @@ export default function Gnb() {
           {isOpen && <LoginModal onClose={openToggle} />}
         </div>
       )}
-      {showMatchingModal && <MatchingModal onClose={openToggle} />}
+      {showMatchingModal && <MatchingModal onClose={() => setShowMatchingModal(false)} />}
     </div>
   );
 }

@@ -18,7 +18,6 @@ import {
   useProgressWayStore,
 } from "@/store/matchingStore";
 import { matchingAction } from "@/lib/database/action/matching";
-import { match } from "assert";
 
 export default function MatchingPage() {
   const { user, fetchUser } = useUserStore();
