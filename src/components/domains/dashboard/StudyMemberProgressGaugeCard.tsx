@@ -37,7 +37,7 @@ const MEMBER_SAMPLE_LIST = [
   },
 ];
 
-export default function StudyMemberProgressCard() {
+export default function StudyMemberProgressGaugeCard() {
   const isEditing = true;
 
   return (
