@@ -45,7 +45,6 @@ export default function EditInput(props: EditInputProps) {
     if (setInputValue) {
       setInputValue(value);
     }
-
     setIsDropdown(false);
   };
 
