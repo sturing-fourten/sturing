@@ -10,11 +10,7 @@ import { LectureData } from "@/app/lecture/[id]/page";
 import { CATEGORY } from "@/constant/category";
 import { useEffect, useState } from "react";
 import { Bookmark } from "../ScrapButton";
-import {
-  createLectureBookmarkAction,
-  deleteLectureBookmarkAction,
-  getLecturebookmarks,
-} from "@/lib/database/action/bookmark";
+import { getLectureBookmarks, createLectureBookmarkAction, deleteLectureBookmarkAction } from "@/utils/bookmarkUtils";
 
 interface LectureCardProps {
   variant: "card" | "info";
@@ -33,7 +29,7 @@ export default function LectureCard({ variant, lecture }: LectureCardProps) {
   useEffect(() => {
     const fetchLectureBookmarkData = async () => {
       try {
-        const data = await getLecturebookmarks(lectureId);
+        const data = await getLectureBookmarks(lectureId);
         const filteredBookmarks = data.filter((bookmark: Bookmark) => bookmark.lectureId === lectureId);
         setBookmarks(filteredBookmarks);
         setChecked(filteredBookmarks.some((bookmark: Bookmark) => bookmark.userId === sampleUserId));

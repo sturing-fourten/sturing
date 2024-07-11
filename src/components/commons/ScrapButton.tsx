@@ -2,12 +2,8 @@
 
 import Image from "next/image";
 import { BOOKMARK } from "@/constant/icons";
-import {
-  createLectureBookmarkAction,
-  deleteLectureBookmarkAction,
-  getLecturebookmarks,
-} from "@/lib/database/action/bookmark";
 import { useEffect, useState } from "react";
+import { getLectureBookmarks, createLectureBookmarkAction, deleteLectureBookmarkAction } from "@/utils/bookmarkUtils";
 
 interface ScrapButtonProps {
   variant: "detail" | "card";
@@ -30,7 +26,7 @@ export default function ScrapButton({ variant, lectureId }: ScrapButtonProps) {
   useEffect(() => {
     const fetchLectureBookmarkData = async () => {
       try {
-        const data = await getLecturebookmarks(lectureId);
+        const data = await getLectureBookmarks(lectureId);
         const filteredBookmarks = data.filter((bookmark: Bookmark) => bookmark.lectureId === lectureId);
         setBookmarks(filteredBookmarks);
         setScrapCount(filteredBookmarks.length);

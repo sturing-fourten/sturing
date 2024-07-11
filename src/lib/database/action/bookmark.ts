@@ -2,9 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 
-export const getLecturebookmarks = async (lectureId: string) => {
+export const getbookmarksAction = async (type: string, typeId: string) => {
   try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${lectureId}/bookmark`, {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/${type}/${typeId}/bookmark`, {
       method: "GET",
     });
 
@@ -20,14 +20,14 @@ export const getLecturebookmarks = async (lectureId: string) => {
   }
 };
 
-export const createLectureBookmarkAction = async (lectureId: string, userId: string) => {
+export const createBookmarkAction = async (type: string, typeId: string, userId: string) => {
   try {
     const newLectureBookmark = {
-      lectureId: lectureId,
+      [`${type}Id`]: typeId,
       userId: userId,
     };
 
-    const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${lectureId}/bookmark`, {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/${type}/${typeId}/bookmark`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,9 +46,9 @@ export const createLectureBookmarkAction = async (lectureId: string, userId: str
   }
 };
 
-export const deleteLectureBookmarkAction = async (lectureId: string, _id: string) => {
+export const deleteBookmarkAction = async (type: string, typeId: string, _id: string) => {
   try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${lectureId}/bookmark`, {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/${type}/${typeId}/bookmark`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
