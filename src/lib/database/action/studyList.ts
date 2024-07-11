@@ -18,9 +18,9 @@ const SAMPLE_STUDY = {
       time: "오전 10시",
     },
   },
-  startDate: new Date("2024-07-15"),
+  startDate: new Date("2024-07-18"),
   endDate: new Date("2024-08-30"),
-  status: "RECRUIT_START",
+
   moodKeywords: ["열정적인 분위기", "친절한 분위기"],
   task: ["과제1", "과제1"],
 };
@@ -46,7 +46,6 @@ export const createStudyAction = async () => {
       meeting: SAMPLE_STUDY.meeting,
       startDate: SAMPLE_STUDY.startDate,
       endDate: SAMPLE_STUDY.endDate,
-      status: SAMPLE_STUDY.status,
       moodKeywords: SAMPLE_STUDY.moodKeywords,
       task: SAMPLE_STUDY.task,
     };

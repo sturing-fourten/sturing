@@ -1,83 +1,86 @@
 import mongoose from "mongoose";
 
-const studySchema = new mongoose.Schema({
-  category: {
-    type: String,
-    enum: ["DESIGN", "DEVELOP", "BUSINESS", "MARKETING", "ECONOMY", "LANGUAGE", "LICENSE", "SELF-DEVELOPMENT"],
-  },
-  ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
-  /**
-   * @todo dashboard 작업 이후 추가 예정
-   */
-  // dashboardId: { type: mongoose.Schema.Types.ObjectId, ref: "Dashboard", required: true },
-  title: {
-    type: String,
-    required: true,
-  },
-  /**
-   * @todo 이미지 저장방식 확인 후 수정 예정
-   */
-  imageUrl: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  meeting: {
-    format: {
+const studySchema = new mongoose.Schema(
+  {
+    category: {
       type: String,
-      enum: ["ONLINE", "OFFLINE"],
+      enum: ["DESIGN", "DEVELOP", "BUSINESS", "MARKETING", "ECONOMY", "LANGUAGE", "LICENSE", "SELF-DEVELOPMENT"],
+    },
+    ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
+    /**
+     * @todo dashboard 작업 이후 추가 예정
+     */
+    // dashboardId: { type: mongoose.Schema.Types.ObjectId, ref: "Dashboard", required: true },
+    title: {
+      type: String,
       required: true,
     },
-    platform: {
+    /**
+     * @todo 이미지 저장방식 확인 후 수정 예정
+     */
+    imageUrl: {
       type: String,
-      /**
-       * @todo sessionFormat.type === "ONLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
-       */
+      required: true,
     },
-    location: {
+    description: {
       type: String,
-      /**
-       * @todo sessionFormat.type === "OFFLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
-       */
+      required: true,
     },
-    schedule: {
-      day: {
+    meeting: {
+      format: {
         type: String,
+        enum: ["ONLINE", "OFFLINE"],
         required: true,
       },
-      time: {
+      platform: {
         type: String,
-        required: true,
+        /**
+         * @todo sessionFormat.type === "ONLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
+         */
+      },
+      location: {
+        type: String,
+        /**
+         * @todo sessionFormat.type === "OFFLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
+         */
+      },
+      schedule: {
+        day: {
+          type: String,
+          required: true,
+        },
+        time: {
+          type: String,
+          required: true,
+        },
       },
     },
+    startDate: {
+      type: Date,
+      required: true,
+    },
+    endDate: {
+      type: Date,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["RECRUIT_START", "RECRUIT_END", "PROGRESS", "DONE"],
+      required: true,
+    },
+    moodKeywords: {
+      type: [String],
+    },
+    /**
+     * @todo 과제 데이터 형식 확인 후 수정 예정
+     */
+    task: {
+      type: [String],
+    },
+    teamMembersId: { type: mongoose.Schema.Types.ObjectId, ref: "TeamMembers" },
   },
-  startDate: {
-    type: Date,
-    required: true,
-  },
-  endDate: {
-    type: Date,
-    required: true,
-  },
-  status: {
-    type: String,
-    enum: ["RECRUIT_START", "RECRUIT_END", "PROGRESS", "DONE"],
-    required: true,
-  },
-  moodKeywords: {
-    type: [String],
-  },
-  /**
-   * @todo 과제 데이터 형식 확인 후 수정 예정
-   */
-  task: {
-    type: [String],
-  },
-  teamMembersId: { type: mongoose.Schema.Types.ObjectId, ref: "TeamMembers" },
-});
+  { timestamps: true },
+);
 
 export const Study = mongoose.models.Study || mongoose.model("Study", studySchema);
