@@ -6,7 +6,7 @@ import {
   createLectureBookmarkAction,
   deleteLectureBookmarkAction,
   getLecturebookmarks,
-} from "@/lib/database/action/lecture";
+} from "@/lib/database/action/bookmark";
 import { useEffect, useState } from "react";
 
 interface ScrapButtonProps {

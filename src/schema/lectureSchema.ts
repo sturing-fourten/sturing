@@ -22,12 +22,4 @@ const lectureSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-// 강의 북마크
-const lectureBookmarkSchema = new mongoose.Schema({
-  lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-});
-
 export const Lecture = mongoose.models.Lecture || mongoose.model("Lecture", lectureSchema);
-export const LectureBookmark =
-  mongoose.models.LectureBookmark || mongoose.model("LectureBookmark", lectureBookmarkSchema);

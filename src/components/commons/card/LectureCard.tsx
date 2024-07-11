@@ -14,7 +14,7 @@ import {
   createLectureBookmarkAction,
   deleteLectureBookmarkAction,
   getLecturebookmarks,
-} from "@/lib/database/action/lecture";
+} from "@/lib/database/action/bookmark";
 
 interface LectureCardProps {
   variant: "card" | "info";
