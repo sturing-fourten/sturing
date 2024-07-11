@@ -15,13 +15,14 @@ export async function matching(formData: FormData) {
   connectDB();
 
   const session = await getSession();
-  const email = session?.user?.email;
+  const id = session?.user?.id;
   const existingUser = await User.findOne({
-    email,
+    _id: id,
   });
+  console.log("id:", existingUser._id);
   if (existingUser) {
     const matchingData = await new Matching({
-      userEmail: email,
+      userId: existingUser._id,
       levels: levels,
       progressWay: progressWay,
       locations: locations,
