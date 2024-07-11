@@ -76,7 +76,7 @@ export default function ProfileCard({ page }: ProfileCardProps) {
           </div>
         </div>
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide min-w-full">
-          {matching?.locationIsVisible && <InfoTag icon={ICONS.locationBlack}>{`${city}시 ${district}`}</InfoTag>}
+          {matching?.locationIsVisible && <InfoTag icon={ICONS.locationBlack}>{`${city} ${district}`}</InfoTag>}
           <InfoTag>{getMoodAltById(repMood)}</InfoTag>
         </div>
       </div>
