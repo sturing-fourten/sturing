@@ -12,36 +12,38 @@ import { ICONS, LOGO } from "@/constant/icons";
 import { useEffect, useState } from "react";
 import { useMatchingStore } from "@/store/matchingStore";
 import MatchingModal from "../modal/MatchingModal";
+import { useUserStore } from "@/store/userStore";
 
 // user session 받아올때 로딩 과정 추가해야함.
 export default function Gnb() {
   const [sideBar, setSideBar, handleSideBar] = useToggle(false);
   const { isOpen, openToggle } = useOpenToggle();
+  const { user, fetchUser } = useUserStore();
   const { matching, fetchMatching } = useMatchingStore();
-  const { data: session } = useSession();
   const [showMatchingModal, setShowMatchingModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const checkMatching = async () => {
-    if (session) {
-      await fetchMatching();
-      setLoading(false);
-    }
+    await fetchMatching();
+    setLoading(false);
   };
 
   useEffect(() => {
-    checkMatching();
-  }, [session]);
+    if (!user) {
+      fetchUser();
+      checkMatching();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (matching) {
       setShowMatchingModal(false);
     } else {
-      if (!loading && session) {
+      if (!loading && user) {
         setShowMatchingModal(true);
       }
     }
-  }, [matching, loading, session]);
+  }, [matching, loading, user]);
 
   return (
     <div className="sticky top-0 bg-white w-full h-[54px] z-[1100] flex justify-between items-center px-4 border-b border-gray-300">
@@ -53,8 +55,8 @@ export default function Gnb() {
           <img src={LOGO.logoText.src} alt={LOGO.logoText.alt} width={78} height={24} />
         </Link>
       </div>
-      {sideBar && <SideBar sideBar={sideBar} setSideBar={setSideBar} />}
-      {session ? (
+      {sideBar && <SideBar sideBar={sideBar} setSideBar={setSideBar} user={user} />}
+      {user ? (
         <div className="flex justify-center items-center gap-3">
           <button>
             <img src={ICONS.alarm.src} alt={ICONS.alarm.alt} width={24} height={24} />
