@@ -1,6 +1,7 @@
 "use server";
 
 import { Lecture, LectureBookmark } from "@/schema/lectureSchema";
+import { TLectureDetailData } from "@/types/api/lecture";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -21,10 +22,11 @@ export const getLectureListAction = async () => {
   }
 };
 
-export const getLectureAction = async (id: string) => {
+export const getLectureAction = async (id: string): Promise<TLectureDetailData> => {
   try {
-    const lecture = await Lecture.findById(id);
-    return lecture;
+    const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${id}`);
+    const data = await response.json();
+    return data;
   } catch (error: any) {
     console.error("Error fetching lecture:", error.message);
     throw error;
