@@ -19,7 +19,6 @@ export async function matching(formData: FormData) {
   const existingUser = await User.findOne({
     _id: id,
   });
-  console.log("id:", existingUser._id);
   if (existingUser) {
     const matchingData = await new Matching({
       userId: existingUser._id,
