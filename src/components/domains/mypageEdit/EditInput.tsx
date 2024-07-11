@@ -66,9 +66,9 @@ export default function EditInput(props: EditInputProps) {
                   <div
                     key={item.interest}
                     className="flex justify-center items-center h-6 px-2 gap-1 bg-main-100 border border-main-500 rounded-md text-main-500 text-[14px] font-medium tracking-[-0.28px] leading-[21px]">
-                    <span>{getIntrestsTitleById(item.interest)}</span>
-                    <span>·</span>
-                    <span>{getLevelTitleById(item.level)}</span>
+                    <div>
+                      {getIntrestsTitleById(item.interest)} · {getLevelTitleById(item.level)}
+                    </div>
                   </div>
                 ))
               : locationData?.map((item) => (
