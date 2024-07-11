@@ -11,7 +11,7 @@ export default function DetailInfo({ icon, title, content, isWhite = false }: De
   return (
     <>
       <li
-        className={`list-none flex items-center gap-[11px] text-[14px] font-medium  leading-[150%] ${
+        className={`list-none flex items-start gap-[11px] text-[14px] font-medium  leading-[150%] ${
           isWhite ? "text-white" : "text-gray-800"
         }`}>
         <div className="flex items-center w-[62px] gap-[7px]">

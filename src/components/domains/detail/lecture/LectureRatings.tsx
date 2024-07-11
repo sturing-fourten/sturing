@@ -4,14 +4,14 @@ import { TagRate } from "@/components/commons/tag/TagRate";
 import Link from "next/link";
 import Image from "next/image";
 import Title from "../Title";
-import { LectureData } from "@/app/lecture/[id]/page";
+import { TLectureInfoData } from "@/types/api/lecture";
 
 interface LectureRatingsProps {
-  lectureData: LectureData;
+  lectureInfo: TLectureInfoData;
 }
 
-export default function LectureRatings({ lectureData }: LectureRatingsProps) {
-  const { rating, review } = lectureData;
+export default function LectureRatings({ lectureInfo }: LectureRatingsProps) {
+  const { rating, review } = lectureInfo;
   return (
     <>
       <section id="rating">

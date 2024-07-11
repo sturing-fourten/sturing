@@ -1,15 +1,16 @@
 import TabMenuLinkUnderlined from "@/components/commons/TabMenuLinkUnderlined";
-
 import LectureInfo from "./LectureInfo";
 import LectureRatings from "./LectureRatings";
 import LectureRelatedStudies from "./LectureRelatedStudies";
-import { LectureData } from "@/app/lecture/[id]/page";
+import { TLectureDetailData } from "@/types/api/lecture";
 
 interface ContentsProps {
-  lectureData: LectureData;
+  lectureData: TLectureDetailData;
 }
 
 export default function Contents({ lectureData }: ContentsProps) {
+  const { lecture, relatedStudyList } = lectureData;
+
   return (
     <div className="mb-[73px]">
       <nav className="flex justify-between items-center gap-3 bg-white sticky top-0 left-0 z-sticky">
@@ -18,9 +19,9 @@ export default function Contents({ lectureData }: ContentsProps) {
         <TabMenuLinkUnderlined title="평점" isCurrent={false} href="#rating" />
       </nav>
       <div className="px-4 sm:overflow-y-auto">
-        <LectureInfo lectureData={lectureData} />
-        <LectureRelatedStudies lectureData={lectureData} />
-        <LectureRatings lectureData={lectureData} />
+        <LectureInfo lectureInfo={lecture} />
+        <LectureRelatedStudies relatedStudyList={relatedStudyList} />
+        <LectureRatings lectureInfo={lecture} />
       </div>
     </div>
   );

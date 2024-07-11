@@ -1,4 +1,3 @@
-import { LectureData } from "@/app/lecture/[id]/page";
 import LectureLinkBanner from "@/components/commons/LectureLinkBanner";
 import TopBar from "@/components/commons/TopBar";
 import { TagLight } from "@/components/commons/tag/TagLight";
@@ -6,19 +5,21 @@ import { TagMain } from "@/components/commons/tag/TagMain";
 import { TagRate } from "@/components/commons/tag/TagRate";
 import { IMAGES_DEFAUlT } from "@/constant/images";
 import { CATEGORY } from "@/constant/category";
+import { TLectureInfoData } from "@/types/api/lecture";
 
 interface BannerProps {
   page: "study" | "lecture";
-  lectureData: LectureData;
+  lectureInfo: TLectureInfoData;
 }
 
 const { study, lecture } = IMAGES_DEFAUlT;
 
-export default function Header({ page, lectureData }: BannerProps) {
-  const { online, platform, category, rating, title, link } = lectureData;
-  const imageUrl = "";
+export default function Header({ page, lectureInfo }: BannerProps) {
+  const { online, platform, category, rating, title, link } = lectureInfo;
+  const studyImageUrl = ""; //임시
   const isStudy = page === "study";
   const defaultImageUrl = isStudy ? study.src : lecture.src;
+  const imageUrl = isStudy ? studyImageUrl : "";
   const style = {
     backgroundImage: `url(${imageUrl || defaultImageUrl})`,
   };
