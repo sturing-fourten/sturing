@@ -92,8 +92,10 @@ export default function MatchingPage() {
   return (
     <form action={matchingAction}>
       <div className="flex flex-col w-full min-h-screen sm:h-dvh gap-5">
-        <TopBar variant="back" />
-        <ProgressBar maxSteps={5} steps={steps} />
+        <div className="flex flex-col w-full">
+          <TopBar variant="back" />
+          <ProgressBar maxSteps={5} steps={steps} />
+        </div>
         {steps === 1 && <InterestStep setIsSelected={setIsInterestSelected} userNickname={userNickname} />}
         {steps === 2 && <LevelStep setIsSelected={setIsLevelSelected} />}
         {steps === 3 && <ProgressWayStep setIsSelected={setIsProgressWaySelected} userNickname={userNickname} />}
