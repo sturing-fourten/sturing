@@ -1,4 +1,3 @@
-import { getSession } from "@/lib/database/getSession";
 import { MatchingType } from "@/types/matching";
 import { create } from "zustand";
 
