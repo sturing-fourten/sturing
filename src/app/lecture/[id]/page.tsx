@@ -17,7 +17,7 @@ export default async function LectureDetail({ params }: { params: { id: string }
           <Header page="lecture" lectureInfo={lectureData.lecture} />
           <Contents lectureData={lectureData} />
         </div>
-        <FixedBottomBar page="lecture" lectureId={lectureId} />
+        <FixedBottomBar page="lecture" lectureId={id} />
       </div>
     </>
   );
