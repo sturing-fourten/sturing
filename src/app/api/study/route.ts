@@ -2,6 +2,8 @@ import connectDB from "@/lib/database/db";
 import { Lecture } from "@/schema/lectureSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
+import { Dashboard } from "@/schema/dashboardSchema";
+import generateDateList from "@/utils/generateDateList";
 
 export async function POST(request: Request) {
   connectDB();
@@ -29,13 +31,43 @@ export async function POST(request: Request) {
       ],
     };
 
-    const { _id: teamMembersId } = await TeamMembers.create(newTeamMembers);
+    const { _id: teamMembersId, members } = await TeamMembers.create(newTeamMembers);
     if (!teamMembersId) throw new Error("팀원 정보가 없습니다.");
 
     // 3) Study에 teamMembersId 추가
     await Study.findOneAndUpdate({ _id: newStudyId }, { $push: { teamMembersId: teamMembersId } }, { new: true });
 
-    // 4) Study에 관련 강의 추가
+    // 3) Dashboard 생성
+    const newDashboard = {
+      studyId: newStudyId,
+      progressGauge: [
+        {
+          teamMemberId: members[0]._id,
+          data: 0,
+        },
+      ],
+      isQualified: [
+        {
+          teamMemberId: members[0]._id,
+          data: false,
+        },
+      ],
+      attendance: {
+        teamMemberId: members[0]._id,
+        data: generateDateList(newStudy.startDate, newStudy.endDate, "isAttended"),
+      },
+      checkList: [],
+    };
+    const { _id: dashboardId } = await Dashboard.create(newDashboard);
+
+    // 4) Study에 teamMembersId, dashboardId 추가
+    await Study.findOneAndUpdate(
+      { _id: newStudyId },
+      { $push: { teamMembersId: teamMembersId, dashboardId: dashboardId } },
+      { new: true },
+    );
+
+    // 5) Study에 관련 강의 추가
     const lectureId = newStudyResult.lectureId;
     const lectureData = await Lecture.findById(lectureId);
 
