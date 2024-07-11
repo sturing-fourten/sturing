@@ -5,6 +5,7 @@ const studySchema = new mongoose.Schema(
     category: {
       type: String,
       enum: ["DESIGN", "DEVELOP", "BUSINESS", "MARKETING", "ECONOMY", "LANGUAGE", "LICENSE", "SELF-DEVELOPMENT"],
+      required: true,
     },
     ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
@@ -21,7 +22,6 @@ const studySchema = new mongoose.Schema(
      */
     imageUrl: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
