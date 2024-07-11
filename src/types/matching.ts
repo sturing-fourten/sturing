@@ -27,3 +27,12 @@ export type StepsProps = {
   userNickname?: string;
   setIsSelected: Dispatch<SetStateAction<boolean>>;
 };
+
+export interface MatchingType {
+  userId: string;
+  levels: string;
+  progressWay: "online" | "offline" | "irrelevant";
+  locations: string;
+  locationIsVisible: boolean;
+  moods: string;
+}

@@ -5,7 +5,7 @@ import connectDB from "../db";
 import { getSession } from "../getSession";
 import { Matching } from "@/schema/matchingSchema";
 
-export async function matching(formData: FormData) {
+export async function matchingAction(formData: FormData) {
   const levels = formData.get("levels");
   const progressWay = formData.get("progressWay");
   const locations = formData.get("locations");
@@ -19,16 +19,30 @@ export async function matching(formData: FormData) {
   const existingUser = await User.findOne({
     _id: id,
   });
+  const existingMatching = await Matching.findOne({
+    userId: id,
+  });
   if (existingUser) {
-    const matchingData = await new Matching({
-      userId: existingUser._id,
-      levels: levels,
-      progressWay: progressWay,
-      locations: locations,
-      locationIsVisible: locationIsVisible,
-      moods: moods,
-    });
-
-    await matchingData.save();
+    if (!existingMatching) {
+      await new Matching({
+        userId: existingUser._id,
+        levels: levels,
+        progressWay: progressWay,
+        locations: locations,
+        locationIsVisible: locationIsVisible,
+        moods: moods,
+      }).save();
+    } else {
+      await Matching.findOneAndUpdate(
+        { userId: existingUser._id },
+        {
+          levels: levels,
+          progressWay: progressWay,
+          locations: locations,
+          locationIsVisible: locationIsVisible,
+          moods: moods,
+        },
+      );
+    }
   }
 }

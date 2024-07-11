@@ -10,11 +10,19 @@ import ProgressWayStep from "@/components/domains/matching/steps/ProgressWayStep
 import LocationStep from "@/components/domains/matching/steps/LocationStep";
 import MoodStep from "@/components/domains/matching/steps/MoodStep";
 import { useUserStore } from "@/store/userStore";
-import { useLevelsStore, useLocationsStore, useMoodsStore, useProgressWayStore } from "@/store/matchingStore";
-import { matching } from "@/lib/database/action/matching";
+import {
+  useLevelsStore,
+  useLocationsStore,
+  useMatchingStore,
+  useMoodsStore,
+  useProgressWayStore,
+} from "@/store/matchingStore";
+import { matchingAction } from "@/lib/database/action/matching";
+import { match } from "assert";
 
 export default function MatchingPage() {
   const { user, fetchUser } = useUserStore();
+  const { matching, fetchMatching } = useMatchingStore();
   const [steps, setSteps] = useState<number>(1);
   const [isInterestSelected, setIsInterestSelected] = useState<boolean>(false);
   const [isLevelSelected, setIsLevelSelected] = useState<boolean>(false);
@@ -29,6 +37,11 @@ export default function MatchingPage() {
   const selectedProgressWay = useProgressWayStore((state) => state.progressWay);
   const selectedLocations = useLocationsStore((state) => state.locations);
   const selectedMoods = useMoodsStore((state) => state.moods);
+
+  const setSelectedLevel = useLevelsStore((state) => state.setLevels);
+  const setSelectedProgressWay = useProgressWayStore((state) => state.setProgressWay);
+  const setSelectedLocations = useLocationsStore((state) => state.setLocations);
+  const setSelectedMoods = useMoodsStore((state) => state.setMoods);
 
   const handlePrevSection = () => {
     if (steps !== 1) setSteps((prevSteps) => prevSteps - 1);
@@ -66,11 +79,19 @@ export default function MatchingPage() {
   useEffect(() => {
     if (!user) {
       fetchUser();
+      if (!matching) {
+        fetchMatching();
+      }
+    } else {
+      setSelectedLevel(JSON.parse(matching?.levels || ""));
+      setSelectedProgressWay(matching?.progressWay || "");
+      setSelectedLocations(JSON.parse(matching?.locations || ""));
+      setSelectedMoods(JSON.parse(matching?.moods || ""));
     }
-  }, [user]);
+  }, [user, fetchUser, fetchMatching]);
 
   return (
-    <form action={matching}>
+    <form action={matchingAction}>
       <div className="flex flex-col w-full min-h-screen sm:h-dvh gap-5">
         <TopBar variant="back" />
         <ProgressBar maxSteps={5} steps={steps} />
