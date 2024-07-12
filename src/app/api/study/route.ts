@@ -43,6 +43,7 @@ export async function POST(request: Request) {
       isQualified: [
         {
           teamMemberId: members[0]._id,
+          userId: newStudy.ownerId,
           data: false,
         },
       ],
@@ -51,6 +52,7 @@ export async function POST(request: Request) {
         list: [
           {
             teamMemberId: members[0]._id,
+            userId: newStudy.ownerId,
             data: 0,
           },
         ],
@@ -60,6 +62,7 @@ export async function POST(request: Request) {
         list: [
           {
             teamMemberId: members[0]._id,
+            userId: newStudy.ownerId,
             data: generateDateList(newStudy.startDate, newStudy.endDate, "isAttended"),
           },
         ],
@@ -69,6 +72,7 @@ export async function POST(request: Request) {
         list: [
           {
             teamMemberId: members[0]._id,
+            userId: newStudy.ownerId,
             data: [],
           },
         ],

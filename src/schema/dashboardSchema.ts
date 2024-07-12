@@ -6,6 +6,7 @@ const dashboardSchema = new mongoose.Schema(
     isQualified: [
       {
         teamMemberId: { type: mongoose.Schema.Types.ObjectId, required: true },
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
         data: Boolean,
       },
     ],
@@ -14,6 +15,7 @@ const dashboardSchema = new mongoose.Schema(
       list: [
         {
           teamMemberId: { type: mongoose.Schema.Types.ObjectId, required: true },
+          userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
           data: Number,
         },
       ],
@@ -23,6 +25,7 @@ const dashboardSchema = new mongoose.Schema(
       list: [
         {
           teamMemberId: { type: mongoose.Schema.Types.ObjectId, required: true },
+          userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
           data: [
             {
               date: { type: Date },
@@ -37,6 +40,7 @@ const dashboardSchema = new mongoose.Schema(
       list: [
         {
           teamMemberId: { type: mongoose.Schema.Types.ObjectId, required: true },
+          userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
           data: [
             {
               date: { type: Date },
