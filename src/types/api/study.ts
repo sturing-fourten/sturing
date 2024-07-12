@@ -8,7 +8,26 @@ export type TCategory =
   | "LICENSE"
   | "SELF-DEVELOPMENT";
 
-export type TStudyDetailInfoData = {
+type TRelatedLecture = {
+  id: string;
+  category: TCategory;
+  online: boolean;
+  platform: string;
+  rating: number;
+  title: string;
+  instructor: string;
+  link: string;
+};
+
+type TTeamMember = {
+  memberId: string;
+  nickname: string;
+  profileImageUrl: string;
+  role: string;
+  isOwner: boolean;
+};
+
+type TStudyDetail = {
   _id: string;
   ownerId: string;
   category: TCategory;
@@ -28,8 +47,21 @@ export type TStudyDetailInfoData = {
   endDate: string;
   moodKeywords: string[];
   task: string[];
+  wantedMember: {
+    career: string[];
+    count: number;
+    age: string[];
+    role: string[];
+  };
+  scrapCount: number;
   createdAt: string;
   updateAt: string;
   __v: number;
   teamMemberId: string[];
+};
+
+export type TStudyDetailInfoData = {
+  study: TStudyDetail;
+  lecture: TRelatedLecture;
+  teamMemberList: TTeamMember[];
 };

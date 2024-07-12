@@ -30,7 +30,7 @@ const studySchema = new mongoose.Schema(
     meeting: {
       format: {
         type: String,
-        enum: ["ONLINE", "OFFLINE"],
+        enum: ["online", "offline"],
         required: true,
       },
       platform: {
@@ -72,12 +72,25 @@ const studySchema = new mongoose.Schema(
     moodKeywords: {
       type: [String],
     },
-    /**
-     * @todo 과제 데이터 형식 확인 후 수정 예정
-     */
     task: {
       type: [String],
     },
+    wantedMember: {
+      career: {
+        type: [String],
+        required: true,
+      },
+      count: { type: Number, required: true },
+      age: {
+        type: [String],
+        required: true,
+      },
+      role: {
+        type: [String],
+        required: true,
+      },
+    },
+    scrapCount: { type: Number, required: true },
     teamMembersId: { type: mongoose.Schema.Types.ObjectId, ref: "TeamMembers" },
   },
   { timestamps: true },
