@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       members: [
         {
           userId: newStudy.ownerId,
-          role: "leader",
+          role: "팀장",
           isOwner: true,
           status: "ACCEPTED",
         },
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     return Response.json({ study: newStudyResult, lecture: lectureResult }, { status: 200 });
   } catch (error: any) {
     if (error.name === "ValidationError") {
-      return Response.json({ message: "필수 값을 모두 입력해주세요" }, { status: 400 });
+      return Response.json({ error }, { status: 400 });
     } else {
       return Response.json(error, { status: 500 });
     }
