@@ -9,9 +9,11 @@ import { editProfile } from "@/lib/database/action/edit";
 import { PROFILE_AGES, PROFILE_GENDER } from "@/constant/profileEdit";
 import { useEffect, useState } from "react";
 import { useUserStore } from "@/store/userStore";
+import { useMatchingStore } from "@/store/matchingStore";
 
 export default function MypageEdit() {
   const { user, fetchUser } = useUserStore();
+  const { matching, fetchMatching } = useMatchingStore();
   const [image, setImage] = useState<string>("");
   const [fileToRead, setFileToRead] = useState<File | null>(null);
 
@@ -51,6 +53,9 @@ export default function MypageEdit() {
   useEffect(() => {
     if (!user) {
       fetchUser();
+      if (!matching) {
+        fetchMatching();
+      }
     } else {
       setName(user.name);
       setNickname(user.nickname);
@@ -59,8 +64,9 @@ export default function MypageEdit() {
       setGender(user.gender);
       setAgeIsVisible(user.ageIsVisible);
       setGenderIsVisible(user.genderIsVisible);
+      setLocationIsVisible(matching?.locationIsVisible || false);
     }
-  }, [user, fetchUser]);
+  }, [user, matching]);
 
   return (
     <form action={editProfile}>
@@ -84,7 +90,7 @@ export default function MypageEdit() {
             <EditInput maxLength={8} name="nickname" inputValue={nickname} setInputValue={setNickname}>
               닉네임
             </EditInput>
-            <EditInput readOnly inputValue="" setInputValue={() => {}}>
+            <EditInput readOnly matching levelData={JSON.parse(matching?.levels || "[]")}>
               직업 수준
             </EditInput>
           </div>
@@ -122,11 +128,12 @@ export default function MypageEdit() {
             </EditInput>
             <EditInput
               readOnly
+              matching
+              locationData={JSON.parse(matching?.locations || "[]")}
               toggle
+              toggleInputName="locationIsVisible"
               isVisible={locationIsVisible}
-              setIsVisible={setLocationIsVisible}
-              inputValue=""
-              setInputValue={() => {}}>
+              setIsVisible={setLocationIsVisible}>
               선호지역
             </EditInput>
           </div>

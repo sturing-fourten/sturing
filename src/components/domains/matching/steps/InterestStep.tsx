@@ -39,7 +39,7 @@ export default function InterestStep({ userNickname, setIsSelected }: StepsProps
         <input
           hidden
           name="selectedInterests"
-          value={levels.map((interest) => interest.interest)}
+          value={levels?.map((interest) => interest.interest)}
           onChange={(e) => e.target.value}
         />
         {Object.keys(content).map((key) => {

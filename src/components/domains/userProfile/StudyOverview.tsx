@@ -1,4 +1,5 @@
 import Button from "@/components/commons/Button";
+import Link from "next/link";
 
 export default function StudyOverview() {
   return (
@@ -23,16 +24,20 @@ export default function StudyOverview() {
           </div>
         </section>
         <section className="flex items-center gap-2 w-full">
-          <Button
-            varient="filled"
-            addStyle="px-3 py-2 bg-white border border-gray-300 rounded-[5px] w-full text-sm font-semibold">
-            대표 지원서 작성
-          </Button>
-          <Button
-            varient="filled"
-            addStyle="px-3 py-2 bg-white border border-gray-300 rounded-[5px] w-full text-sm font-semibold">
-            매칭 정보 수정
-          </Button>
+          <Link className="w-full" href="">
+            <Button
+              varient="filled"
+              addStyle="px-3 py-2 bg-white border border-gray-300 rounded-[5px] w-full text-sm font-semibold">
+              대표 지원서 작성
+            </Button>
+          </Link>
+          <Link className="w-full" href="/matching">
+            <Button
+              varient="filled"
+              addStyle="px-3 py-2 bg-white border border-gray-300 rounded-[5px] w-full text-sm font-semibold">
+              매칭 정보 수정
+            </Button>
+          </Link>
         </section>
       </article>
     </>

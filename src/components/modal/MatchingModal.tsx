@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "../commons/Button";
 import ModalContainer from "./ModalContainer";
 
@@ -17,11 +18,14 @@ export default function MatchingModal({ onClose }: MatchingModalProps) {
           <br />
           선호하는 스터디 유형을 선택해주세요
         </p>
-        <Button
-          varient="filled"
-          addStyle="w-64 h-12 bg-blue-500 rounded text-white text-base font-semibold font-['Pretendard Variable'] leading-normal">
-          매칭 항목 선택 바로가기
-        </Button>
+        <Link href="/matching">
+          <Button
+            varient="filled"
+            addStyle="w-64 h-12 bg-blue-500 rounded text-white text-base font-semibold font-['Pretendard Variable'] leading-normal"
+            onClick={onClose}>
+            매칭 항목 선택 바로가기
+          </Button>
+        </Link>
       </div>
     </ModalContainer>
   );

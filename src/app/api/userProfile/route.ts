@@ -7,7 +7,6 @@ export async function GET(request: Request) {
 
   const session = await getSession();
   const email = session?.user?.email;
-  console.log("User ID:", email);
 
   if (!email) {
     return new Response(JSON.stringify({ error: "인증되지 않은 사용자" }), { status: 401 });
