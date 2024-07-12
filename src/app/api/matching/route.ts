@@ -3,7 +3,7 @@ import connectDB from "@/lib/database/db";
 import { getSession } from "@/lib/database/getSession";
 import { Matching } from "@/schema/matchingSchema";
 
-export async function GET(reqest: Request) {
+export async function GET(request: Request) {
   await connectDB();
   const session = await getSession();
   const userId = session?.user?.id;
