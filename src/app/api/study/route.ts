@@ -11,18 +11,18 @@ export async function POST(request: Request) {
 
     if (!newStudy) throw new Error("필수 정보가 누락되었습니다.");
     newStudy.status = "RECRUIT_START";
+    newStudy.scrapCount = 0;
 
     // 1) Study 생성
     const newStudyResult = await Study.create(newStudy);
     const newStudyId = newStudyResult._id;
-
     // 2) TeamMembers 생성
     const newTeamMembers = {
       studyId: newStudyId,
       members: [
         {
           userId: newStudy.ownerId,
-          role: "팀장",
+          role: "leader",
           isOwner: true,
           status: "ACCEPTED",
         },
@@ -39,8 +39,8 @@ export async function POST(request: Request) {
     const lectureId = newStudyResult.lectureId;
     const lectureData = await Lecture.findById(lectureId);
 
-    const { _id, category, online, platform, rating, title, instructor } = lectureData;
-    const lectureResult = { id: _id, category, online, platform, rating, title, instructor };
+    const { _id, category, online, platform, rating, title, instructor, link } = lectureData;
+    const lectureResult = { id: _id, category, online, platform, rating, title, instructor, link };
 
     return Response.json({ study: newStudyResult, lecture: lectureResult }, { status: 200 });
   } catch (error: any) {
