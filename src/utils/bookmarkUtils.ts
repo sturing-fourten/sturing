@@ -1,10 +1,6 @@
-import { getbookmarksAction, createBookmarkAction, deleteBookmarkAction } from "@/lib/database/action/bookmark";
+import { createBookmarkAction, deleteBookmarkAction } from "@/lib/database/action/bookmark";
 
 // Lecture Bookmark
-export const getLectureBookmarks = async (lectureId: string) => {
-  return getbookmarksAction("lecture", lectureId);
-};
-
 export const createLectureBookmarkAction = async (lectureId: string, userId: string) => {
   return createBookmarkAction("lecture", lectureId, userId);
 };
@@ -14,10 +10,6 @@ export const deleteLectureBookmarkAction = async (lectureId: string, _id: string
 };
 
 // Study Bookmark
-export const getStudyBookmarks = async (studyId: string) => {
-  return getbookmarksAction("study", studyId);
-};
-
 export const createStudyBookmarkAction = async (studyId: string, userId: string) => {
   return createBookmarkAction("study", studyId, userId);
 };

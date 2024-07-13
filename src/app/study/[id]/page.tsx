@@ -2,7 +2,9 @@ import FixedBottomBar from "@/components/domains/detail/FixedBottomBar";
 import Header from "@/components/domains/detail/Header";
 import Contents from "@/components/domains/detail/study/Contents";
 
-export default function StudyDetail() {
+export default async function StudyDetail({ params }: { params: { id: string } }) {
+  const { id } = params;
+
   return (
     <>
       <div className="flex-col inline-flex w-full h-dvh">
@@ -10,7 +12,7 @@ export default function StudyDetail() {
           <Header page="study" />
           <Contents />
         </div>
-        <FixedBottomBar page="study" />
+        <FixedBottomBar page="study" id={id} />
       </div>
     </>
   );

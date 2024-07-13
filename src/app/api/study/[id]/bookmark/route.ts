@@ -5,7 +5,7 @@ export async function GET() {
   try {
     await connectDB();
     const studyBookmark = await StudyBookmark.find({});
-    return Response.json({ studyBookmark });
+    return Response.json(studyBookmark);
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error }), {
       status: 500,

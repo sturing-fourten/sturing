@@ -2,24 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 
-export const getbookmarksAction = async (type: string, typeId: string) => {
-  try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/${type}/${typeId}/bookmark`, {
-      method: "GET",
-    });
-
-    if (!response.ok) {
-      throw new Error("강의 찜 리스트 불러오기 실패");
-    }
-
-    const data = await response.json();
-    return data.lectureBookmark;
-  } catch (error: any) {
-    console.error("Error fetching lecture:", error.message);
-    throw error;
-  }
-};
-
 export const createBookmarkAction = async (type: string, typeId: string, userId: string) => {
   try {
     const newLectureBookmark = {

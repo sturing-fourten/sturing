@@ -1,11 +1,12 @@
 import connectDB from "@/lib/database/db";
 import { LectureBookmark } from "@/schema/bookmarkSchema";
 
-export async function GET() {
+export async function GET(req: Request) {
+  await connectDB();
+
   try {
-    await connectDB();
     const lectureBookmark = await LectureBookmark.find({});
-    return Response.json({ lectureBookmark });
+    return Response.json(lectureBookmark);
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error }), {
       status: 500,
