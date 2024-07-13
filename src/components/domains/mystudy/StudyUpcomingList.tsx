@@ -6,15 +6,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { TUpcomingMeetingList } from "@/utils/generateMeetingList";
 
-export default function StudyUpcomingList() {
+interface IStudyUpcomingListProps {
+  upComingMeetingList: TUpcomingMeetingList;
+}
+export default function StudyUpcomingList({ upComingMeetingList }: IStudyUpcomingListProps) {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   return (
     <>
       <Swiper
         loop={false}
-        spaceBetween={0}
+        spaceBetween={8}
         slidesPerView={1}
         initialSlide={currentSlide}
         onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex + 1)}
@@ -22,16 +26,14 @@ export default function StudyUpcomingList() {
         navigation={false}
         pagination={true}
         modules={[Pagination]}>
-        <SwiperSlide>
-          <div className="h-[184px]">
-            <StudyUpcomingCard className={"bg-white"} />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="h-[184px]">
-            <StudyUpcomingCard className={"bg-white"} />
-          </div>
-        </SwiperSlide>
+        {upComingMeetingList &&
+          upComingMeetingList.map((meeting, index) => (
+            <SwiperSlide key={index}>
+              <div className="h-[184px]">
+                <StudyUpcomingCard className={"bg-white"} meeting={meeting} />
+              </div>
+            </SwiperSlide>
+          ))}
       </Swiper>
     </>
   );
