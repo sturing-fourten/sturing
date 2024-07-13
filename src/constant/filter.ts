@@ -4,7 +4,7 @@ export const FILTER = {
   sort: {
     defaultValue: "최신순",
     options: [" 최신순", "마감순", "인기순"],
-    values: ["LATEST", "BY_DEADLINE", "BY_POPULARITY"],
+    values: ["LATEST", "DEADLINE", "POPULAR"],
   },
 };
 
