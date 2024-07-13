@@ -1,5 +1,5 @@
 import connectDB from "@/lib/database/db";
-import { Lecture, LectureType } from "@/schema/lectureSchema";
+import { Lecture } from "@/schema/lectureSchema";
 import categoryMap from "@/utils/categoryMap";
 
 export async function GET(request: Request) {
@@ -7,7 +7,10 @@ export async function GET(request: Request) {
   const category = searchParams.get("category")?.split(",");
   const search = searchParams.get("search");
 
+  //헤더로 유저정보 받기 (북마크 여부 확인)
+
   await connectDB();
+
   let query: { [key: string]: any } = {};
 
   if (category && category.length > 0) {

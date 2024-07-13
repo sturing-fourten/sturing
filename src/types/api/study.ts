@@ -67,3 +67,17 @@ export type TStudyDetailInfoData = {
   lecture: TRelatedLecture;
   teamMemberList: TTeamMember[];
 };
+
+export type TStudyListData = {
+  id: string;
+  ownerId: string;
+  category: string;
+  title: string;
+  imageUrl: string;
+  startDate: Date;
+  endDate: Date;
+  meeting: { format: string; platform?: string; location?: string; schedule: { day: string; time: string } };
+  wantedMemberCount: string | number;
+  acceptedTeamMemberCount: number;
+  isBookmark?: boolean;
+}[];

@@ -1,5 +1,8 @@
 import connectDB from "@/lib/database/db";
 import { Study } from "@/schema/studySchema";
+import { TeamMembers } from "@/schema/teamMemberSchema";
+import { TStudyListData } from "@/types/api/study";
+import categoryMap from "@/utils/categoryMap";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -10,23 +13,14 @@ export async function GET(request: Request) {
   const age = searchParams.get("age")?.split(",");
   const career = searchParams.get("career")?.split(",");
   const memberCount = searchParams.get("memberCount");
-  //지역검색 추가 예정
+  // 지역검색 추가 예정
 
-  connectDB();
+  //헤더로 유저정보 받기 (북마크 여부 확인)
 
-  const categoryMap: { [key: string]: string } = {
-    디자인: "DESIGN",
-    개발: "DEVELOP",
-    비즈니스: "BUSINESS",
-    마케팅: "MARKETING",
-    경제: "ECONOMY",
-    언어: "LANGUAGE",
-    자격증: "LICENSE",
-    자기개발: "SELF-DEVELOPMENT",
-  };
+  await connectDB();
 
   //쿼리 설정
-  let query: { [key: string]: any } = {};
+  let query: { [key: string]: any } = { status: "RECRUIT_START" };
 
   if (category) {
     query.category = { $in: category };
@@ -68,9 +62,9 @@ export async function GET(request: Request) {
   }
 
   try {
-    let studyList;
+    let studyListData;
     if (sortBy === "POPULAR") {
-      studyList = await Study.aggregate([
+      studyListData = await Study.aggregate([
         { $match: query },
         {
           $lookup: {
@@ -112,11 +106,37 @@ export async function GET(request: Request) {
         },
       ]);
     } else {
-      studyList = await Study.find(query).sort(sortOption);
+      studyListData = await Study.find(query).sort(sortOption);
     }
+    let studyList: TStudyListData = [];
 
-    return Response.json(studyList);
+    //isBookmark 추가 예정.
+    if (studyListData) {
+      studyList = await Promise.all(
+        studyListData.map(async (study) => {
+          const { _id, ownerId, category, title, imageUrl, startDate, endDate, meeting, wantedMember } = study;
+
+          const acceptedTeamMembers = await TeamMembers.findOne({ studyId: _id, "members.status": "ACCEPTED" });
+          const acceptedCount = acceptedTeamMembers ? acceptedTeamMembers.members.length : 0;
+          const wantedMemberCount = wantedMember?.count || "제한없음";
+          return {
+            id: _id.toString(),
+            ownerId,
+            category,
+            title,
+            imageUrl,
+            startDate,
+            endDate,
+            meeting,
+            wantedMemberCount,
+            acceptedTeamMemberCount: acceptedCount,
+          };
+        }),
+      );
+    }
+    return Response.json({ studyList });
   } catch (error: any) {
+    console.error("error study list", error);
     return Response.json({ error }, { status: 500 });
   }
 }
