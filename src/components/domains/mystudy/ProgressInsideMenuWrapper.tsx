@@ -8,11 +8,9 @@ export function ProgressInsideMenuWrapper() {
   return (
     <nav className="flex gap-3 mb-4">
       <form action={fetchProgressStudyListAction}>
-        <input type="hidden" name="listType" value="PROGRESS" />
         <InsideMenu title="진행 중" number={progressStudyListCount} isCurrent={true} />
       </form>
-      <form action={fetchProgressStudyListAction}>
-        <input type="hidden" name="listType" value="RECRUIT_END" />
+      <form action={""}>
         <InsideMenu title="진행 예정" number={recruitEndStudyListCount} isCurrent={false} />
       </form>
     </nav>

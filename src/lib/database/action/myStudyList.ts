@@ -4,17 +4,16 @@ import { useMyStudyListStore } from "@/store/myStudyListStore";
 import { getSession } from "../getSession";
 import { revalidatePath } from "next/cache";
 
-type TFetchProgressStudyListAction = (formData?: FormData) => Promise<void>;
+type TFetchProgressStudyListAction = () => Promise<void>;
 
-export const fetchProgressStudyListAction: TFetchProgressStudyListAction = async (formData) => {
+export const fetchProgressStudyListAction: TFetchProgressStudyListAction = async () => {
   const session = await getSession();
   const userId = session?.user?.id;
-  const listType = formData?.get("listType") ?? "PROGRESS";
 
-  if (!userId || !listType) throw new Error("유저 정보와 리스트 타입 정보가 필요합니다.");
+  if (!userId) throw new Error("유저 정보가 필요합니다.");
 
   try {
-    const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${userId}&listType=${listType}`;
+    const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${userId}&listType=PROGRESS`;
     const response = await fetch(url);
     if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
