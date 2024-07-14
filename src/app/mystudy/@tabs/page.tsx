@@ -15,7 +15,7 @@ export default async function ProcessTabPage() {
       <div className="flex flex-col gap-4">
         {currentStudyList &&
           currentStudyList.map((study) => (
-            <StudyOnGoingCard key={study._id.toString()} isStarted={false} study={study} />
+            <StudyOnGoingCard key={study._id.toString()} isStarted={currentListType === "PROGRESS"} study={study} />
           ))}
       </div>
     </section>
