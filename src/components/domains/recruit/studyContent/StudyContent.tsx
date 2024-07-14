@@ -6,18 +6,23 @@ import StudyTitle from "./StudyTitle";
 import StudyIntroduction from "./StudyIntroduction";
 import StudyExample from "./StudyExample";
 import ProgressWay from "./ProgressWay";
+import { useStudyContentStore } from "@/store/recruitStore";
 
 interface StudyContentProps {
   onIntroduceChange: (image: string, title: string, introduction: string, progressWay: string) => void;
 }
 
 export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
-  const [image, setImage] = useState<string>();
   const [fileToRead, setFileToRead] = useState<File | null>(null);
-  const [studyTitle, setStudyTitle] = useState<string>("");
-  const [studyIntroduction, setStudyIntroduction] = useState<string>("");
-  const [selectedProgressWay, setSelectedProgressWay] = useState("");
-  const [address, setAddress] = useState("");
+
+  const image = useStudyContentStore((state) => state.image);
+  const setImage = useStudyContentStore((state) => state.setImage);
+  const title = useStudyContentStore((state) => state.title);
+  const setTitle = useStudyContentStore((state) => state.setTitle);
+  const introduction = useStudyContentStore((state) => state.introduction);
+  const setIntroduction = useStudyContentStore((state) => state.setIntroduction);
+  const progressWay = useStudyContentStore((state) => state.progressWay);
+  const setProgressWay = useStudyContentStore((state) => state.setProgressWay);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -33,19 +38,19 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputTitle = e.target.value;
     if (inputTitle.length <= 24) {
-      setStudyTitle(inputTitle);
+      setTitle(inputTitle);
     }
   };
 
   const handleIntroductionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const textareaIntroduction = e.target.value;
     if (textareaIntroduction.length <= 500) {
-      setStudyIntroduction(textareaIntroduction);
+      setIntroduction(textareaIntroduction);
     }
   };
 
   const handleProgressWayToggle = (progressWay: string) => {
-    setSelectedProgressWay(progressWay);
+    setProgressWay(progressWay);
   };
 
   useEffect(() => {
@@ -62,8 +67,8 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   }, [fileToRead, setImage]);
 
   useEffect(() => {
-    onIntroduceChange(image ?? "", studyTitle, studyIntroduction, selectedProgressWay);
-  }, [image, studyTitle, studyIntroduction, selectedProgressWay]);
+    onIntroduceChange(image ?? "", title, introduction, progressWay);
+  }, [image, title, introduction, progressWay]);
 
   return (
     <div className="w-full px-[22px] py-[16px] flex-col gap-5 inline-flex">
@@ -74,19 +79,14 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
       </div>
       <div className="flex-col gap-3 inline-flex">
         <Subtitle>스터디 제목</Subtitle>
-        <StudyTitle studyTitle={studyTitle} handleTitleChange={handleTitleChange} />
+        <StudyTitle studyTitle={title} handleTitleChange={handleTitleChange} />
       </div>
       <div className="flex-col gap-2 inline-flex">
         <Subtitle>스터디 소개</Subtitle>
-        <StudyIntroduction studyIntroduction={studyIntroduction} handleIntroductionChange={handleIntroductionChange} />
+        <StudyIntroduction studyIntroduction={introduction} handleIntroductionChange={handleIntroductionChange} />
       </div>
       <StudyExample />
-      <ProgressWay
-        selectedProgressWay={selectedProgressWay}
-        onClickToggle={handleProgressWayToggle}
-        address={address}
-        setAddress={setAddress}
-      />
+      <ProgressWay selectedProgressWay={progressWay} onClickToggle={handleProgressWayToggle} />
     </div>
   );
 }

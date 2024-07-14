@@ -22,7 +22,7 @@ export default function ProgressWayStep({ userNickname, setIsSelected }: StepsPr
 
   return (
     <div className="flex flex-1 flex-col gap-10 px-4">
-      <Title>{`${userNickname}님 ${MATCHING_CONFIG.type.title}`}</Title>
+      <Title>{`${userNickname}님${MATCHING_CONFIG.type.title}`}</Title>
       <div className="flex flex-col gap-[15px]">
         {Object.keys(content).map((key) => {
           const type = content[key as keyof TypeContentConfig];
