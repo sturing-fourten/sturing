@@ -1,3 +1,5 @@
+import { TLectureInfoData } from "./lecture";
+
 export type TCategory =
   | "DESIGN"
   | "DEVELOP"
@@ -43,8 +45,8 @@ type TStudyDetail = {
       time: string;
     };
   };
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   moodKeywords: string[];
   task: string[];
   wantedMember: {
@@ -62,6 +64,6 @@ type TStudyDetail = {
 
 export type TStudyDetailInfoData = {
   study: TStudyDetail;
-  lecture: TRelatedLecture;
+  lecture: TLectureInfoData;
   teamMemberList: TTeamMember[];
 };
