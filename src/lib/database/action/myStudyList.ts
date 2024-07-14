@@ -4,9 +4,11 @@ import { useMyStudyListStore } from "@/store/myStudyListStore";
 import { getSession } from "../getSession";
 import { revalidatePath } from "next/cache";
 
-type TFetchProgressStudyListAction = () => Promise<void>;
+type TMyStudyListAction = () => Promise<void>;
 
-export const fetchProgressStudyListAction: TFetchProgressStudyListAction = async () => {
+export const fetchProgressStudyListAction: TMyStudyListAction = async () => {
+  useMyStudyListStore.getState().setCurrentListType("PROGRESS");
+
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -20,7 +22,7 @@ export const fetchProgressStudyListAction: TFetchProgressStudyListAction = async
     const { progressStudyList, recruitEndStudyListCount } = await response.json();
     if (!progressStudyList || !recruitEndStudyListCount) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
-    useMyStudyListStore.getState().setProgressStudyList(progressStudyList);
+    useMyStudyListStore.getState().setCurrentStudyList(progressStudyList);
     useMyStudyListStore.getState().setProgressStudyListCount(progressStudyList.length);
     useMyStudyListStore.getState().setRecruitEndStudyListCount(recruitEndStudyListCount);
     revalidatePath("/mystudy");
