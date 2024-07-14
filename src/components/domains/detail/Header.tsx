@@ -6,24 +6,50 @@ import { TagRate } from "@/components/commons/tag/TagRate";
 import { IMAGES_DEFAUlT } from "@/constant/images";
 import { CATEGORY } from "@/constant/category";
 import { TLectureInfoData } from "@/types/api/lecture";
+import { TStudyDetailInfoData } from "@/types/api/study";
 
 interface BannerProps {
   page: "study" | "lecture";
   lectureInfo: TLectureInfoData;
+  studyInfo?: TStudyDetailInfoData["study"];
 }
 
 const { study, lecture } = IMAGES_DEFAUlT;
 
-export default function Header({ page, lectureInfo }: BannerProps) {
-  const { online, platform, category, rating, title, link } = lectureInfo;
+export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
+  const { online: lectureOnline, platform, category: lectureCategory, rating, title: lectureTitle, link } = lectureInfo;
+  const studyOnline = studyInfo?.meeting?.format || "online";
+  const { category: studyCategory = "", title: studyTitle, startDate } = studyInfo || {};
   const studyImageUrl = ""; //임시
   const isStudy = page === "study";
   const defaultImageUrl = isStudy ? study.src : lecture.src;
   const imageUrl = isStudy ? studyImageUrl : "";
+  const studyStartDate = startDate
+    ? new Date(startDate).toLocaleDateString("ko-KR", {
+        month: "2-digit",
+        day: "2-digit",
+        weekday: "short",
+      })
+    : "";
   const style = {
     backgroundImage: `url(${imageUrl || defaultImageUrl})`,
   };
   const isLeader = true;
+
+  const getStatus = () => {
+    if (isStudy) {
+      switch (studyOnline) {
+        case "online":
+          return "온라인";
+        case "offline":
+          return "오프라인";
+        default:
+          return "온/오프라인";
+      }
+    } else {
+      return lectureOnline ? "온라인" : "오프라인";
+    }
+  };
 
   return (
     <>
@@ -34,8 +60,8 @@ export default function Header({ page, lectureInfo }: BannerProps) {
         style={style}>
         <TopBar variant="share" showMore={isStudy && isLeader} isWhite={isStudy} />
         <div className="flex items-center gap-1 mt-10 mb-4">
-          <TagMain>{online ? "온라인" : "오프라인"}</TagMain>
-          <TagLight>{CATEGORY(category)}</TagLight>
+          <TagMain>{getStatus()}</TagMain>
+          <TagLight>{CATEGORY(isStudy ? studyCategory : lectureCategory)}</TagLight>
           {!isStudy && (
             <>
               <TagLight>{platform}</TagLight>
@@ -46,18 +72,18 @@ export default function Header({ page, lectureInfo }: BannerProps) {
         <h1
           className="mx-11 text-center text-[18px] font-semibold leading-[150%] tracking-[0.6px] break-keep"
           style={{ color: isStudy ? "white" : "black" }}>
-          {title}
+          {isStudy ? studyTitle : lectureTitle}
         </h1>
         {isStudy && (
           <div className="mt-6 w-[149px] h-[18px] flex justify-start items-center gap-2.5 leading-[150%] tracking-[-0.36px] text-gray-400 text-[12px] font-medium text-nowrap ">
-            <p>4주 진행</p>
+            <p>몇주 진행</p>
             <div className="w-[1px] h-[12px] bg-gray-400" />
-            <p>06.21(일)부터 시작</p>
+            <p>{`${studyStartDate} 부터 시작`}</p>
           </div>
         )}
       </section>
       <section className="px-4 py-5">
-        <LectureLinkBanner href={link} title={title} />
+        <LectureLinkBanner href={link} title={lectureTitle} />
       </section>
     </>
   );

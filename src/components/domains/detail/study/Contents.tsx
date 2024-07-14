@@ -2,8 +2,16 @@ import TabMenuLinkUnderlined from "@/components/commons/TabMenuLinkUnderlined";
 import RecruitInfo from "./RecruitInfo";
 import RecruitedMembersList from "./RecruitedMembersList";
 import RecruitComments from "./RecruitComments";
+import { TLectureInfoData } from "@/types/api/lecture";
+import { TStudyDetailInfoData } from "@/types/api/study";
 
-export default function Contents() {
+interface IContentsProps {
+  study: TStudyDetailInfoData["study"];
+  lecture: TLectureInfoData;
+  memberList: TStudyDetailInfoData["teamMemberList"];
+}
+
+export default function Contents({ study, lecture, memberList }: IContentsProps) {
   return (
     <>
       <div className="mb-[73px]">
@@ -13,8 +21,8 @@ export default function Contents() {
           <TabMenuLinkUnderlined title="댓글" isCurrent={false} href="#comments" />
         </nav>
         <div className="px-4 bg-gray-100 pb-12">
-          <RecruitInfo />
-          <RecruitedMembersList />
+          <RecruitInfo study={study} lecture={lecture} />
+          <RecruitedMembersList study={study} memberList={memberList} />
           <RecruitComments />
         </div>
       </div>

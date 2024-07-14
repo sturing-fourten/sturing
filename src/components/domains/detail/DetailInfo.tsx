@@ -3,11 +3,12 @@ import Image from "next/image";
 interface DetailInfoProps {
   icon: { src: string; alt: string };
   title: string;
-  content: string;
+  content?: string;
   isWhite?: boolean;
+  taskContent?: string[];
 }
 
-export default function DetailInfo({ icon, title, content, isWhite = false }: DetailInfoProps) {
+export default function DetailInfo({ icon, title, content, isWhite = false, taskContent }: DetailInfoProps) {
   return (
     <>
       <li
@@ -18,7 +19,7 @@ export default function DetailInfo({ icon, title, content, isWhite = false }: De
           <Image src={icon.src} alt={icon.alt} width={18} height={18} />
           <p>{title}</p>
         </div>
-        <p>{content}</p>
+        {taskContent ? taskContent.map((content, idx) => <p key={idx}>{content}</p>) : <p>{content}</p>}
       </li>
     </>
   );
