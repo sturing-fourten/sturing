@@ -34,6 +34,27 @@ export async function GET(request: Request) {
           }),
         });
 
+      case "RECRUIT_END":
+        const recruitEndTeamMembers = await TeamMembers.find({
+          "members.userId": userId,
+          $or: [{ "members.isOwner": true }, { "members.status": "ACCEPTED" }],
+        });
+        const recruitEndStudyIdList = recruitEndTeamMembers.map((member) => member.studyId);
+        const recruitEndStudyList = await Study.find({
+          _id: { $in: recruitEndStudyIdList },
+          status: listType,
+        }).populate({
+          path: "teamMembersId",
+          select: "members",
+        });
+        return Response.json({
+          recruitEndStudyList,
+          progressStudyListCount: await Study.countDocuments({
+            _id: { $in: recruitEndStudyIdList },
+            status: "PROGRESS",
+          }),
+        });
+
       // case "RECRUIT_START_OWNER":
       //   // 내가 개설한 모든 스터디 중 status가 RECRUIT_START인 목록 조회
       //   studyList = await Study.find({ ownerId: userId, status: "RECRUIT_START" });
