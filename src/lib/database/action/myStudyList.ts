@@ -3,7 +3,6 @@
 import { useMyStudyListStore } from "@/store/myStudyListStore";
 import { getSession } from "../getSession";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 type TFetchProgressStudyListAction = (formData?: FormData) => Promise<void>;
 

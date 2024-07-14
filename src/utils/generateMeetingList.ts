@@ -1,4 +1,4 @@
-import { addDays, startOfWeek, getDate, startOfDay, getDay } from "date-fns";
+import { addDays, startOfDay, getDay } from "date-fns";
 
 const dayMap: { [key: string]: number } = {
   일요일: 1,
