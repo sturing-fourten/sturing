@@ -10,16 +10,18 @@ export async function GET(request: Request) {
 
   try {
     switch (listType) {
+      /*
+       * PROGRESS, RECRUIT_END, DOME : 내가 참여하고 있는 모든 스터디 (개설 or 지원 후 ACCEPTED) 중 각 status로 필터링한 목록 조회
+       */
       case "PROGRESS":
-        // 1) 내가 참여하고 있는 모든 스터디 (개설 or 지원 후 ACCEPTED) 중 각 status로 필터링한 목록 조회
-        const myTeamMembers = await TeamMembers.find({
+        const progressTeamMembers = await TeamMembers.find({
           "members.userId": userId,
-          $or: [{ "members.isOwner": true }, { "members.status": "ACCEPTED" }], // TODO 이 부분 맞는지 확인 필요
+          $or: [{ "members.isOwner": true }, { "members.status": "ACCEPTED" }],
         });
-        const studyIds = myTeamMembers.map((member) => member.studyId);
+        const progressStudyIdList = progressTeamMembers.map((member) => member.studyId);
         const progressStudyList = await Study.find({
-          _id: { $in: studyIds },
-          status: "PROGRESS",
+          _id: { $in: progressStudyIdList },
+          status: listType,
         }).populate({
           path: "teamMembersId",
           select: "members",
@@ -27,12 +29,11 @@ export async function GET(request: Request) {
         return Response.json({
           progressStudyList,
           recruitEndStudyListCount: await Study.countDocuments({
-            _id: { $in: studyIds },
+            _id: { $in: progressStudyIdList },
             status: "RECRUIT_END",
           }),
         });
 
-      // case "RECRUIT_END":
       // case "RECRUIT_START_OWNER":
       //   // 내가 개설한 모든 스터디 중 status가 RECRUIT_START인 목록 조회
       //   studyList = await Study.find({ ownerId: userId, status: "RECRUIT_START" });
