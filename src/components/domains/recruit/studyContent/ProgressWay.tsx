@@ -25,7 +25,7 @@ export default function ProgressWay(props: ProgressWayProps) {
         ))}
       </div>
       {selectedProgressWay === "온라인" && <OnlineDropdown />}
-      {selectedProgressWay === "오프라인" && <SelectLocation />}
+      {selectedProgressWay === "오프라인" && <SelectLocation isRecruit />}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { StepsProps } from "@/types/matching";
 import { useLocationsStore } from "@/store/matchingStore";
 import { useStudyContentStore } from "@/store/recruitStore";
 
-export default function SelectLocation({ setIsSelected, isMatching }: StepsProps) {
+export default function SelectLocation({ setIsSelected, isRecruit }: StepsProps) {
   const content = MATCHING_CONFIG.location.city;
   const [selectedCity, setSelectedCity] = useState("");
   const selectedLocations = useLocationsStore((state) => state.locations);
@@ -22,6 +22,12 @@ export default function SelectLocation({ setIsSelected, isMatching }: StepsProps
     const newLocation = { city, district };
     if (city && district) {
       const isSelected = selectedLocations.some((location) => location.city === city && location.district === district);
+
+      if (isRecruit && selectedLocations.length > 0) {
+        alert("이미 선택된 장소가 있습니다. 한 개의 장소만 선택할 수 있습니다.");
+        return;
+      }
+
       if (isSelected) {
         const updatedLocations = selectedLocations.filter(
           (location) => !(location.city === city && location.district === district),
@@ -100,7 +106,7 @@ export default function SelectLocation({ setIsSelected, isMatching }: StepsProps
           )}
         </div>
       </div>
-      {isMatching && (
+      {!isRecruit && (
         <div className="flex items-center gap-[6px] w-full">
           <span className="flex justify-center items-center text-center text-[11px] tracking-[-0.22px] leading-[16px] font-semibold bg-main-100 text-main-500 rounded-full w-[13px] h-[13px]">
             !
