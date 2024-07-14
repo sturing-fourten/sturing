@@ -1,10 +1,9 @@
 import { TIMES_LIST } from "@/constant/studyDetail";
 import Dropdown from "../../../commons/Dropdown";
-import { SetStateAction } from "react";
 
 interface TimesDropdownProps {
   time: string;
-  setTime: React.Dispatch<SetStateAction<string>>;
+  setTime: (time: string) => void;
 }
 
 export default function TimesDropdown(props: TimesDropdownProps) {

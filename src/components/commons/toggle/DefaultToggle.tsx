@@ -19,7 +19,7 @@ function DefaultToggleBase(props: IDefaultToggleBaseProps) {
 
 interface IDefaultToggleProps {
   children: React.ReactNode;
-  isActive: boolean;
+  isActive: boolean | undefined;
   onClick?: () => void;
   toggleSize: string;
 }

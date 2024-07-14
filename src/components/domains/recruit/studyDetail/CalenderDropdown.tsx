@@ -1,4 +1,3 @@
-import { SetStateAction } from "react";
 import Dropdown from "../../../commons/Dropdown";
 import { Calendar } from "@/components/shadcn/ui/calendar";
 import { DateRange } from "react-day-picker";
@@ -6,7 +5,7 @@ import { format, isBefore, startOfToday } from "date-fns";
 
 interface CalenderDropdownProps {
   date: DateRange;
-  setDate: React.Dispatch<SetStateAction<DateRange>>;
+  setDate: (date: DateRange) => void;
 }
 
 export default function CalenderDropdown(props: CalenderDropdownProps) {

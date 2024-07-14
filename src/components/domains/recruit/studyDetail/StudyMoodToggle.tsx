@@ -3,7 +3,7 @@ import { USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
 import { UserFavoriteFieldType } from "@/types/study";
 
 interface StudyMoodToggleProps {
-  selectedMood: string[];
+  selectedMood: string[] | undefined;
   handleMoodToggle: (mood: string) => void;
 }
 
@@ -15,7 +15,7 @@ export default function StudyMoodToggle({ selectedMood, handleMoodToggle }: Stud
           key={key}
           src={USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].src}
           alt={USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt}
-          isActive={selectedMood.includes(USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt)}
+          isActive={selectedMood?.includes(USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt)}
           onClick={() => handleMoodToggle(USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt)}>
           {USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt}
         </MoodMiniToggle>
