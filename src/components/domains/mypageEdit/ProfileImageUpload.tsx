@@ -13,29 +13,7 @@ interface ProfileImageUploadProps {
 export default function ProfileImageUpload(props: ProfileImageUploadProps) {
   const { image, setImage } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [blob, setBlob] = useState<PutBlobResult | null>(null);
-
-  const onUploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!fileInputRef.current?.files) {
-      throw new Error("No file selected");
-    }
-
-    const file = fileInputRef.current.files[0];
-
-    const response = await fetch(`/api/image-test?filename=${file.name}`, {
-      method: "POST",
-      body: file,
-    });
-
-    console.log(file, response);
-
-    const newBlob = (await response.json()) as PutBlobResult;
-
-    setBlob(newBlob);
-    setImage(blob?.url || image);
-  };
+  const [fileToRead, setFileToRead] = useState<File | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -45,42 +23,60 @@ export default function ProfileImageUpload(props: ProfileImageUploadProps) {
       alert("파일 크기는 1MB를 초과할 수 없습니다.");
       return;
     }
-    setImage(blob?.url || image);
+    setFileToRead(file);
+  };
+
+  const handleUploadClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   useEffect(() => {
-    if (!blob) return;
+    if (!fileToRead) return;
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImage(blob.url);
+      const newImage = reader.result as string;
+      setImage(newImage);
     };
-  }, [image, blob?.url]);
 
-  console.log(blob?.url);
-  console.log(image);
+    const fetchImage = async (file: any) => {
+      try {
+        const response = await fetch(`/api/image-test?filename=${file.name}`, {
+          method: "POST",
+          body: file,
+        });
+        const newBlob = (await response.json()) as PutBlobResult;
+        const uploadImage = newBlob.url;
+        setImage(uploadImage);
+      } catch (error: any) {
+        console.error("Error fetching Image:", error.message);
+        throw error;
+      }
+    };
+
+    fetchImage(fileToRead);
+
+    reader.readAsDataURL(fileToRead);
+    setFileToRead(null);
+  }, [fileToRead, setImage]);
 
   return (
-    <form onSubmit={onUploadImage}>
-      <div className="w-fit relative">
-        <button type="submit" onClick={() => fileInputRef.current?.click()}>
-          <input hidden name="profileImageUrl" value={image} onChange={handleFileChange} />
-          <input
-            name="file"
-            type="file"
-            ref={fileInputRef}
-            accept="image/*"
-            onChange={handleFileChange}
-            style={{ display: "none" }}
-          />
-          <Avatar profileImageUrl={image} width={90} height={90} />
-          <img
-            className="w-6 h-6 absolute right-0 bottom-0"
-            src={ICONS.cameraCircle.src}
-            alt={ICONS.cameraCircle.alt}
-          />
-        </button>
-      </div>
-    </form>
+    <div className="w-fit relative">
+      <button type="button" onClick={handleUploadClick}>
+        <input hidden name="profileImageUrl" value={image} onChange={handleFileChange} />
+        <input
+          name="file"
+          type="file"
+          ref={fileInputRef}
+          accept="image/*"
+          onChange={handleFileChange}
+          style={{ display: "none" }}
+        />
+        <Avatar profileImageUrl={image} width={90} height={90} />
+        <img className="w-6 h-6 absolute right-0 bottom-0" src={ICONS.cameraCircle.src} alt={ICONS.cameraCircle.alt} />
+      </button>
+    </div>
   );
 }
