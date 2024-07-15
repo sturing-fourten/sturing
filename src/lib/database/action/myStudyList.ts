@@ -72,3 +72,27 @@ export const fetchDoneStudyListAction: TMyStudyListAction = async () => {
     revalidatePath("/mystudy/done");
   } catch (error) {}
 };
+
+export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async () => {
+  useMyStudyListStore.getState().setCurrentListType("RECRUIT_START_OWNER");
+
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  if (!userId) throw new Error("유저 정보가 필요합니다.");
+
+  try {
+    const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${userId}&listType=RECRUIT_START_OWNER`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+
+    const { recruitStartOwnerStudyList, recruitStartMemberStudyListCount } = await response.json();
+    if (!recruitStartOwnerStudyList || !recruitStartMemberStudyListCount)
+      throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+
+    useMyStudyListStore.getState().setCurrentStudyList(recruitStartOwnerStudyList);
+    useMyStudyListStore.getState().setRecruitStartOwnerStudyListCount(recruitStartOwnerStudyList.length);
+    useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyListCount);
+    revalidatePath("/mystudy/recruitment");
+  } catch (error) {}
+};
