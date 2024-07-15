@@ -1,26 +1,36 @@
+import { TUpcomingMeetingItem } from "@/utils/generateMeetingList";
 import { TagLight } from "../tag/TagLight";
 import { TagMain } from "../tag/TagMain";
+import { getDayTimeByDate } from "@/utils/getDayTimeByDate";
+import { format } from "date-fns";
+import { ko } from "date-fns/locale";
+import { getDDayByDate } from "@/utils/getDDayByDate";
 
 interface IStudyUpcomingCardProps {
+  meeting: TUpcomingMeetingItem;
   className?: string;
 }
 
 export default function StudyUpcomingCard(props: IStudyUpcomingCardProps) {
-  const { className } = props;
+  const {
+    meeting: { title, where, date },
+    className,
+  } = props;
+
+  const DayTime = getDayTimeByDate(new Date(date));
+
   return (
     <article className={`py-6 px-5 rounded-lg border border-gray-300 ${className}`}>
       <div className="flex items-center gap-1 mb-3">
-        <TagMain>{"D-3"}</TagMain>
-        <TagLight>{"6월 7일"}</TagLight>
+        <TagMain>{getDDayByDate(date)}</TagMain>
+        <TagLight>{format(new Date(date), "M월 d일", { locale: ko })}</TagLight>
       </div>
-      <p className="my-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">
-        {"UXUI 디자이너 본질 강화 피그마 스터디"}
-      </p>
+      <p className="my-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
       <div className="flex items-center gap-2 p-2 border rounded-[3px] bg-gray-100 text-gray-700 text-[12px] font-semibold tracking-[-0.36px]">
-        <span>{"스타벅스 종로점"}</span>
+        <span>{where}</span>
         <span className="w-[1px] h-3 bg-gray-400"></span>
         <span>
-          {"06.07(토)"} {"오후 8:00 - 9:00"}
+          {DayTime[0]} {DayTime[1]}
         </span>
       </div>
     </article>

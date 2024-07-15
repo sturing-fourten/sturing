@@ -1,22 +1,23 @@
 import StudyOnGoingCard from "@/components/commons/card/StudyOnGoingCard";
-import { InsideMenu } from "@/components/commons/card/element/InsideMenu";
+import { ProgressInsideMenuWrapper } from "@/components/domains/mystudy/ProgressInsideMenuWrapper";
+import { fetchProgressStudyListAction } from "@/lib/database/action/myStudyList";
+import { useMyStudyListStore } from "@/store/myStudyListStore";
 
-export default function ProcessTabPage() {
-  const studyList = [
-    { id: 1, isStarted: true },
-    { id: 2, isStarted: true },
-  ];
+export default async function ProcessTabPage() {
+  const currentListType = useMyStudyListStore.getState().currentListType;
+
+  if (currentListType === "PROGRESS") await fetchProgressStudyListAction();
+  const currentStudyList = useMyStudyListStore.getState().currentStudyList;
+
   return (
     <section className="pt-5 pb-10 px-4">
-      <form className="flex gap-3 mb-4">
-        <InsideMenu title="진행 중" number={2} isCurrent={true} />
-        <InsideMenu title="진행 예정" number={1} isCurrent={false} />
-      </form>
+      <ProgressInsideMenuWrapper />
 
       <div className="flex flex-col gap-4">
-        {studyList.map((study) => (
-          <StudyOnGoingCard key={study.id} isStarted={study.isStarted} />
-        ))}
+        {currentStudyList &&
+          currentStudyList.map((study) => (
+            <StudyOnGoingCard key={study._id.toString()} isStarted={currentListType === "PROGRESS"} study={study} />
+          ))}
       </div>
     </section>
   );
