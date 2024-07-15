@@ -3,52 +3,34 @@ import StudyDetailCardLayout from "./elements/layouts/StudyDetailCardLayout";
 
 import Title from "../Title";
 import MemberProfile from "./elements/MemberProfile";
-import { IMAGES_DEFAUlT } from "@/constant/images";
+import { TStudyDetailInfoData } from "@/types/api/study";
 
-type TMember = {
-  id: string;
-  nickname: string;
-  profileImageUrl: string;
-  isLeader: boolean;
-  role: string;
-};
+interface IRecruitedMembersListProps {
+  study: TStudyDetailInfoData["study"];
+  memberList: TStudyDetailInfoData["teamMemberList"];
+}
 
-const memberList: TMember[] = [
-  {
-    id: "1",
-    nickname: "웅진",
-    profileImageUrl: "",
-    isLeader: true,
-    role: "팀장",
-  },
-  {
-    id: "2",
-    nickname: "체리콜라",
-    profileImageUrl: "",
-    isLeader: false,
-    role: "기록팀장",
-  },
-  {
-    id: "3",
-    nickname: "취뽀고",
-    profileImageUrl: "",
-    isLeader: false,
-    role: "일정팀장",
-  },
-];
-
-export default function RecruitedMembersList() {
+export default function RecruitedMembersList({ study, memberList }: IRecruitedMembersListProps) {
   return (
     <>
       <article id="recruited_member">
         <StudyDetailCardLayout addStyle="mt-4">
           <Title>
-            팀원 프로필<span className="text-main-500 ml-2">3/4</span>
+            팀원 프로필
+            <span className="text-main-500 ml-2">
+              {memberList.length}/{study.wantedMember.count}
+            </span>
           </Title>
           <HorizontalDivider addStyle="my-4" />
           <div className="flex flex-col gap-1 justify-start">
-            {memberList.map((member) => (
-              <MemberProfile key={member.id} {...member} />
+            {memberList?.map((member) => (
+              <MemberProfile
+                key={member.memberId}
+                nickname={member.nickname}
+                profileImageUrl={member.profileImageUrl}
+                role={member.role}
+                isLeader={member.isOwner}
+              />
             ))}
           </div>
         </StudyDetailCardLayout>

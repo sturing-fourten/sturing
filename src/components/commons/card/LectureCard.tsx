@@ -9,8 +9,8 @@ import { TLectureInfoData } from "@/types/api/lecture";
 
 interface LectureCardProps {
   variant: "card" | "info";
+  isScraped?: boolean;
   lecture: TLectureInfoData;
-  isScraped: boolean;
 }
 
 export default function LectureCard({ variant, lecture, isScraped }: LectureCardProps) {
