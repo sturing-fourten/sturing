@@ -1,7 +1,11 @@
 import Button from "@/components/commons/Button";
 import Link from "next/link";
 
-export default function FindTeamMember() {
+interface FindTeamMemberProps {
+  studyId: string;
+}
+
+export default function FindTeamMember({ studyId }: FindTeamMemberProps) {
   return (
     <div className="w-full h-dvh px-[22px] py-[16px] flex-col inline-flex">
       <div className="overflow-auto flex-1 mt-[55px]">
@@ -28,7 +32,7 @@ export default function FindTeamMember() {
         <Button varient="filled" addStyle="w-full h-12 bg-blue-500 text-white font-semibold rounded">
           팔로잉 목록에서 초대하기
         </Button>
-        <Link href="/recruit/success">
+        <Link href={`/recruit/success/${studyId}`}>
           <Button varient="filled" addStyle="w-full h-12 bg-indigo-50 text-blue-500 font-semibold rounded">
             나중에 하기
           </Button>

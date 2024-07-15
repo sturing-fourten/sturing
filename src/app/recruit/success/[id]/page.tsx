@@ -1,7 +1,7 @@
 import Button from "@/components/commons/Button";
 import Link from "next/link";
 
-export default function Success() {
+export default function Success({ params }: { params: { id: string } }) {
   return (
     <div className="w-full h-dvh px-[22px] py-[16px] flex-col inline-flex">
       <div className="flex-col inline-flex justify-center items-center gap-[13px] flex-1">
@@ -14,7 +14,7 @@ export default function Success() {
           </p>
         </div>
       </div>
-      <Link href="/">
+      <Link href={`/study/${params.id}`}>
         <Button varient="filled" addStyle="w-full h-12 bg-blue-500 text-white font-semibold rounded">
           확인
         </Button>
