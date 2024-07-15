@@ -7,6 +7,15 @@ export type TTabMenuLinkUnderlinedItem = {
   count?: number;
 };
 
+export type THrefType = "/mystudy/recruitment" | "/mystudy/done" | "/mystudy/";
+
+export type TMyStudyTabMenuLinkUnderlinedItem = {
+  id: string;
+  title: string;
+  href: THrefType;
+  count?: number;
+};
+
 export type TTabMenuButtonUnderlinedItem = {
   id: string;
   title: string;

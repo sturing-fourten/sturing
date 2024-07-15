@@ -1,6 +1,6 @@
 "use server";
 
-import { useMyStudyListStore } from "@/store/myStudyListStore";
+import { TMyStudyListType, useMyStudyListStore } from "@/store/myStudyListStore";
 import { getSession } from "../getSession";
 import { revalidatePath } from "next/cache";
 
@@ -74,6 +74,7 @@ export const fetchDoneStudyListAction: TMyStudyListAction = async () => {
 };
 
 export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async () => {
+  console.log("fetchRecruitStartOwnerStudyListAction");
   useMyStudyListStore.getState().setCurrentListType("RECRUIT_START_OWNER");
 
   const session = await getSession();
@@ -95,4 +96,10 @@ export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async (
     useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyListCount);
     revalidatePath("/mystudy/recruitment");
   } catch (error) {}
+};
+
+export const resetMyStudyAction = (nextHref: string, nextListType: TMyStudyListType) => {
+  console.log("resetMyStudyAction", nextHref, nextListType);
+  useMyStudyListStore.getState().setCurrentListType(nextListType);
+  revalidatePath(nextHref);
 };

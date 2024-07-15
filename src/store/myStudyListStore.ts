@@ -1,11 +1,10 @@
 import { create } from "zustand";
 import { TStudy } from "@/types/study";
 
+export type TMyStudyListType = "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE";
 interface IMyStudyListState {
-  currentListType: "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE";
-  setCurrentListType: (
-    newType: "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE",
-  ) => void;
+  currentListType: TMyStudyListType;
+  setCurrentListType: (newType: TMyStudyListType) => void;
   currentStudyList: TStudy[] | null;
   setCurrentStudyList: (newList: TStudy[]) => void;
   progressStudyListCount: number;

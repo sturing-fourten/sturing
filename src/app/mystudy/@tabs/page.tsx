@@ -5,6 +5,7 @@ import { useMyStudyListStore } from "@/store/myStudyListStore";
 
 export default async function ProcessTabPage() {
   const currentListType = useMyStudyListStore.getState().currentListType;
+
   if (currentListType === "PROGRESS") await fetchProgressStudyListAction();
   const currentStudyList = useMyStudyListStore.getState().currentStudyList;
 

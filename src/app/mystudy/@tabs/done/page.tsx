@@ -3,7 +3,8 @@ import { fetchDoneStudyListAction } from "@/lib/database/action/myStudyList";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
 
 export default async function DoneTabPage() {
-  await fetchDoneStudyListAction();
+  const currentListType = useMyStudyListStore.getState().currentListType;
+  if (currentListType === "DONE") await fetchDoneStudyListAction();
   const currentStudyList = useMyStudyListStore.getState().currentStudyList;
 
   return (

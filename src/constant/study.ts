@@ -1,5 +1,10 @@
 import { STUDY_CATEGORY, MOOD, ICONS } from "@/constant/icons";
-import { StudyCategoryMenu, UserFavoriteFieldType, TTabMenuLinkUnderlinedItem } from "@/types/study";
+import {
+  StudyCategoryMenu,
+  UserFavoriteFieldType,
+  TTabMenuLinkUnderlinedItem,
+  TMyStudyTabMenuLinkUnderlinedItem,
+} from "@/types/study";
 
 export const STUDY_CATEGORY_MENU: StudyCategoryMenu = {
   design: {
@@ -79,7 +84,7 @@ export const USER_FAVORITE_FIELD_TYPE: UserFavoriteFieldType = {
   },
 };
 
-export const STUDY_TAB_MENU_LIST: TTabMenuLinkUnderlinedItem[] = [
+export const STUDY_TAB_MENU_LIST: TMyStudyTabMenuLinkUnderlinedItem[] = [
   { id: "progress", title: "진행", href: "/mystudy/", count: 1 },
   { id: "recruitment", title: "대기", href: "/mystudy/recruitment", count: 1 },
   { id: "done", title: "완료", href: "/mystudy/done", count: 1 },

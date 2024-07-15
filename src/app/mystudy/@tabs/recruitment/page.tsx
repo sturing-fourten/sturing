@@ -6,7 +6,7 @@ import { useMyStudyListStore } from "@/store/myStudyListStore";
 
 export default async function RecruitmentTabPage() {
   const currentListType = useMyStudyListStore.getState().currentListType;
-  if (currentListType !== "RECRUIT_START_MEMBER") await fetchRecruitStartOwnerStudyListAction();
+  if (currentListType === "RECRUIT_START_OWNER") await fetchRecruitStartOwnerStudyListAction();
   const currentStudyList = useMyStudyListStore.getState().currentStudyList;
 
   return (
