@@ -10,8 +10,8 @@ export default function LectureReviewForm({ lectureId }: { lectureId: string }) 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append("rating", rating.toString());
     formData.append("comment", comment);

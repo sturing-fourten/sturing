@@ -4,8 +4,8 @@ import { getLectureAction } from "@/lib/database/action/lecture";
 
 export default async function LectureReviewPage({ params }: { params: { id: string } }) {
   const { id } = params;
-  const lectureData = await getLectureAction(id);
-  const { title, instructor } = lectureData;
+  const data = await getLectureAction(id);
+  const { title, instructor } = data.lecture;
 
   return (
     <>

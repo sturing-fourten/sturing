@@ -37,7 +37,7 @@ export const createLectureReviewAction = async (lectureId: string, formData: For
     reviewer: "모몽가",
     rating: Number(formData.get("rating")),
     comment: formData.get("comment"),
-    createdAt: new Date(),
+    createdAt: new Date().toISOString(),
   };
 
   const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${lectureId}/review`, {
@@ -52,5 +52,6 @@ export const createLectureReviewAction = async (lectureId: string, formData: For
     throw new Error("Failed to create lecture review");
   }
 
+  revalidatePath("/lecture");
   redirect("/mystudy");
 };

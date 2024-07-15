@@ -23,3 +23,4 @@ const lectureSchema = new mongoose.Schema({
 });
 
 export const Lecture = mongoose.models.Lecture || mongoose.model("Lecture", lectureSchema);
+export const LectureReview = mongoose.models.LectureReview || mongoose.model("LectureReview", lectureReviewSchema);
