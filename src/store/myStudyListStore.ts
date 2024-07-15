@@ -12,6 +12,10 @@ interface IMyStudyListState {
   setProgressStudyListCount: (newCounts: number) => void;
   recruitEndStudyListCount: number;
   setRecruitEndStudyListCount: (newCounts: number) => void;
+  recruitStartOwnerStudyListCount: number;
+  setRecruitStartOwnerStudyListCount: (newCounts: number) => void;
+  recruitStartMemberStudyListCount: number;
+  setRecruitStartMemberStudyListCount: (newCounts: number) => void;
 }
 
 export const useMyStudyListStore = create<IMyStudyListState>((set) => ({
@@ -26,11 +30,19 @@ export const useMyStudyListStore = create<IMyStudyListState>((set) => ({
     set({ currentStudyList: newList });
   },
   progressStudyListCount: 0,
-  setProgressStudyListCount: (newCounts: number) => {
-    set({ progressStudyListCount: newCounts });
+  setProgressStudyListCount: (newCount: number) => {
+    set({ progressStudyListCount: newCount });
   },
   recruitEndStudyListCount: 0,
-  setRecruitEndStudyListCount: (newCounts: number) => {
-    set({ recruitEndStudyListCount: newCounts });
+  setRecruitEndStudyListCount: (newCount: number) => {
+    set({ recruitEndStudyListCount: newCount });
+  },
+  recruitStartOwnerStudyListCount: 0,
+  setRecruitStartOwnerStudyListCount: (newCount: number) => {
+    set({ recruitStartOwnerStudyListCount: newCount });
+  },
+  recruitStartMemberStudyListCount: 0,
+  setRecruitStartMemberStudyListCount: (newCount: number) => {
+    set({ recruitStartMemberStudyListCount: newCount });
   },
 }));

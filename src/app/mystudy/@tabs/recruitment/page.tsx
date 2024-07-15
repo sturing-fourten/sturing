@@ -1,27 +1,24 @@
 import StudyApplyingCard from "@/components/commons/card/StudyApplyingCard";
 import StudyRecruitingCard from "@/components/commons/card/StudyRecruitingCard";
-import { InsideMenu } from "@/components/commons/card/element/InsideMenu";
+import RecruitmentInsideMenuWrapper from "@/components/domains/mystudy/RecruitmentInsideMenuWrapper";
+import { fetchRecruitStartOwnerStudyListAction } from "@/lib/database/action/myStudyList";
+import { useMyStudyListStore } from "@/store/myStudyListStore";
 
-export default function RecruitmentTabPage() {
+export default async function RecruitmentTabPage() {
+  const currentListType = useMyStudyListStore.getState().currentListType;
+  if (currentListType !== "RECRUIT_START_MEMBER") await fetchRecruitStartOwnerStudyListAction();
+  const currentStudyList = useMyStudyListStore.getState().currentStudyList;
+
   return (
     <section className="pt-5 pb-10 px-4">
-      <form className="flex gap-3 mb-4">
-        <InsideMenu title="모집 중" number={2} isCurrent={true} />
-        <InsideMenu title="지원 중" number={1} isCurrent={false} />
-      </form>
-
-      {/* 모집 중 */}
+      <RecruitmentInsideMenuWrapper />
       <div className="flex flex-col gap-3 pb-5">
-        <StudyApplyingCard status={"APPLIED"} />
-        <StudyApplyingCard status={"APPLIED_VIEW"} />
-        <StudyApplyingCard status={"ACCEPTED"} />
-      </div>
-
-      {/* 지원 중 */}
-      <div className="flex flex-col gap-3 pb-5">
-        <StudyRecruitingCard />
-        <StudyRecruitingCard />
-        <StudyRecruitingCard />
+        {currentStudyList &&
+          currentListType === "RECRUIT_START_OWNER" &&
+          currentStudyList.map((study) => <StudyRecruitingCard key={study._id.toString()} study={study} />)}
+        {currentStudyList &&
+          currentListType === "RECRUIT_START_MEMBER" &&
+          currentStudyList.map((study) => <StudyApplyingCard key={study._id.toString()} study={study} />)}
       </div>
     </section>
   );
