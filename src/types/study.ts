@@ -89,18 +89,23 @@ export type TStudy = {
   status: "RECRUIT_START" | "RECRUIT_END" | "PROGRESS" | "DONE";
   moodKeywords?: string[];
   task?: string[];
-  teamMembersId?:
-    | mongoose.Types.ObjectId
-    | {
-        _id: mongoose.Types.ObjectId;
-        members: TMember[];
-      };
+  teamMembersId?: mongoose.Types.ObjectId | TTeamMembersIdAddedMember;
   createdAt: Date;
   updatedAt: Date;
 };
 
+export type TTeamMembersIdAddedMember = {
+  _id: mongoose.Types.ObjectId;
+  members: TMember[];
+};
+
+export type TMemberUserIdAddedUser = {
+  _id: mongoose.Types.ObjectId;
+  nickname: string;
+};
+
 export type TMember = {
-  userId: mongoose.Types.ObjectId;
+  userId: mongoose.Types.ObjectId | TMemberUserIdAddedUser;
   role: "팀장" | "부팀장" | "과제팀장" | "출결팀장" | "기록팀장" | "일정팀장" | "팀원";
   isOwner: boolean;
   status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
