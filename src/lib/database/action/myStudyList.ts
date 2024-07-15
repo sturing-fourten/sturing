@@ -51,3 +51,24 @@ export const fetchRecruitEndStudyListAction: TMyStudyListAction = async () => {
     revalidatePath("/mystudy");
   } catch (error) {}
 };
+
+export const fetchDoneStudyListAction: TMyStudyListAction = async () => {
+  useMyStudyListStore.getState().setCurrentListType("DONE");
+
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  if (!userId) throw new Error("유저 정보가 필요합니다.");
+
+  try {
+    const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${userId}&listType=DONE`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+
+    const doneList = await response.json();
+    if (!doneList) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+
+    useMyStudyListStore.getState().setCurrentStudyList(doneList);
+    revalidatePath("/mystudy/done");
+  } catch (error) {}
+};
