@@ -2,7 +2,7 @@ import StudyApplyingCard from "@/components/commons/card/StudyApplyingCard";
 import StudyRecruitingCard from "@/components/commons/card/StudyRecruitingCard";
 import { InsideMenu } from "@/components/commons/card/element/InsideMenu";
 
-export default function AppliedTabPage() {
+export default function RecruitmentTabPage() {
   return (
     <section className="pt-5 pb-10 px-4">
       <form className="flex gap-3 mb-4">

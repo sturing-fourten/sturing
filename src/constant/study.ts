@@ -81,7 +81,7 @@ export const USER_FAVORITE_FIELD_TYPE: UserFavoriteFieldType = {
 
 export const STUDY_TAB_MENU_LIST: TTabMenuLinkUnderlinedItem[] = [
   { id: "progress", title: "진행", href: "/mystudy/", count: 1 },
-  { id: "applying", title: "대기", href: "/mystudy/applying", count: 1 },
+  { id: "recruitment", title: "대기", href: "/mystudy/recruitment", count: 1 },
   { id: "done", title: "완료", href: "/mystudy/done", count: 1 },
 ];
 
