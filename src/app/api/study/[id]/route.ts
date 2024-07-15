@@ -32,7 +32,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
     const teamMembers = await TeamMembers.findOne({ studyId, "members.status": "ACCEPTED" });
 
-    let acceptedTeamMembers;
+    let acceptedTeamMembers = [];
 
     if (teamMembers) {
       acceptedTeamMembers = await Promise.all(
@@ -47,8 +47,6 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
           };
         }),
       );
-    } else {
-      acceptedTeamMembers = [];
     }
 
     return Response.json({ study, lecture: lectureResult, teamMemberList: acceptedTeamMembers }, { status: 200 });

@@ -5,7 +5,7 @@ interface FixedBottomBarProps {
   lectureId?: string;
 }
 
-export default function FixedBottomBar({ page, lectureId }: FixedBottomBarProps) {
+export default function FixedBottomBar({ page, id }: FixedBottomBarProps) {
   return (
     <>
       <footer className="sm:absolute fixed inset-x-0 bottom-0 flex items-center justify-between gap-1 h-[74px] bg-white px-4 py-3 drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]">

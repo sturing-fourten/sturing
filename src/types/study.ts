@@ -17,14 +17,14 @@ type StudyCategory = {
 };
 
 export type StudyCategoryMenu = {
-  design: StudyCategory;
-  develop: StudyCategory;
-  marketing: StudyCategory;
-  business: StudyCategory;
-  economic: StudyCategory;
-  language: StudyCategory;
-  certificate: StudyCategory;
-  selfDevelop: StudyCategory;
+  DESIGN: StudyCategory;
+  DEVELOP: StudyCategory;
+  MARKETING: StudyCategory;
+  BUSINESS: StudyCategory;
+  ECONOMY: StudyCategory;
+  LANGUAGE: StudyCategory;
+  LICENSE: StudyCategory;
+  "SELF-DEVELOPMENT": StudyCategory;
 };
 
 export type UserFavoriteFieldType = {

@@ -24,7 +24,7 @@ export default async function StudyDetail({ params }: { params: { id: string } }
           <Header page="study" studyInfo={studyData.study} lectureInfo={studyData.lecture} />
           <Contents study={studyData.study} lecture={studyData.lecture} memberList={studyData.teamMemberList} />
         </div>
-        <FixedBottomBar page="study" />
+        <FixedBottomBar page="study" id={id} />
       </div>
     </>
   );

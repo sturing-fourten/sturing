@@ -8,22 +8,38 @@ import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import { useEffect, useState } from "react";
 import SortFilterButton from "./SortFilterButton";
 import { getLectureListAction } from "@/lib/database/action/lecture";
-import { LectureData } from "@/app/lecture/[id]/page";
+import { LectureData, StudyData } from "@/types/studyDetail";
 
 export default function Content() {
   const [menu, setMenu] = useState("lecture");
-  const [lectures, setLectures] = useState([]);
+  const [lectures, setLectures] = useState<LectureData[]>([]);
+  const [studies, setStudies] = useState<StudyData[]>([]);
+
+  const fetchStudyListData = async () => {
+    try {
+      const res = await fetch(`/api/study/list`);
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await res.json();
+      setStudies(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchLectureListData = async () => {
+    try {
+      const data = await getLectureListAction();
+      setLectures(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchLectureListData = async () => {
-      try {
-        const data = await getLectureListAction();
-        setLectures(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchLectureListData();
+    fetchStudyListData();
   }, []);
 
   return (
@@ -40,12 +56,11 @@ export default function Content() {
               <h1 className="text-base text-gray-1000 font-semibold leading-snug mb-[17px]">스터디</h1>
             )}
             <div className="flex flex-col gap-5 items-end">
-              <SortFilterButton />
+              {menu === "total" && <SortFilterButton />}
               <CardList>
-                <StudyRecruitCard isMini isScraped />
-                <StudyRecruitCard isMini isScraped />
-                <StudyRecruitCard isMini isScraped />
-                <StudyRecruitCard isMini isScraped />
+                {menu === "total"
+                  ? studies.slice(0, 4).map((study: StudyData) => <StudyRecruitCard key={study._id} isMini isScraped />)
+                  : studies.map((study: StudyData) => <StudyRecruitCard key={study._id} isMini isScraped />)}
               </CardList>
             </div>
             {menu === "total" && (
@@ -68,9 +83,11 @@ export default function Content() {
               {menu === "total"
                 ? lectures
                     .slice(0, 2)
-                    .map((lecture: LectureData) => <LectureCard key={lecture._id} lecture={lecture} variant="card" />)
+                    .map((lecture: LectureData) => (
+                      <LectureCard key={lecture._id} lecture={lecture} variant="card" isScraped />
+                    ))
                 : lectures.map((lecture: LectureData) => (
-                    <LectureCard key={lecture._id} lecture={lecture} variant="card" />
+                    <LectureCard key={lecture._id} lecture={lecture} variant="card" isScraped />
                   ))}
             </div>
             {menu === "total" && (
