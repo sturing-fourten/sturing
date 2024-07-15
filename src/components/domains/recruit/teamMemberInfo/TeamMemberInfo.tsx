@@ -8,6 +8,7 @@ import CareerList from "./CareerList";
 import NumberOfTeamMember from "./NumberOfTeamMember";
 import AgesList from "./AgesList";
 import RoleList from "./RoleList";
+import { useTeamMemberInfoStore } from "@/store/recruitStore";
 
 interface TeamMemberInfoProps {
   onTeamMemberInfoChange: (
@@ -19,55 +20,60 @@ interface TeamMemberInfoProps {
 }
 
 export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInfoProps) {
-  const [selectedCareer, setSelectedCareer] = useState<string[]>([]);
-  const [selectedAges, setSelectedAges] = useState<string[]>([]);
-  const [selectedRole, setSelectedRole] = useState<string[]>([]);
-  const [numberOfTeamMembers, setNumberOfTeamMembers] = useState<number>(1);
+  const career = useTeamMemberInfoStore((state) => state.career);
+  const setCareer = useTeamMemberInfoStore((state) => state.setCareer);
+  const numberOfTeamMembers = useTeamMemberInfoStore((state) => state.numberOfTeamMembers);
+  const setNumberOfTeamMembers = useTeamMemberInfoStore((state) => state.setNumberOfTeamMembers);
+  const ages = useTeamMemberInfoStore((state) => state.ages);
+  const setAges = useTeamMemberInfoStore((state) => state.setAges);
+  const role = useTeamMemberInfoStore((state) => state.role);
+  const setRole = useTeamMemberInfoStore((state) => state.setRole);
+
   const [isInfinity, setIsInfinity] = useState<boolean>(false);
 
   const handleCareerToggle = (careerName: string) => {
     if (careerName === CAREER_LIST.all) {
-      if (selectedCareer.includes(CAREER_LIST.all)) {
-        setSelectedCareer([]);
+      if (career.includes(CAREER_LIST.all)) {
+        setCareer([]);
       } else {
-        setSelectedCareer([CAREER_LIST.all]);
+        setCareer([CAREER_LIST.all]);
       }
     } else {
-      if (selectedCareer.includes(careerName)) {
-        setSelectedCareer(selectedCareer.filter((career) => career !== careerName));
+      if (career.includes(careerName)) {
+        setCareer(career.filter((career) => career !== careerName));
       } else {
-        setSelectedCareer([...selectedCareer.filter((career) => career !== CAREER_LIST.all), careerName]);
+        setCareer([...career.filter((career) => career !== CAREER_LIST.all), careerName]);
       }
     }
   };
 
   const handleAgesToggle = (ageName: string) => {
     if (ageName === AGE_LIST.all) {
-      if (selectedAges.includes(AGE_LIST.all)) {
-        setSelectedAges([]);
+      if (ages.includes(AGE_LIST.all)) {
+        setAges([]);
       } else {
-        setSelectedAges([AGE_LIST.all]);
+        setAges([AGE_LIST.all]);
       }
     } else {
-      if (selectedAges.includes(ageName)) {
-        setSelectedAges(selectedAges.filter((age) => age !== ageName));
+      if (ages.includes(ageName)) {
+        setAges(ages.filter((age) => age !== ageName));
       } else {
-        setSelectedAges([...selectedAges.filter((age) => age !== AGE_LIST.all), ageName]);
+        setAges([...ages.filter((age) => age !== AGE_LIST.all), ageName]);
       }
     }
   };
 
   const handleRoleToggle = (roleName: string) => {
-    if (selectedRole.includes(roleName)) {
-      setSelectedRole(selectedRole.filter((role) => role !== roleName));
+    if (role.includes(roleName)) {
+      setRole(role.filter((role) => role !== roleName));
     } else {
-      setSelectedRole([...selectedRole, roleName]);
+      setRole([...role, roleName]);
     }
   };
 
   const handleMinusNumber = () => {
     setNumberOfTeamMembers((prev) => {
-      if (prev > 1) {
+      if (typeof prev === "number" && prev > 1) {
         return prev - 1;
       }
       return prev;
@@ -75,16 +81,26 @@ export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInf
   };
 
   const handlePlusNumber = () => {
-    setNumberOfTeamMembers((prev) => prev + 1);
+    setNumberOfTeamMembers((prev) => {
+      if (typeof prev === "number") {
+        return prev + 1;
+      }
+      return prev;
+    });
   };
 
   const handleInfiniteNumber = () => {
     setIsInfinity((prev) => !prev);
+    if (!isInfinity) {
+      setNumberOfTeamMembers("제한없음");
+    } else {
+      setNumberOfTeamMembers(1);
+    }
   };
 
   useEffect(() => {
-    onTeamMemberInfoChange(selectedCareer, numberOfTeamMembers, selectedAges, selectedRole);
-  }, [selectedCareer, numberOfTeamMembers, selectedAges, selectedRole]);
+    onTeamMemberInfoChange(career, numberOfTeamMembers, ages, role);
+  }, [career, numberOfTeamMembers, ages, role]);
 
   return (
     <div className="w-full px-[22px] py-[16px] flex-col gap-[30px] inline-flex">
@@ -92,7 +108,7 @@ export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInf
         <Title>원하는 팀원의 정보를 입력해 주세요</Title>
         <div className="flex-col inline-flex gap-4">
           <Subtitle>함께하고 싶은 팀원</Subtitle>
-          <CareerList selectedCareer={selectedCareer} handleCareerToggle={handleCareerToggle} />
+          <CareerList selectedCareer={career} handleCareerToggle={handleCareerToggle} />
         </div>
       </div>
       <DivisionLine />
@@ -111,12 +127,12 @@ export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInf
       <DivisionLine />
       <div className="flex-col inline-flex gap-[13px]">
         <Subtitle>함께하고 싶은 팀원의 연령대</Subtitle>
-        <AgesList selectedAges={selectedAges} handleAgesToggle={handleAgesToggle} />
+        <AgesList selectedAges={ages} handleAgesToggle={handleAgesToggle} />
       </div>
       <DivisionLine />
       <div className="flex-col inline-flex gap-[13px]">
         <Subtitle>스터디에서 필요한 역할 선택</Subtitle>
-        <RoleList selectedRole={selectedRole} handleRoleToggle={handleRoleToggle} />
+        <RoleList selectedRole={role} handleRoleToggle={handleRoleToggle} />
       </div>
     </div>
   );

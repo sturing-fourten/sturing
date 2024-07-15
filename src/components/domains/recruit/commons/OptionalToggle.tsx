@@ -8,7 +8,9 @@ interface OptionalToggle {
 
 export default function OptionalToggle({ onClick, children, isActive }: OptionalToggle) {
   return (
-    <div className="flex gap-[6px] text-neutral-400 text-sm font-normal leading-snug" onClick={onClick}>
+    <div
+      className="flex gap-[6px] w-fit text-neutral-400 text-sm font-normal leading-snug cursor-pointer"
+      onClick={onClick}>
       {isActive ? (
         <img src={ICONS.toggleCheckBlue.src} alt={ICONS.toggleCheckBlue.alt} />
       ) : (

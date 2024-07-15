@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       members: [
         {
           userId: newStudy.ownerId,
-          role: "leader",
+          role: "팀장",
           isOwner: true,
           status: "ACCEPTED",
         },

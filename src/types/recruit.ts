@@ -101,6 +101,6 @@ export interface RecruitType {
 
 export interface RecruitState {
   recruit: RecruitType | null;
-  fetchRecruit: (ownerId: string) => Promise<void>;
+  fetchRecruit: () => Promise<void>;
   setRecruit: (recruit: RecruitType) => void;
 }

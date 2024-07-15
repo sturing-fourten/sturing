@@ -4,10 +4,7 @@ import Link from "next/link";
 export default function FindTeamMember() {
   return (
     <div className="w-full h-dvh px-[22px] py-[16px] flex-col inline-flex">
-      <div className="flex justify-end mt-[15px] mb-8">
-        <img src="/icons/close.svg" alt="닫기" onClick={() => {}} />
-      </div>
-      <div className="overflow-auto flex-1">
+      <div className="overflow-auto flex-1 mt-[55px]">
         <div className="w-full flex-col inline-flex">
           <div className="flex-col inline-flex gap-[11px] mb-[66px]">
             <div className="w-full text-black text-2xl font-semibold leading-9">나와 딱 맞는 팀원을 찾아볼까요?</div>

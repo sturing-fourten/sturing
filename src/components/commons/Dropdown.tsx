@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, ReactElement, cloneElement } from "react";
 import TextField from "./TextField";
 import { ICONS } from "@/constant/icons";
 
@@ -7,10 +7,11 @@ interface DropdownProps {
   name: string;
   addStyle?: string;
   children: React.ReactNode;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   value: string;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
 export default function Dropdown(props: DropdownProps) {
   const { type, name, addStyle, children, onBlur, value, onChange } = props;
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
@@ -18,6 +19,22 @@ export default function Dropdown(props: DropdownProps) {
   const handleDropdown = () => {
     setOpenDropdown((prev) => !prev);
   };
+
+  const handleChildClick = () => {
+    setOpenDropdown(false);
+  };
+
+  const clonedChildren = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      return cloneElement(child as ReactElement, {
+        onClick: (e: React.MouseEvent) => {
+          if (child.props.onClick) child.props.onClick(e);
+          handleChildClick();
+        },
+      });
+    }
+    return child;
+  });
 
   return (
     <div className="relative">
@@ -30,7 +47,7 @@ export default function Dropdown(props: DropdownProps) {
         onBlur={onBlur}
         value={value}
         onChange={onChange}>
-        {openDropdown ? children : undefined}
+        {openDropdown ? clonedChildren : undefined}
       </TextField>
       <button type="button" className="absolute top-[11px] right-4" onClick={handleDropdown}>
         <img

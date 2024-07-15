@@ -8,40 +8,68 @@ import SelectLecture from "@/components/domains/recruit/selectLecture/SelectLect
 import StudyDetail from "@/components/domains/recruit/studyDetail/StudyDetail";
 import StudyContent from "@/components/domains/recruit/studyContent/StudyContent";
 import TeamMemberInfo from "@/components/domains/recruit/teamMemberInfo/TeamMemberInfo";
-import { LectureType, StudyContentType, StudyDetailType, TeamMemberInfoType } from "@/types/recruit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
+import { recruitAction } from "@/lib/database/action/recruit";
+import {
+  useSelectLectureStore,
+  useStudyContentStore,
+  useStudyDetailStore,
+  useTeamMemberInfoStore,
+} from "@/store/recruitStore";
 
 export default function Recruit() {
   const [steps, setSteps] = useState<number>(1);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [isLecture, setIsLecture] = useState<LectureType>({ lecture: "", category: "" });
-  const [isStudyContent, setIsStudyContent] = useState<StudyContentType>({
-    image: "",
-    title: "",
-    introduction: "",
-    progressWay: "",
-  });
-  const [isStudyDetail, setIsStudyDetail] = useState<StudyDetailType>({
-    date: { from: new Date(), to: new Date() },
-    day: "",
-    time: "",
-    selectedMood: [],
-    selectedAssignment: [],
-  });
-  const [isTeamMemberInfo, setIsTeamMemberInfo] = useState<TeamMemberInfoType>({
-    career: [],
-    numberOfTeamMembers: 1,
-    ages: [],
-    role: [],
-  });
+
+  // SelectLectureStore 상태와 업데이트 함수 사용
+  const lecture = useSelectLectureStore((state) => state.lecture);
+  const setLecture = useSelectLectureStore((state) => state.setLecture);
+  const category = useSelectLectureStore((state) => state.category);
+  const setCategory = useSelectLectureStore((state) => state.setCategory);
+
+  // StudyContentStore 상태와 업데이트 함수 사용
+  const image = useStudyContentStore((state) => state.image);
+  const setImage = useStudyContentStore((state) => state.setImage);
+  const title = useStudyContentStore((state) => state.title);
+  const setTitle = useStudyContentStore((state) => state.setTitle);
+  const introduction = useStudyContentStore((state) => state.introduction);
+  const setIntroduction = useStudyContentStore((state) => state.setIntroduction);
+  const progressWay = useStudyContentStore((state) => state.progressWay);
+  const setProgressWay = useStudyContentStore((state) => state.setProgressWay);
+  const online = useStudyContentStore((state) => state.online);
+  const setOnline = useStudyContentStore((state) => state.setOnline);
+  const address = useStudyContentStore((state) => state.address);
+  const setAddress = useStudyContentStore((state) => state.setAddress);
+
+  // StudyDetailStore 상태와 업데이트 함수 사용
+  const date = useStudyDetailStore((state) => state.date);
+  const setDate = useStudyDetailStore((state) => state.setDate);
+  const day = useStudyDetailStore((state) => state.day);
+  const setDay = useStudyDetailStore((state) => state.setDay);
+  const time = useStudyDetailStore((state) => state.time);
+  const setTime = useStudyDetailStore((state) => state.setTime);
+  const selectedMood = useStudyDetailStore((state) => state.selectedMood);
+  const setSelectedMood = useStudyDetailStore((state) => state.setSelectedMood);
+  const selectedAssignment = useStudyDetailStore((state) => state.selectedAssignment);
+  const setSelectedAssignment = useStudyDetailStore((state) => state.setSelectedAssignment);
+
+  // TeamMemberInfoStore 상태와 업데이트 함수 사용
+  const career = useTeamMemberInfoStore((state) => state.career);
+  const setCareer = useTeamMemberInfoStore((state) => state.setCareer);
+  const numberOfTeamMembers = useTeamMemberInfoStore((state) => state.numberOfTeamMembers);
+  const setNumberOfTeamMembers = useTeamMemberInfoStore((state) => state.setNumberOfTeamMembers);
+  const ages = useTeamMemberInfoStore((state) => state.ages);
+  const setAges = useTeamMemberInfoStore((state) => state.setAges);
+  const role = useTeamMemberInfoStore((state) => state.role);
+  const setRole = useTeamMemberInfoStore((state) => state.setRole);
 
   const handlePrevSection = () => {
     setSteps((prevSteps) => prevSteps - 1);
   };
 
   const handleNextSection = () => {
-    if (steps === 1 && (!isLecture.lecture || !isLecture.category)) return;
+    if (steps === 1 && (!lecture || !category)) return;
     setSteps((prevSteps) => prevSteps + 1);
   };
 
@@ -50,11 +78,15 @@ export default function Recruit() {
   };
 
   const handleLectureChange = (lecture: string, category: string) => {
-    setIsLecture({ lecture, category });
+    setLecture(lecture);
+    setCategory(category);
   };
 
   const handleIntroduceChange = (image: string, title: string, introduction: string, progressWay: string) => {
-    setIsStudyContent({ image, title, introduction, progressWay });
+    setImage(image);
+    setTitle(title);
+    setIntroduction(introduction);
+    setProgressWay(progressWay);
   };
 
   const handleDetailChange = (
@@ -64,13 +96,11 @@ export default function Recruit() {
     selectedMood: string[] = [],
     selectedAssignment: string[] = [],
   ) => {
-    setIsStudyDetail({
-      date,
-      day,
-      time,
-      selectedMood,
-      selectedAssignment,
-    });
+    setDate(date);
+    setDay(day);
+    setTime(time);
+    setSelectedMood(selectedMood);
+    setSelectedAssignment(selectedAssignment);
   };
 
   const handleTeamMemberInfoChange = (
@@ -79,38 +109,84 @@ export default function Recruit() {
     ages: string[],
     role: string[],
   ) => {
-    setIsTeamMemberInfo({
-      career,
-      numberOfTeamMembers,
-      ages,
-      role,
-    });
+    setCareer(career);
+    setNumberOfTeamMembers(numberOfTeamMembers);
+    setAges(ages);
+    setRole(role);
   };
 
   const isNextButtonDisabled = () => {
     if (steps === 1) {
-      return !isLecture.lecture || !isLecture.category;
+      return !lecture || !category;
     } else if (steps === 2) {
-      return !isStudyContent.title || !isStudyContent.introduction || !isStudyContent.progressWay;
+      return !title || !introduction || !progressWay;
     } else if (steps === 3) {
-      return !isStudyDetail.date || !isStudyDetail.day || !isStudyDetail.time;
+      return !date || !day || !time;
     } else if (steps === 4) {
-      return (
-        isTeamMemberInfo.career.length === 0 ||
-        isTeamMemberInfo.numberOfTeamMembers === 0 ||
-        isTeamMemberInfo.ages.length === 0 ||
-        isTeamMemberInfo.role.length === 0
-      );
+      return career.length === 0 || numberOfTeamMembers === 0 || ages.length === 0 || role.length === 0;
     }
     return false;
   };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("lectureId", lecture);
+    formData.append("category", category);
+    formData.append("imageUrl", image);
+    formData.append("title", title);
+    formData.append("introduction", introduction);
+    formData.append("progressWay", progressWay);
+    formData.append("online", online || "");
+    formData.append("address", address || "");
+    formData.append("startDate", new Date(date.from ?? "").toISOString());
+    formData.append("endDate", new Date(date.to ?? "").toISOString());
+    formData.append("day", day);
+    formData.append("time", time);
+    formData.append("selectedMood", selectedMood ? selectedMood.join(",") : "");
+    formData.append("selectedAssignment", selectedAssignment ? selectedAssignment.join(",") : "");
+    formData.append("career", career.join(","));
+    formData.append("numberOfTeamMembers", String(numberOfTeamMembers));
+    formData.append("ages", ages.join(","));
+    formData.append("role", role.join(","));
+
+    try {
+      await recruitAction(formData);
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("POST 요청 실패:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      setLecture("");
+      setCategory("");
+      setImage("");
+      setTitle("");
+      setIntroduction("");
+      setProgressWay("");
+      setOnline("");
+      setAddress("");
+      setDate({ from: new Date(), to: new Date() });
+      setDay("");
+      setTime("");
+      setSelectedMood([]);
+      setSelectedAssignment([]);
+      setCareer([]);
+      setNumberOfTeamMembers(0);
+      setAges([]);
+      setRole([]);
+    }
+  }, [isSubmitted]);
 
   if (isSubmitted) {
     return <FindTeamMember />;
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="w-full h-dvh flex-col inline-flex">
         <TopBar variant="save" />
         <ProgressBar maxSteps={4} steps={steps} />
@@ -131,7 +207,7 @@ export default function Recruit() {
             </Button>
           )}
           <Button
-            type="button"
+            type={steps === 4 ? "submit" : "button"}
             varient="filled"
             addStyle={`w-full h-12 ${
               !isNextButtonDisabled() ? "bg-blue-500" : "bg-gray-300"

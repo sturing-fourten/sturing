@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Title from "../commons/Title";
 import Subtitle from "../commons/Subtitle";
 import ImageUpload from "./ImageUpload";
@@ -7,6 +7,7 @@ import StudyIntroduction from "./StudyIntroduction";
 import StudyExample from "./StudyExample";
 import ProgressWay from "./ProgressWay";
 import { useStudyContentStore } from "@/store/recruitStore";
+import { PutBlobResult } from "@vercel/blob";
 
 interface StudyContentProps {
   onIntroduceChange: (image: string, title: string, introduction: string, progressWay: string) => void;
@@ -14,6 +15,7 @@ interface StudyContentProps {
 
 export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   const [fileToRead, setFileToRead] = useState<File | null>(null);
+  const [blob, setBlob] = useState<PutBlobResult | null>(null);
 
   const image = useStudyContentStore((state) => state.image);
   const setImage = useStudyContentStore((state) => state.setImage);
@@ -61,6 +63,24 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
       const newImage = reader.result as string;
       setImage(newImage);
     };
+
+    const fetchImage = async (file: any) => {
+      try {
+        const response = await fetch(`/api/image-test?filename=${file.name}`, {
+          method: "POST",
+          body: file,
+        });
+        const newBlob = (await response.json()) as PutBlobResult;
+        const uploadImage = newBlob.url;
+        setBlob(newBlob);
+        setImage(uploadImage);
+      } catch (error: any) {
+        console.error("Error fetching Image:", error.message);
+        throw error;
+      }
+    };
+
+    fetchImage(fileToRead);
 
     reader.readAsDataURL(fileToRead);
     setFileToRead(null);

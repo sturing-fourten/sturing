@@ -67,7 +67,7 @@ export const useRecruitStore = create<RecruitState>((set) => ({
     try {
       const response = await fetch(`/api/study`);
       if (!response.ok) {
-        throw new Error("작성한 스터디를 가져오는 데 실패했습s니다.");
+        throw new Error("작성한 스터디를 가져오는 데 실패했습니다.");
       }
       const data = await response.json();
       set({ recruit: data });
