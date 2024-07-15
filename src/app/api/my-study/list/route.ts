@@ -67,12 +67,14 @@ export async function GET(request: Request) {
           select: "members",
         });
 
-        const teamMembers = await TeamMembers.find(
-          {
-            "members.userId": userId,
+        const teamMembers = await TeamMembers.find({
+          members: {
+            $elemMatch: {
+              userId: userId,
+              isOwner: false,
+            },
           },
-          { "members.isOwner": false },
-        );
+        });
         const studyIdList = teamMembers.map((member) => member.studyId);
 
         return Response.json({
