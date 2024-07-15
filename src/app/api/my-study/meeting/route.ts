@@ -47,7 +47,9 @@ export async function GET(request: Request) {
         day,
         time,
       };
-      upcomingMeetingList = [...generateUpcomingMeetingList(meetingInfo)];
+      upcomingMeetingList = [...upcomingMeetingList, ...generateUpcomingMeetingList(meetingInfo)].sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+      );
     });
 
     return Response.json(upcomingMeetingList);
