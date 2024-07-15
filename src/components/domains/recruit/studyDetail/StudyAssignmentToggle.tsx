@@ -2,7 +2,7 @@ import DefaultToggle from "@/components/commons/toggle/DefaultToggle";
 import { ASSIGNMENT_LIST } from "@/constant/studyDetail";
 
 interface StudyAssignmentToggleProps {
-  selectedAssignment: string[];
+  selectedAssignment: string[] | undefined;
   handleAssignmentToggle: (assignment: string) => void;
 }
 
@@ -16,7 +16,7 @@ export default function StudyAssignmentToggle({
         <DefaultToggle
           key={key}
           toggleSize="w-full h-[42px]"
-          isActive={selectedAssignment.includes(ASSIGNMENT_LIST[key])}
+          isActive={selectedAssignment?.includes(ASSIGNMENT_LIST[key])}
           onClick={() => handleAssignmentToggle(ASSIGNMENT_LIST[key])}>
           {ASSIGNMENT_LIST[key]}
         </DefaultToggle>

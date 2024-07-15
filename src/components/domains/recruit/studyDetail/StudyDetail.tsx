@@ -3,16 +3,13 @@ import Subtitle from "../commons/Subtitle";
 import Title from "../commons/Title";
 import CalenderDropdown from "@/components/domains/recruit/studyDetail/CalenderDropdown";
 import DaysDropdown from "@/components/domains/recruit/studyDetail/DaysDropdown";
-import { MoodMiniToggle } from "@/components/commons/toggle/MoodToggle";
-import { USER_FAVORITE_FIELD_TYPE } from "@/constant/study";
 import { useEffect, useState } from "react";
-import { ASSIGNMENT_LIST } from "@/constant/studyDetail";
-import { DefaultToggle } from "@/components/commons/toggle/DefaultToggle";
 import { DateRange } from "react-day-picker";
 import DivisionLine from "@/components/commons/DivisionLine";
 import OptionalToggle from "@/components/domains/recruit/commons/OptionalToggle";
 import StudyMoodToggle from "./StudyMoodToggle";
 import StudyAssignmentToggle from "./StudyAssignmentToggle";
+import { useStudyDetailStore } from "@/store/recruitStore";
 
 interface StudyDetailProps {
   onDetailChange: (date: DateRange, day: string, time: string, mood?: string[], assignment?: string[]) => void;
@@ -20,27 +17,33 @@ interface StudyDetailProps {
 
 // 추후 협의에 관한 토글 로직 필요
 export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
-  const [date, setDate] = useState<DateRange>({ from: new Date(), to: new Date() });
-  const [day, setDay] = useState<string>("");
-  const [time, setTime] = useState<string>("");
-  const [selectedMood, setSelectedMood] = useState<string[]>([]);
-  const [selectedAssignment, setSelectedAssignment] = useState<string[]>([]);
+  const date = useStudyDetailStore((state) => state.date);
+  const setDate = useStudyDetailStore((state) => state.setDate);
+  const day = useStudyDetailStore((state) => state.day);
+  const setDay = useStudyDetailStore((state) => state.setDay);
+  const time = useStudyDetailStore((state) => state.time);
+  const setTime = useStudyDetailStore((state) => state.setTime);
+  const selectedMood = useStudyDetailStore((state) => state.selectedMood);
+  const setSelectedMood = useStudyDetailStore((state) => state.setSelectedMood);
+  const selectedAssignment = useStudyDetailStore((state) => state.selectedAssignment);
+  const setSelectedAssignment = useStudyDetailStore((state) => state.setSelectedAssignment);
+
   const [isDayAndTimeLater, setIsDayAndTimeLater] = useState<boolean>(false);
   const [isAssignmentLater, setIsAssignmentLater] = useState<boolean>(false);
 
   const handleMoodToggle = (moodName: string) => {
-    if (selectedMood.includes(moodName)) {
+    if (selectedMood?.includes(moodName)) {
       setSelectedMood(selectedMood.filter((mood) => mood !== moodName));
     } else {
-      setSelectedMood([...selectedMood, moodName]);
+      if (selectedMood) setSelectedMood([...selectedMood, moodName]);
     }
   };
 
   const handleAssignmentToggle = (assignment: string) => {
-    if (selectedAssignment.includes(assignment)) {
+    if (selectedAssignment?.includes(assignment)) {
       setSelectedAssignment(selectedAssignment.filter((Assignment) => Assignment !== assignment));
     } else {
-      setSelectedAssignment([...selectedAssignment, assignment]);
+      if (selectedAssignment) setSelectedAssignment([...selectedAssignment, assignment]);
       setIsAssignmentLater(false);
     }
   };

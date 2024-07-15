@@ -29,7 +29,7 @@ export function MoodBigToggle(props: IMoodBigTagProps) {
 }
 
 interface IMoodMiniToggleProps extends Omit<IMoodMiniBaseProps, "className"> {
-  isActive: boolean;
+  isActive: boolean | undefined;
   onClick?: () => void;
 }
 

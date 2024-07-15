@@ -6,15 +6,19 @@ import CategoryList from "./CategoryList";
 import UrlInput from "./UrlInput";
 import FavoriteListButton from "./FavoriteListButton";
 import SearchBar from "./SearchBar";
+import { useSelectLectureStore } from "@/store/recruitStore";
 
 interface SelectLectureProps {
   onLectureChange: (lecture: string, category: string) => void;
 }
 
 export default function SelectLecture({ onLectureChange }: SelectLectureProps) {
-  const [isLecture, setIsLecture] = useState<string>("");
   const [isLectureValid, setIsLectureValid] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const lecture = useSelectLectureStore((state) => state.lecture);
+  const setLecture = useSelectLectureStore((state) => state.setLecture);
+  const category = useSelectLectureStore((state) => state.category);
+  const setCategory = useSelectLectureStore((state) => state.setCategory);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const url = e.target.value;
@@ -23,37 +27,37 @@ export default function SelectLecture({ onLectureChange }: SelectLectureProps) {
 
     setIsLectureValid(valid);
     if (valid) {
-      setIsLecture(url);
+      setLecture(url);
     }
   };
 
   const handleLectureCancle = () => {
-    setIsLecture("");
+    setLecture("");
   };
 
   const handleCategoryToggle = (categoryName: string) => {
-    setSelectedCategory(categoryName === selectedCategory ? "" : categoryName);
+    setCategory(categoryName === category ? "" : categoryName);
   };
 
   useEffect(() => {
-    onLectureChange(isLecture, selectedCategory);
-  }, [isLecture, selectedCategory]);
+    onLectureChange(lecture, category);
+  }, [lecture, category]);
 
   return (
     <div className="w-full px-[22px] py-[16px] flex-col gap-5 inline-flex">
       <Title>함께 들을 강의를 선택해 볼까요?</Title>
       <div className="flex-col gap-2 inline-flex">
         <SearchBar />
-        {!isLecture && <UrlInput isLectureValid={isLectureValid} onBlur={handleBlur} />}
+        {!lecture && <UrlInput isLectureValid={isLectureValid} onBlur={handleBlur} />}
       </div>
       <FavoriteListButton onClick={() => {}} />
       <div>
-        {isLecture && (
+        {lecture && (
           <div className="w-full flex-col gap-5 inline-flex">
-            <LectureCard onClick={handleLectureCancle} />
+            <LectureCard onClick={handleLectureCancle} setIsLecture={setLecture} />
             <div className="flex-col gap-3 inline-flex">
               <Subtitle>카테고리</Subtitle>
-              <CategoryList selectedCategory={selectedCategory} handleCategoryToggle={handleCategoryToggle} />
+              <CategoryList selectedCategory={category} handleCategoryToggle={handleCategoryToggle} />
             </div>
           </div>
         )}

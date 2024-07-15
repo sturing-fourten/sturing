@@ -30,7 +30,7 @@ const studySchema = new mongoose.Schema(
     meeting: {
       format: {
         type: String,
-        enum: ["online", "offline"],
+        enum: ["온라인", "오프라인"],
         required: true,
       },
       platform: {
@@ -80,7 +80,7 @@ const studySchema = new mongoose.Schema(
         type: [String],
         required: true,
       },
-      count: { type: Number, required: true },
+      count: { type: mongoose.Schema.Types.Mixed, required: true },
       age: {
         type: [String],
         required: true,

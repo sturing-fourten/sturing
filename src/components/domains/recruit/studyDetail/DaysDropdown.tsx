@@ -1,10 +1,9 @@
 import { DAYS_LIST } from "@/constant/studyDetail";
 import Dropdown from "../../../commons/Dropdown";
-import { SetStateAction } from "react";
 
 interface DaysDropdownProps {
   day: string;
-  setDay: React.Dispatch<SetStateAction<string>>;
+  setDay: (day: string) => void;
 }
 
 export default function DaysDropdown(props: DaysDropdownProps) {
