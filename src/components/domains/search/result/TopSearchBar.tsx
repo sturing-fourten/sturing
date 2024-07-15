@@ -4,7 +4,7 @@ import { ICONS } from "@/constant/icons";
 export default function TopSearchBar() {
   return (
     <>
-      <section className="h-[54px] px-4 flex items-center gap-2">
+      <section className="h-[54px] px-4 flex items-center gap-2 mt-5">
         <GoBackButton />
         <form action={""} className="w-full">
           <div className="relative">

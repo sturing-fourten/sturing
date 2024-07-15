@@ -2,35 +2,35 @@ import { STUDY_CATEGORY, MOOD, ICONS } from "@/constant/icons";
 import { StudyCategoryMenu, UserFavoriteFieldType, TTabMenuLinkUnderlinedItem } from "@/types/study";
 
 export const STUDY_CATEGORY_MENU: StudyCategoryMenu = {
-  design: {
+  DESIGN: {
     src: STUDY_CATEGORY.design.src,
     alt: STUDY_CATEGORY.design.alt,
   },
-  develop: {
+  DEVELOP: {
     src: STUDY_CATEGORY.develop.src,
     alt: STUDY_CATEGORY.develop.alt,
   },
-  marketing: {
+  MARKETING: {
     src: STUDY_CATEGORY.marketing.src,
     alt: STUDY_CATEGORY.marketing.alt,
   },
-  business: {
+  BUSINESS: {
     src: STUDY_CATEGORY.business.src,
     alt: STUDY_CATEGORY.business.alt,
   },
-  economic: {
+  ECONOMY: {
     src: STUDY_CATEGORY.economic.src,
     alt: STUDY_CATEGORY.economic.alt,
   },
-  language: {
+  LANGUAGE: {
     src: STUDY_CATEGORY.language.src,
     alt: STUDY_CATEGORY.language.alt,
   },
-  certificate: {
+  LICENSE: {
     src: STUDY_CATEGORY.certificate.src,
     alt: STUDY_CATEGORY.certificate.alt,
   },
-  selfDevelop: {
+  "SELF-DEVELOPMENT": {
     src: STUDY_CATEGORY.selfDevelop.src,
     alt: STUDY_CATEGORY.selfDevelop.alt,
   },

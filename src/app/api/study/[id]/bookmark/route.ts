@@ -1,12 +1,11 @@
 import connectDB from "@/lib/database/db";
-import { LectureBookmark } from "@/schema/bookmarkSchema";
+import { StudyBookmark } from "@/schema/bookmarkSchema";
 
-export async function GET(req: Request) {
-  await connectDB();
-
+export async function GET() {
   try {
-    const lectureBookmark = await LectureBookmark.find({});
-    return Response.json(lectureBookmark);
+    await connectDB();
+    const studyBookmark = await StudyBookmark.find({});
+    return Response.json(studyBookmark);
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error }), {
       status: 500,
@@ -18,20 +17,20 @@ export async function POST(req: Request) {
   try {
     await connectDB();
 
-    const { lectureId, userId } = await req.json();
+    const { studyId, userId } = await req.json();
 
-    const existingBookmark = await LectureBookmark.findOne({ lectureId, userId });
+    const existingBookmark = await StudyBookmark.findOne({ studyId, userId });
 
     if (existingBookmark) {
       throw new Error("이미 해당 강의를 찜한 사용자입니다.");
     }
 
     const newLectureBookmark = {
-      lectureId: lectureId,
+      studyId: studyId,
       userId: userId,
     };
 
-    await LectureBookmark.create(newLectureBookmark);
+    await StudyBookmark.create(newLectureBookmark);
 
     return Response.json(
       { message: "강의 찜하기 성공!" },
@@ -55,7 +54,7 @@ export async function DELETE(req: Request) {
 
     const { _id } = await req.json();
 
-    await LectureBookmark.findByIdAndDelete(_id);
+    await StudyBookmark.findByIdAndDelete(_id);
 
     return Response.json("강의 찜 삭제 성공!");
   } catch (error: any) {

@@ -17,9 +17,9 @@ export async function POST(req: Request, { params }: { params: { id: string } })
       createdAt: new Date(),
     };
 
-    await Lecture.updateOne({ lectureId: lectureId }, { $push: { review: newReview } });
+    await Lecture.updateOne({ _id: lectureId }, { $push: { review: newReview } });
     return Response.json(
-      { message: "강의 후기를 작성했습니다!" },
+      { message: "강의 후기를 작성했습니다..!" },
       {
         status: 200,
       },
