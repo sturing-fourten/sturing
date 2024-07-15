@@ -74,7 +74,6 @@ export const fetchDoneStudyListAction: TMyStudyListAction = async () => {
 };
 
 export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async () => {
-  console.log("fetchRecruitStartOwnerStudyListAction");
   useMyStudyListStore.getState().setCurrentListType("RECRUIT_START_OWNER");
 
   const session = await getSession();
@@ -98,8 +97,31 @@ export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async (
   } catch (error) {}
 };
 
+export const fetchRecruitStartMemberStudyListAction: TMyStudyListAction = async () => {
+  useMyStudyListStore.getState().setCurrentListType("RECRUIT_START_MEMBER");
+
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  if (!userId) throw new Error("유저 정보가 필요합니다.");
+
+  try {
+    const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${userId}&listType=RECRUIT_START_MEMBER`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+
+    const { recruitStartMemberStudyList, recruitStartOwnerStudyListCount } = await response.json();
+    if (!recruitStartMemberStudyList || !recruitStartOwnerStudyListCount)
+      throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+
+    useMyStudyListStore.getState().setCurrentStudyList(recruitStartMemberStudyList);
+    useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyList.length);
+    useMyStudyListStore.getState().setRecruitStartOwnerStudyListCount(recruitStartOwnerStudyListCount);
+    revalidatePath("/mystudy/recruitment");
+  } catch (error) {}
+};
+
 export const resetMyStudyAction = (nextHref: string, nextListType: TMyStudyListType) => {
-  console.log("resetMyStudyAction", nextHref, nextListType);
   useMyStudyListStore.getState().setCurrentListType(nextListType);
   revalidatePath(nextHref);
 };

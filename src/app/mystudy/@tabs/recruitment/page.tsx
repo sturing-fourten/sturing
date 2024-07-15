@@ -14,11 +14,9 @@ export default async function RecruitmentTabPage() {
       <RecruitmentInsideMenuWrapper />
       <div className="flex flex-col gap-3 pb-5">
         {currentStudyList &&
-          currentListType === "RECRUIT_START_OWNER" &&
-          currentStudyList.map((study) => <StudyRecruitingCard key={study._id.toString()} study={study} />)}
-        {currentStudyList &&
-          currentListType === "RECRUIT_START_MEMBER" &&
-          currentStudyList.map((study) => <StudyApplyingCard key={study._id.toString()} study={study} />)}
+          (currentListType === "RECRUIT_START_OWNER"
+            ? currentStudyList.map((study) => <StudyRecruitingCard key={study._id.toString()} study={study} />)
+            : currentStudyList.map((study) => <StudyApplyingCard key={study._id.toString()} study={study} />))}
       </div>
     </section>
   );

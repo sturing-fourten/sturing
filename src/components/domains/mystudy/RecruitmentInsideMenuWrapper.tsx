@@ -1,4 +1,7 @@
-import { fetchRecruitStartOwnerStudyListAction } from "@/lib/database/action/myStudyList";
+import {
+  fetchRecruitStartMemberStudyListAction,
+  fetchRecruitStartOwnerStudyListAction,
+} from "@/lib/database/action/myStudyList";
 import { InsideMenu } from "../../commons/card/element/InsideMenu";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
 
@@ -16,7 +19,7 @@ export default function RecruitmentInsideMenuWrapper() {
           isCurrent={currentListType === "RECRUIT_START_OWNER"}
         />
       </form>
-      <form action={fetchRecruitStartOwnerStudyListAction}>
+      <form action={fetchRecruitStartMemberStudyListAction}>
         <InsideMenu
           title="지원 중"
           number={recruitStartMemberStudyListCount}

@@ -86,16 +86,31 @@ export async function GET(request: Request) {
         });
       }
 
-      // case "RECRUIT_START_MEMBER":
-      //   // 내가 지원한 모든 스터디 중 RECRUIT_START 상태인 목록 조회
-      //   studyList = await Study.find({ ownerId: !userId, status: "RECRUIT_START" });
-      //   // const myRecruitStartTeamMembers = await TeamMembers.find({
-      //   //   "members.userId": userId,
-      //   //   "members.status": "ACCEPTED",
-      //   // });
-      //   // const recruitStartStudyIds = myRecruitStartTeamMembers.map((member) => member.studyId);
-      //   // studyList = await Study.find({ _id: { $in: recruitStartStudyIds }, status: "RECRUIT_START" });
-      //   break;
+      case "RECRUIT_START_MEMBER": {
+        // 내가 지원한 모든 스터디 중 status가 RECRUIT_START인 목록 조회
+        const teamMembers = await TeamMembers.find({
+          members: {
+            $elemMatch: {
+              userId: userId,
+              isOwner: false,
+            },
+          },
+        });
+        const studyIdList = teamMembers.map((member) => member.studyId);
+        const studyList = await Study.find({
+          _id: { $in: studyIdList },
+          status: "RECRUIT_START",
+        });
+
+        return Response.json({
+          recruitStartMemberStudyList: studyList,
+          recruitStartOwnerStudyListCount: await Study.countDocuments({
+            ownerId: userId,
+            status: "RECRUIT_START",
+          }),
+        });
+      }
+
       case "DONE": {
         const teamMembers = await TeamMembers.find({
           "members.userId": userId,

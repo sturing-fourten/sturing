@@ -1,15 +1,46 @@
+import { TStudy, TTeamMembersIdAddedMember } from "@/types/study";
 import StudyApplyInfo from "./element/StudyApplyInfo";
 import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
+import { getDateRange } from "@/utils/getDateRange";
+import { getSession } from "@/lib/database/getSession";
 
-export default function StudyApplyingCard({ status }: { status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED" }) {
+interface IStudyApplyingCardProps {
+  study: TStudy;
+}
+
+export default async function StudyApplyingCard(props: IStudyApplyingCardProps) {
+  const {
+    study: {
+      _id,
+      title,
+      startDate,
+      endDate,
+      meeting: {
+        schedule: { day },
+        format,
+        platform,
+        location,
+      },
+      task,
+      teamMembersId,
+    },
+  } = props;
+
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  const dateRange = getDateRange(startDate, endDate);
+  const where = (format === "ONLINE" ? platform : location) ?? "";
+  const status = (teamMembersId as TTeamMembersIdAddedMember)?.members?.find(
+    (member) => member.userId?._id.toString() !== userId,
+  )?.status;
+
   return (
     <article className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg">
-      <StudyApplyInfo status={status} />
-      <StudyMeetingInfo />
-      <p className="text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">
-        {"소카 5개 프로젝트 디자인 실무 마스터 스터디"}
-      </p>
+      {status && <StudyApplyInfo status={status} />}
+      <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
+      <p className="text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
       <hr className="bg-gray-300" />
       <div className="flex gap-2">
         <StudyCardButton>지원서 보기</StudyCardButton>
