@@ -1,3 +1,5 @@
+import { TRole } from "@/constant/teamMemberInfo";
+
 export type TCategory =
   | "DESIGN"
   | "DEVELOP"
@@ -23,7 +25,7 @@ type TTeamMember = {
   memberId: string;
   nickname: string;
   profileImageUrl: string;
-  role: string;
+  role: TRole;
   isOwner: boolean;
 };
 
@@ -51,7 +53,7 @@ type TStudyDetail = {
     career: string[];
     count: number;
     age: string[];
-    role: string[];
+    role: TRole[];
   };
   scrapCount: number;
   createdAt: string;
@@ -65,3 +67,17 @@ export type TStudyDetailInfoData = {
   lecture: TRelatedLecture;
   teamMemberList: TTeamMember[];
 };
+
+export type TStudyListData = {
+  id: string;
+  ownerId: string;
+  category: string;
+  title: string;
+  imageUrl: string;
+  startDate: Date;
+  endDate: Date;
+  meeting: { format: string; platform?: string; location?: string; schedule: { day: string; time: string } };
+  wantedMemberCount: string | number;
+  acceptedTeamMemberCount: number;
+  isBookmark?: boolean;
+}[];
