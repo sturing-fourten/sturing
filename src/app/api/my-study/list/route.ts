@@ -69,8 +69,27 @@ export async function GET(request: Request) {
       //   // const recruitStartStudyIds = myRecruitStartTeamMembers.map((member) => member.studyId);
       //   // studyList = await Study.find({ _id: { $in: recruitStartStudyIds }, status: "RECRUIT_START" });
       //   break;
-      // case "DONE":
-      //   break;
+      case "DONE":
+        const doneTeamMembers = await TeamMembers.find({
+          "members.userId": userId,
+          $or: [{ "members.isOwner": true }, { "members.status": "ACCEPTED" }],
+        });
+        const doneStudyIdList = doneTeamMembers.map((member) => member.studyId);
+        const doneStudyList = await Study.find({
+          _id: { $in: doneStudyIdList },
+          status: listType,
+        }).populate({
+          path: "teamMembersId",
+          select: "members",
+          populate: {
+            path: "members.userId",
+            model: "User",
+            select: "nickname",
+          },
+        });
+
+        return Response.json(doneStudyList);
+
       default:
         throw new Error("listType이 잘못되었습니다.");
     }
