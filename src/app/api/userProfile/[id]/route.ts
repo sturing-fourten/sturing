@@ -7,7 +7,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   if (!userId) {
     return Response.json({ error: "id 가 필요합니다." }, { status: 400 });
   }
-  connectDB();
+  await connectDB();
 
   try {
     const user = await User.findById(userId);
@@ -15,7 +15,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
       return Response.json({ message: "해당 회원이 존재하지 않습니다." }, { status: 404 });
     }
 
-    const matchingData = await Matching.findById(userId);
+    const matchingData = await Matching.findOne({ userId: userId });
 
     return new Response(JSON.stringify({ user, matching: matchingData }), { status: 200 });
   } catch (error: any) {
