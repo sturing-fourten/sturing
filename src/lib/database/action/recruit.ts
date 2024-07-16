@@ -15,12 +15,16 @@ export async function recruitAction(formData: FormData) {
   const endDate = formData.get("endDate");
   const day = formData.get("day");
   const time = formData.get("time");
-  const moodKeywords = formData.get("selectedMood");
-  const task = formData.get("selectedAssignment");
+  const moodData = formData.get("selectedMood");
+  const taskData = formData.get("selectedAssignment");
+  const moodKeywords = typeof moodData === "string" ? moodData.split(",") : [];
+  const tasks = typeof taskData === "string" ? taskData.split(",") : [];
   const career = formData.get("career");
   const count = formData.get("numberOfTeamMembers");
-  const age = formData.get("ages");
-  const role = formData.get("role");
+  const ageData = formData.get("ages");
+  const roleData = formData.get("role");
+  const age = typeof ageData === "string" ? ageData.split(",") : [];
+  const role = typeof roleData === "string" ? roleData.split(",") : [];
 
   await connectDB();
 
@@ -46,7 +50,7 @@ export async function recruitAction(formData: FormData) {
     startDate: startDate,
     endDate: endDate,
     moodKeywords: moodKeywords,
-    task: task,
+    task: tasks,
     wantedMember: {
       career: career,
       count: count,
