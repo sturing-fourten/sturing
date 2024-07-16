@@ -6,10 +6,9 @@ import SturingIndex from "@/components/domains/userProfile/SturingIndex";
 import TopBar from "@/components/commons/TopBar";
 import HorizontalDivider from "@/components/commons/HorizontalDivider";
 
-export const getProfileInfo = async (id: string) => {
+const getProfileInfo = async (id: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/userProfile/${id}`);
-
     const data = await response.json();
     return data;
   } catch (error) {
@@ -20,7 +19,6 @@ export const getProfileInfo = async (id: string) => {
 export default async function Profile({ params }: { params: { id: string } }) {
   const { id } = params;
   const profileData = await getProfileInfo(id);
-  console.log(profileData);
   return (
     <>
       <div className="bg-gradient-to-br from-gradient-gray/30 to-gradient-to/30">
