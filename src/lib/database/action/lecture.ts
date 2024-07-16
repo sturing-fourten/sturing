@@ -1,6 +1,7 @@
 "use server";
 
 import { TLectureDetailData } from "@/types/api/lecture";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const getLectureListAction = async () => {
