@@ -1,7 +1,7 @@
 import DefaultToggle from "@/components/commons/toggle/DefaultToggle";
 import { PROGRESSWAY_LIST } from "@/constant/progressWay";
 import OnlineDropdown from "./OnlineDropdown";
-import SelectLocation from "@/components/commons/SelectLocation";
+import OfflineSelectLocation from "./OfflineSelectLocation";
 
 interface ProgressWayProps {
   selectedProgressWay: string;
@@ -25,7 +25,7 @@ export default function ProgressWay(props: ProgressWayProps) {
         ))}
       </div>
       {selectedProgressWay === "온라인" && <OnlineDropdown />}
-      {selectedProgressWay === "오프라인" && <SelectLocation isRecruit />}
+      {selectedProgressWay === "오프라인" && <OfflineSelectLocation />}
     </div>
   );
 }

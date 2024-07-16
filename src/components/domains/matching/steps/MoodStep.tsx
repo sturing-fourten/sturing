@@ -27,7 +27,7 @@ export default function MoodStep({ userNickname, setIsSelected }: StepsProps) {
   };
 
   useEffect(() => {
-    setIsSelected(selectedMoods.length > 0);
+    if (setIsSelected) setIsSelected(selectedMoods.length > 0);
   }, [selectedMoods, setIsSelected]);
 
   return (

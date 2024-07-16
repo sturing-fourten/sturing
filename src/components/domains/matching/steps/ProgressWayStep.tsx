@@ -17,7 +17,7 @@ export default function ProgressWayStep({ userNickname, setIsSelected }: StepsPr
   };
 
   useEffect(() => {
-    setIsSelected(selectedProgressWay !== "");
+    if (setIsSelected) setIsSelected(selectedProgressWay !== "");
   }, [selectedProgressWay, setIsSelected]);
 
   return (

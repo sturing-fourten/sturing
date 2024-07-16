@@ -47,14 +47,14 @@ export const MATCHING_CONFIG = {
 };
 
 export const LEVEL_TAB_MENU_LIST = [
-  { id: "design", title: "디자인" },
-  { id: "develop", title: "개발" },
-  { id: "marketing", title: "기획 · 마케팅" },
-  { id: "business", title: "비즈니스" },
-  { id: "economic", title: "경제" },
-  { id: "language", title: "외국어" },
-  { id: "certificate", title: "자격증" },
-  { id: "selfDevelop", title: "자기 계발" },
+  { id: "DESIGN", title: "디자인" },
+  { id: "DEVELOP", title: "개발" },
+  { id: "MARKETING", title: "기획 · 마케팅" },
+  { id: "BUSINESS", title: "비즈니스" },
+  { id: "ECONOMY", title: "경제" },
+  { id: "LANGUAGE", title: "외국어" },
+  { id: "LICENSE", title: "자격증" },
+  { id: "SELF-DEVELOPMENT", title: "자기 계발" },
 ];
 
 export const NEXT_STEP_LIST: NextStepList[] = [
