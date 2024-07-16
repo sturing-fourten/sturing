@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const matchingSchema = new mongoose.Schema(
   {
-    userId: { type: String },
+    userId: { type: mongoose.Types.ObjectId },
     levels: { type: String },
     progressWay: { type: String, enum: ["online", "offline", "irrelevant"] },
     locations: { type: String },
