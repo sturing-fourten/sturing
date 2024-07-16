@@ -104,9 +104,23 @@ export async function GET(request: Request) {
             popularScore: 0,
           },
         },
+        {
+          $lookup: {
+            from: "users",
+            localField: "ownerId",
+            foreignField: "_id",
+            as: "ownerData",
+          },
+        },
+        {
+          $match: {
+            ownerData: { $ne: [] },
+          },
+        },
       ]);
     } else {
-      studyListData = await Study.find(query).sort(sortOption);
+      studyListData = await Study.find(query).populate({ path: "ownerId" }).sort(sortOption).exec();
+      studyListData = studyListData.filter((study) => study.ownerId !== null);
     }
     let studyList: TStudyListData = [];
 
