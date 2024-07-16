@@ -38,7 +38,6 @@ export const createLectureReviewAction = async (lectureId: string, formData: For
     reviewer: "모몽가",
     rating: Number(formData.get("rating")),
     comment: formData.get("comment"),
-    createdAt: new Date().toISOString(),
   };
 
   const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${lectureId}/review`, {

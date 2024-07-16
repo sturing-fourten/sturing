@@ -7,19 +7,18 @@ export async function POST(req: Request, { params }: { params: { id: string } })
   try {
     await connectDB();
 
-    const { rating, comment, reviewerId, reviewer, createAt } = await req.json();
+    const { rating, comment, reviewerId, reviewer } = await req.json();
 
     const newReview = {
       reviewerId: reviewerId,
       reviewer: reviewer,
       rating: rating,
       comment: comment,
-      createAt: createAt,
     };
 
     await Lecture.updateOne({ _id: lectureId }, { $push: { review: newReview } });
     return Response.json(
-      { message: "강의 후기를 작성했습니다..!" },
+      { message: "강의 후기를 작성했습니다!" },
       {
         status: 200,
       },
