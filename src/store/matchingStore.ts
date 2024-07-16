@@ -1,11 +1,4 @@
-import {
-  LevelsState,
-  LocationsState,
-  MatchingState,
-  MatchingType,
-  MoodsState,
-  ProgressWayState,
-} from "@/types/matching";
+import { LevelsState, LocationsState, MatchingState, MoodsState, ProgressWayState } from "@/types/matching";
 import { create } from "zustand";
 
 export const useLevelsStore = create<LevelsState>((set) => ({
