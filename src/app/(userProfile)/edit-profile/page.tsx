@@ -28,9 +28,7 @@ export default function MypageEdit() {
   useEffect(() => {
     if (!user) {
       fetchUser();
-      if (!matching) {
-        fetchMatching();
-      }
+      fetchMatching();
     } else {
       setName(user.name);
       setNickname(user.nickname);
