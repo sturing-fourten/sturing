@@ -29,14 +29,12 @@ export default function ProfileCard({ page }: ProfileCardProps) {
   const repMood = JSON.parse(matching?.moods || "[]")[0];
 
   useEffect(() => {
-    if (!user) {
-      fetchUser();
-      fetchMatching();
-    }
-  }, [user, matching]);
+    fetchUser();
+    fetchMatching();
+  }, [fetchUser, fetchMatching]);
 
   return (
-    <div className="bg-white px-5 py-6  border border-gray-300 rounded-[5px] flex items-center gap-3 overflow-hidden">
+    <div className="bg-white px-5 py-6 border border-gray-300 rounded-[5px] flex items-center gap-3 overflow-hidden">
       <Avatar width={70} height={70} profileImageUrl={user?.profileImageUrl || ""} hasBorder={true} />
       <div className="flex flex-col gap-2 justify-start w-full">
         <div className="flex items-center gap-2">
