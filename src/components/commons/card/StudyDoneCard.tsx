@@ -2,12 +2,12 @@ import Link from "next/link";
 import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 import StudyCardLink from "./element/StudyCardLink";
-import { TMember, TMemberUserIdAddedUser, TStudy, TTeamMembersIdAddedMember } from "@/types/study";
+import { TMember, TMemberUserIdAddedUser, TMyStudy, TTeamMembersIdAddedMember } from "@/types/study";
 import { getDateRange } from "@/utils/getDateRange";
 import { getSession } from "@/lib/database/getSession";
 
 interface IStudyDoneCardProps {
-  study: TStudy;
+  study: TMyStudy;
 }
 
 export default async function StudyDoneCard(props: IStudyDoneCardProps) {

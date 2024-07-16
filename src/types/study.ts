@@ -51,7 +51,7 @@ export type UserFavoriteFieldType = {
   freewheeling: StudyCategory;
 };
 
-export type TStudy = {
+export type TMyStudy = {
   _id: mongoose.Types.ObjectId;
   category: "DESIGN" | "DEVELOP" | "BUSINESS" | "MARKETING" | "ECONOMY" | "LANGUAGE" | "LICENSE" | "SELF-DEVELOPMENT";
   ownerId: mongoose.Types.ObjectId;

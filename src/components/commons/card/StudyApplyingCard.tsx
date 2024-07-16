@@ -1,4 +1,4 @@
-import { TStudy, TTeamMembersIdAddedMember } from "@/types/study";
+import { TMyStudy, TTeamMembersIdAddedMember } from "@/types/study";
 import StudyApplyInfo from "./element/StudyApplyInfo";
 import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
@@ -6,7 +6,7 @@ import { getDateRange } from "@/utils/getDateRange";
 import { getSession } from "@/lib/database/getSession";
 
 interface IStudyApplyingCardProps {
-  study: TStudy;
+  study: TMyStudy;
 }
 
 export default async function StudyApplyingCard(props: IStudyApplyingCardProps) {
