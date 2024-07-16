@@ -26,7 +26,6 @@ export type LevelContentConfig = {
 export type StepsProps = {
   userNickname?: string;
   setIsSelected?: Dispatch<SetStateAction<boolean>>;
-  isRecruit?: boolean;
 };
 
 export interface MatchingType {

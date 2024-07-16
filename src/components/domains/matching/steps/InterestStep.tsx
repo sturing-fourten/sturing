@@ -21,7 +21,7 @@ export default function InterestStep({ userNickname, setIsSelected }: StepsProps
       if (levels.length < 3) {
         updatedInterests = [...levels, { interest: key, level: "" }];
         setLevels(updatedInterests);
-        setIsSelected(updatedInterests.length > 0);
+        if (setIsSelected) setIsSelected(updatedInterests.length > 0);
       } else {
         alert("최대 3개의 카테고리만 선택할 수 있습니다.");
       }
@@ -29,7 +29,7 @@ export default function InterestStep({ userNickname, setIsSelected }: StepsProps
   };
 
   useEffect(() => {
-    setIsSelected(levels.length > 0);
+    if (setIsSelected) setIsSelected(levels.length > 0);
   }, [levels, setIsSelected]);
 
   return (

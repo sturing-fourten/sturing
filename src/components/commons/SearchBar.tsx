@@ -6,7 +6,7 @@ interface SearchBarProps {
 
 export default function SearchBar({ placeholder, ...props }: SearchBarProps) {
   return (
-    <form action="" className="flex items-center px-[20px] justify-between w-full rounded-full bg-main-100">
+    <form className="flex items-center px-[20px] justify-between w-full rounded-full bg-main-100">
       <input
         type="text"
         name="searchBar"

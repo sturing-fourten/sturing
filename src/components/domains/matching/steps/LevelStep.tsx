@@ -11,6 +11,7 @@ export default function LevelStep({ setIsSelected }: StepsProps) {
   const content = MATCHING_CONFIG.level.content;
   const selectedLevels = useLevelsStore((state) => state.levels);
   const setSelectedLevels = useLevelsStore((state) => state.setLevels);
+
   const storedInterests = selectedLevels.flatMap((interests) => interests.interest);
   const filteredTabMenuList = storedInterests
     .map((interest) => LEVEL_TAB_MENU_LIST.find((tab) => tab.id === interest))
@@ -40,10 +41,8 @@ export default function LevelStep({ setIsSelected }: StepsProps) {
 
   useEffect(() => {
     const allLevelSelected = selectedLevels.every((level) => level.level !== "");
-    if (allLevelSelected) {
-      setIsSelected(true);
-    } else {
-      setIsSelected(false);
+    if (setIsSelected) {
+      setIsSelected(allLevelSelected);
     }
   }, [setIsSelected, filteredTabMenuList]);
 
@@ -53,8 +52,9 @@ export default function LevelStep({ setIsSelected }: StepsProps) {
       <div className="flex flex-col gap-5">
         <nav className="flex justify-between items-center gap-3 bg-white">
           {filteredTabMenuList.map((tab) => {
-            const currentLevel = selectedLevels.find((item) => item.interest === tab.id)?.level;
-            const hasLevel = currentLevel && currentLevel !== "";
+            // const currentLevel = selectedLevels.find((item) => item.interest === tab.id)?.level;
+            // const hasLevel = currentLevel && currentLevel !== "";
+            const isSelectedTab = selectedTab === tab.id;
 
             return (
               <button
@@ -62,7 +62,7 @@ export default function LevelStep({ setIsSelected }: StepsProps) {
                 type="button"
                 className={`w-full flex justify-center items-center gap-3 py-3 text-4 font-semibold leading-[22px] tracking-[-0.42px] relative ${
                   selectedTab === tab.id ? "border-main-500 border-b-2" : "border-b-2 border-gray-300"
-                } ${hasLevel ? "text-main-500" : "text-gray-700"}`}
+                } ${isSelectedTab ? "text-main-500" : "text-gray-700"}`}
                 onClick={() => handleTabClick(tab.id)}>
                 <span>{tab.title}</span>
                 {storedInterests[0] === tab.id && (

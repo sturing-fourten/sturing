@@ -4,15 +4,13 @@ import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { CityList } from "@/types/city";
 import { StepsProps } from "@/types/matching";
 import { useLocationsStore } from "@/store/matchingStore";
-import { useStudyContentStore } from "@/store/recruitStore";
 
-export default function SelectLocation({ setIsSelected, isRecruit }: StepsProps) {
+export default function SelectLocation({ setIsSelected }: StepsProps) {
   const content = MATCHING_CONFIG.location.city;
-  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState("서울");
+
   const selectedLocations = useLocationsStore((state) => state.locations);
   const setSelectedLocations = useLocationsStore((state) => state.setLocations);
-
-  const setAddress = useStudyContentStore((state) => state.setAddress);
 
   const handleCityClick = (key: string) => {
     setSelectedCity(key);
@@ -22,12 +20,6 @@ export default function SelectLocation({ setIsSelected, isRecruit }: StepsProps)
     const newLocation = { city, district };
     if (city && district) {
       const isSelected = selectedLocations.some((location) => location.city === city && location.district === district);
-
-      if (isRecruit && selectedLocations.length > 0) {
-        alert("이미 선택된 장소가 있습니다. 한 개의 장소만 선택할 수 있습니다.");
-        return;
-      }
-
       if (isSelected) {
         const updatedLocations = selectedLocations.filter(
           (location) => !(location.city === city && location.district === district),
@@ -41,7 +33,6 @@ export default function SelectLocation({ setIsSelected, isRecruit }: StepsProps)
         }
       }
     }
-    if (setAddress) setAddress(`${city} ${district}`);
   };
 
   const handleRemoveLocation = (district: string) => {
@@ -54,12 +45,6 @@ export default function SelectLocation({ setIsSelected, isRecruit }: StepsProps)
       setIsSelected(selectedLocations.length > 0);
     }
   }, [selectedLocations, setIsSelected]);
-
-  useEffect(() => {
-    if (setAddress && selectedLocations.length > 0) {
-      setAddress(`${selectedLocations[0].city} ${selectedLocations[0].district}`);
-    }
-  }, [selectedLocations, setAddress]);
 
   return (
     <div className="flex flex-col gap-[20px]">
@@ -106,16 +91,14 @@ export default function SelectLocation({ setIsSelected, isRecruit }: StepsProps)
           )}
         </div>
       </div>
-      {!isRecruit && (
-        <div className="flex items-center gap-[6px] w-full">
-          <span className="flex justify-center items-center text-center text-[11px] tracking-[-0.22px] leading-[16px] font-semibold bg-main-100 text-main-500 rounded-full w-[13px] h-[13px]">
-            !
-          </span>
-          <span className="text-[13px] tracking-[-0.22px] leading-[16px] text-gray-900">
-            첫 번째로 선택한 장소가 대표 장소로 설정됩니다.
-          </span>
-        </div>
-      )}
+      <div className="flex items-center gap-[6px] w-full">
+        <span className="flex justify-center items-center text-center text-[11px] tracking-[-0.22px] leading-[16px] font-semibold bg-main-100 text-main-500 rounded-full w-[13px] h-[13px]">
+          !
+        </span>
+        <span className="text-[13px] tracking-[-0.22px] leading-[16px] text-gray-900">
+          첫 번째로 선택한 장소가 대표 장소로 설정됩니다.
+        </span>
+      </div>
       {selectedLocations.length > 0 && (
         <>
           <div className="flex flex-wrap items-center gap-[11px] sm:gap-[14px]">
