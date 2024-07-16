@@ -1,4 +1,4 @@
-export interface EditProfileType {
+export type EditProfileType = {
   name: string;
   email: string;
   nickname: string;
@@ -7,4 +7,4 @@ export interface EditProfileType {
   ageIsVisible: boolean;
   gender: "남" | "여" | "";
   genderIsVisible: boolean;
-}
+} | null;
