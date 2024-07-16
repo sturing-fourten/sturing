@@ -16,8 +16,8 @@ export default function StudyAssignmentToggle({
         <DefaultToggle
           key={key}
           toggleSize="w-full h-[42px]"
-          isActive={selectedAssignment?.includes(ASSIGNMENT_LIST[key])}
-          onClick={() => handleAssignmentToggle(ASSIGNMENT_LIST[key])}>
+          isActive={selectedAssignment?.includes(key)}
+          onClick={() => handleAssignmentToggle(key)}>
           {ASSIGNMENT_LIST[key]}
         </DefaultToggle>
       ))}

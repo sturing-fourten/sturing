@@ -1,6 +1,6 @@
 export const PROGRESSWAY_LIST: { [key: string]: string } = {
-  online: "온라인",
-  offline: "오프라인",
+  ONLINE: "온라인",
+  OFFLINE: "오프라인",
 };
 
 export const ONLINE_LIST: { [key: string]: string } = {
