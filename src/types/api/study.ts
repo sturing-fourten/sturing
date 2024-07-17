@@ -1,4 +1,6 @@
+import { TRole } from "@/constant/teamMemberInfo";
 import { TLectureInfoData } from "./lecture";
+import mongoose from "mongoose";
 
 export type TCategory =
   | "DESIGN"
@@ -9,17 +11,6 @@ export type TCategory =
   | "LANGUAGE"
   | "LICENSE"
   | "SELF-DEVELOPMENT";
-
-type TRelatedLecture = {
-  id: string;
-  category: TCategory;
-  online: boolean;
-  platform: string;
-  rating: number;
-  title: string;
-  instructor: string;
-  link: string;
-};
 
 type TTeamMember = {
   memberId: string;
@@ -66,6 +57,7 @@ export type TStudyDetailInfoData = {
   study: TStudyDetail;
   lecture: TLectureInfoData;
   teamMemberList: TTeamMember[];
+  comment: TComment[];
 };
 
 export type TStudyListData = {
@@ -81,3 +73,13 @@ export type TStudyListData = {
   acceptedTeamMemberCount: number;
   isBookmark?: boolean;
 }[];
+
+export type TComment = {
+  id: string;
+  studyId: string;
+  userId: string;
+  nickname: string;
+  profileImageUrl: string;
+  content: string;
+  createdAt: string;
+};
