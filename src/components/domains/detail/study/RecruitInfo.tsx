@@ -19,15 +19,17 @@ const { teamMember, meeting, task, location } = STUDY_RECRUIT_INFO;
 
 export default function RecruitInfo({ study, lecture }: IRecruitInfoProps) {
   const renderTags = (items: string[], list: { [key: string]: string | { name: string } }) => {
-    return items.map((item) => (
-      <span
-        key={item}
-        className="inline-flex items-center h-[33px] px-3 text-center border border-main-500 rounded-[3px] text-[14px] font-medium text-main-500 tracking-[-0.42px]">
-        {typeof list[item] === "string" ? list[item] : list[item].name}
-      </span>
-    ));
+    return items.map((item) => {
+      const listItem = list[item];
+      return (
+        <span
+          key={item}
+          className="inline-flex items-center h-[33px] px-3 text-center border border-main-500 rounded-[3px] text-[14px] font-medium text-main-500 tracking-[-0.42px]">
+          {typeof listItem === "string" ? listItem : listItem.name}
+        </span>
+      );
+    });
   };
-
   return (
     <article id="recruit_Info">
       <section className="flex flex-col gap-3 justify-start py-5">
