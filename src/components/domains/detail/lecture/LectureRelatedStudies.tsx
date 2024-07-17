@@ -12,7 +12,7 @@ export default function LectureRelatedStudies({ relatedStudyList }: LectureRelat
   return (
     <>
       {relatedStudyList.length !== 0 && (
-        <section className="mb-[50px]" id="related_study">
+        <section className="mb-[50px]">
           <Title addStyle="mb-5">
             이 강의를 수강하는 스터디 <span className="text-main-500 ">{relatedStudyList.length}개</span>
           </Title>
