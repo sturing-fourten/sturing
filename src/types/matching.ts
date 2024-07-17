@@ -28,47 +28,47 @@ export type StepsProps = {
   setIsSelected?: Dispatch<SetStateAction<boolean>>;
 };
 
-export interface MatchingType {
+export type MatchingType = {
   userId: string;
   levels: string;
   progressWay: "online" | "offline" | "irrelevant";
   locations: string;
   locationIsVisible: boolean;
   moods: string;
-}
+} | null;
 
-export interface level {
+export type level = {
   interest: string;
   level: string;
-}
+};
 
-export interface location {
+export type location = {
   city: string;
   district: string;
-}
+};
 
-export interface LevelsState {
+export type LevelsState = {
   levels: level[];
   setLevels: (levels: level[]) => void;
-}
+};
 
-export interface ProgressWayState {
+export type ProgressWayState = {
   progressWay: string;
   setProgressWay: (progressWay: string) => void;
-}
+};
 
-export interface LocationsState {
+export type LocationsState = {
   locations: location[];
   setLocations: (locations: location[]) => void;
-}
+};
 
-export interface MoodsState {
+export type MoodsState = {
   moods: string[];
   setMoods: (moods: string[]) => void;
-}
+};
 
-export interface MatchingState {
+export type MatchingState = {
   matching: MatchingType | null;
   fetchMatching: () => Promise<void>;
   setMatching: (matching: MatchingType) => void;
-}
+};

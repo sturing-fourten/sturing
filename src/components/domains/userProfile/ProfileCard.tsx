@@ -1,50 +1,67 @@
-"use client";
-
 import Avatar from "@/components/commons/Avatar";
 import Link from "next/link";
 import { ICONS } from "@/constant/icons";
 import InfoTag from "./InfoTag";
-import { useUserStore } from "@/store/userStore";
-import { useEffect } from "react";
-import { useMatchingStore } from "@/store/matchingStore";
 import { getIntrestsTitleById, getLevelTitleById, getMoodAltById } from "@/utils/getTitleById";
+import { EditProfileType } from "@/types/editProfile";
+import { MatchingType } from "@/types/matching";
 
 interface ProfileCardProps {
   page: "mypage" | "profile";
+  mypage?: { user: EditProfileType; matching: MatchingType };
+  profile?: { user: EditProfileType; matching: MatchingType };
 }
 
-export default function ProfileCard({ page }: ProfileCardProps) {
+export default function ProfileCard({ page, mypage, profile }: ProfileCardProps) {
   const isProfile = page === "profile";
-  const { user, fetchUser } = useUserStore();
-  const { matching, fetchMatching } = useMatchingStore();
 
-  const repLevel = JSON.parse(matching?.levels || "[]")[0];
-  const interest = repLevel?.interest;
-  const level = repLevel?.level;
+  const userLevel = JSON.parse(profile?.matching?.levels || "[]");
+  const userLocation = JSON.parse(profile?.matching?.locations || "[]");
+  const userMood = JSON.parse(profile?.matching?.moods || "[]")[0];
 
-  const repLocation = JSON.parse(matching?.locations || "[]")[0];
-  const city = repLocation?.city;
-  const district = repLocation?.district;
+  const myLevel = JSON.parse(mypage?.matching?.levels || "[]");
+  const myLocation = JSON.parse(mypage?.matching?.locations || "[]");
+  const myMood = JSON.parse(mypage?.matching?.moods || "[]")[0];
 
-  const repMood = JSON.parse(matching?.moods || "[]")[0];
+  const visibleInfo = (data: EditProfileType) =>
+    (data?.ageIsVisible || data?.genderIsVisible) && (
+      <div className="flex gap-1 text-xs text-gray-700 font-semibold">
+        {data.ageIsVisible && <span>{data.age}</span>}
+        {data.ageIsVisible && data.genderIsVisible && <span>·</span>}
+        {data.genderIsVisible && <span>{data.gender}</span>}
+      </div>
+    );
 
-  useEffect(() => {
-    fetchUser();
-    fetchMatching();
-  }, [fetchUser, fetchMatching]);
+  const matchingLevelInfo = (data: { interest: string; level: string }[]) => (
+    <>
+      <span>{getIntrestsTitleById(data[0]?.interest)}</span>
+      <span>·</span>
+      <span>{getLevelTitleById(data[0]?.level)}</span>
+    </>
+  );
+
+  const matchingLocationInfo = (locationIsVisible: boolean, data: { city: string; district: string }[]) =>
+    locationIsVisible && <InfoTag icon={ICONS.locationBlack}>{`${data[0].city} ${data[0].district}`}</InfoTag>;
 
   return (
-    <div className="bg-white px-5 py-6 border border-gray-300 rounded-[5px] flex items-center gap-3 overflow-hidden">
-      <Avatar width={70} height={70} profileImageUrl={user?.profileImageUrl || ""} hasBorder={true} />
+    <div className="bg-white px-5 py-6  border border-gray-300 rounded-[5px] flex items-center gap-3 overflow-hidden">
+      <Avatar
+        width={70}
+        height={70}
+        profileImageUrl={(isProfile ? profile?.user?.profileImageUrl : mypage?.user?.profileImageUrl) || ""}
+        hasBorder={true}
+      />
       <div className="flex flex-col gap-2 justify-start w-full">
         <div className="flex items-center gap-2">
-          <h1 className="font-bold text-[18px] leading-[150%]">{user?.nickname}님</h1>
+          <h1 className="font-bold text-[18px] leading-[150%]">
+            {isProfile ? profile?.user?.nickname : mypage?.user?.nickname}님
+          </h1>
           {isProfile ? (
             <form action={""} className="flex items-center">
               <button className="text-xs text-main-500 font-semibold">팔로우</button>
             </form>
           ) : (
-            <Link href={"/mypage/edit"}>
+            <Link href={"/edit-profile"}>
               <button className="flex items-center text-gray-700 font-semibold text-xs leading-normal">
                 프로필 수정 <img src={ICONS.rightArrowBlackBold.src} />
               </button>
@@ -60,22 +77,16 @@ export default function ProfileCard({ page }: ProfileCardProps) {
           </p>
         </div>
         <div className="flex items-center gap-[10px]">
-          {(user?.ageIsVisible || user?.genderIsVisible) && (
-            <div className="flex gap-1 text-xs text-gray-700 font-semibold">
-              {user?.ageIsVisible && <span>{user?.age}</span>}
-              {user?.ageIsVisible && user?.genderIsVisible && <span>·</span>}
-              {user?.genderIsVisible && <span>{user?.gender}</span>}
-            </div>
-          )}
+          {isProfile ? visibleInfo(profile?.user || null) : visibleInfo(mypage?.user || null)}
           <div className="flex gap-1 text-xs text-gray-1000 font-semibold">
-            <span>{getIntrestsTitleById(interest)}</span>
-            <span>·</span>
-            <span>{getLevelTitleById(level)}</span>
+            {matchingLevelInfo(isProfile ? userLevel : myLevel)}
           </div>
         </div>
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide min-w-full">
-          {matching?.locationIsVisible && <InfoTag icon={ICONS.locationBlack}>{`${city} ${district}`}</InfoTag>}
-          <InfoTag>{getMoodAltById(repMood)}</InfoTag>
+          {isProfile
+            ? matchingLocationInfo(profile?.matching?.locationIsVisible || false, userLocation)
+            : matchingLocationInfo(mypage?.matching?.locationIsVisible || false, myLocation)}
+          <InfoTag>{getMoodAltById(isProfile ? userMood : myMood)}</InfoTag>
         </div>
       </div>
     </div>

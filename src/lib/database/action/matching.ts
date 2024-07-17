@@ -16,9 +16,7 @@ export async function matchingAction(formData: FormData) {
 
   const session = await getSession();
   const id = session?.user?.id;
-  const existingUser = await User.findOne({
-    _id: id,
-  });
+  const existingUser = await User.findById(id);
   const existingMatching = await Matching.findOne({
     userId: id,
   });
