@@ -1,17 +1,17 @@
 import Avatar from "@/components/commons/Avatar";
-import Button from "@/components/commons/Button";
 
 interface MemberProfileProps {
   nickname: string;
   role: string;
   isLeader: boolean;
   profileImageUrl: string;
+  status: string;
 }
 
-export default function MemberProfile({ nickname, role, profileImageUrl, isLeader }: MemberProfileProps) {
+export default function MemberProfile({ nickname, role, profileImageUrl, isLeader, status }: MemberProfileProps) {
   return (
-    <>
-      <div className="flex items-center justify-between py-2">
+    <div className="flex items-center justify-between py-2">
+      {status === "ACCEPTED" && (
         <div className="flex items-center gap-2">
           <Avatar profileImageUrl={profileImageUrl} width={38} height={38} />
           <div className="flex flex-col">
@@ -27,12 +27,7 @@ export default function MemberProfile({ nickname, role, profileImageUrl, isLeade
             <p className="text-[12px] text-gray-700">{role}</p>
           </div>
         </div>
-        {isLeader && (
-          <Button varient="filled" className="text-xs bg-main-500 px-2 py-1 rounded-[5px] text-white leading-[150%]">
-            1:1 채팅
-          </Button>
-        )}
-      </div>
-    </>
+      )}
+    </div>
   );
 }

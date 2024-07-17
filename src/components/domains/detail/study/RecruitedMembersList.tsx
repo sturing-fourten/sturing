@@ -18,7 +18,7 @@ export default function RecruitedMembersList({ study, memberList }: IRecruitedMe
           <Title>
             팀원 프로필
             <span className="text-main-500 ml-2">
-              {memberList.length}/{study.wantedMember.count}
+              {memberList.filter((member) => member.status === "ACCEPTED").length}/{study.wantedMember.count}
             </span>
           </Title>
           <HorizontalDivider addStyle="my-4" />
@@ -30,6 +30,7 @@ export default function RecruitedMembersList({ study, memberList }: IRecruitedMe
                 profileImageUrl={member.profileImageUrl}
                 role={member.role}
                 isLeader={member.isOwner}
+                status={member.status}
               />
             ))}
           </div>
