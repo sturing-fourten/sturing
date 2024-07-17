@@ -1,4 +1,7 @@
+import mongoose from "mongoose";
+
 export type EditProfileType = {
+  _id: mongoose.Types.ObjectId;
   name: string;
   email: string;
   nickname: string;
