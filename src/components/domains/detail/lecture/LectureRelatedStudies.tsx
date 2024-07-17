@@ -17,9 +17,9 @@ export default function LectureRelatedStudies({ relatedStudyList }: LectureRelat
             이 강의를 수강하는 스터디 <span className="text-main-500 ">{relatedStudyList.length}개</span>
           </Title>
           <CardList>
-            {relatedStudyList.slice(0, 4).map((study) => (
-              <StudyRecruitCard key={study._id} isMini isScraped />
-            ))}
+            {/* {relatedStudyList.slice(0, 4).map((study) => (
+              // <StudyRecruitCard key={study._id} isMini isScraped />
+            ))} */}
           </CardList>
           <Button varient="ghost" addStyle="w-full h-[50px] rounded-[5px] border-gray-400 text-gray-800 mt-6">
             스터디 전체보기
