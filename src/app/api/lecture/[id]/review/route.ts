@@ -14,12 +14,11 @@ export async function POST(req: Request, { params }: { params: { id: string } })
       reviewer: reviewer,
       rating: rating,
       comment: comment,
-      createdAt: new Date(),
     };
 
     await Lecture.updateOne({ _id: lectureId }, { $push: { review: newReview } });
     return Response.json(
-      { message: "강의 후기를 작성했습니다..!" },
+      { message: "강의 후기를 작성했습니다!" },
       {
         status: 200,
       },

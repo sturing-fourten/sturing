@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 
-const lectureReviewSchema = new mongoose.Schema({
-  reviewerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  reviewer: { type: String, ref: "User" },
-  rating: { type: Number, required: true },
-  comment: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
-});
+const lectureReviewSchema = new mongoose.Schema(
+  {
+    reviewerId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    reviewer: { type: String, ref: "User" },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+  },
+  { timestamps: true },
+);
 
 const lectureSchema = new mongoose.Schema({
   online: { type: Boolean, default: true, required: true },
@@ -23,3 +25,4 @@ const lectureSchema = new mongoose.Schema({
 });
 
 export const Lecture = mongoose.models.Lecture || mongoose.model("Lecture", lectureSchema);
+export const LectureReview = mongoose.models.LectureReview || mongoose.model("LectureReview", lectureReviewSchema);
