@@ -61,7 +61,7 @@ export type TStudy = {
   description: string;
   meeting: {
     schedule: {
-      day: "월요일" | "화요일" | "수요일" | "목요일" | "금요일" | "토요일" | "일요일" | "추후협의";
+      day: "월요일" | "화요일" | "수요일" | "목요일" | "금요일" | "토요일" | "일요일";
       time:
         | "오전 12:00"
         | "오전 1:00"
@@ -86,8 +86,7 @@ export type TStudy = {
         | "오후 8:00"
         | "오후 9:00"
         | "오후 10:00"
-        | "오후 11:00"
-        | "추후협의";
+        | "오후 11:00";
     };
     format: "ONLINE" | "OFFLINE";
     platform?: string;

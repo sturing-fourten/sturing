@@ -13,8 +13,8 @@ export default function CareerList({ selectedCareer, handleCareerToggle }: Caree
         <DefaultToggle
           key={key}
           toggleSize="w-fit h-[33px]"
-          isActive={selectedCareer.includes(CAREER_LIST[key])}
-          onClick={() => handleCareerToggle(CAREER_LIST[key])}>
+          isActive={selectedCareer.includes(key)}
+          onClick={() => handleCareerToggle(key)}>
           {CAREER_LIST[key]}
         </DefaultToggle>
       ))}

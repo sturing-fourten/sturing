@@ -25,11 +25,11 @@ export default function TopBar({ variant, children, isWhite = false, showMore, s
       )}
       {variant === "share" && (
         <div className="flex justify-center items-center gap-3">
-          <button>
+          <button type="button">
             <img src={shareIcon.src} alt={shareIcon.alt} width={24} height={24} />
           </button>
           {showMore && (
-            <button>
+            <button type="button">
               <img src={moreIcon.src} alt={moreIcon.alt} width={24} height={24} />
             </button>
           )}

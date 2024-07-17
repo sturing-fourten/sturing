@@ -13,7 +13,7 @@ export default function GoBackButton({ isWhite }: { isWhite?: boolean }) {
   const backIcon = isWhite ? backWhite : back;
   return (
     <>
-      <button onClick={prevPage}>
+      <button type="button" onClick={prevPage}>
         <img src={backIcon.src} alt={backIcon.alt} />
       </button>
     </>

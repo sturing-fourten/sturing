@@ -18,14 +18,14 @@ export default function ProgressWay(props: ProgressWayProps) {
           <DefaultToggle
             key={key}
             toggleSize="w-fit h-[30px]"
-            isActive={selectedProgressWay === PROGRESSWAY_LIST[key]}
-            onClick={() => onClickToggle(PROGRESSWAY_LIST[key])}>
+            isActive={selectedProgressWay === key}
+            onClick={() => onClickToggle(key)}>
             {PROGRESSWAY_LIST[key]}
           </DefaultToggle>
         ))}
       </div>
-      {selectedProgressWay === "온라인" && <OnlineDropdown />}
-      {selectedProgressWay === "오프라인" && <OfflineSelectLocation />}
+      {selectedProgressWay === "ONLINE" && <OnlineDropdown />}
+      {selectedProgressWay === "OFFLINE" && <OfflineSelectLocation />}
     </div>
   );
 }

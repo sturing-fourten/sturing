@@ -31,34 +31,34 @@ export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInf
 
   const [isInfinity, setIsInfinity] = useState<boolean>(false);
 
-  const handleCareerToggle = (careerName: string) => {
-    if (careerName === CAREER_LIST.all) {
-      if (career.includes(CAREER_LIST.all)) {
+  const handleCareerToggle = (selectedcareer: string) => {
+    if (selectedcareer === "all") {
+      if (career.includes("all")) {
         setCareer([]);
       } else {
-        setCareer([CAREER_LIST.all]);
+        setCareer(["all"]);
       }
     } else {
-      if (career.includes(careerName)) {
-        setCareer(career.filter((career) => career !== careerName));
+      if (career.includes(selectedcareer)) {
+        setCareer(career.filter((career) => career !== selectedcareer && career !== "all"));
       } else {
-        setCareer([...career.filter((career) => career !== CAREER_LIST.all), careerName]);
+        setCareer([...career.filter((career) => career !== "all"), selectedcareer]);
       }
     }
   };
 
-  const handleAgesToggle = (ageName: string) => {
-    if (ageName === AGE_LIST.all) {
-      if (ages.includes(AGE_LIST.all)) {
+  const handleAgesToggle = (selectedAge: string) => {
+    if (selectedAge === "all") {
+      if (ages.includes("all")) {
         setAges([]);
       } else {
-        setAges([AGE_LIST.all]);
+        setAges(["all"]);
       }
     } else {
-      if (ages.includes(ageName)) {
-        setAges(ages.filter((age) => age !== ageName));
+      if (ages.includes(selectedAge)) {
+        setAges(ages.filter((age) => age !== selectedAge && age !== "all"));
       } else {
-        setAges([...ages.filter((age) => age !== AGE_LIST.all), ageName]);
+        setAges([...ages.filter((age) => age !== "all"), selectedAge]);
       }
     }
   };
@@ -120,7 +120,10 @@ export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInf
           handlePlusNumber={handlePlusNumber}
           numberOfTeamMembers={numberOfTeamMembers}
         />
-        <OptionalToggle isActive={isInfinity} onClick={() => handleInfiniteNumber()}>
+        <OptionalToggle
+          numberOfTeamMembers={numberOfTeamMembers}
+          isActive={isInfinity}
+          onClick={() => handleInfiniteNumber()}>
           제한없음
         </OptionalToggle>
       </div>

@@ -30,7 +30,7 @@ const studySchema = new mongoose.Schema(
     meeting: {
       format: {
         type: String,
-        enum: ["온라인", "오프라인"],
+        enum: ["ONLINE", "OFFLINE"],
         required: true,
       },
       platform: {
@@ -48,7 +48,7 @@ const studySchema = new mongoose.Schema(
       schedule: {
         day: {
           type: String,
-          enum: ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일", "추후협의"],
+          enum: ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
           required: true,
         },
         time: {
@@ -78,7 +78,6 @@ const studySchema = new mongoose.Schema(
             "오후 9:00",
             "오후 10:00",
             "오후 11:00",
-            "추후협의",
           ],
           required: true,
         },

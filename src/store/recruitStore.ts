@@ -1,3 +1,4 @@
+import { LocationsState } from "@/types/matching";
 import {
   SelectLectureState,
   StudyContentState,
@@ -28,6 +29,11 @@ export const useStudyContentStore = create<StudyContentState>((set) => ({
   setOnline: (online) => set({ online: online }),
   address: "",
   setAddress: (address) => set({ address: address }),
+}));
+
+export const useLocationsStore = create<LocationsState>((set) => ({
+  locations: [],
+  setLocations: (locations) => set({ locations: locations }),
 }));
 
 export const useStudyDetailStore = create<StudyDetailState>((set) => ({

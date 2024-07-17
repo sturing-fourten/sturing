@@ -13,8 +13,8 @@ export default function AgesList({ selectedAges, handleAgesToggle }: AgesListPro
         <DefaultToggle
           key={key}
           toggleSize="w-[109px] h-[42px]"
-          isActive={selectedAges.includes(AGE_LIST[key])}
-          onClick={() => handleAgesToggle(AGE_LIST[key])}>
+          isActive={selectedAges.includes(key)}
+          onClick={() => handleAgesToggle(key)}>
           {AGE_LIST[key]}
         </DefaultToggle>
       ))}

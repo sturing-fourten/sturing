@@ -12,7 +12,7 @@ export default function NumberOfTeamMember(props: NumberOfTeamMemberProps) {
   return (
     <div className="w-full bg-white py-3 px-4 rounded-[5px] border border-gray-300 text-sm font-medium">
       <div className="flex justify-center items-center gap-[57px]">
-        {isInfinity ? (
+        {isInfinity || numberOfTeamMembers === "제한없음" ? (
           "제한없음"
         ) : (
           <>
@@ -22,7 +22,7 @@ export default function NumberOfTeamMember(props: NumberOfTeamMemberProps) {
               onClick={() => handleMinusNumber()}
               className="cursor-pointer"
             />
-            <div className="flex">{`${numberOfTeamMembers}${numberOfTeamMembers === "제한없음" ? "" : "명"}`}</div>
+            <div className="flex">{`${numberOfTeamMembers}명`}</div>
             <img
               src={ICONS.plusCircle.src}
               alt={ICONS.plusCircle.alt}

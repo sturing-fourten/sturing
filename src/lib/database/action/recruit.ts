@@ -15,21 +15,20 @@ export async function recruitAction(formData: FormData) {
   const endDate = formData.get("endDate");
   const day = formData.get("day");
   const time = formData.get("time");
-  const moodKeywords = formData.get("selectedMood");
-  const task = formData.get("selectedAssignment");
+  const moodData = formData.get("selectedMood");
+  const taskData = formData.get("selectedAssignment");
+  const moodKeywords = typeof moodData === "string" ? moodData.split(",") : [];
+  const tasks = typeof taskData === "string" ? taskData.split(",") : [];
   const career = formData.get("career");
   const count = formData.get("numberOfTeamMembers");
-  const age = formData.get("ages");
-  const role = formData.get("role");
-
-  // formData.forEach((value, key) => {
-  //   console.log(key, value);
-  // });
+  const ageData = formData.get("ages");
+  const roleData = formData.get("role");
+  const age = typeof ageData === "string" ? ageData.split(",") : [];
+  const role = typeof roleData === "string" ? roleData.split(",") : [];
 
   await connectDB();
 
-  // const session = await getSession();
-  const userId = "668bcc45f6265b4ece271a16";
+  const userId = "668bcc45f6265b4ece271a16"; // 추후에 수정 예정
   if (!userId) throw new Error("유저 정보가 없습니다.");
 
   const newStudy = {
@@ -51,7 +50,7 @@ export async function recruitAction(formData: FormData) {
     startDate: startDate,
     endDate: endDate,
     moodKeywords: moodKeywords,
-    task: task,
+    task: tasks,
     wantedMember: {
       career: career,
       count: count,
@@ -74,6 +73,9 @@ export async function recruitAction(formData: FormData) {
     if (!response.ok) {
       throw new Error("스터디 개설 실패");
     }
+
+    const data = await response.json();
+    return data.study;
   } catch (error: any) {
     console.error("Error fetching study:", error.message);
     throw error;

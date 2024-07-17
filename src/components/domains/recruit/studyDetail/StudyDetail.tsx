@@ -3,10 +3,9 @@ import Subtitle from "../commons/Subtitle";
 import Title from "../commons/Title";
 import CalenderDropdown from "@/components/domains/recruit/studyDetail/CalenderDropdown";
 import DaysDropdown from "@/components/domains/recruit/studyDetail/DaysDropdown";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { DateRange } from "react-day-picker";
 import DivisionLine from "@/components/commons/DivisionLine";
-import OptionalToggle from "@/components/domains/recruit/commons/OptionalToggle";
 import StudyMoodToggle from "./StudyMoodToggle";
 import StudyAssignmentToggle from "./StudyAssignmentToggle";
 import { useStudyDetailStore } from "@/store/recruitStore";
@@ -28,9 +27,6 @@ export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
   const selectedAssignment = useStudyDetailStore((state) => state.selectedAssignment);
   const setSelectedAssignment = useStudyDetailStore((state) => state.setSelectedAssignment);
 
-  const [isDayAndTimeLater, setIsDayAndTimeLater] = useState<boolean>(false);
-  const [isAssignmentLater, setIsAssignmentLater] = useState<boolean>(false);
-
   const handleMoodToggle = (moodName: string) => {
     if (selectedMood?.includes(moodName)) {
       setSelectedMood(selectedMood.filter((mood) => mood !== moodName));
@@ -44,28 +40,6 @@ export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
       setSelectedAssignment(selectedAssignment.filter((Assignment) => Assignment !== assignment));
     } else {
       if (selectedAssignment) setSelectedAssignment([...selectedAssignment, assignment]);
-      setIsAssignmentLater(false);
-    }
-  };
-
-  const handleDayAndTimeLater = () => {
-    if (!isDayAndTimeLater) {
-      setDay("추후협의");
-      setTime("추후협의");
-      setIsDayAndTimeLater((prev) => !prev);
-    } else {
-      setDay("");
-      setTime("");
-      setIsDayAndTimeLater((prev) => !prev);
-    }
-  };
-
-  const handleAssignmentLater = () => {
-    if (!isAssignmentLater) {
-      setSelectedAssignment([]);
-      setIsAssignmentLater((prev) => !prev);
-    } else {
-      setIsAssignmentLater((prev) => !prev);
     }
   };
 
@@ -91,9 +65,6 @@ export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
             <TimesDropdown time={time} setTime={setTime} />
           </div>
         </div>
-        <OptionalToggle isActive={isDayAndTimeLater} onClick={() => handleDayAndTimeLater()}>
-          추후협의
-        </OptionalToggle>
       </div>
       <DivisionLine />
       <div className="flex-col inline-flex gap-3">
@@ -107,9 +78,6 @@ export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
           selectedAssignment={selectedAssignment}
           handleAssignmentToggle={handleAssignmentToggle}
         />
-        <OptionalToggle isActive={isAssignmentLater} onClick={() => handleAssignmentLater()}>
-          추후협의
-        </OptionalToggle>
       </div>
     </div>
   );

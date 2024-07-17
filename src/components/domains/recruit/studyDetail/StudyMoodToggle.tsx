@@ -15,8 +15,8 @@ export default function StudyMoodToggle({ selectedMood, handleMoodToggle }: Stud
           key={key}
           src={USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].src}
           alt={USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt}
-          isActive={selectedMood?.includes(USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt)}
-          onClick={() => handleMoodToggle(USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt)}>
+          isActive={selectedMood?.includes(key)}
+          onClick={() => handleMoodToggle(key)}>
           {USER_FAVORITE_FIELD_TYPE[key as keyof UserFavoriteFieldType].alt}
         </MoodMiniToggle>
       ))}

@@ -21,6 +21,7 @@ import {
 export default function Recruit() {
   const [steps, setSteps] = useState<number>(1);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [studyId, setStudyId] = useState<string>("");
 
   // SelectLectureStore 상태와 업데이트 함수 사용
   const lecture = useSelectLectureStore((state) => state.lecture);
@@ -71,10 +72,6 @@ export default function Recruit() {
   const handleNextSection = () => {
     if (steps === 1 && (!lecture || !category)) return;
     setSteps((prevSteps) => prevSteps + 1);
-  };
-
-  const goToSuccessPage = () => {
-    setIsSubmitted(true);
   };
 
   const handleLectureChange = (lecture: string, category: string) => {
@@ -152,7 +149,8 @@ export default function Recruit() {
     formData.append("role", role.join(","));
 
     try {
-      await recruitAction(formData);
+      const res = await recruitAction(formData);
+      setStudyId(res._id);
       setIsSubmitted(true);
     } catch (error) {
       console.error("POST 요청 실패:", error);
@@ -182,7 +180,7 @@ export default function Recruit() {
   }, [isSubmitted]);
 
   if (isSubmitted) {
-    return <FindTeamMember />;
+    return <FindTeamMember studyId={studyId} />;
   }
 
   return (
@@ -212,7 +210,7 @@ export default function Recruit() {
             addStyle={`w-full h-12 ${
               !isNextButtonDisabled() ? "bg-blue-500" : "bg-gray-300"
             } text-white font-semibold rounded`}
-            onClick={steps !== 4 ? handleNextSection : goToSuccessPage}
+            onClick={steps !== 4 ? handleNextSection : undefined}
             disabled={isNextButtonDisabled()}>
             {steps === 4 ? "등록하기" : "다음"}
           </Button>
