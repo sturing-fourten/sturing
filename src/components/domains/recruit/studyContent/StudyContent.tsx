@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../commons/Title";
 import Subtitle from "../commons/Subtitle";
 import ImageUpload from "./ImageUpload";

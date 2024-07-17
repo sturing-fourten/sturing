@@ -25,7 +25,7 @@ export default function CalenderDropdown(props: CalenderDropdownProps) {
     date?.from && date?.to ? `${format(date.from, "yyyy-MM-dd")} ~ ${format(date.to, "yyyy-MM-dd")}` : "";
 
   return (
-    <Dropdown type="text" name="calendar" value={formattedDate} onChange={(e) => e.target.value}>
+    <Dropdown type="text" name="calendar" value={formattedDate} preventClose={true} onChange={(e) => e.target.value}>
       <div className="w-full flex-col inline-flex justify-center items-center mt-2">
         <div className="w-full h-px rotate-180 border border-neutral-200 z-toast"></div>
         <Calendar
