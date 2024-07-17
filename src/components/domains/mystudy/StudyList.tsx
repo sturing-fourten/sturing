@@ -1,5 +1,4 @@
 import MyStudyTabBarLinkUnderlined from "@/components/commons/MyStudyTabBarLinkUnderlined";
-import { STUDY_TAB_MENU_LIST } from "@/constant/study";
 import { getSession } from "@/lib/database/getSession";
 
 interface IStudyListProps {

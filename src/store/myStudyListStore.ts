@@ -22,7 +22,6 @@ export const useMyStudyListStore = create<IMyStudyListState>((set, get) => ({
   setCurrentListType: (
     newType: "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE",
   ) => {
-    console.log("setCurrentListType", newType);
     set({ currentListType: newType });
   },
   currentStudyList: null,

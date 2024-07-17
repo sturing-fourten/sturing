@@ -2,7 +2,7 @@
 
 import { useSelectedLayoutSegment } from "next/navigation";
 
-import { TMyStudyTabMenuLinkUnderlinedItem, TTabMenuLinkUnderlinedItem } from "@/types/study";
+import { TMyStudyTabMenuLinkUnderlinedItem } from "@/types/study";
 import MyStudyTabMenuLinkUnderlined from "./MyStudyTabMenuLinkUnderlined";
 
 const getIsCurrent = (currentPath: string, href: string) => currentPath === href;
