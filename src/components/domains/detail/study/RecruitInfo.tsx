@@ -20,7 +20,7 @@ const { teamMember, meeting, task, location } = STUDY_RECRUIT_INFO;
 export default function RecruitInfo({ study, lecture }: IRecruitInfoProps) {
   return (
     <>
-      <article id="recruit_Info">
+      <article>
         <section className="flex flex-col gap-3 justify-start py-5">
           <DetailInfo icon={teamMember.icon} title={teamMember.title} content={`최대 ${study.wantedMember.count}명`} />
           <DetailInfo
