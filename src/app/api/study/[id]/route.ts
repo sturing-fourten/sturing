@@ -1,5 +1,4 @@
 import connectDB from "@/lib/database/db";
-import { RecruitComment } from "@/schema/RecruitCommentSchema";
 import { Lecture } from "@/schema/lectureSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
@@ -48,7 +47,6 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
         }),
       );
     }
-
     return Response.json({ study, lecture: lectureResult, teamMemberList: acceptedTeamMembers }, { status: 200 });
   } catch (error: any) {
     if (error.name === "CastError") {
