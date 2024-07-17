@@ -1,5 +1,6 @@
 import connectDB from "@/lib/database/db";
 import { Application } from "@/schema/applicationSchema";
+import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 import { User } from "@/schema/userSchema";
 
@@ -38,7 +39,12 @@ export async function GET(request: Request) {
       }),
     );
 
-    return Response.json(enhancedApplicationList);
+    // 3. 스터디 정보 조회
+    const study = await Study.findById(studyId).select("startDate endDate meeting");
+    return Response.json({
+      study,
+      applicationList: enhancedApplicationList,
+    });
   } catch (error: any) {
     throw new Error(error);
   }

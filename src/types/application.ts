@@ -1,3 +1,5 @@
+import { TMyStudy } from "./study";
+
 export type TRole = "팀장" | "부팀장" | "과제팀장" | "출결팀장" | "기록팀장" | "일정팀장" | "팀원";
 
 export type TApplication = {
@@ -14,3 +16,7 @@ export type TApplication = {
 
 export type TApplicationSummary = Omit<TApplication, "resolution" | "role">;
 export type TApplicationList = TApplicationSummary[];
+export type TApplicationListResponse = {
+  study: TMyStudy;
+  applicationList: TApplicationSummary[];
+};
