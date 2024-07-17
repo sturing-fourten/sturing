@@ -41,7 +41,7 @@ export default async function StudyDetail({ params }: { params: { id: string } }
             commentList={commentData}
           />
         </div>
-        <FixedBottomBar page="study" id={id} />
+        <FixedBottomBar page="study" id={id} study={studyData} />
       </div>
     </>
   );
