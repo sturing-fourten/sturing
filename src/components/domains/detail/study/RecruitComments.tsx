@@ -1,35 +1,24 @@
 import StudyDetailCardLayout from "./elements/layouts/StudyDetailCardLayout";
 import Title from "../Title";
 import HorizontalDivider from "@/components/commons/HorizontalDivider";
-import Comment from "./elements/Comment";
 import CommentInput from "./elements/CommentInput";
-type TComment = {
-  id: string;
-  nickname: string;
-  profileImageUrl: string;
-  createdAt: string;
-  content: string;
-};
+import Comment from "./elements/Comment";
+import { TComment } from "@/types/api/study";
+import { format } from "date-fns";
+import { ko } from "date-fns/locale";
 
-const commentList: TComment[] = [
-  {
-    id: "1",
-    nickname: "채니",
-    profileImageUrl: "",
-    createdAt: "6월 7일 오전 12:42",
-    content: "과제팀장으로 지원해도 될까요??",
-  },
-  {
-    id: "2",
-    nickname: "주현",
-    profileImageUrl: "",
-    createdAt: "6월 7일 오전 12:42",
-    content:
-      "과제팀장으로 지원해도 될까요??과제팀장으로 지원해도 될까요??과제팀장으로 지원해도 될까요??과제팀장으로 지원해도 될까요??과제팀장으로 지원해도 될까요??과제팀장으로 지원해도 될까요??과제팀장으로 지원해도 될까요??과제팀장으로 지원해도 될까요??",
-  },
-];
+interface RecruitCommentsProps {
+  commentList: TComment[];
+  studyId: string;
+  userId: string;
+}
 
-export default function RecruitComments() {
+export default function RecruitComments({ commentList, studyId, userId }: RecruitCommentsProps) {
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return format(date, "M월 d일 a h:mm", { locale: ko });
+  };
+
   return (
     <>
       <article id="comments">
@@ -37,9 +26,19 @@ export default function RecruitComments() {
           <Title>댓글</Title>
           <HorizontalDivider addStyle="my-4" />
           {commentList.map((comment) => (
-            <Comment key={comment.id} {...comment} />
+            <Comment
+              key={comment.id}
+              userId={userId || ""}
+              studyId={studyId}
+              commentId={comment.id}
+              commentOwnerId={comment.userId}
+              nickname={comment.nickname}
+              profileImageUrl={comment.profileImageUrl}
+              content={comment.content}
+              createdAt={formatDate(comment.createdAt)}
+            />
           ))}
-          <CommentInput />
+          <CommentInput studyId={studyId} />
         </StudyDetailCardLayout>
       </article>
     </>
