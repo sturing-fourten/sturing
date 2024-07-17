@@ -3,7 +3,7 @@ import { TMyStudy } from "@/types/study";
 
 export type TMyStudyListType = "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE";
 interface IMyStudyListState {
-  currentListType: TMyStudyListType;
+  currentListType: TMyStudyListType | null;
   setCurrentListType: (newType: TMyStudyListType) => void;
   currentStudyList: TMyStudy[] | null;
   setCurrentStudyList: (newList: TMyStudy[]) => void;
@@ -17,11 +17,12 @@ interface IMyStudyListState {
   setRecruitStartMemberStudyListCount: (newCounts: number) => void;
 }
 
-export const useMyStudyListStore = create<IMyStudyListState>((set) => ({
-  currentListType: "PROGRESS",
+export const useMyStudyListStore = create<IMyStudyListState>((set, get) => ({
+  currentListType: null,
   setCurrentListType: (
     newType: "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE",
   ) => {
+    console.log("setCurrentListType", newType);
     set({ currentListType: newType });
   },
   currentStudyList: null,

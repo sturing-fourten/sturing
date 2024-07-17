@@ -3,9 +3,14 @@ import NoList from "@/components/domains/mystudy/NoList";
 import { fetchDoneStudyListAction } from "@/lib/database/action/myStudyList";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
 
+const TAB_DEFAULT_LIST_TYPE = "DONE";
+
 export default async function DoneTabPage() {
   const currentListType = useMyStudyListStore.getState().currentListType;
-  if (currentListType === "DONE") await fetchDoneStudyListAction();
+  const isFirstRender = currentListType === null;
+  const isCurrentTabPage = currentListType === TAB_DEFAULT_LIST_TYPE;
+  if (!isFirstRender && isCurrentTabPage) await fetchDoneStudyListAction();
+
   const currentStudyList = useMyStudyListStore.getState().currentStudyList;
 
   return (

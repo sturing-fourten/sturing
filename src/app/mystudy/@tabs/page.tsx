@@ -4,9 +4,14 @@ import { ProgressInsideMenuWrapper } from "@/components/domains/mystudy/Progress
 import { fetchProgressStudyListAction } from "@/lib/database/action/myStudyList";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
 
+const TAB_DEFAULT_LIST_TYPE = "PROGRESS";
+
 export default async function ProcessTabPage() {
   const currentListType = useMyStudyListStore.getState().currentListType;
-  if (currentListType === "PROGRESS") await fetchProgressStudyListAction();
+  const isFirstRender = currentListType === null;
+  const isCurrentTabPage = currentListType === TAB_DEFAULT_LIST_TYPE;
+  if (!isFirstRender && isCurrentTabPage) await fetchProgressStudyListAction();
+
   const currentStudyList = useMyStudyListStore.getState().currentStudyList;
 
   return (

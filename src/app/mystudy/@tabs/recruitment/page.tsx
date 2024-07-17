@@ -5,9 +5,13 @@ import RecruitmentInsideMenuWrapper from "@/components/domains/mystudy/Recruitme
 import { fetchRecruitStartOwnerStudyListAction } from "@/lib/database/action/myStudyList";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
 
+const TAB_DEFAULT_LIST_TYPE = "RECRUIT_START_OWNER";
+
 export default async function RecruitmentTabPage() {
   const currentListType = useMyStudyListStore.getState().currentListType;
-  if (currentListType === "RECRUIT_START_OWNER") await fetchRecruitStartOwnerStudyListAction();
+  const isFirstRender = currentListType === null;
+  const isCurrentTabPage = currentListType === TAB_DEFAULT_LIST_TYPE;
+  if (!isFirstRender && isCurrentTabPage) await fetchRecruitStartOwnerStudyListAction();
 
   return (
     <section className="pt-5 pb-10 px-4">
