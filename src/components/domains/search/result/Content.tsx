@@ -9,9 +9,11 @@ import { useEffect, useState } from "react";
 import SortFilterButton from "./SortFilterButton";
 import { getLectureListAction } from "@/lib/database/action/lecture";
 import { LectureData, StudyData } from "@/types/studyDetail";
+import { useSearchTabMenuStore } from "@/store/FilterStore";
 
 export default function Content() {
-  const [menu, setMenu] = useState("lecture");
+  const { menu, setTabMenu } = useSearchTabMenuStore();
+
   const [lectures, setLectures] = useState<LectureData[]>([]);
   const [studies, setStudies] = useState<StudyData[]>([]);
 
@@ -46,9 +48,9 @@ export default function Content() {
     <>
       <article>
         <nav className="px-4 pt-[2px] flex justify-between items-center gap-3 bg-white border-b border-gray-200">
-          <TabMenuButton onClick={() => setMenu("total")} title="전체" isSelected={menu === "total"} />
-          <TabMenuButton onClick={() => setMenu("study")} title="스터디" isSelected={menu === "study"} />
-          <TabMenuButton onClick={() => setMenu("lecture")} title="강의" isSelected={menu === "lecture"} />
+          <TabMenuButton onClick={() => setTabMenu("total")} title="전체" isSelected={menu === "total"} />
+          <TabMenuButton onClick={() => setTabMenu("study")} title="스터디" isSelected={menu === "study"} />
+          <TabMenuButton onClick={() => setTabMenu("lecture")} title="강의" isSelected={menu === "lecture"} />
         </nav>
         {menu !== "lecture" && (
           <section className="px-4 pt-5 pb-10">
@@ -58,14 +60,14 @@ export default function Content() {
             <div className="flex flex-col gap-5 items-end">
               {menu === "total" && <SortFilterButton />}
               <CardList>
-                {menu === "total"
+                {/* {menu === "total"
                   ? studies.slice(0, 4).map((study: StudyData) => <StudyRecruitCard key={study._id} isMini isScraped />)
-                  : studies.map((study: StudyData) => <StudyRecruitCard key={study._id} isMini isScraped />)}
+                  : studies.map((study: StudyData) => <StudyRecruitCard key={study._id} isMini isScraped />)} */}
               </CardList>
             </div>
             {menu === "total" && (
               <Button
-                onClick={() => setMenu("study")}
+                onClick={() => setTabMenu("study")}
                 varient="ghost"
                 addStyle="text-gray-800 border-gray-400 w-full px-5 py-[14px] rounded-lg mt-6">
                 스터디 전체보기
@@ -82,17 +84,17 @@ export default function Content() {
             <div className="flex flex-col gap-[14px]">
               {menu === "total"
                 ? lectures
-                    .slice(0, 2)
+                    ?.slice(0, 2)
                     .map((lecture: LectureData) => (
                       <LectureCard key={lecture._id} lecture={lecture} variant="card" isScraped />
                     ))
-                : lectures.map((lecture: LectureData) => (
+                : lectures?.map((lecture: LectureData) => (
                     <LectureCard key={lecture._id} lecture={lecture} variant="card" isScraped />
                   ))}
             </div>
             {menu === "total" && (
               <Button
-                onClick={() => setMenu("lecture")}
+                onClick={() => setTabMenu("lecture")}
                 varient="ghost"
                 addStyle="text-gray-800 border-gray-400 w-full px-5 py-[14px] rounded-lg mt-6">
                 강의 전체보기

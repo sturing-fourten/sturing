@@ -37,9 +37,9 @@ export default function Content() {
       <section className="pl-4 pb-10 sm:px-4">
         <h1 className="pb-5 text-base text-gray-1000 font-semibold leading-normal">최근 본 스터디</h1>
         <CardList isSingleLine>
+          {/* <StudyRecruitCard isMini={false} isScraped />
           <StudyRecruitCard isMini={false} isScraped />
-          <StudyRecruitCard isMini={false} isScraped />
-          <StudyRecruitCard isMini={false} isScraped />
+          <StudyRecruitCard isMini={false} isScraped /> */}
         </CardList>
       </section>
     </>

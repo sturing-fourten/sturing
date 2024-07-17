@@ -1,7 +1,7 @@
 import React, { ChangeEvent, SetStateAction, useState } from "react";
 import Subtitle from "./Subtitle";
 import { ToggleButton } from "./ToggleButton";
-import { getIntrestsTitleById, getLevelTitleById } from "@/utils/getTitleById";
+import { getInterestsTitleById, getLevelTitleById } from "@/utils/getTitleById";
 import { level, location } from "@/types/matching";
 
 interface EditInputProps extends React.ComponentProps<"input"> {
@@ -66,7 +66,7 @@ export default function EditInput(props: EditInputProps) {
                     key={item.interest}
                     className="flex justify-center items-center h-6 px-2 gap-1 bg-main-100 border border-main-500 rounded-md text-main-500 text-[14px] font-medium tracking-[-0.28px] leading-[21px]">
                     <div>
-                      {getIntrestsTitleById(item.interest)} · {getLevelTitleById(item.level)}
+                      {getInterestsTitleById(item.interest)} · {getLevelTitleById(item.level)}
                     </div>
                   </div>
                 ))

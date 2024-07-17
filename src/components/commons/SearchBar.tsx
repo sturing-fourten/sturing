@@ -1,16 +1,36 @@
+"use client";
 import { ICONS } from "@/constant/icons";
-
+import { useFilterStore } from "@/store/FilterStore";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 interface SearchBarProps {
   placeholder: string;
 }
 
 export default function SearchBar({ placeholder, ...props }: SearchBarProps) {
+  const [inputValue, setValue] = useState("");
+  const { setSearchQuery } = useFilterStore();
+  const router = useRouter();
+
+  const handleInputSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (inputValue) {
+      setSearchQuery(inputValue);
+      router.push(`/search/result?search=${inputValue}`);
+      setValue("");
+    }
+  };
+
   return (
-    <form className="flex items-center px-[20px] justify-between w-full rounded-full bg-main-100">
+    <form
+      onSubmit={handleInputSubmit}
+      className="flex items-center px-[20px] justify-between w-full rounded-full bg-main-100">
       <input
         type="text"
-        name="searchBar"
+        name="search"
         placeholder={placeholder}
+        value={inputValue}
+        onChange={(e) => setValue(e.target.value)}
         {...props}
         className="items-center w-full flex pr-[10px] py-3 gap-[10px] bg-main-100 focus-visible:outline-none placeholder:text-gray-700 placeholder:text-[14px] placeholder:font-medium placeholder:tracking-[-0.42px] placeholder:leading-[22px] text-[14px] tracking-[-0.42px] leading-[22px] font-semibold text-gray-1000"
       />
