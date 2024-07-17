@@ -12,12 +12,12 @@ const { instructor, level } = LECTURE_INFO;
 export default function LectureInfo({ lectureInfo }: LectureInfoProps) {
   return (
     <>
-      <section className="pt-7 pb-10" id="lectureInfo">
+      <section className="pt-7 pb-10">
         <div className="flex flex-col gap-3 justify-start">
           <DetailInfo icon={instructor.icon} title={instructor.title} content={lectureInfo?.instructor} />
           <DetailInfo icon={level.icon} title={level.title} content={lectureInfo?.level} />
         </div>
-        <div className="flex items-center gap-[14px] mt-5">
+        <div className="flex items-center gap-[14px] mt-5" id="related_study">
           {lectureInfo?.tag.map((tag: string, index: number) => (
             <HashTag key={index} tag={tag} />
           ))}
