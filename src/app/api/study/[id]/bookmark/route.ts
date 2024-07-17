@@ -75,15 +75,16 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request): Promise<NextResponse> {
   const { _id } = await req.json();
+
   try {
     await connectDB();
 
     const response = await StudyBookmark.findByIdAndDelete(_id);
     if (!response) {
-      return NextResponse.json({ message: "사용자를 찾을 수 없습니다." }, { status: 404 });
+      return NextResponse.json({ message: "댓글을 찾을 수 없습니다." }, { status: 404 });
     }
 
-    return NextResponse.json("스터디 찜 삭제 성공!");
+    return NextResponse.json("강의 찜 삭제 성공!");
   } catch (error: any) {
     throw new Error(error);
   }
