@@ -6,6 +6,8 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const category = searchParams.get("category")?.split(",");
   const search = searchParams.get("search");
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
   //헤더로 유저정보 받기 (북마크 여부 확인)
 
@@ -26,7 +28,9 @@ export async function GET(request: Request) {
   }
 
   try {
-    const lectureListData = await Lecture.find(query);
+    const lectureListData = await Lecture.find(query)
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
 
     const lectureList: {
       id: string;
@@ -53,7 +57,11 @@ export async function GET(request: Request) {
     }
     //북마크 여부  Promise.all 로 추가
 
-    return Response.json({ lectureList });
+    const totalLectureCount = await Lecture.countDocuments(query);
+    const totalPages = Math.ceil(totalLectureCount / pageSize);
+    const hasNextPage = totalPages > page;
+
+    return Response.json({ lectureList, totalPages, currentPage: page, hasNextPage });
   } catch (error: any) {
     console.error("Error fetching lectures:", error);
     return new Response(JSON.stringify({ error: "강의 리스트를 불러오는데 실패하였습니다." }), {
