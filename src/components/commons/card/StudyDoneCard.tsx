@@ -34,7 +34,7 @@ export default async function StudyDoneCard(props: IStudyDoneCardProps) {
    * @todo teamMembersId 타입 수정
    */
   const teamMemberList = (teamMembersId as TTeamMembersIdAddedMember)?.members?.filter(
-    (member) => member.userId?._id.toString() !== myUserId,
+    (member) => member.userId._id.toString() !== myUserId,
   );
 
   const dateRange = getDateRange(startDate, endDate);
@@ -60,6 +60,7 @@ function TeamMemberReviewItem({ member }: { member: TMember }) {
   /**
    * @todo review 유무 연동
    */
+
   const review = false;
   const user = member.userId as TMemberUserIdAddedUser;
   return (
