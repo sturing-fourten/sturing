@@ -13,8 +13,9 @@ export async function GET(request: Request) {
   const age = searchParams.get("age")?.split(",");
   const career = searchParams.get("career")?.split(",");
   const memberCount = searchParams.get("memberCount");
-  // 지역검색 추가 예정
-
+  const location = searchParams.get("location")?.split(",");
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
   //헤더로 유저정보 받기 (북마크 여부 확인)
 
   await connectDB();
@@ -50,19 +51,25 @@ export async function GET(request: Request) {
     query["wantedMember.count"] = { $in: memberCount };
   }
 
+  if (location) {
+    query["$or"] = location.map((loc) => ({
+      "meeting.location": { $regex: `^${loc}$`, $options: "i" },
+    }));
+  }
   //정렬 설정
   let sortOption: { [key: string]: any } = {};
 
   if (sortBy === "LATEST") {
     sortOption = { createdAt: -1 };
   } else if (sortBy === "DEADLINE") {
-    sortOption = { startDate: 1 };
+    sortOption = { startDate: 1, createdAt: 1 };
   } else if (sortBy === "POPULAR") {
-    sortOption = { popularScore: -1 };
+    sortOption = { popularScore: -1, createdAt: 1 };
   }
 
   try {
     let studyListData;
+
     if (sortBy === "POPULAR") {
       studyListData = await Study.aggregate([
         { $match: query },
@@ -94,16 +101,7 @@ export async function GET(request: Request) {
             popularScore: { $add: ["$scrapCount", "$teamMembersCount", "$commentsCount"] },
           },
         },
-        { $sort: sortOption },
-        {
-          $project: {
-            teamMembersData: 0,
-            commentsData: 0,
-            teamMembersCount: 0,
-            commentsCount: 0,
-            popularScore: 0,
-          },
-        },
+
         {
           $lookup: {
             from: "users",
@@ -117,11 +115,41 @@ export async function GET(request: Request) {
             ownerData: { $ne: [] },
           },
         },
+        { $sort: sortOption },
+        { $skip: (page - 1) * pageSize },
+        { $limit: pageSize },
+        {
+          $project: {
+            teamMembersData: 0,
+            commentsData: 0,
+            teamMembersCount: 0,
+            commentsCount: 0,
+            popularScore: 0,
+          },
+        },
       ]);
     } else {
-      studyListData = await Study.find(query).populate({ path: "ownerId" }).sort(sortOption).exec();
-      studyListData = studyListData.filter((study) => study.ownerId !== null);
+      studyListData = await Study.aggregate([
+        { $match: query },
+        {
+          $lookup: {
+            from: "users",
+            localField: "ownerId",
+            foreignField: "_id",
+            as: "ownerData",
+          },
+        },
+        {
+          $match: {
+            ownerData: { $ne: [] },
+          },
+        },
+        { $sort: sortOption },
+        { $skip: (page - 1) * pageSize },
+        { $limit: pageSize },
+      ]);
     }
+
     let studyList: TStudyListData = [];
 
     //isBookmark 추가 예정.
@@ -129,7 +157,6 @@ export async function GET(request: Request) {
       studyList = await Promise.all(
         studyListData.map(async (study) => {
           const { _id, ownerId, category, title, imageUrl, startDate, endDate, meeting, wantedMember } = study;
-
           const acceptedTeamMembers = await TeamMembers.findOne({ studyId: _id, "members.status": "ACCEPTED" });
           const acceptedCount = acceptedTeamMembers ? acceptedTeamMembers.members.length : 0;
           const wantedMemberCount = wantedMember?.count || "제한없음";
@@ -148,7 +175,16 @@ export async function GET(request: Request) {
         }),
       );
     }
-    return Response.json({ studyList });
+
+    const totalStudies = (await Study.find(query).populate({ path: "ownerId" }).exec()).filter(
+      (study) => study.ownerId !== null,
+    );
+    const totalStudiesCount = totalStudies.length;
+
+    const totalPages = Math.ceil(totalStudiesCount / pageSize);
+    const hasNextPage = totalPages > page;
+
+    return Response.json({ studyList, totalPages, hasNextPage, currentPage: page, pageSize, query });
   } catch (error: any) {
     console.error("error study list", error);
     return Response.json({ error }, { status: 500 });
