@@ -1,3 +1,4 @@
+import { ASSIGNMENT_LIST } from "@/constant/studyDetail";
 import Image from "next/image";
 
 interface DetailInfoProps {
@@ -19,7 +20,11 @@ export default function DetailInfo({ icon, title, content, isWhite = false, task
           <Image src={icon.src} alt={icon.alt} width={18} height={18} />
           <p>{title}</p>
         </div>
-        {taskContent ? taskContent.map((content, idx) => <p key={idx}>{content}</p>) : <p>{content}</p>}
+        {taskContent ? (
+          taskContent.map((content, idx) => <p key={idx}>{ASSIGNMENT_LIST[content]}</p>)
+        ) : (
+          <p>{content}</p>
+        )}
       </li>
     </>
   );

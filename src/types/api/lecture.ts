@@ -2,6 +2,7 @@ import { TStudyDetailInfoData } from "./study";
 
 export type TLectureInfoData = {
   _id: string;
+  id?: string;
   online: boolean;
   category: string;
   platform: string;

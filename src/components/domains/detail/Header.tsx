@@ -18,9 +18,9 @@ const { study, lecture } = IMAGES_DEFAUlT;
 
 export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
   const { online: lectureOnline, platform, category: lectureCategory, rating, title: lectureTitle, link } = lectureInfo;
-  const studyOnline = studyInfo?.meeting?.format || "online";
+  const studyOnline = studyInfo?.meeting?.format || "ONLINE";
   const { category: studyCategory = "", title: studyTitle, startDate } = studyInfo || {};
-  const studyImageUrl = ""; //임시
+  const studyImageUrl = studyInfo?.imageUrl;
   const isStudy = page === "study";
   const defaultImageUrl = isStudy ? study.src : lecture.src;
   const imageUrl = isStudy ? studyImageUrl : "";
@@ -32,6 +32,8 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
       })
     : "";
   const style = {
+    backgroundPosition: "center",
+    backgroundSize: "cover",
     backgroundImage: `url(${imageUrl || defaultImageUrl})`,
   };
   const isLeader = true;
@@ -39,9 +41,9 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
   const getStatus = () => {
     if (isStudy) {
       switch (studyOnline) {
-        case "online":
+        case "ONLINE":
           return "온라인";
-        case "offline":
+        case "OFFLINE":
           return "오프라인";
         default:
           return "온/오프라인";
@@ -75,7 +77,7 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
           {isStudy ? studyTitle : lectureTitle}
         </h1>
         {isStudy && (
-          <div className="mt-6 w-[149px] h-[18px] flex justify-start items-center gap-2.5 leading-[150%] tracking-[-0.36px] text-gray-400 text-[12px] font-medium text-nowrap ">
+          <div className="mt-6 w-[149px] h-[18px] flex justify-start items-center gap-2.5 leading-[150%] tracking-[-0.36px] text-gray-300 text-[12px] font-medium text-nowrap ">
             <p>몇주 진행</p>
             <div className="w-[1px] h-[12px] bg-gray-400" />
             <p>{`${studyStartDate} 부터 시작`}</p>
