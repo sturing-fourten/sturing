@@ -4,6 +4,7 @@ import DashboardCardTitle from "../DashboardCardTitle";
 import { TAttendanceItem } from "@/types/dashboard";
 import { TStudyDetailInfoData } from "@/types/api/study";
 import { getSession } from "@/lib/database/getSession";
+import { format } from "date-fns";
 
 export default function StudyMemberAttendanceCard({
   list,
@@ -17,7 +18,7 @@ export default function StudyMemberAttendanceCard({
   return (
     <DashboardCardLayout>
       <DashboardCardTitle isEditing={isEditing} title="출석체크">
-        <span className="text-gray-600 text-sm font-medium leading-snug">06.03(월)</span>
+        <span className="text-gray-600 text-sm font-medium leading-snug">{format(new Date(), "M월 d일")}</span>
       </DashboardCardTitle>
       <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide mt-4">
         {list.map((item) => {
@@ -44,12 +45,13 @@ async function MemberItem(props: IMemberItem) {
     <li className="flex-shrink-0 flex flex-col items-center justify-end gap-2 w-[66px] py-2">
       {!isMe && (
         <button
+          type="button"
           className={`w-[66px] h-[28px] pb-[5px] bg-[url('/icons/alert-bg-66.svg')] bg-[length:66px] bg-no-repeat text-center text-[#787878] text-[11px] font-medium leading-none tracking-[-0.33px]`}>
           출석 알리기
         </button>
       )}
       <form className="flex flex-col justify-center items-center gap-2" action={""}>
-        <button>
+        <button type="button">
           <Checkbox isChecked={item.data.isAttended} />
         </button>
         <div

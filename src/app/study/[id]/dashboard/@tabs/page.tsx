@@ -1,10 +1,11 @@
 import StudyAddFunctionCard from "@/components/domains/dashboard/StudyFunctionAddButtonCard";
 import StudyFunctionEditButton from "@/components/domains/dashboard/StudyFunctionEditButton";
 import StudyMemberProgressGaugeCard from "@/components/domains/dashboard/StudyMemberProgressGaugeCard";
-import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMemberChecklistCard";
+import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMemberChecklistCard/StudyMemberChecklistCard";
 import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMemberAttendanceCard";
 import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardConnector";
+import { getSession } from "@/lib/database/getSession";
 
 interface ITeamTabProps {
   params: {
@@ -25,13 +26,15 @@ const getDashboardInfo = async (id: string) => {
 
 export default async function TeamTab(props: ITeamTabProps) {
   const studyId = props.params.id;
+  const session = await getSession();
+  const userId = session?.user?.id;
 
   const dashboard = await getDashboardInfo(studyId);
 
+  console.log(dashboard);
+
   if (!dashboard) return;
   const { progressGauge, attendance, checkList } = dashboard.dashboard;
-
-  console.log(attendance, dashboard.teamMemberList);
 
   const isProgressGaugeExist = true;
   const isAttendanceExist = true;
@@ -71,7 +74,11 @@ export default async function TeamTab(props: ITeamTabProps) {
         )}
         {isCheckListExist && (
           <div className="relative">
-            <StudyMemberChecklistCard />
+            <StudyMemberChecklistCard
+              userId={userId || ""}
+              list={checkList.list}
+              teamMember={dashboard.teamMemberList}
+            />
             {checkListExist && <FunctionCardConnector />}
           </div>
         )}
