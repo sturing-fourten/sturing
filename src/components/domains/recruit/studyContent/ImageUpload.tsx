@@ -1,6 +1,8 @@
 import { ICONS } from "@/constant/icons";
+import { PutBlobResult } from "@vercel/blob";
 import Image from "next/image";
 import { useRef } from "react";
+import ImageDelete from "./ImageDelete";
 
 interface ImageUploadProps {
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -48,6 +50,7 @@ export default function ImageUpload(props: ImageUploadProps) {
           <button className="absolute -top-1.5 -right-1.5" onClick={() => setImage("")}>
             <img src={ICONS.imageCancel.src} alt={ICONS.imageCancel.alt} />
           </button>
+          {/* <ImageDelete blob={blob} setImage={setImage} /> */}
         </div>
       ) : (
         ""

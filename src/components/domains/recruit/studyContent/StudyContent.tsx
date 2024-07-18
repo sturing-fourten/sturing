@@ -15,7 +15,6 @@ interface StudyContentProps {
 
 export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   const [fileToRead, setFileToRead] = useState<File | null>(null);
-  const [blob, setBlob] = useState<PutBlobResult | null>(null);
 
   const image = useStudyContentStore((state) => state.image);
   const setImage = useStudyContentStore((state) => state.setImage);
@@ -56,34 +55,47 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   };
 
   useEffect(() => {
-    if (!fileToRead) return;
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const newImage = reader.result as string;
-      setImage(newImage);
+    const loadImageFromFile = async (file: File) => {
+      return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const newImage = reader.result as string;
+          resolve(newImage);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
     };
 
-    const fetchImage = async (file: any) => {
+    const uploadImageToServer = async (file: File) => {
       try {
         const response = await fetch(`/api/image-test?filename=${file.name}`, {
           method: "POST",
           body: file,
         });
+
         const newBlob = (await response.json()) as PutBlobResult;
         const uploadImage = newBlob.url;
-        setBlob(newBlob);
-        setImage(uploadImage);
-      } catch (error: any) {
-        console.error("Error fetching Image:", error.message);
+        return uploadImage;
+      } catch (error) {
+        console.error(error);
         throw error;
       }
     };
 
-    fetchImage(fileToRead);
+    const processImageUpload = async () => {
+      if (fileToRead) {
+        try {
+          const [imageUrl] = await Promise.all([loadImageFromFile(fileToRead), uploadImageToServer(fileToRead)]);
+          setImage(imageUrl);
+          setFileToRead(null);
+        } catch (error) {
+          console.error("Error processing image upload:", error);
+        }
+      }
+    };
 
-    reader.readAsDataURL(fileToRead);
-    setFileToRead(null);
+    processImageUpload();
   }, [fileToRead, setImage]);
 
   useEffect(() => {

@@ -131,7 +131,7 @@ export default function Recruit() {
     const formData = new FormData();
     formData.append("lectureId", lecture);
     formData.append("category", category);
-    formData.append("imageUrl", image);
+    if (image) formData.append("imageUrl", image);
     formData.append("title", title);
     formData.append("introduction", introduction);
     formData.append("progressWay", progressWay);
