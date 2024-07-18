@@ -1,10 +1,10 @@
 import Dropdown from "@/components/commons/Dropdown";
 import { ONLINE_LIST } from "@/constant/progressWay";
-import { useStudyContentStore } from "@/store/recruitStore";
+import { useRecruitStore } from "@/store/recruitStore";
 
 export default function OnlineDropdown() {
-  const online = useStudyContentStore((state) => state.online) ?? "";
-  const setOnline = useStudyContentStore((state) => state.setOnline);
+  const online = useRecruitStore((state) => state.online) ?? "";
+  const setOnline = useRecruitStore((state) => state.setOnline);
 
   const handleOnlineChange = (selectedOnline: string) => {
     setOnline(selectedOnline);

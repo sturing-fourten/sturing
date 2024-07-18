@@ -6,7 +6,7 @@ import StudyTitle from "./StudyTitle";
 import StudyIntroduction from "./StudyIntroduction";
 import StudyExample from "./StudyExample";
 import ProgressWay from "./ProgressWay";
-import { useStudyContentStore } from "@/store/recruitStore";
+import { useRecruitStore } from "@/store/recruitStore";
 import { PutBlobResult } from "@vercel/blob";
 
 interface StudyContentProps {
@@ -16,14 +16,14 @@ interface StudyContentProps {
 export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   const [fileToRead, setFileToRead] = useState<File | null>(null);
 
-  const image = useStudyContentStore((state) => state.image);
-  const setImage = useStudyContentStore((state) => state.setImage);
-  const title = useStudyContentStore((state) => state.title);
-  const setTitle = useStudyContentStore((state) => state.setTitle);
-  const introduction = useStudyContentStore((state) => state.introduction);
-  const setIntroduction = useStudyContentStore((state) => state.setIntroduction);
-  const progressWay = useStudyContentStore((state) => state.progressWay);
-  const setProgressWay = useStudyContentStore((state) => state.setProgressWay);
+  const image = useRecruitStore((state) => state.image);
+  const setImage = useRecruitStore((state) => state.setImage);
+  const title = useRecruitStore((state) => state.title);
+  const setTitle = useRecruitStore((state) => state.setTitle);
+  const introduction = useRecruitStore((state) => state.introduction);
+  const setIntroduction = useRecruitStore((state) => state.setIntroduction);
+  const progressWay = useRecruitStore((state) => state.progressWay);
+  const setProgressWay = useRecruitStore((state) => state.setProgressWay);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;

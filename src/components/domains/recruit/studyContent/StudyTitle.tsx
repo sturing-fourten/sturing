@@ -1,5 +1,3 @@
-import TextField from "@/components/commons/TextField";
-
 interface StudyTitleProps {
   studyTitle: string;
   handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

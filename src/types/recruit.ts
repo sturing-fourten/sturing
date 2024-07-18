@@ -27,13 +27,11 @@ export interface TeamMemberInfoType {
   role: string[];
 }
 
-export interface SelectLectureState {
+export interface RecruitState {
   lecture: string;
   setLecture: (lecture: string) => void;
   category: string;
   setCategory: (category: string) => void;
-}
-export interface StudyContentState {
   image: string;
   setImage: (image: string) => void;
   title: string;
@@ -46,8 +44,6 @@ export interface StudyContentState {
   setOnline: (online: string) => void;
   address?: string;
   setAddress: (address: string) => void;
-}
-export interface StudyDetailState {
   date: DateRange;
   setDate: (date: DateRange) => void;
   day: string;
@@ -58,8 +54,6 @@ export interface StudyDetailState {
   setSelectedMood: (selectedMood: string[]) => void;
   selectedAssignment?: string[];
   setSelectedAssignment: (selectedAssignment: string[]) => void;
-}
-export interface TeamMemberInfoState {
   career: string[];
   setCareer: (career: string[]) => void;
   numberOfTeamMembers: number | "제한없음";
@@ -97,10 +91,4 @@ export interface RecruitType {
     age: string[];
     role: string[];
   };
-}
-
-export interface RecruitState {
-  recruit: RecruitType | null;
-  fetchRecruit: () => Promise<void>;
-  setRecruit: (recruit: RecruitType) => void;
 }

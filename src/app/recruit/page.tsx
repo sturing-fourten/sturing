@@ -11,12 +11,7 @@ import TeamMemberInfo from "@/components/domains/recruit/teamMemberInfo/TeamMemb
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { recruitAction } from "@/lib/database/action/recruit";
-import {
-  useSelectLectureStore,
-  useStudyContentStore,
-  useStudyDetailStore,
-  useTeamMemberInfoStore,
-} from "@/store/recruitStore";
+import { useRecruitStore } from "@/store/recruitStore";
 import { useRecruitReset } from "@/hooks/useReset";
 import { clearDraft, loadDraft, saveDraft } from "@/utils/saveDraft";
 
@@ -29,46 +24,41 @@ export default function Recruit() {
   const resetRecruitAll = useRecruitReset();
 
   // SelectLectureStore 상태와 업데이트 함수 사용
-  const lecture = useSelectLectureStore((state) => state.lecture);
-  const setLecture = useSelectLectureStore((state) => state.setLecture);
-  const category = useSelectLectureStore((state) => state.category);
-  const setCategory = useSelectLectureStore((state) => state.setCategory);
+  const { lecture, category, setLecture, setCategory } = useRecruitStore();
 
   // StudyContentStore 상태와 업데이트 함수 사용
-  const image = useStudyContentStore((state) => state.image);
-  const setImage = useStudyContentStore((state) => state.setImage);
-  const title = useStudyContentStore((state) => state.title);
-  const setTitle = useStudyContentStore((state) => state.setTitle);
-  const introduction = useStudyContentStore((state) => state.introduction);
-  const setIntroduction = useStudyContentStore((state) => state.setIntroduction);
-  const progressWay = useStudyContentStore((state) => state.progressWay);
-  const setProgressWay = useStudyContentStore((state) => state.setProgressWay);
-  const online = useStudyContentStore((state) => state.online);
-  const setOnline = useStudyContentStore((state) => state.setOnline);
-  const address = useStudyContentStore((state) => state.address);
-  const setAddress = useStudyContentStore((state) => state.setAddress);
+  const {
+    image,
+    title,
+    introduction,
+    progressWay,
+    online,
+    address,
+    setImage,
+    setTitle,
+    setIntroduction,
+    setProgressWay,
+    setOnline,
+    setAddress,
+  } = useRecruitStore();
 
   // StudyDetailStore 상태와 업데이트 함수 사용
-  const date = useStudyDetailStore((state) => state.date);
-  const setDate = useStudyDetailStore((state) => state.setDate);
-  const day = useStudyDetailStore((state) => state.day);
-  const setDay = useStudyDetailStore((state) => state.setDay);
-  const time = useStudyDetailStore((state) => state.time);
-  const setTime = useStudyDetailStore((state) => state.setTime);
-  const selectedMood = useStudyDetailStore((state) => state.selectedMood);
-  const setSelectedMood = useStudyDetailStore((state) => state.setSelectedMood);
-  const selectedAssignment = useStudyDetailStore((state) => state.selectedAssignment);
-  const setSelectedAssignment = useStudyDetailStore((state) => state.setSelectedAssignment);
+  const {
+    date,
+    day,
+    time,
+    selectedMood,
+    selectedAssignment,
+    setDate,
+    setDay,
+    setTime,
+    setSelectedMood,
+    setSelectedAssignment,
+  } = useRecruitStore();
 
   // TeamMemberInfoStore 상태와 업데이트 함수 사용
-  const career = useTeamMemberInfoStore((state) => state.career);
-  const setCareer = useTeamMemberInfoStore((state) => state.setCareer);
-  const numberOfTeamMembers = useTeamMemberInfoStore((state) => state.numberOfTeamMembers);
-  const setNumberOfTeamMembers = useTeamMemberInfoStore((state) => state.setNumberOfTeamMembers);
-  const ages = useTeamMemberInfoStore((state) => state.ages);
-  const setAges = useTeamMemberInfoStore((state) => state.setAges);
-  const role = useTeamMemberInfoStore((state) => state.role);
-  const setRole = useTeamMemberInfoStore((state) => state.setRole);
+  const { career, numberOfTeamMembers, ages, role, setCareer, setNumberOfTeamMembers, setAges, setRole } =
+    useRecruitStore();
 
   const handlePrevSection = () => {
     setSteps((prevSteps) => prevSteps - 1);
