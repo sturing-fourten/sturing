@@ -7,7 +7,7 @@ export default function layout({ children }: { children: ReactNode }) {
   return (
     <>
       {children}
-      {isLeader && isDone && (
+      {/* {isLeader && isDone && (
         <footer className="fixed bottom-0 z-[2] w-[inherit] py-3 px-4 bg-white">
           <Button
             varient="filled"
@@ -15,7 +15,7 @@ export default function layout({ children }: { children: ReactNode }) {
             스터디 종료하기
           </Button>
         </footer>
-      )}
+      )} */}
     </>
   );
 }

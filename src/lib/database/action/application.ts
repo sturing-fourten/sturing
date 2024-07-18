@@ -6,7 +6,7 @@ export const applyAction = async (formData: FormData) => {
   try {
     const session = await getSession();
     const userId = session?.user?.id;
-    const studyId = formData.get("studyId")?.toString();
+    const studyId = formData.get("studyId");
     const title = formData.get("title");
     const resolution = formData.get("resolution");
     const role = formData.get("role") || "팀원";
