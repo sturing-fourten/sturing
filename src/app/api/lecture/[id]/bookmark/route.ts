@@ -1,12 +1,36 @@
 import connectDB from "@/lib/database/db";
 import { LectureBookmark } from "@/schema/bookmarkSchema";
+import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+  const lectureId = params.id;
+  if (!lectureId) {
+    return Response.json({ message: "스터디 id 가 필요합니다." }, { status: 400 });
+  }
   await connectDB();
 
   try {
-    const lectureBookmark = await LectureBookmark.find({});
-    return Response.json(lectureBookmark);
+    const lectureBookmark = await LectureBookmark.find({ lectureId: lectureId });
+
+    let bookmarkList: {
+      id: string;
+      lectureId: string;
+      userId: string;
+    }[] = [];
+
+    if (lectureBookmark) {
+      bookmarkList = await Promise.all(
+        lectureBookmark.map(async (bookmark: any) => {
+          return {
+            id: bookmark.id,
+            lectureId: bookmark.lectureId,
+            userId: bookmark.userId,
+          };
+        }),
+      );
+    }
+
+    return Response.json(bookmarkList, { status: 200 });
   } catch (error: any) {
     return new Response(JSON.stringify({ error: error }), {
       status: 500,
@@ -49,15 +73,17 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req: Request): Promise<NextResponse> {
+  const { _id } = await req.json();
   try {
     await connectDB();
 
-    const { _id } = await req.json();
+    const response = await LectureBookmark.findByIdAndDelete(_id);
+    if (!response) {
+      return NextResponse.json({ message: "사용자를 찾을 수 없습니다." }, { status: 404 });
+    }
 
-    await LectureBookmark.findByIdAndDelete(_id);
-
-    return Response.json("강의 찜 삭제 성공!");
+    return NextResponse.json("강의 찜 삭제 성공!");
   } catch (error: any) {
     throw new Error(error);
   }

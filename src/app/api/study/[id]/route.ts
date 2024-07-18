@@ -38,15 +38,17 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
         teamMembers.members.map(async (member: any) => {
           const user = await User.findById(member.userId);
           return {
-            memberId: member.id,
+            memberId: member.userId,
             nickname: user.nickname,
             profileImageUrl: user.profileImageUrl,
             role: member.role,
             isOwner: member.isOwner,
+            status: member.status,
           };
         }),
       );
     }
+
     return Response.json({ study, lecture: lectureResult, teamMemberList: acceptedTeamMembers }, { status: 200 });
   } catch (error: any) {
     if (error.name === "CastError") {

@@ -39,7 +39,7 @@ export const deleteBookmarkAction = async (type: string, typeId: string, _id: st
     });
 
     if (!response.ok) {
-      throw new Error("강의 북마크 삭제 실패");
+      throw new Error(`${type === "study" ? "스터디" : "강의"} 북마크 삭제 실패`);
     }
 
     revalidatePath("/lecture", "layout");
