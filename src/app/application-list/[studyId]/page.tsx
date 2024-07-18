@@ -13,7 +13,6 @@ export default async function ApplicationListPage({ params: { studyId } }: IAppl
     await fetch(`${process.env.LOCAL_URL}/api/study-application-list?studyId=${studyId}`)
   ).json();
 
-  console.log(studyApplicationList);
   return (
     <>
       <TopBar variant="back">지원서 리스트</TopBar>

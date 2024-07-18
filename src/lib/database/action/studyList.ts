@@ -37,9 +37,6 @@ export const createStudyAction = async () => {
        */
       category: SAMPLE_STUDY.category,
       lectureId: SAMPLE_STUDY.lectureId,
-      /**
-       * @todo dashboard 작업 이후 dashboardId 추가
-       */
       title: SAMPLE_STUDY.title,
       imageUrl: SAMPLE_STUDY.imageUrl,
       description: SAMPLE_STUDY.description,

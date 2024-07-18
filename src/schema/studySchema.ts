@@ -9,10 +9,7 @@ const studySchema = new mongoose.Schema(
     },
     ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
-    /**
-     * @todo dashboard 작업 이후 추가 예정
-     */
-    // dashboardId: { type: mongoose.Schema.Types.ObjectId, ref: "Dashboard", required: true },
+    dashboardId: { type: mongoose.Schema.Types.ObjectId, ref: "Dashboard" },
     title: {
       type: String,
       required: true,
