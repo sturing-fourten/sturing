@@ -28,12 +28,7 @@ export default function SelectedLectureCard({ onClick, setIsLecture }: SelectedL
           <p className="Dr. Angela Yu, Developer and Lead Instructor, 웅진씽크빅 글로벌">GameDev.tv Team</p>
         </div>
       </button>
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          onClick();
-        }}>
+      <button type="button" onClick={onClick}>
         <img src={ICONS.close.src} alt={ICONS.close.alt} />
       </button>
     </div>
