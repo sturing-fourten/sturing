@@ -31,7 +31,7 @@ export default function DashboardLayout({ params, tabs }: IDashboardProps) {
         {/* TODO 공통 레이아웃 처리 */}
         <TopBar variant="share" showMore={false} isWhite={true} />
         {/* Study Info */}
-        <StudyInfo />
+        <StudyInfo params={id} />
       </div>
       {/* Tab Menu */}
       <TabBarLinkUnderlined

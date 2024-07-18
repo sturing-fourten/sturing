@@ -31,8 +31,6 @@ export default async function TeamTab(props: ITeamTabProps) {
 
   const dashboard = await getDashboardInfo(studyId);
 
-  console.log(dashboard);
-
   if (!dashboard) return;
   const { progressGauge, attendance, checkList } = dashboard.dashboard;
 

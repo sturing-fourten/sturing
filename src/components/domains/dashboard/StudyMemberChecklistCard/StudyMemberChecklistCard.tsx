@@ -17,8 +17,6 @@ export default function StudyMemberChecklistCard({
 }) {
   const isEditing = true;
 
-  console.log(teamMember);
-
   return (
     <DashboardCardLayout>
       <DashboardCardTitle isEditing={isEditing} title="체크리스트">
