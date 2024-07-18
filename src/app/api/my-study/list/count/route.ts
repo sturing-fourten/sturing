@@ -14,17 +14,18 @@ export async function GET(request: Request) {
       $or: [{ "members.isOwner": true }, { "members.status": "ACCEPTED" }],
     });
     const studyIdList = teamMembers.map((member) => member.studyId);
-    const [progressCount, recruitmentCount, doneCount] = await Promise.all([
+    const [progressCount, waitingCount, doneCount] = await Promise.all([
       Study.countDocuments({ _id: { $in: studyIdList }, status: { $in: ["PROGRESS", "RECRUIT_END"] } }),
       Study.countDocuments({ _id: { $in: studyIdList }, status: "RECRUIT_START" }),
       Study.countDocuments({ _id: { $in: studyIdList }, status: "DONE" }),
     ]);
-    const studyTabMenuList: TMyStudyTabMenuLinkUnderlinedItem[] = [
-      { id: "progress", title: "진행", href: "/mystudy/", count: progressCount },
-      { id: "recruitment", title: "대기", href: "/mystudy/recruitment", count: recruitmentCount },
+    const myStudyTabMenuList: TMyStudyTabMenuLinkUnderlinedItem[] = [
+      { id: "progress", title: "진행", href: "/mystudy/progress", count: progressCount },
+      { id: "waiting", title: "대기", href: "/mystudy/waiting", count: waitingCount },
       { id: "done", title: "완료", href: "/mystudy/done", count: doneCount },
     ];
-    return Response.json(studyTabMenuList);
+
+    return Response.json(myStudyTabMenuList);
   } catch (error: any) {
     throw new Error(error);
   }

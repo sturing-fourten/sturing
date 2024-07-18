@@ -3,12 +3,11 @@
 import { TMyStudyListType, useMyStudyListStore } from "@/store/myStudyListStore";
 import { getSession } from "../getSession";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 type TMyStudyListAction = () => Promise<void>;
 
 export const fetchProgressStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("PROGRESS");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -25,13 +24,10 @@ export const fetchProgressStudyListAction: TMyStudyListAction = async () => {
     useMyStudyListStore.getState().setCurrentStudyList(progressStudyList);
     useMyStudyListStore.getState().setProgressStudyListCount(progressStudyList.length);
     useMyStudyListStore.getState().setRecruitEndStudyListCount(recruitEndStudyListCount);
-    revalidatePath("/mystudy");
   } catch (error) {}
 };
 
 export const fetchRecruitEndStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("RECRUIT_END");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -48,13 +44,10 @@ export const fetchRecruitEndStudyListAction: TMyStudyListAction = async () => {
     useMyStudyListStore.getState().setCurrentStudyList(recruitEndStudyList);
     useMyStudyListStore.getState().setRecruitEndStudyListCount(recruitEndStudyList.length);
     useMyStudyListStore.getState().setProgressStudyListCount(progressStudyListCount);
-    revalidatePath("/mystudy");
   } catch (error) {}
 };
 
 export const fetchDoneStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("DONE");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -69,13 +62,10 @@ export const fetchDoneStudyListAction: TMyStudyListAction = async () => {
     if (!doneList) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
     useMyStudyListStore.getState().setCurrentStudyList(doneList);
-    revalidatePath("/mystudy/done");
   } catch (error) {}
 };
 
 export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("RECRUIT_START_OWNER");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -93,13 +83,10 @@ export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async (
     useMyStudyListStore.getState().setCurrentStudyList(recruitStartOwnerStudyList);
     useMyStudyListStore.getState().setRecruitStartOwnerStudyListCount(recruitStartOwnerStudyList.length);
     useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyListCount);
-    revalidatePath("/mystudy/recruitment");
   } catch (error) {}
 };
 
 export const fetchRecruitStartMemberStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("RECRUIT_START_MEMBER");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -117,11 +104,50 @@ export const fetchRecruitStartMemberStudyListAction: TMyStudyListAction = async 
     useMyStudyListStore.getState().setCurrentStudyList(recruitStartMemberStudyList);
     useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyList.length);
     useMyStudyListStore.getState().setRecruitStartOwnerStudyListCount(recruitStartOwnerStudyListCount);
-    revalidatePath("/mystudy/recruitment");
   } catch (error) {}
 };
 
-export const resetMyStudyAction = (nextHref: string, nextListType: TMyStudyListType) => {
-  useMyStudyListStore.getState().setCurrentListType(nextListType);
-  revalidatePath(nextHref);
-};
+export async function fetchMyStudyListByListType(myStudyListType: TMyStudyListType) {
+  switch (myStudyListType) {
+    case "PROGRESS":
+      await fetchProgressStudyListAction();
+      revalidatePath("/mystudy", "layout");
+      break;
+    case "RECRUIT_END":
+      await fetchRecruitEndStudyListAction();
+      revalidatePath("/mystudy", "layout");
+      break;
+    case "RECRUIT_START_OWNER":
+      await fetchRecruitStartOwnerStudyListAction();
+      revalidatePath("/mystudy/waiting");
+      break;
+    case "RECRUIT_START_MEMBER":
+      await fetchRecruitStartMemberStudyListAction();
+      revalidatePath("/mystudy/waiting");
+      break;
+    case "DONE":
+      await fetchDoneStudyListAction();
+      revalidatePath("/mystudy/done");
+      break;
+    default:
+      throw new Error(`스터디 리스트 타입이 맞지 않습니다.`);
+  }
+}
+
+export async function listTypeFormAction(formData: FormData) {
+  const myStudyListType = formData.get("myStudyListType") as TMyStudyListType;
+  if (!myStudyListType) return;
+
+  useMyStudyListStore.getState().setMyStudyListType(myStudyListType);
+  revalidatePath("/mystudy");
+}
+
+export async function tabMyStudyAction(formData: FormData) {
+  const href = formData.get("href")?.toString();
+  if (!href) return;
+  redirect(href);
+}
+
+export async function urlRenderAction(newType: TMyStudyListType) {
+  useMyStudyListStore.getState().setMyStudyListType(newType);
+}

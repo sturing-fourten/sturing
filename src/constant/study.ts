@@ -84,12 +84,6 @@ export const USER_FAVORITE_FIELD_TYPE: UserFavoriteFieldType = {
   },
 };
 
-export const STUDY_TAB_MENU_LIST: TMyStudyTabMenuLinkUnderlinedItem[] = [
-  { id: "progress", title: "진행", href: "/mystudy/", count: 1 },
-  { id: "recruitment", title: "대기", href: "/mystudy/recruitment", count: 1 },
-  { id: "done", title: "완료", href: "/mystudy/done", count: 1 },
-];
-
 export const STUDY_RECRUIT_INFO = {
   teamMember: { title: "팀원", icon: { src: ICONS.postInfoTeamMember.src, alt: ICONS.postInfoTeamMember.alt } },
   meeting: { title: "일정", icon: { src: ICONS.postInfoMeeting.src, alt: ICONS.postInfoMeeting.alt } },
