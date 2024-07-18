@@ -27,10 +27,19 @@ export type TAttendance = {
 
 export type TChecklistItem = {
   teamMemberId: Types.ObjectId;
-  data: {
-    date: Date;
-    isChecked: boolean;
-  };
+  userId: Types.ObjectId;
+  data: TChecklistDataList[];
+};
+
+type TChecklistDataList = {
+  date: Date;
+  task: TTaskList[];
+};
+
+type TTaskList = {
+  task: string;
+  like: number;
+  isChecked: boolean;
 };
 
 export type TChecklist = {
