@@ -14,8 +14,6 @@ export default function StudyMemberAttendanceCard({
 }) {
   const isEditing = true;
 
-  console.log(teamMember);
-
   return (
     <DashboardCardLayout>
       <DashboardCardTitle isEditing={isEditing} title="출석체크">
