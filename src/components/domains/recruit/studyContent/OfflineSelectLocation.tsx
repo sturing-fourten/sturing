@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { MATCHING_CONFIG } from "@/constant/matchingConfig";
 import { CityList } from "@/types/city";
 import { StepsProps } from "@/types/matching";
-import { useStudyContentStore, useLocationsStore } from "@/store/recruitStore";
+import { useRecruitStore, useLocationsStore } from "@/store/recruitStore";
 
 export default function SelectLocation({ setIsSelected }: StepsProps) {
   const content = MATCHING_CONFIG.location.city;
@@ -11,7 +11,7 @@ export default function SelectLocation({ setIsSelected }: StepsProps) {
 
   const selectedLocations = useLocationsStore((state) => state.locations);
   const setSelectedLocations = useLocationsStore((state) => state.setLocations);
-  const setAddress = useStudyContentStore((state) => state.setAddress);
+  const setAddress = useRecruitStore((state) => state.setAddress);
 
   const handleCityClick = (key: string) => {
     setSelectedCity(key);

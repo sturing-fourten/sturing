@@ -8,7 +8,7 @@ import { DateRange } from "react-day-picker";
 import DivisionLine from "@/components/commons/DivisionLine";
 import StudyMoodToggle from "./StudyMoodToggle";
 import StudyAssignmentToggle from "./StudyAssignmentToggle";
-import { useStudyDetailStore } from "@/store/recruitStore";
+import { useRecruitStore } from "@/store/recruitStore";
 
 interface StudyDetailProps {
   onDetailChange: (date: DateRange, day: string, time: string, mood?: string[], assignment?: string[]) => void;
@@ -16,16 +16,16 @@ interface StudyDetailProps {
 
 // 추후 협의에 관한 토글 로직 필요
 export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
-  const date = useStudyDetailStore((state) => state.date);
-  const setDate = useStudyDetailStore((state) => state.setDate);
-  const day = useStudyDetailStore((state) => state.day);
-  const setDay = useStudyDetailStore((state) => state.setDay);
-  const time = useStudyDetailStore((state) => state.time);
-  const setTime = useStudyDetailStore((state) => state.setTime);
-  const selectedMood = useStudyDetailStore((state) => state.selectedMood);
-  const setSelectedMood = useStudyDetailStore((state) => state.setSelectedMood);
-  const selectedAssignment = useStudyDetailStore((state) => state.selectedAssignment);
-  const setSelectedAssignment = useStudyDetailStore((state) => state.setSelectedAssignment);
+  const date = useRecruitStore((state) => state.date);
+  const setDate = useRecruitStore((state) => state.setDate);
+  const day = useRecruitStore((state) => state.day);
+  const setDay = useRecruitStore((state) => state.setDay);
+  const time = useRecruitStore((state) => state.time);
+  const setTime = useRecruitStore((state) => state.setTime);
+  const selectedMood = useRecruitStore((state) => state.selectedMood);
+  const setSelectedMood = useRecruitStore((state) => state.setSelectedMood);
+  const selectedAssignment = useRecruitStore((state) => state.selectedAssignment);
+  const setSelectedAssignment = useRecruitStore((state) => state.setSelectedAssignment);
 
   const handleMoodToggle = (moodName: string) => {
     if (selectedMood?.includes(moodName)) {

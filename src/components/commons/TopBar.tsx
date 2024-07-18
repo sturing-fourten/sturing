@@ -1,6 +1,7 @@
 import { ICONS, BOOKMARK } from "@/constant/icons";
 import GoBackButton from "./GoBackButton";
 import Link from "next/link";
+import SaveButton from "./SaveButton";
 
 export type TopBarVariant = "share" | "chat" | "back" | "save" | "edit";
 
@@ -10,11 +11,21 @@ interface TopBarProps {
   isWhite?: boolean;
   children?: React.ReactNode;
   showBookmark?: boolean;
+  onCancel?: () => void;
+  onSave?: () => void;
 }
 
 const { share, more, message, shareWhite, moreWhite } = ICONS;
 
-export default function TopBar({ variant, children, isWhite = false, showMore, showBookmark }: TopBarProps) {
+export default function TopBar({
+  variant,
+  children,
+  isWhite = false,
+  showMore,
+  showBookmark,
+  onCancel,
+  onSave,
+}: TopBarProps) {
   const shareIcon = isWhite ? shareWhite : share;
   const moreIcon = isWhite ? moreWhite : more;
 
@@ -62,12 +73,7 @@ export default function TopBar({ variant, children, isWhite = false, showMore, s
           <span></span>
         </>
       )}
-      {variant === "save" && (
-        <>
-          <button className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">취소</button>
-          <button className="text-gray-600 text-[14px] tracking-[-0.42px] leading-[22px]">임시저장</button>
-        </>
-      )}
+      {variant === "save" && onCancel && onSave && <SaveButton onCancel={onCancel} onSave={onSave} />}
       {variant === "edit" && (
         <>
           <span className="text-[18px] font-semibold tracking-[-0.36px] leading-[27px]">{children}</span>

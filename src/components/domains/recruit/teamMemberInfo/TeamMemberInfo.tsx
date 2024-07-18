@@ -8,7 +8,7 @@ import CareerList from "./CareerList";
 import NumberOfTeamMember from "./NumberOfTeamMember";
 import AgesList from "./AgesList";
 import RoleList from "./RoleList";
-import { useTeamMemberInfoStore } from "@/store/recruitStore";
+import { useRecruitStore } from "@/store/recruitStore";
 
 interface TeamMemberInfoProps {
   onTeamMemberInfoChange: (
@@ -20,14 +20,14 @@ interface TeamMemberInfoProps {
 }
 
 export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInfoProps) {
-  const career = useTeamMemberInfoStore((state) => state.career);
-  const setCareer = useTeamMemberInfoStore((state) => state.setCareer);
-  const numberOfTeamMembers = useTeamMemberInfoStore((state) => state.numberOfTeamMembers);
-  const setNumberOfTeamMembers = useTeamMemberInfoStore((state) => state.setNumberOfTeamMembers);
-  const ages = useTeamMemberInfoStore((state) => state.ages);
-  const setAges = useTeamMemberInfoStore((state) => state.setAges);
-  const role = useTeamMemberInfoStore((state) => state.role);
-  const setRole = useTeamMemberInfoStore((state) => state.setRole);
+  const career = useRecruitStore((state) => state.career);
+  const setCareer = useRecruitStore((state) => state.setCareer);
+  const numberOfTeamMembers = useRecruitStore((state) => state.numberOfTeamMembers);
+  const setNumberOfTeamMembers = useRecruitStore((state) => state.setNumberOfTeamMembers);
+  const ages = useRecruitStore((state) => state.ages);
+  const setAges = useRecruitStore((state) => state.setAges);
+  const role = useRecruitStore((state) => state.role);
+  const setRole = useRecruitStore((state) => state.setRole);
 
   const [isInfinity, setIsInfinity] = useState<boolean>(false);
 

@@ -10,10 +10,11 @@ interface DropdownProps {
   value: string;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  preventClose?: boolean;
 }
 
 export default function Dropdown(props: DropdownProps) {
-  const { type, name, addStyle, children, onBlur, value, onChange } = props;
+  const { type, name, addStyle, children, onBlur, value, onChange, preventClose } = props;
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
 
   const handleDropdown = () => {
@@ -21,7 +22,9 @@ export default function Dropdown(props: DropdownProps) {
   };
 
   const handleChildClick = () => {
-    setOpenDropdown(false);
+    if (!preventClose) {
+      setOpenDropdown(false);
+    }
   };
 
   const clonedChildren = React.Children.map(children, (child) => {

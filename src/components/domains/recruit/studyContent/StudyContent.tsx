@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../commons/Title";
 import Subtitle from "../commons/Subtitle";
 import ImageUpload from "./ImageUpload";
@@ -6,7 +6,7 @@ import StudyTitle from "./StudyTitle";
 import StudyIntroduction from "./StudyIntroduction";
 import StudyExample from "./StudyExample";
 import ProgressWay from "./ProgressWay";
-import { useStudyContentStore } from "@/store/recruitStore";
+import { useRecruitStore } from "@/store/recruitStore";
 import { PutBlobResult } from "@vercel/blob";
 
 interface StudyContentProps {
@@ -15,16 +15,15 @@ interface StudyContentProps {
 
 export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   const [fileToRead, setFileToRead] = useState<File | null>(null);
-  const [blob, setBlob] = useState<PutBlobResult | null>(null);
 
-  const image = useStudyContentStore((state) => state.image);
-  const setImage = useStudyContentStore((state) => state.setImage);
-  const title = useStudyContentStore((state) => state.title);
-  const setTitle = useStudyContentStore((state) => state.setTitle);
-  const introduction = useStudyContentStore((state) => state.introduction);
-  const setIntroduction = useStudyContentStore((state) => state.setIntroduction);
-  const progressWay = useStudyContentStore((state) => state.progressWay);
-  const setProgressWay = useStudyContentStore((state) => state.setProgressWay);
+  const image = useRecruitStore((state) => state.image);
+  const setImage = useRecruitStore((state) => state.setImage);
+  const title = useRecruitStore((state) => state.title);
+  const setTitle = useRecruitStore((state) => state.setTitle);
+  const introduction = useRecruitStore((state) => state.introduction);
+  const setIntroduction = useRecruitStore((state) => state.setIntroduction);
+  const progressWay = useRecruitStore((state) => state.progressWay);
+  const setProgressWay = useRecruitStore((state) => state.setProgressWay);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -56,34 +55,47 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   };
 
   useEffect(() => {
-    if (!fileToRead) return;
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const newImage = reader.result as string;
-      setImage(newImage);
+    const loadImageFromFile = async (file: File) => {
+      return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const newImage = reader.result as string;
+          resolve(newImage);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
     };
 
-    const fetchImage = async (file: any) => {
+    const uploadImageToServer = async (file: File) => {
       try {
         const response = await fetch(`/api/image-test?filename=${file.name}`, {
           method: "POST",
           body: file,
         });
+
         const newBlob = (await response.json()) as PutBlobResult;
         const uploadImage = newBlob.url;
-        setBlob(newBlob);
-        setImage(uploadImage);
-      } catch (error: any) {
-        console.error("Error fetching Image:", error.message);
+        return uploadImage;
+      } catch (error) {
+        console.error(error);
         throw error;
       }
     };
 
-    fetchImage(fileToRead);
+    const processImageUpload = async () => {
+      if (fileToRead) {
+        try {
+          const [imageUrl] = await Promise.all([loadImageFromFile(fileToRead), uploadImageToServer(fileToRead)]);
+          setImage(imageUrl);
+          setFileToRead(null);
+        } catch (error) {
+          console.error("Error processing image upload:", error);
+        }
+      }
+    };
 
-    reader.readAsDataURL(fileToRead);
-    setFileToRead(null);
+    processImageUpload();
   }, [fileToRead, setImage]);
 
   useEffect(() => {

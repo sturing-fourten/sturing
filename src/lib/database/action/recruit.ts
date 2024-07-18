@@ -1,6 +1,7 @@
 "use server";
 
 import connectDB from "../db";
+import { getSession } from "../getSession";
 
 export async function recruitAction(formData: FormData) {
   const lectureId = formData.get("lectureId");
@@ -28,7 +29,8 @@ export async function recruitAction(formData: FormData) {
 
   await connectDB();
 
-  const userId = "668bcc45f6265b4ece271a16"; // 추후에 수정 예정
+  const session = await getSession();
+  const userId = session?.user?.id;
   if (!userId) throw new Error("유저 정보가 없습니다.");
 
   const newStudy = {

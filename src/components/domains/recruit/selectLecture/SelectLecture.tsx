@@ -6,7 +6,7 @@ import CategoryList from "./CategoryList";
 import UrlInput from "./UrlInput";
 import FavoriteListButton from "./FavoriteListButton";
 import SearchBar from "./SearchBar";
-import { useSelectLectureStore } from "@/store/recruitStore";
+import { useRecruitStore } from "@/store/recruitStore";
 
 interface SelectLectureProps {
   onLectureChange: (lecture: string, category: string) => void;
@@ -15,10 +15,10 @@ interface SelectLectureProps {
 export default function SelectLecture({ onLectureChange }: SelectLectureProps) {
   const [isLectureValid, setIsLectureValid] = useState(true);
 
-  const lecture = useSelectLectureStore((state) => state.lecture);
-  const setLecture = useSelectLectureStore((state) => state.setLecture);
-  const category = useSelectLectureStore((state) => state.category);
-  const setCategory = useSelectLectureStore((state) => state.setCategory);
+  const lecture = useRecruitStore((state) => state.lecture);
+  const setLecture = useRecruitStore((state) => state.setLecture);
+  const category = useRecruitStore((state) => state.category);
+  const setCategory = useRecruitStore((state) => state.setCategory);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const url = e.target.value;
