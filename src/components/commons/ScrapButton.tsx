@@ -14,59 +14,58 @@ interface ScrapButtonProps {
   variant: "detail" | "card";
   id: string;
   page: "study" | "lecture";
+  userId: string;
 }
 
 export interface Bookmark {
   lectureId?: string;
   studyId?: string;
   userId: string;
-  _id: string;
+  id: string;
 }
 
-export default function ScrapButton({ variant, id, page }: ScrapButtonProps) {
+export default function ScrapButton({ variant, id, page, userId }: ScrapButtonProps) {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [isChecked, setChecked] = useState<boolean>(false);
   const [scrapCount, setScrapCount] = useState<number>(0);
   const isDetail = variant === "detail";
-  const sampleUserId = "668bcc45f6265b4ece271a16";
+  const isStudy = page === "study";
 
-  useEffect(() => {
-    const fetchBookmarkData = async () => {
-      try {
-        const response = await fetch(`/api/lecture/${id}/bookmark`);
-
-        if (!response.ok) {
-          throw new Error("강의 찜 리스트 불러오기 실패");
-        }
-        const lectrueBookmarkData = await response.json();
-        setBookmarks(lectrueBookmarkData);
-        setScrapCount(lectrueBookmarkData.length);
-        setChecked(lectrueBookmarkData.some((bookmark: Bookmark) => bookmark.userId === sampleUserId));
-      } catch (error) {
-        console.error("Error fetching bookmarks:", error);
+  const fetchBookmarkData = async () => {
+    try {
+      const response = await fetch(`/api/${isStudy ? "study" : "lecture"}/${id}/bookmark`);
+      if (!response.ok) {
+        throw new Error(`${isStudy ? "스터디" : "강의"} 찜 리스트 불러오기 실패`);
       }
-    };
-    fetchBookmarkData();
-  }, [isChecked]);
+
+      const bookmarkData = await response.json();
+
+      setBookmarks(bookmarkData);
+      setScrapCount(bookmarkData.length);
+      setChecked(bookmarkData.some((bookmark: Bookmark) => bookmark.userId === userId));
+    } catch (error) {
+      console.error("Error fetching bookmarks:", error);
+    }
+  };
 
   const handleBookmark = async () => {
     try {
       if (isChecked) {
-        const bookmarkToDelete = bookmarks.find((bookmark: Bookmark) => bookmark.userId === sampleUserId);
+        const bookmarkToDelete = bookmarks.find((bookmark: Bookmark) => bookmark.userId === userId);
         if (bookmarkToDelete) {
-          const { _id } = bookmarkToDelete;
+          const { id } = bookmarkToDelete;
           if (page === "lecture") {
-            await deleteLectureBookmarkAction(id, _id);
+            await deleteLectureBookmarkAction(id, id);
           } else if (page === "study") {
-            await deleteStudyBookmarkAction(id, _id);
+            await deleteStudyBookmarkAction(id, id);
           }
           setScrapCount((prevCount) => prevCount - 1);
         }
       } else {
         if (page === "lecture") {
-          await createLectureBookmarkAction(id, sampleUserId);
+          await createLectureBookmarkAction(id, userId);
         } else if (page === "study") {
-          await createStudyBookmarkAction(id, sampleUserId);
+          await createStudyBookmarkAction(id, userId);
         }
         setScrapCount((prevCount) => prevCount + 1);
       }
@@ -75,6 +74,10 @@ export default function ScrapButton({ variant, id, page }: ScrapButtonProps) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    fetchBookmarkData();
+  }, [isChecked]);
 
   return (
     <div className={isDetail ? "w-[52px] h-[50px] flex flex-col items-center justify-center" : ""}>

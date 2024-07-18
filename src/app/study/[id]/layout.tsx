@@ -2,8 +2,8 @@ import Button from "@/components/commons/Button";
 import { ReactNode } from "react";
 
 export default function layout({ children }: { children: ReactNode }) {
-  const isLeader = true;
-  const isDone = true;
+  const isLeader = false;
+  const isDone = false;
   return (
     <>
       {children}

@@ -1,6 +1,5 @@
 import { TRole } from "@/constant/teamMemberInfo";
 import { TLectureInfoData } from "./lecture";
-import mongoose from "mongoose";
 
 export type TCategory =
   | "DESIGN"
@@ -18,6 +17,7 @@ type TTeamMember = {
   profileImageUrl: string;
   role: TRole;
   isOwner: boolean;
+  status: string;
 };
 
 type TStudyDetail = {

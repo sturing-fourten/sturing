@@ -8,13 +8,16 @@ import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import { useEffect, useState } from "react";
 import SortFilterButton from "./SortFilterButton";
 import { getLectureListAction } from "@/lib/database/action/lecture";
+
 import { LectureData, StudyData } from "@/types/studyDetail";
 import { useSearchTabMenuStore } from "@/store/FilterStore";
+import { StudyData } from "@/types/studyDetail";
+import Link from "next/link";
+import { TLectureInfoData } from "@/types/api/lecture";
 
 export default function Content() {
   const { menu, setTabMenu } = useSearchTabMenuStore();
-
-  const [lectures, setLectures] = useState<LectureData[]>([]);
+  const [lectures, setLectures] = useState<TLectureInfoData[]>([]);
   const [studies, setStudies] = useState<StudyData[]>([]);
 
   const fetchStudyListData = async () => {
@@ -83,13 +86,15 @@ export default function Content() {
             )}
             <div className="flex flex-col gap-[14px]">
               {menu === "total"
-                ? lectures
-                    ?.slice(0, 2)
-                    .map((lecture: LectureData) => (
-                      <LectureCard key={lecture._id} lecture={lecture} variant="card" isScraped />
-                    ))
-                : lectures?.map((lecture: LectureData) => (
-                    <LectureCard key={lecture._id} lecture={lecture} variant="card" isScraped />
+                ? lectures?.slice(0, 2).map((lecture: TLectureInfoData) => (
+                    <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
+                      <LectureCard lecture={lecture} variant="card" isScraped />
+                    </Link>
+                  ))
+                : lectures?.map((lecture: TLectureInfoData) => (
+                    <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
+                      <LectureCard lecture={lecture} variant="card" isScraped />
+                    </Link>
                   ))}
             </div>
             {menu === "total" && (

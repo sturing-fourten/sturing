@@ -15,7 +15,7 @@ export const getLectureListAction = async () => {
     }
 
     const data = await response.json();
-    return data.lectures;
+    return data.lectureList;
   } catch (error: any) {
     console.log("error", error.message);
   }

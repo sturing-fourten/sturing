@@ -8,7 +8,7 @@ import DetailTabMenu from "@/components/commons/DetailTabMenu";
 
 interface IContentsProps {
   study: TStudyDetailInfoData["study"];
-  lecture: TLectureInfoData;
+  lecture: TStudyDetailInfoData["lecture"];
   memberList: TStudyDetailInfoData["teamMemberList"];
   commentList: TComment[];
 }
