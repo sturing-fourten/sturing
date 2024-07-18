@@ -9,23 +9,22 @@ import { useEffect, useState } from "react";
 import { useApplyStore } from "@/store/applyStore";
 import Button from "@/components/commons/Button";
 import TopBar from "@/components/commons/TopBar";
+import { useApplyReset } from "@/hooks/useReset";
+import { clearDraft, loadDraft, saveDraft } from "@/utils/saveDraft";
 
 interface IApplyPageProps {
   params: {
     id: string;
   };
 }
+const STORAGE_KEY = "applyDraft";
 
 export default function ApplyPage({ params: { id } }: IApplyPageProps) {
   const [steps, setSteps] = useState<number>(1);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const resetApplyAll = useApplyReset();
 
-  const title = useApplyStore((state) => state.title);
-  const setTitle = useApplyStore((state) => state.setTitle);
-  const resolution = useApplyStore((state) => state.resolution);
-  const setResolution = useApplyStore((state) => state.setResolution);
-  const role = useApplyStore((state) => state.role);
-  const setRole = useApplyStore((state) => state.setRole);
+  const { title, role, resolution, setTitle, setResolution, setRole } = useApplyStore();
 
   const handleNextSection = () => {
     if (steps === 1 && (!title || !resolution)) return;
@@ -57,19 +56,42 @@ export default function ApplyPage({ params: { id } }: IApplyPageProps) {
     formData.append("role", role);
 
     try {
-      await applyAction(formData);
+      const res = await applyAction(formData);
+
+      if (res.status !== 200) {
+        throw new Error(res.message);
+      }
+
       setIsSubmitted(true);
-    } catch (error) {
-      console.error("POST 요청 실패:", error);
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 
   useEffect(() => {
+    const savedDraft = loadDraft(`${STORAGE_KEY}-${id}`);
+    if (savedDraft) {
+      const { title, resolution, role } = savedDraft;
+      setTitle(title);
+      setResolution(resolution);
+      setRole(role);
+
+      clearDraft(`${STORAGE_KEY}-${id}`);
+    }
+  }, []);
+
+  const handleSave = () => {
+    const draftData = {
+      title,
+      resolution,
+      role,
+    };
+    saveDraft(draftData, `${STORAGE_KEY}-${id}`);
+  };
+
+  useEffect(() => {
     if (isSubmitted) {
-      setTitle("");
-      setResolution("");
-      setRole("");
-      setTitle("");
+      resetApplyAll();
     }
   }, [isSubmitted]);
 
@@ -80,7 +102,7 @@ export default function ApplyPage({ params: { id } }: IApplyPageProps) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="w-full h-dvh flex-col inline-flex">
-        <TopBar variant="save" />
+        <TopBar variant="save" onCancel={resetApplyAll} onSave={handleSave} />
         <ProgressBar maxSteps={2} steps={steps} />
         <div className="overflow-auto flex-1">
           {steps === 1 && <WriteStep onWriteChange={handleWriteChange} />}
