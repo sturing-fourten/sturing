@@ -24,11 +24,11 @@ export default function SuccessPage() {
         <div className="flex flex-col gap-5 w-full">
           <h1 className="text-gray-900 text-[16px] font-[600] tracking-[-0.32px] leading-[24px]">{`${user?.nickname}님에게 딱 맞는 팀원 추천`}</h1>
           <CardList isSingleLine>
+            {/* <StudyRecruitCard isMini={false} isScraped />
             <StudyRecruitCard isMini={false} isScraped />
             <StudyRecruitCard isMini={false} isScraped />
             <StudyRecruitCard isMini={false} isScraped />
-            <StudyRecruitCard isMini={false} isScraped />
-            <StudyRecruitCard isMini={false} isScraped />
+            <StudyRecruitCard isMini={false} isScraped /> */}
           </CardList>
         </div>
       </div>

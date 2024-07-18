@@ -2,7 +2,7 @@ import Avatar from "@/components/commons/Avatar";
 import Link from "next/link";
 import { ICONS } from "@/constant/icons";
 import InfoTag from "./InfoTag";
-import { getIntrestsTitleById, getLevelTitleById, getMoodAltById } from "@/utils/getTitleById";
+import { getInterestsTitleById, getLevelTitleById, getMoodAltById } from "@/utils/getTitleById";
 import { EditProfileType } from "@/types/editProfile";
 import { MatchingType } from "@/types/matching";
 
@@ -34,7 +34,7 @@ export default function ProfileCard({ page, mypage, profile }: ProfileCardProps)
 
   const matchingLevelInfo = (data: { interest: string; level: string }[]) => (
     <>
-      <span>{getIntrestsTitleById(data[0]?.interest)}</span>
+      <span>{getInterestsTitleById(data[0]?.interest)}</span>
       <span>·</span>
       <span>{getLevelTitleById(data[0]?.level)}</span>
     </>

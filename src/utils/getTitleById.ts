@@ -14,7 +14,7 @@ export const getLevelTitleById = (id: string): string => {
   return item ? item.name : id;
 };
 
-export const getIntrestsTitleById = (id: string) => {
+export const getInterestsTitleById = (id: string) => {
   const item = LEVEL_TAB_MENU_LIST.find((menu) => menu.id === id);
   return item ? item.title : id;
 };

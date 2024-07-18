@@ -27,7 +27,7 @@ export default function StudyUpcomingList({ upComingMeetingList }: IStudyUpcomin
         pagination={true}
         modules={[Pagination]}>
         {upComingMeetingList &&
-          upComingMeetingList.map((meeting, index) => (
+          upComingMeetingList?.map((meeting, index) => (
             <SwiperSlide key={index}>
               <div className="h-[184px]">
                 <StudyUpcomingCard className={"bg-white"} meeting={meeting} />

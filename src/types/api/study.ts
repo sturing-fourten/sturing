@@ -60,7 +60,7 @@ export type TStudyDetailInfoData = {
   comment: TComment[];
 };
 
-export type TStudyListData = {
+export type TStudyRecruitCardData = {
   id: string;
   ownerId: string;
   category: string;
@@ -72,7 +72,9 @@ export type TStudyListData = {
   wantedMemberCount: string | number;
   acceptedTeamMemberCount: number;
   isBookmark?: boolean;
-}[];
+};
+
+export type TStudyListData = TStudyRecruitCardData[];
 
 export type TComment = {
   id: string;
