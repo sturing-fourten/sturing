@@ -13,6 +13,7 @@ export type TProgressGauge = {
 
 export type TAttendanceItem = {
   teamMemberId: Types.ObjectId;
+  userId: Types.ObjectId;
   data: {
     date: Date;
     isAttended: boolean;

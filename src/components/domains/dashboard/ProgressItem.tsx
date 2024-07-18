@@ -1,15 +1,6 @@
 import Avatar from "@/components/commons/Avatar";
 import { getSession } from "@/lib/database/getSession";
-import { TStudyDetailInfoData, TTeamMember } from "@/types/api/study";
-import { TProgressGauge, TProgressGaugeItem } from "@/types/dashboard";
-
-const SAMPLE_USER_DATA = {
-  profileImageUrl: "",
-  nickname: "갓생살자",
-  role: "일정팀장",
-  isLeader: false,
-  userId: "60f7b3b3b9b4f4001f9f1b1b",
-};
+import { TProgressGaugeItem } from "@/types/dashboard";
 
 interface IProgressItem {
   item: TProgressGaugeItem;

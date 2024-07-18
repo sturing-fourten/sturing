@@ -21,12 +21,12 @@ export default function StudyMemberProgressGaugeCard({
           const member = teamMember.find((member) => member.memberId === item.userId);
           return (
             <ProgressItem
+              key={item.teamMemberId.toString()}
               item={item}
               nickname={member?.nickname || ""}
               role={member?.role || ""}
               isLeader={member?.isOwner || false}
               profileImageUrl={member?.profileImageUrl || ""}
-              key={item.teamMemberId.toString()}
             />
           );
         })}

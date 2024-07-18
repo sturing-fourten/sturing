@@ -30,9 +30,8 @@ export default async function TeamTab(props: ITeamTabProps) {
 
   if (!dashboard) return;
   const { progressGauge, attendance, checkList } = dashboard.dashboard;
-  console.log(progressGauge, attendance, checkList);
 
-  console.log(dashboard.teamMemberList);
+  console.log(attendance, dashboard.teamMemberList);
 
   const isProgressGaugeExist = true;
   const isAttendanceExist = true;
@@ -66,7 +65,7 @@ export default async function TeamTab(props: ITeamTabProps) {
         )}
         {isAttendanceExist && (
           <div className="relative">
-            <StudyMemberAttendanceCard />
+            <StudyMemberAttendanceCard list={attendance.list} teamMember={dashboard.teamMemberList} />
             {attendanceHasNext && <FunctionCardConnector />}
           </div>
         )}
