@@ -2,6 +2,7 @@ import { Types } from "mongoose";
 
 export type TProgressGaugeItem = {
   teamMemberId: Types.ObjectId;
+  userId: Types.ObjectId;
   data: number;
 };
 
@@ -39,6 +40,7 @@ export type TChecklist = {
 export type TIsQualifiedItem = {
   _id: Types.ObjectId;
   teamMemberId: Types.ObjectId;
+  userId: Types.ObjectId;
   data: boolean;
 };
 
@@ -51,5 +53,5 @@ export type TDashboardResponse = {
   isQualified: TIsQualifiedItem[];
   createdAt: Date;
   updatedAt: Date;
-  // __v: number;
+  __v: number;
 };
