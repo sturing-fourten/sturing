@@ -9,7 +9,7 @@ const studySchema = new mongoose.Schema(
     },
     ownerId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     lectureId: { type: mongoose.Schema.Types.ObjectId, ref: "Lecture", required: true },
-    dashboardId: { type: mongoose.Schema.Types.ObjectId, ref: "Dashboard", required: true },
+    dashboardId: { type: mongoose.Schema.Types.ObjectId, ref: "Dashboard" },
     title: {
       type: String,
       required: true,

@@ -5,19 +5,35 @@ import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMember
 import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMemberAttendanceCard";
 import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardConnector";
+import { TDashboardResponse } from "@/types/dashboard";
 
-export default function TeamTab() {
-  const data = {
-    progressGauge: {}, // "진척도"
-    attendance: {}, // "출석체크"
-    checkList: [{}], // "체크리스트"
-    proofList: [{}], // "사진 인증"
+interface ITeamTabProps {
+  params: {
+    id: string;
   };
+}
 
-  const isProgressGaugeExist = data.progressGauge !== null;
-  const isAttendanceExist = data.attendance !== null;
-  const isCheckListExist = data.checkList.length > 0;
-  const isProofListExist = data.proofList.length > 0;
+export default async function TeamTab(props: ITeamTabProps) {
+  const studyId = props.params.id;
+  const dashboard: TDashboardResponse = await (
+    await fetch(`${process.env.LOCAL_URL}/api/dashboard?studyId=${studyId}`)
+  ).json();
+
+  if (!dashboard) return;
+  const { progressGauge, attendance, checkList } = dashboard;
+  console.log(progressGauge, attendance, checkList);
+
+  const isProgressGaugeExist = true;
+  const isAttendanceExist = true;
+  const isCheckListExist = true;
+  // const isProgressGaugeExist = progressGauge.isActive;
+  // const isAttendanceExist = attendance.isActive;
+  // const isCheckListExist = checkList.isActive;
+  /**
+   * @todo proofList 추가 후 수정 예정
+   */
+  // const isProofListExist = proofList.isActive;
+  const isProofListExist = false;
 
   const isAnyFeatureExist = isProgressGaugeExist || isAttendanceExist || isCheckListExist || isProofListExist;
   const isAnyFeatureNotExist = !isProgressGaugeExist || !isAttendanceExist || !isCheckListExist || !isProofListExist;
@@ -33,7 +49,7 @@ export default function TeamTab() {
       <div className="flex flex-col gap-4">
         {isProgressGaugeExist && (
           <div className="relative">
-            <StudyMemberProgressGaugeCard />
+            <StudyMemberProgressGaugeCard {...progressGauge} />
             {progressGaugeHasNext && <FunctionCardConnector />}
           </div>
         )}

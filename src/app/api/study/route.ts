@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     const { _id: dashboardId } = await Dashboard.create(newDashboard);
 
     // 4) Study에 teamMembersId, dashboardId 추가
-    await Study.findOneAndUpdate({ _id: newStudyId }, { $push: { teamMembersId: dashboardId } }, { new: true });
+    await Study.findOneAndUpdate({ _id: newStudyId }, { $set: { teamMembersId, dashboardId } }, { new: true });
 
     // 5) Study에 관련 강의 추가
     const lectureId = newStudyResult.lectureId;

@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const dashboardSchema = new mongoose.Schema(
   {
-    studyId: { type: mongoose.Schema.Types.ObjectId, ref: "Study", required: true },
+    studyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Study",
+      required: true,
+    },
     isQualified: [
       {
         teamMemberId: { type: mongoose.Schema.Types.ObjectId, required: true },
