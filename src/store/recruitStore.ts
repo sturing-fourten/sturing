@@ -65,21 +65,3 @@ export const useTeamMemberInfoStore = create<TeamMemberInfoState>((set) => ({
   role: [],
   setRole: (role) => set({ role: role }),
 }));
-
-export const useRecruitStore = create<RecruitState>((set) => ({
-  recruit: null,
-  setRecruit: (recruit) => set({ recruit: recruit }),
-  fetchRecruit: async () => {
-    try {
-      const response = await fetch(`/api/study`);
-      if (!response.ok) {
-        throw new Error("작성한 스터디를 가져오는 데 실패했습니다.");
-      }
-      const data = await response.json();
-      set({ recruit: data });
-    } catch (error) {
-      console.error("작성한 스터디 가져오기 실패:", error);
-      set({ recruit: null });
-    }
-  },
-}));

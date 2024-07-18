@@ -17,11 +17,16 @@ import {
   useStudyDetailStore,
   useTeamMemberInfoStore,
 } from "@/store/recruitStore";
+import { useRecruitReset } from "@/hooks/useReset";
+import { clearDraft, loadDraft, saveDraft } from "@/utils/saveDraft";
+
+const STORAGE_KEY = "recruitDraft";
 
 export default function Recruit() {
   const [steps, setSteps] = useState<number>(1);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [studyId, setStudyId] = useState<string>("");
+  const resetRecruitAll = useRecruitReset();
 
   // SelectLectureStore 상태와 업데이트 함수 사용
   const lecture = useSelectLectureStore((state) => state.lecture);
@@ -158,24 +163,76 @@ export default function Recruit() {
   };
 
   useEffect(() => {
+    const savedDraft = loadDraft(STORAGE_KEY);
+    if (savedDraft) {
+      const {
+        lecture,
+        category,
+        image,
+        title,
+        introduction,
+        progressWay,
+        online,
+        address,
+        date,
+        day,
+        time,
+        selectedMood,
+        selectedAssignment,
+        career,
+        numberOfTeamMembers,
+        ages,
+        role,
+      } = savedDraft;
+
+      setLecture(lecture);
+      setCategory(category);
+      setImage(image);
+      setTitle(title);
+      setIntroduction(introduction);
+      setProgressWay(progressWay);
+      setOnline(online);
+      setAddress(address);
+      setDate(date);
+      setDay(day);
+      setTime(time);
+      setSelectedMood(selectedMood);
+      setSelectedAssignment(selectedAssignment);
+      setCareer(career);
+      setNumberOfTeamMembers(numberOfTeamMembers);
+      setAges(ages);
+      setRole(role);
+
+      clearDraft(STORAGE_KEY);
+    }
+  }, []);
+
+  const handleSave = () => {
+    const draftData = {
+      lecture,
+      category,
+      image,
+      title,
+      introduction,
+      progressWay,
+      online,
+      address,
+      date,
+      day,
+      time,
+      selectedMood,
+      selectedAssignment,
+      career,
+      numberOfTeamMembers,
+      ages,
+      role,
+    };
+    saveDraft(draftData, STORAGE_KEY);
+  };
+
+  useEffect(() => {
     if (isSubmitted) {
-      setLecture("");
-      setCategory("");
-      setImage("");
-      setTitle("");
-      setIntroduction("");
-      setProgressWay("");
-      setOnline("");
-      setAddress("");
-      setDate({ from: new Date(), to: new Date() });
-      setDay("");
-      setTime("");
-      setSelectedMood([]);
-      setSelectedAssignment([]);
-      setCareer([]);
-      setNumberOfTeamMembers(0);
-      setAges([]);
-      setRole([]);
+      resetRecruitAll();
     }
   }, [isSubmitted]);
 
@@ -186,7 +243,7 @@ export default function Recruit() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="w-full h-dvh flex-col inline-flex">
-        <TopBar variant="save" />
+        <TopBar variant="save" onCancel={resetRecruitAll} onSave={handleSave} />
         <ProgressBar maxSteps={4} steps={steps} />
         <div className="overflow-auto flex-1">
           {steps === 1 && <SelectLecture onLectureChange={handleLectureChange} />}
