@@ -16,6 +16,7 @@ export default async function ApplicationListPage({ params: { studyId } }: IAppl
   ).json();
 
   const {
+    title,
     startDate,
     endDate,
     meeting: { format, platform, location },
@@ -30,9 +31,7 @@ export default async function ApplicationListPage({ params: { studyId } }: IAppl
       <section className="py-5 px-4">
         <article className="flex flex-col gap-2 py-6 px-5 border border-gray-300 rounded-lg bg-white">
           <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
-          <p className="mt-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">
-            {"쏘카 5개 프로젝트 디자인 실무 마스터 스터디"}
-          </p>
+          <p className="mt-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
         </article>
 
         <hr className="bg-gray-300 my-4" />
