@@ -12,7 +12,7 @@ export default async function DoneTabPage() {
     myStudyList = await fetchDoneStudyListAction();
   }
   return (
-    <>
+    <div className="flex flex-col pt-5 gap-4 px-4">
       {myStudyList &&
         myStudyListType === "DONE" &&
         (myStudyList.length === 0 ? (
@@ -20,6 +20,6 @@ export default async function DoneTabPage() {
         ) : (
           myStudyList.map((study) => <StudyDoneCard key={study._id.toString()} study={study} />)
         ))}
-    </>
+    </div>
   );
 }
