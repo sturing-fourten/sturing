@@ -26,9 +26,10 @@ export function InsideMenu(props: any) {
   const myStudyListType = useMyStudyListStore.getState().myStudyListType;
   if (!myStudyListType) return;
   const isCurrent = myStudyListType === id;
-  const countType = getCountType(myStudyListType);
+  const countType = getCountType(id);
   if (!countType) return;
   const listTypeCount = useMyStudyListStore.getState()[countType];
+
   return (
     <form action={listTypeFormAction}>
       <input type="hidden" className="w-3" name="myStudyListType" value={id} />
