@@ -24,7 +24,7 @@ export default function RecruitedMembersList({ study, memberList }: IRecruitedMe
         <div className="flex flex-col gap-1 justify-start">
           {memberList?.map((member) => (
             <MemberProfile
-              key={member.memberId}
+              key={member.memberId.toString()}
               nickname={member.nickname}
               profileImageUrl={member.profileImageUrl}
               role={member.role}

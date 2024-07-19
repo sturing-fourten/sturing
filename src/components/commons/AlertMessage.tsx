@@ -1,7 +1,7 @@
 import { ALERT_MESSAGE_CONFIG } from "@/constant/alertMessageConfig";
 
 interface AlertMessageProps {
-  varient: "matching" | "recruit" | "apply" | "notFound" | "preparing";
+  varient: "matching" | "recruit" | "apply" | "notFound" | "preparing" | "board";
 }
 
 export default function AlertMessage({ varient }: AlertMessageProps) {

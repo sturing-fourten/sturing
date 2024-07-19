@@ -1,11 +1,11 @@
-import { TStudy, TTeamMembersIdAddedMember } from "@/types/study";
+import { TMyStudy, TTeamMembersIdAddedMember } from "@/types/study";
 import { StudyDetailInfo } from "./element/StudyDetailInfo";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 import { getDateRange } from "@/utils/getDateRange";
 
 interface IStudyOnGoingCardProps {
   isStarted: boolean;
-  study: TStudy;
+  study: TMyStudy;
 }
 
 export default function StudyOnGoingCard(props: IStudyOnGoingCardProps) {

@@ -2,10 +2,10 @@ import { getDateRange } from "@/utils/getDateRange";
 import StudyCardLink from "./element/StudyCardLink";
 import { StudyDetailInfo } from "./element/StudyDetailInfo";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
-import { TStudy, TTeamMembersIdAddedMember } from "@/types/study";
+import { TMyStudy, TTeamMembersIdAddedMember } from "@/types/study";
 
 interface IStudyRecruitingCardProps {
-  study: TStudy;
+  study: TMyStudy;
 }
 
 export default function StudyRecruitingCard(props: IStudyRecruitingCardProps) {

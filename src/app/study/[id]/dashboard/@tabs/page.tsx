@@ -1,11 +1,11 @@
 import StudyAddFunctionCard from "@/components/domains/dashboard/StudyFunctionAddButtonCard";
 import StudyFunctionEditButton from "@/components/domains/dashboard/StudyFunctionEditButton";
 import StudyMemberProgressGaugeCard from "@/components/domains/dashboard/StudyMemberProgressGaugeCard";
-import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMemberChecklistCard";
+import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMemberChecklistCard/StudyMemberChecklistCard";
 import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMemberAttendanceCard";
 import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardConnector";
-import { TDashboardResponse } from "@/types/dashboard";
+import { getSession } from "@/lib/database/getSession";
 
 interface ITeamTabProps {
   params: {
@@ -13,15 +13,26 @@ interface ITeamTabProps {
   };
 }
 
+const getDashboardInfo = async (id: string) => {
+  try {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard?studyId=${id}`);
+    const dashboard = await response.json();
+    return dashboard;
+  } catch (error) {
+    console.error("Error fetching study", error);
+    throw error;
+  }
+};
+
 export default async function TeamTab(props: ITeamTabProps) {
   const studyId = props.params.id;
-  const dashboard: TDashboardResponse = await (
-    await fetch(`${process.env.LOCAL_URL}/api/dashboard?studyId=${studyId}`)
-  ).json();
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  const dashboard = await getDashboardInfo(studyId);
 
   if (!dashboard) return;
-  const { progressGauge, attendance, checkList } = dashboard;
-  console.log(progressGauge, attendance, checkList);
+  const { progressGauge, attendance, checkList } = dashboard.dashboard;
 
   const isProgressGaugeExist = true;
   const isAttendanceExist = true;
@@ -49,19 +60,23 @@ export default async function TeamTab(props: ITeamTabProps) {
       <div className="flex flex-col gap-4">
         {isProgressGaugeExist && (
           <div className="relative">
-            <StudyMemberProgressGaugeCard {...progressGauge} />
+            <StudyMemberProgressGaugeCard list={progressGauge.list} teamMember={dashboard.teamMemberList} />
             {progressGaugeHasNext && <FunctionCardConnector />}
           </div>
         )}
         {isAttendanceExist && (
           <div className="relative">
-            <StudyMemberAttendanceCard />
+            <StudyMemberAttendanceCard list={attendance.list} teamMember={dashboard.teamMemberList} />
             {attendanceHasNext && <FunctionCardConnector />}
           </div>
         )}
         {isCheckListExist && (
           <div className="relative">
-            <StudyMemberChecklistCard />
+            <StudyMemberChecklistCard
+              userId={userId || ""}
+              list={checkList.list}
+              teamMember={dashboard.teamMemberList}
+            />
             {checkListExist && <FunctionCardConnector />}
           </div>
         )}

@@ -1,13 +1,13 @@
-import { addDays, startOfDay, getDay } from "date-fns";
+import { addDays, getDay } from "date-fns";
 
 const dayMap: { [key: string]: number } = {
-  일요일: 1,
-  월요일: 2,
-  화요일: 3,
-  수요일: 4,
-  목요일: 5,
-  금요일: 6,
-  토요일: 0,
+  일요일: 0,
+  월요일: 1,
+  화요일: 2,
+  수요일: 3,
+  목요일: 4,
+  금요일: 5,
+  토요일: 6,
 };
 
 const timeMap: { [key: string]: string[] } = {
@@ -55,7 +55,7 @@ export function generateUpcomingMeetingList(props: IGenerateUpcomingMeetingListP
   const meetingTime = timeMap[time][0];
   const meetingMinutes = timeMap[time][1];
 
-  const today = startOfDay(new Date());
+  const today = new Date();
   const twoWeekFromToday = addDays(today, 14);
 
   let meetingList = [];
@@ -73,7 +73,7 @@ export function generateUpcomingMeetingList(props: IGenerateUpcomingMeetingListP
       const meetingDateTime = new Date(
         current.getFullYear(),
         current.getMonth(),
-        current.getDate() - 1,
+        current.getDate(),
         parseInt(meetingTime),
         parseInt(meetingMinutes),
       );
@@ -84,7 +84,6 @@ export function generateUpcomingMeetingList(props: IGenerateUpcomingMeetingListP
         date: meetingDateTime,
       });
     }
-
     current = addDays(current, 1);
   }
 

@@ -1,46 +1,40 @@
 import { create } from "zustand";
-import { TStudy } from "@/types/study";
+import { TMyStudy } from "@/types/study";
 
 export type TMyStudyListType = "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE";
 interface IMyStudyListState {
-  currentListType: TMyStudyListType;
-  setCurrentListType: (newType: TMyStudyListType) => void;
-  currentStudyList: TStudy[] | null;
-  setCurrentStudyList: (newList: TStudy[]) => void;
-  progressStudyListCount: number;
+  myStudyListType: TMyStudyListType | null;
+  setMyStudyListType: (newType: TMyStudyListType | null) => void;
+  progressStudyListCount: number | null;
   setProgressStudyListCount: (newCounts: number) => void;
-  recruitEndStudyListCount: number;
+  recruitEndStudyListCount: number | null;
   setRecruitEndStudyListCount: (newCounts: number) => void;
-  recruitStartOwnerStudyListCount: number;
+  recruitStartOwnerStudyListCount: number | null;
   setRecruitStartOwnerStudyListCount: (newCounts: number) => void;
-  recruitStartMemberStudyListCount: number;
+  recruitStartMemberStudyListCount: number | null;
   setRecruitStartMemberStudyListCount: (newCounts: number) => void;
 }
 
-export const useMyStudyListStore = create<IMyStudyListState>((set) => ({
-  currentListType: "PROGRESS",
-  setCurrentListType: (
-    newType: "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE",
+export const useMyStudyListStore = create<IMyStudyListState>((set, get) => ({
+  myStudyListType: null,
+  setMyStudyListType: (
+    newType: "PROGRESS" | "RECRUIT_END" | "RECRUIT_START_OWNER" | "RECRUIT_START_MEMBER" | "DONE" | null,
   ) => {
-    set({ currentListType: newType });
+    set({ myStudyListType: newType });
   },
-  currentStudyList: null,
-  setCurrentStudyList: (newList: TStudy[]) => {
-    set({ currentStudyList: newList });
-  },
-  progressStudyListCount: 0,
+  progressStudyListCount: null,
   setProgressStudyListCount: (newCount: number) => {
     set({ progressStudyListCount: newCount });
   },
-  recruitEndStudyListCount: 0,
+  recruitEndStudyListCount: null,
   setRecruitEndStudyListCount: (newCount: number) => {
     set({ recruitEndStudyListCount: newCount });
   },
-  recruitStartOwnerStudyListCount: 0,
+  recruitStartOwnerStudyListCount: null,
   setRecruitStartOwnerStudyListCount: (newCount: number) => {
     set({ recruitStartOwnerStudyListCount: newCount });
   },
-  recruitStartMemberStudyListCount: 0,
+  recruitStartMemberStudyListCount: null,
   setRecruitStartMemberStudyListCount: (newCount: number) => {
     set({ recruitStartMemberStudyListCount: newCount });
   },

@@ -5,8 +5,8 @@ import {
 import { InsideMenu } from "../../commons/card/element/InsideMenu";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
 
-export default function RecruitmentInsideMenuWrapper() {
-  const currentListType = useMyStudyListStore.getState().currentListType;
+export default function WaitingInsideMenuWrapper() {
+  const myStudyListType = useMyStudyListStore.getState().myStudyListType;
   const recruitStartOwnerStudyListCount = useMyStudyListStore.getState().recruitStartOwnerStudyListCount;
   const recruitStartMemberStudyListCount = useMyStudyListStore.getState().recruitStartMemberStudyListCount;
 
@@ -16,14 +16,14 @@ export default function RecruitmentInsideMenuWrapper() {
         <InsideMenu
           title="모집 중"
           number={recruitStartOwnerStudyListCount}
-          isCurrent={currentListType === "RECRUIT_START_OWNER"}
+          isCurrent={myStudyListType === "RECRUIT_START_OWNER"}
         />
       </form>
       <form action={fetchRecruitStartMemberStudyListAction}>
         <InsideMenu
           title="지원 중"
           number={recruitStartMemberStudyListCount}
-          isCurrent={currentListType === "RECRUIT_START_MEMBER"}
+          isCurrent={myStudyListType === "RECRUIT_START_MEMBER"}
         />
       </form>
     </nav>

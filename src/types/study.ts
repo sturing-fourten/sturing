@@ -7,7 +7,7 @@ export type TTabMenuLinkUnderlinedItem = {
   count?: number;
 };
 
-export type THrefType = "/mystudy/recruitment" | "/mystudy/done" | "/mystudy/";
+export type THrefType = "/mystudy/waiting" | "/mystudy/done" | "/mystudy/progress";
 
 export type TMyStudyTabMenuLinkUnderlinedItem = {
   id: string;
@@ -51,7 +51,7 @@ export type UserFavoriteFieldType = {
   freewheeling: StudyCategory;
 };
 
-export type TStudy = {
+export type TMyStudy = {
   _id: mongoose.Types.ObjectId;
   category: "DESIGN" | "DEVELOP" | "BUSINESS" | "MARKETING" | "ECONOMY" | "LANGUAGE" | "LICENSE" | "SELF-DEVELOPMENT";
   ownerId: mongoose.Types.ObjectId;
@@ -114,7 +114,16 @@ export type TMemberUserIdAddedUser = {
 
 export type TMember = {
   userId: mongoose.Types.ObjectId | TMemberUserIdAddedUser;
-  role: "팀장" | "부팀장" | "과제팀장" | "출결팀장" | "기록팀장" | "일정팀장" | "팀원";
+  role:
+    | "leader"
+    | "viceLeader"
+    | "assignment"
+    | "notification"
+    | "attendance"
+    | "record"
+    | "environment"
+    | "schedule"
+    | "member";
   isOwner: boolean;
   status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
   applicationId?: mongoose.Types.ObjectId | TApplication;

@@ -11,4 +11,5 @@ export type AlertMessageConfig = {
   apply: AlertMessage;
   notFound: AlertMessage;
   preparing: AlertMessage;
+  board: AlertMessage;
 };

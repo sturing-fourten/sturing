@@ -31,13 +31,13 @@ export default function DashboardLayout({ params, tabs }: IDashboardProps) {
         {/* TODO 공통 레이아웃 처리 */}
         <TopBar variant="share" showMore={false} isWhite={true} />
         {/* Study Info */}
-        <StudyInfo />
+        <StudyInfo params={id} />
       </div>
       {/* Tab Menu */}
       <TabBarLinkUnderlined
         defaultSegment={hrefBase}
         tabMenuList={MY_STUDY_DASHBOARD_TAB_MENU_LIST}
-        stickyOption="sticky top-[54px] z-[2]"
+        stickyOption="sticky top-0 z-[2]"
       />
       {/* Tab Panel */}
       {tabs}

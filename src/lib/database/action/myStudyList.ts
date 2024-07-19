@@ -3,12 +3,12 @@
 import { TMyStudyListType, useMyStudyListStore } from "@/store/myStudyListStore";
 import { getSession } from "../getSession";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { TMyStudy } from "@/types/study";
 
-type TMyStudyListAction = () => Promise<void>;
+type TMyStudyListAction = () => Promise<TMyStudy[]>;
 
 export const fetchProgressStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("PROGRESS");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -22,16 +22,14 @@ export const fetchProgressStudyListAction: TMyStudyListAction = async () => {
     const { progressStudyList, recruitEndStudyListCount } = await response.json();
     if (!progressStudyList || !recruitEndStudyListCount) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
-    useMyStudyListStore.getState().setCurrentStudyList(progressStudyList);
     useMyStudyListStore.getState().setProgressStudyListCount(progressStudyList.length);
     useMyStudyListStore.getState().setRecruitEndStudyListCount(recruitEndStudyListCount);
-    revalidatePath("/mystudy");
+    revalidatePath("/mystudy/progress");
+    return progressStudyList;
   } catch (error) {}
 };
 
 export const fetchRecruitEndStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("RECRUIT_END");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -45,37 +43,14 @@ export const fetchRecruitEndStudyListAction: TMyStudyListAction = async () => {
     const { recruitEndStudyList, progressStudyListCount } = await response.json();
     if (!recruitEndStudyList || !progressStudyListCount) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
-    useMyStudyListStore.getState().setCurrentStudyList(recruitEndStudyList);
     useMyStudyListStore.getState().setRecruitEndStudyListCount(recruitEndStudyList.length);
     useMyStudyListStore.getState().setProgressStudyListCount(progressStudyListCount);
-    revalidatePath("/mystudy");
-  } catch (error) {}
-};
-
-export const fetchDoneStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("DONE");
-
-  const session = await getSession();
-  const userId = session?.user?.id;
-
-  if (!userId) throw new Error("유저 정보가 필요합니다.");
-
-  try {
-    const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${userId}&listType=DONE`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
-
-    const doneList = await response.json();
-    if (!doneList) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
-
-    useMyStudyListStore.getState().setCurrentStudyList(doneList);
-    revalidatePath("/mystudy/done");
+    revalidatePath("/mystudy/progress");
+    return recruitEndStudyList;
   } catch (error) {}
 };
 
 export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("RECRUIT_START_OWNER");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -90,16 +65,14 @@ export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async (
     if (!recruitStartOwnerStudyList || !recruitStartMemberStudyListCount)
       throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
-    useMyStudyListStore.getState().setCurrentStudyList(recruitStartOwnerStudyList);
     useMyStudyListStore.getState().setRecruitStartOwnerStudyListCount(recruitStartOwnerStudyList.length);
     useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyListCount);
-    revalidatePath("/mystudy/recruitment");
+    revalidatePath("/mystudy/waiting");
+    return recruitStartOwnerStudyList;
   } catch (error) {}
 };
 
 export const fetchRecruitStartMemberStudyListAction: TMyStudyListAction = async () => {
-  useMyStudyListStore.getState().setCurrentListType("RECRUIT_START_MEMBER");
-
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -114,14 +87,51 @@ export const fetchRecruitStartMemberStudyListAction: TMyStudyListAction = async 
     if (!recruitStartMemberStudyList || !recruitStartOwnerStudyListCount)
       throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
-    useMyStudyListStore.getState().setCurrentStudyList(recruitStartMemberStudyList);
     useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyList.length);
     useMyStudyListStore.getState().setRecruitStartOwnerStudyListCount(recruitStartOwnerStudyListCount);
-    revalidatePath("/mystudy/recruitment");
+    revalidatePath("/mystudy/waiting");
+    return recruitStartMemberStudyList;
   } catch (error) {}
 };
 
-export const resetMyStudyAction = (nextHref: string, nextListType: TMyStudyListType) => {
-  useMyStudyListStore.getState().setCurrentListType(nextListType);
-  revalidatePath(nextHref);
+export const fetchDoneStudyListAction: TMyStudyListAction = async () => {
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  if (!userId) throw new Error("유저 정보가 필요합니다.");
+
+  try {
+    const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${userId}&listType=DONE`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+
+    const doneList = await response.json();
+    if (!doneList) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+
+    revalidatePath("/mystudy/done");
+    return doneList;
+  } catch (error) {}
 };
+
+export async function listTypeFormAction(formData: FormData) {
+  const myStudyListType = formData.get("myStudyListType") as TMyStudyListType;
+  if (!myStudyListType) return;
+
+  useMyStudyListStore.getState().setMyStudyListType(myStudyListType);
+  revalidatePath("/mystudy");
+}
+
+export async function tabMyStudyAction(formData: FormData) {
+  const href = formData.get("href")?.toString();
+  if (!href) return;
+
+  revalidatePath(href);
+  redirect(href);
+}
+
+export async function urlRenderAction(newType: TMyStudyListType) {
+  useMyStudyListStore.getState().setMyStudyListType(newType);
+  if (newType === "PROGRESS") revalidatePath("/mystudy/progress");
+  if (newType === "RECRUIT_START_OWNER") revalidatePath("/mystudy/waiting");
+  if (newType === "DONE") revalidatePath("/mystudy/done");
+}

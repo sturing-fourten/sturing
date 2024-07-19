@@ -4,8 +4,7 @@ import { TApplicationSummary } from "@/types/application";
 import StudyCardLink from "./element/StudyCardLink";
 
 export default function StudyApplicationCard(props: TApplicationSummary) {
-  const { _id: applicationId, profileImageUrl, status, nickname, title } = props;
-  status;
+  const { profileImageUrl, status, nickname, title } = props;
   return (
     <article className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg">
       <StudyApplyInfo status={status} />

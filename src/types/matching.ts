@@ -50,25 +50,30 @@ export type location = {
 export type LevelsState = {
   levels: level[];
   setLevels: (levels: level[]) => void;
+  reset: () => void;
 };
 
 export type ProgressWayState = {
   progressWay: string;
   setProgressWay: (progressWay: string) => void;
+  reset: () => void;
 };
 
 export type LocationsState = {
   locations: location[];
   setLocations: (locations: location[]) => void;
+  reset: () => void;
 };
 
 export type MoodsState = {
   moods: string[];
   setMoods: (moods: string[]) => void;
+  reset: () => void;
 };
 
 export type MatchingState = {
   matching: MatchingType | null;
   fetchMatching: () => Promise<void>;
   setMatching: (matching: MatchingType) => void;
+  reset: () => void;
 };

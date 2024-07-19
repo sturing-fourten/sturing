@@ -1,4 +1,15 @@
-export type TRole = "팀장" | "부팀장" | "과제팀장" | "출결팀장" | "기록팀장" | "일정팀장" | "팀원";
+import { TMyStudy } from "./study";
+
+export type TRole =
+  | "leader"
+  | "viceLeader"
+  | "assignment"
+  | "notification"
+  | "attendance"
+  | "record"
+  | "environment"
+  | "schedule"
+  | "member";
 
 export type TApplication = {
   _id: string;
@@ -14,3 +25,7 @@ export type TApplication = {
 
 export type TApplicationSummary = Omit<TApplication, "resolution" | "role">;
 export type TApplicationList = TApplicationSummary[];
+export type TApplicationListResponse = {
+  study: TMyStudy;
+  applicationList: TApplicationSummary[];
+};
