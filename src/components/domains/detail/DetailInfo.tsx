@@ -10,6 +10,7 @@ interface DetailInfoProps {
 }
 
 export default function DetailInfo({ icon, title, content, isWhite = false, taskContent }: DetailInfoProps) {
+  console.log(content);
   return (
     <>
       <li

@@ -32,6 +32,7 @@ type TStudyDetail = {
   meeting: {
     format: string;
     platform: string;
+    location: string;
     schedule: {
       day: string;
       time: string;
