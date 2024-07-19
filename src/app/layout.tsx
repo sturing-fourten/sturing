@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
@@ -18,6 +19,12 @@ const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,12 +32,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <SessionProvider>
-        <body className={`${pretendard.variable} font-pretendard bg-[#f5f5f5] min-w-screen flex flex-col items-center`}>
-          <main className="w-screen sm:w-[600px] bg-white min-h-screen shadow-xl relative">{children}</main>
-          <div id="modal"></div>
-        </body>
-      </SessionProvider>
+      <body>
+        <SessionProvider>
+          <body
+            className={`${pretendard.variable} font-pretendard bg-[#f5f5f5] min-w-screen flex flex-col items-center`}>
+            <main className="w-screen sm:w-[600px] bg-white min-h-screen shadow-xl relative">{children}</main>
+            <div id="modal"></div>
+          </body>
+        </SessionProvider>
+      </body>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="afterInteractive" />
     </html>
   );
 }

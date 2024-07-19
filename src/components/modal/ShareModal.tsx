@@ -1,12 +1,14 @@
 import { usePathname } from "next/navigation";
 import ModalContainer from "./ModalContainer";
 import Button from "../commons/Button";
+import { kakaoLogo } from "../../../public/icons/icons";
+import KakaoShareButton from "../commons/KakaoShare";
 
 interface ShareModalProps {
   onClose: () => void;
 }
 
-export const copyURL = (currentUrl: string) => {
+const copyURL = (currentUrl: string) => {
   const userAgent = window.navigator.userAgent;
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
   if (isMobile) {
@@ -51,6 +53,8 @@ export default function ShareModal({ onClose }: ShareModalProps) {
             복사
           </Button>
         </div>
+
+        <KakaoShareButton />
       </div>
     </ModalContainer>
   );
