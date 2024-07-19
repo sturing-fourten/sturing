@@ -10,3 +10,7 @@ export async function githubLogin() {
 export async function logout() {
   await signOut();
 }
+
+export async function kakaoLogin() {
+  await signIn("kakao", { callbackUrl: "/" });
+}

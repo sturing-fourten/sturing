@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "ifowwhoiz6eixak7.public.blob.vercel-storage.com",
       },
+      {
+        protocol: "http",
+        hostname: "t1.kakaocdn.net",
+      },
     ],
   },
   logging: {
