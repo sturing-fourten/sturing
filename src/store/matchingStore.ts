@@ -3,27 +3,31 @@ import { create } from "zustand";
 
 export const useLevelsStore = create<LevelsState>((set) => ({
   levels: [],
-  setLevels: (levels) => set({ levels: levels }),
+  setLevels: (levels) => set({ levels }),
+  reset: () => set({ levels: [] }),
 }));
 
 export const useProgressWayStore = create<ProgressWayState>((set) => ({
   progressWay: "",
-  setProgressWay: (progressWay) => set({ progressWay: progressWay }),
+  setProgressWay: (progressWay) => set({ progressWay }),
+  reset: () => set({ progressWay: "" }),
 }));
 
 export const useLocationsStore = create<LocationsState>((set) => ({
   locations: [],
-  setLocations: (locations) => set({ locations: locations }),
+  setLocations: (locations) => set({ locations }),
+  reset: () => set({ locations: [] }),
 }));
 
 export const useMoodsStore = create<MoodsState>((set) => ({
   moods: [],
-  setMoods: (moods) => set({ moods: moods }),
+  setMoods: (moods) => set({ moods }),
+  reset: () => set({ moods: [] }),
 }));
 
 export const useMatchingStore = create<MatchingState>((set) => ({
   matching: null,
-  setMatching: (matching) => set({ matching: matching }),
+  setMatching: (matching) => set({ matching }),
   fetchMatching: async () => {
     try {
       const response = await fetch(`/api/matching/`);
@@ -37,4 +41,5 @@ export const useMatchingStore = create<MatchingState>((set) => ({
       set({ matching: null });
     }
   },
+  reset: () => set({ matching: null }),
 }));

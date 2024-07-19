@@ -1,4 +1,12 @@
 import { logout } from "@/lib/database/action/login";
+import {
+  useLevelsStore,
+  useLocationsStore,
+  useMatchingStore,
+  useMoodsStore,
+  useProgressWayStore,
+} from "@/store/matchingStore";
+import { useUserStore } from "@/store/userStore";
 import { EditProfileType } from "@/types/editProfile";
 import Link from "next/link";
 
@@ -20,6 +28,13 @@ export const NavigationLinks = ({ user }: { user: EditProfileType | null }) => (
 export const FooterLinks = ({ user }: { user: EditProfileType | null }) => {
   const handleLogout = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    useUserStore.getState().reset();
+    useLevelsStore.getState().reset();
+    useProgressWayStore.getState().reset();
+    useLocationsStore.getState().reset();
+    useMoodsStore.getState().reset();
+    useMatchingStore.getState().reset();
 
     await logout();
     window.location.reload();
