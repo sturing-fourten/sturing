@@ -40,7 +40,7 @@ export async function GET(request: Request) {
     );
 
     // 3. 스터디 정보 조회
-    const study = await Study.findById(studyId).select("startDate endDate meeting");
+    const study = await Study.findById(studyId).select("title startDate endDate meeting");
     return Response.json({
       study,
       applicationList: enhancedApplicationList,
