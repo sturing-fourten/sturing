@@ -36,6 +36,6 @@ export const ALERT_MESSAGE_CONFIG: AlertMessageConfig = {
     src: ICONS.success.src,
     alt: ICONS.success.alt,
     title: "글 작성을 완료했습니다!",
-    content: `내 스터디 대시보드 게시판탭에서\n작성한 글을 확인할 수 있어요.`,
+    content: `해당 스터디 게시판 탭에서\n작성한 글을 확인할 수 있어요.`,
   },
 };
