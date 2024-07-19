@@ -1,18 +1,19 @@
 "use server";
 
+import { Application } from "@/schema/applicationSchema";
 import { getSession } from "../getSession";
 
 export const applyAction = async (formData: FormData) => {
   try {
     const session = await getSession();
     const userId = session?.user?.id;
-    const studyId = formData.get("studyId")?.toString();
+    const studyId = formData.get("studyId");
     const title = formData.get("title");
     const resolution = formData.get("resolution");
-    const role = formData.get("role") || "팀원";
+    const role = formData.get("role") || "member";
 
     if (!userId || !studyId || !title || !resolution) {
-      throw new Error("필수 정보가 누락되었습니다.");
+      return { status: 400, message: "필수 정보가 누락되었습니다." };
     }
 
     const newApplication = {
@@ -29,6 +30,12 @@ export const applyAction = async (formData: FormData) => {
       status: "APPLIED",
     };
 
+    const existingApplication = await Application.findOne({ studyId, userId });
+
+    if (existingApplication) {
+      return { status: 400, message: "이미 지원한 스터디입니다." };
+    }
+
     const response = await fetch(`${process.env.LOCAL_URL}/api/apply`, {
       method: "PATCH",
       headers: {
@@ -38,9 +45,12 @@ export const applyAction = async (formData: FormData) => {
     });
 
     if (!response.ok) {
-      throw new Error("지원 실패");
+      return { status: 400, message: "지원을 실패하였습니다." };
     }
+
+    const data = await response.json();
+    return { status: 200, data };
   } catch (error: any) {
-    console.log("error", error.message);
+    return { success: false, message: error.message };
   }
 };

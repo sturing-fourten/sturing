@@ -17,7 +17,7 @@ export default function TextField({ type, name, addStyle, isError, placeholder, 
         isError ? "focus:border-error" : "focus:border-main-600"
       } text-[14px] font-medium tracking-[-0.42px] leading-[22px] disabled:bg-gray-200 disabled:border-gray-300`}>
       <input
-        className="flex justify-start items-start w-full focus-visible:outline-none placeholder:text-[14px] placeholder:font-medium placeholder:tracking-[-0.42px] placeholder:leading-[22px]"
+        className="flex justify-start items-start w-full focus-visible:outline-none placeholder:text-gray-600 placeholder:text-[14px] placeholder:font-medium placeholder:tracking-[-0.42px] placeholder:leading-[22px]"
         type={type}
         name={name}
         placeholder={placeholder}
