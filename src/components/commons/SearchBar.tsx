@@ -1,6 +1,6 @@
 "use client";
 import { ICONS } from "@/constant/icons";
-import { useFilterStore } from "@/store/FilterStore";
+import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 interface SearchBarProps {
@@ -9,12 +9,15 @@ interface SearchBarProps {
 
 export default function SearchBar({ placeholder, ...props }: SearchBarProps) {
   const [inputValue, setValue] = useState("");
-  const { setSearchQuery } = useFilterStore();
+  const { setSearchQuery, resetFilters } = useFilterStore();
+  const { setTabMenu } = useSearchTabMenuStore();
   const router = useRouter();
 
   const handleInputSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputValue) {
+      setTabMenu("total");
+      resetFilters();
       setSearchQuery(inputValue);
       router.push(`/search/result?search=${inputValue}`);
       setValue("");

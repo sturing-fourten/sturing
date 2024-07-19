@@ -12,10 +12,10 @@ interface InitialState {
   memberCount: number;
   startDate: Date | null;
   endDate: Date | null;
-  searchQuery: string | null;
 }
 
 export interface Filter extends InitialState {
+  searchQuery: string | null;
   setSortByFilter: (sortBy: TSortBy) => void;
   setCategoryFilter: (category: TCategory) => void;
   setRoleFilter: (role: string) => void;
@@ -33,14 +33,14 @@ const initialState: InitialState = {
   locations: [],
   roles: [],
   levels: [],
-  memberCount: 0,
+  memberCount: 1,
   startDate: null,
   endDate: null,
-  searchQuery: "",
 };
 
 export const useFilterStore = create<Filter>((set) => ({
   ...initialState,
+  searchQuery: "",
   setSortByFilter: (sortBy) => set({ sortBy: sortBy }),
   setCategoryFilter: (category) =>
     set((state) => ({

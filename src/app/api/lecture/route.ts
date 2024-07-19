@@ -1,15 +1,13 @@
 import connectDB from "@/lib/database/db";
 import { Lecture } from "@/schema/lectureSchema";
-import categoryMap from "@/utils/categoryMap";
+import { CATEGORY_MAP_TO_ENG } from "@/utils/categoryMap";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const category = searchParams.get("category")?.split(",");
+  const category = searchParams.get("category")?.split(",").filter(Boolean);
   const search = searchParams.get("search");
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
-
-  //헤더로 유저정보 받기 (북마크 여부 확인)
 
   await connectDB();
 
@@ -19,8 +17,8 @@ export async function GET(request: Request) {
     query.category = { $in: category };
   }
 
-  if (search) {
-    const mappedCategory = categoryMap[search];
+  if (search && search.trim()) {
+    const mappedCategory = CATEGORY_MAP_TO_ENG[search];
     query.$or = [
       { title: { $regex: search, $options: "i" } },
       { category: mappedCategory || { $regex: search, $options: "i" } },
@@ -55,7 +53,6 @@ export async function GET(request: Request) {
         });
       }
     }
-    //북마크 여부  Promise.all 로 추가
 
     const totalLectureCount = await Lecture.countDocuments(query);
     const totalPages = Math.ceil(totalLectureCount / pageSize);

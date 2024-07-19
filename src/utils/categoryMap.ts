@@ -1,4 +1,4 @@
-const categoryMap: { [key: string]: string } = {
+export const CATEGORY_MAP_TO_ENG: { [key: string]: string } = {
   디자인: "DESIGN",
   개발: "DEVELOP",
   테크: "DEVELOP",
@@ -10,4 +10,21 @@ const categoryMap: { [key: string]: string } = {
   자기계발: "SELF-DEVELOPMENT",
 };
 
-export default categoryMap;
+export const CATEGORY_MAP_TO_KO: { [key: string]: string } = {
+  DESIGN: "디자인",
+  DEVELOP: "개발 · 테크",
+  BUSINESS: "비즈니스",
+  MARKETING: "마케팅",
+  ECONOMY: "경제",
+  LANGUAGE: "외국어",
+  LICENSE: "자격증",
+  "SELF-DEVELOPMENT": "자기계발",
+  design: "디자인",
+  develop: "개발 · 테크",
+  business: "비즈니스",
+  marketing: "마케팅",
+  economy: "경제",
+  language: "외국어",
+  license: "자격증",
+  "self-development": "자기계발",
+};

@@ -2,56 +2,57 @@ import connectDB from "@/lib/database/db";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 import { TStudyListData } from "@/types/api/study";
-import categoryMap from "@/utils/categoryMap";
+import { CATEGORY_MAP_TO_ENG } from "@/utils/categoryMap";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const category = searchParams.get("category")?.split(",");
+  const category = searchParams.get("category")?.split(",").filter(Boolean);
   const search = searchParams.get("search");
   const sortBy = searchParams.get("sortBy") || "LATEST";
-  const role = searchParams.get("role")?.split(",");
-  const age = searchParams.get("age")?.split(",");
-  const career = searchParams.get("career")?.split(",");
-  const memberCount = searchParams.get("memberCount");
-  const location = searchParams.get("location")?.split(",");
+  const role = searchParams.get("role")?.split(",").filter(Boolean);
+  const age = searchParams.get("age")?.split(",").filter(Boolean);
+  const level = searchParams.get("level")?.split(",").filter(Boolean);
+  const memberCountStr = searchParams.get("memberCount");
+  const location = searchParams.get("location")?.split(",").filter(Boolean);
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
   //헤더로 유저정보 받기 (북마크 여부 확인)
+  const memberCount = memberCountStr ? parseInt(memberCountStr, 10) : null;
 
   await connectDB();
 
   //쿼리 설정
   let query: { [key: string]: any } = { status: "RECRUIT_START" };
 
-  if (category) {
+  if (category && category.length > 0) {
     query.category = { $in: category };
   }
 
-  if (search) {
-    const mappedCategory = categoryMap[search];
+  if (search && search.trim()) {
+    const mappedCategory = CATEGORY_MAP_TO_ENG[search];
     query.$or = [
       { title: { $regex: search, $options: "i" } },
       { category: mappedCategory || { $regex: search, $options: "i" } },
     ];
   }
 
-  if (role) {
+  if (role && role.length > 0) {
     query["wantedMember.role"] = { $in: role };
   }
 
-  if (age) {
+  if (age && age.length > 0) {
     query["wantedMember.age"] = { $in: age };
   }
 
-  if (career) {
-    query["wantedMember.career"] = { $in: career };
+  if (level && level.length > 0) {
+    query["wantedMember.career"] = { $in: level };
   }
 
-  if (memberCount) {
-    query["wantedMember.count"] = { $in: memberCount };
+  if (memberCount !== null) {
+    query["wantedMember.count"] = memberCount;
   }
 
-  if (location) {
+  if (location && location.length > 0) {
     query["$or"] = location.map((loc) => ({
       "meeting.location": { $regex: `^${loc}$`, $options: "i" },
     }));

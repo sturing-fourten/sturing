@@ -1,4 +1,4 @@
-import { TStudyDetailInfoData } from "./study";
+import { TCategory, TStudyDetailInfoData } from "./study";
 
 export type TLectureInfoData = {
   _id: string;
@@ -29,3 +29,15 @@ export type TLectureDetailData = {
   lecture: TLectureInfoData;
   relatedStudyList: TRelatedStudy[];
 };
+
+export type TLectureListCardData = {
+  id: string;
+  online: boolean;
+  category: TCategory;
+  platform: string;
+  rating: number;
+  title: string;
+  instructor: string;
+};
+
+export type TLectureListData = TLectureListCardData[];

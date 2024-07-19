@@ -38,7 +38,7 @@ export default function Banner() {
 
   return (
     <>
-      <div className="flex w-full h-full justify-center items-center relative">
+      <div className="flex w-full h-full justify-center items-center relative z-dropdown">
         <Swiper
           loop={true}
           spaceBetween={0}
@@ -60,7 +60,7 @@ export default function Banner() {
           </SwiperSlide>
         </Swiper>
         <div className="absolute right-4 bottom-4 z-[1000] flex justify-center items-center w-[45px] h-[20px] bg-gray-1000 bg-opacity-50 rounded-[100px]">
-          <span className="text-white text-center text-[11px] font-semibold tracking-[-0.22px] leading-[16.5px]">
+          <span className="text-white text-center text-[11px] font-semibold tracking-[-0.22px] leading-[16.5px] ">
             {currentSlide} / {totalSlides}
           </span>
         </div>

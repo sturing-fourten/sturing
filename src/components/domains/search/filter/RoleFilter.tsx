@@ -1,19 +1,16 @@
 import { useState } from "react";
 import RoleList from "../../recruit/teamMemberInfo/RoleList";
+import { useFilterStore } from "@/store/FilterStore";
 
 export default function RoleFilter() {
-  const [selectedRole, setSelectedRole] = useState<string[]>([]);
+  const { roles, setRoleFilter } = useFilterStore();
 
   const handleRoleToggle = (roleName: string) => {
-    if (selectedRole.includes(roleName)) {
-      setSelectedRole(selectedRole.filter((role) => role !== roleName));
-    } else {
-      setSelectedRole([...selectedRole, roleName]);
-    }
+    setRoleFilter(roleName);
   };
   return (
     <>
-      <RoleList selectedRole={selectedRole} handleRoleToggle={handleRoleToggle} />
+      <RoleList selectedRole={roles} handleRoleToggle={handleRoleToggle} />
     </>
   );
 }

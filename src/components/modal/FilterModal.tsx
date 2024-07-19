@@ -8,22 +8,42 @@ import NumberOfTeamMemberFilter from "../domains/search/filter/NumberOfTeamMembe
 import PeriodFilter from "../domains/search/filter/PeriodFilter";
 import JobLevelFilter from "../domains/search/filter/JobLevelFilter";
 import RoleFilter from "../domains/search/filter/RoleFilter";
-import { useState } from "react";
 import { TFilterMenuId } from "@/types/filter";
-import { FILTER_MENU } from "@/constant/filter";
+import { FILTER_MENU, FILTER_MENU_LIST } from "@/constant/filter";
+import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
+import { useSearchResultStore } from "@/store/SearchResultStore";
 
 const { CATEGORY, LOCATION, NUMBER_OF_TEAM, PERIOD, LEVEL, ROLE } = FILTER_MENU;
 
 interface FilterModalProps {
   onClose: () => void;
+  onClick: (menuId: TFilterMenuId) => void;
+  menu: TFilterMenuId;
 }
 
-export default function FilterModal({ onClose }: FilterModalProps) {
-  const [menu, setMenu] = useState<TFilterMenuId>(CATEGORY.id);
+export default function FilterModal({ onClose, onClick, menu }: FilterModalProps) {
+  const { resetFilters } = useFilterStore();
+  const { studyList, lectureList } = useSearchResultStore();
+  const { menu: SearchTabMenu } = useSearchTabMenuStore();
+  const handleFilterModalClose = () => {
+    onClick(CATEGORY.id);
+    onClose();
+  };
+
+  const resultCount = () => {
+    switch (SearchTabMenu) {
+      case "total":
+        return studyList.length + lectureList.length;
+      case "study":
+        return studyList.length;
+      case "lecture":
+        return lectureList.length;
+    }
+  };
 
   return (
     <>
-      <ModalContainer onClose={onClose} isCloseClickOutside isBottomFixed>
+      <ModalContainer onClose={handleFilterModalClose} isCloseClickOutside isBottomFixed>
         <div className="w-screen sm:w-[600px] bg-white rounded-t-2xl">
           <div className="px-4 pt-3 pb-5">
             <div className="flex justify-center">
@@ -33,48 +53,16 @@ export default function FilterModal({ onClose }: FilterModalProps) {
           </div>
           <section>
             <nav className="px-4 flex justify-between items-center gap-3 bg-white border-b border-gray-300">
-              <TabMenuButton
-                onClick={() => setMenu(CATEGORY.id)}
-                title={CATEGORY.title}
-                isSelected={menu === CATEGORY.id}
-                isUnderlined
-                isFilterTab
-              />
-              <TabMenuButton
-                onClick={() => setMenu(LOCATION.id)}
-                title={LOCATION.title}
-                isSelected={menu === LOCATION.id}
-                isUnderlined
-                isFilterTab
-              />
-              <TabMenuButton
-                onClick={() => setMenu(NUMBER_OF_TEAM.id)}
-                title={NUMBER_OF_TEAM.title}
-                isSelected={menu === NUMBER_OF_TEAM.id}
-                isUnderlined
-                isFilterTab
-              />
-              <TabMenuButton
-                onClick={() => setMenu(PERIOD.id)}
-                title={PERIOD.title}
-                isSelected={menu === PERIOD.id}
-                isUnderlined
-                isFilterTab
-              />
-              <TabMenuButton
-                onClick={() => setMenu(LEVEL.id)}
-                title={LEVEL.title}
-                isSelected={menu === LEVEL.id}
-                isUnderlined
-                isFilterTab
-              />
-              <TabMenuButton
-                onClick={() => setMenu(ROLE.id)}
-                title={ROLE.title}
-                isSelected={menu === ROLE.id}
-                isUnderlined
-                isFilterTab
-              />
+              {FILTER_MENU_LIST.map((filterMenu) => (
+                <TabMenuButton
+                  key={filterMenu.id}
+                  onClick={() => onClick(filterMenu.id)}
+                  title={filterMenu.title}
+                  isSelected={menu === filterMenu.id}
+                  isUnderlined
+                  isFilterTab
+                />
+              ))}
             </nav>
             <div className="pt-[30px] px-4 h-[453px] overflow-y-auto ">
               {menu === CATEGORY.id && <CategoryFilter />}
@@ -85,12 +73,15 @@ export default function FilterModal({ onClose }: FilterModalProps) {
               {menu === ROLE.id && <RoleFilter />}
             </div>
             <div className="px-4 py-5 flex items-center gap-[10px]">
-              <Button varient="ghost" addStyle="border-gray-300 rounded-lg py-3 w-[109px] text-gray-600 shrink-0">
+              <Button
+                onClick={resetFilters}
+                varient="ghost"
+                addStyle="border-gray-300 rounded-lg py-3 w-[109px] text-gray-600 shrink-0">
                 <img src={ICONS.reset.src} alt={ICONS.reset.alt} className="mr-1" />
                 초기화
               </Button>
-              <Button varient="filled" addStyle="bg-main-500 w-full py-3 text-white rounded-lg">
-                {"20"}개의 결과 보기
+              <Button onClick={onClose} varient="filled" addStyle="bg-main-500 w-full py-3 text-white rounded-lg">
+                {resultCount()}개의 결과 보기
               </Button>
             </div>
           </section>
