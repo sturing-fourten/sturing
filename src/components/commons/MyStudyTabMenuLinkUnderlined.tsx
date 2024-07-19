@@ -1,12 +1,14 @@
+"use client";
+
 import { tabMyStudyAction } from "@/lib/database/action/myStudyList";
 import { TMyStudyTabMenuLinkUnderlinedItem } from "@/types/study";
-import { headers } from "next/headers";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 export function MyStudyTabMenuLinkUnderlined(props: TMyStudyTabMenuLinkUnderlinedItem) {
   const { href, title, count } = props;
-  const headersList = headers();
-  const headerPathname = headersList.get("x-pathname") || "";
-  const isCurrent = headerPathname === href;
+  const currentTab = useSelectedLayoutSegment("tabs") ?? "";
+  const currentPath = `/mystudy/${currentTab}`;
+  const isCurrent = currentPath === href;
 
   return (
     <form

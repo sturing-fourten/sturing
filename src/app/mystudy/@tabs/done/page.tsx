@@ -1,25 +1,25 @@
-import { urlRenderAction } from "@/lib/database/action/myStudyList";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
-
-const getIsUrlRender = (currentInsideMenu: string | null) => {
-  switch (currentInsideMenu) {
-    case "PROGRESS":
-    case "RECRUIT_END":
-    case "RECRUIT_START_OWNER":
-    case "RECRUIT_START_MEMBER":
-    case null:
-      return true;
-    default:
-      return false;
-  }
-};
+import { TMyStudy } from "@/types/study";
+import { fetchDoneStudyListAction } from "@/lib/database/action/myStudyList";
+import NoList from "@/components/domains/mystudy/NoList";
+import StudyDoneCard from "@/components/commons/card/StudyDoneCard";
 
 export default async function DoneTabPage() {
   const myStudyListType = useMyStudyListStore.getState().myStudyListType;
+  let myStudyList: TMyStudy[] = [];
 
-  if (getIsUrlRender(myStudyListType)) {
-    urlRenderAction("DONE");
+  if (myStudyListType === "DONE") {
+    myStudyList = await fetchDoneStudyListAction();
   }
-
-  return null;
+  return (
+    <>
+      {myStudyList &&
+        myStudyListType === "DONE" &&
+        (myStudyList.length === 0 ? (
+          <NoList>완료된 스터디가 없어요.</NoList>
+        ) : (
+          myStudyList.map((study) => <StudyDoneCard key={study._id.toString()} study={study} />)
+        ))}
+    </>
+  );
 }

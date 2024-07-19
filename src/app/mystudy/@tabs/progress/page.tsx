@@ -1,6 +1,9 @@
 import { InsideMenu } from "@/components/commons/card/element/InsideMenu";
-import { urlRenderAction } from "@/lib/database/action/myStudyList";
+import StudyOnGoingCard from "@/components/commons/card/StudyOnGoingCard";
+import NoList from "@/components/domains/mystudy/NoList";
+import { fetchProgressStudyListAction, fetchRecruitEndStudyListAction } from "@/lib/database/action/myStudyList";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
+import { TMyStudy } from "@/types/study";
 
 const menuList = [
   {
@@ -13,28 +16,40 @@ const menuList = [
   },
 ];
 
-const getIsUrlRender = (currentInsideMenu: string | null) => {
-  switch (currentInsideMenu) {
-    case "RECRUIT_START_OWNER":
-    case "RECRUIT_START_MEMBER":
-    case "DONE":
-    case null:
-      return true;
-    default:
-      return false;
-  }
-};
-
 export default async function ProgressTabPage() {
   const myStudyListType = useMyStudyListStore.getState().myStudyListType;
-  if (getIsUrlRender(myStudyListType)) {
-    urlRenderAction("PROGRESS");
+  let myStudyList: TMyStudy[] = [];
+
+  if (myStudyListType === "PROGRESS") {
+    myStudyList = await fetchProgressStudyListAction();
   }
+  if (myStudyListType === "RECRUIT_END") {
+    myStudyList = await fetchRecruitEndStudyListAction();
+  }
+
   return (
-    <nav className="flex gap-3 pt-5 px-4">
-      {menuList.map((item, index) => (
-        <InsideMenu key={index} id={item.id} title={item.title} />
-      ))}
-    </nav>
+    <>
+      <nav className="flex gap-3 pt-5 px-4">
+        {menuList.map((item, index) => (
+          <InsideMenu key={index} id={item.id} title={item.title} />
+        ))}
+      </nav>
+      <div className="flex flex-col pt-5 gap-4 px-4">
+        {myStudyList &&
+          myStudyListType === "PROGRESS" &&
+          (myStudyList.length === 0 ? (
+            <NoList>진행 중인 스터디가 없어요.</NoList>
+          ) : (
+            myStudyList.map((study) => <StudyOnGoingCard key={study._id.toString()} isStarted={true} study={study} />)
+          ))}
+        {myStudyList &&
+          myStudyListType === "RECRUIT_END" &&
+          (myStudyList.length === 0 ? (
+            <NoList>진행 예정인 스터디가 없어요.</NoList>
+          ) : (
+            myStudyList.map((study) => <StudyOnGoingCard key={study._id.toString()} isStarted={false} study={study} />)
+          ))}
+      </div>
+    </>
   );
 }
