@@ -12,7 +12,7 @@ export default async function DoneTabPage() {
     myStudyList = await fetchDoneStudyListAction();
   }
   return (
-    <div className="flex flex-col pt-5 gap-4 px-4">
+    <div className="flex flex-col py-5 gap-4 px-4">
       {myStudyList &&
         myStudyListType === "DONE" &&
         (myStudyList.length === 0 ? (
