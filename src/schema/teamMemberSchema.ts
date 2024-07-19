@@ -38,4 +38,4 @@ const teamMembersSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export const TeamMembers = mongoose.models.TeamMembers || mongoose.model("TeamMembers", teamMembersSchema);
+export const TeamMembers = mongoose.models?.TeamMembers || mongoose.model("TeamMembers", teamMembersSchema);
