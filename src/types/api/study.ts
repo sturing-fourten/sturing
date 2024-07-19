@@ -18,7 +18,7 @@ export type TTeamMember = {
   profileImageUrl: string;
   role: TRole;
   isOwner: boolean;
-  status: string;
+  status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
 };
 
 type TStudyDetail = {
