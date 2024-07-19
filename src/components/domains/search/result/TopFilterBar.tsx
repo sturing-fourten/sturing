@@ -30,7 +30,7 @@ export default function TopFilterBar() {
       case "location":
         return locations.length > 0;
       case "memberCount":
-        return memberCount > 0;
+        return memberCount > 1;
       case "period":
         return !!startDate || !!endDate;
       case "level":

@@ -61,7 +61,7 @@ export function StudyRecruitCard({ isMini, isScraped, RecruitCardData, onClick }
           <TagMain>{PROGRESSWAY_LIST[meeting.format]}</TagMain>
           <TagLight>{CATEGORY_MAP_TO_KO[category]}</TagLight>
         </div>
-        <p className="mb-3 text-4 font-semibold tracking-[-0.32px] text-black loading line-clamp-2 ">{title}</p>
+        <p className="mb-3 text-4 font-semibold tracking-[-0.32px] text-black leading-normal line-clamp-1 ">{title}</p>
         <div className="flex items-center text-[12px] font-medium tracking-[-0.36px] text-gray-600">
           <Image className="mr-[2px]" src={date} alt="date icon" width={18} height={18} />
           <span>{`${formattedStartDate}-${formattedEndDate}`}</span>
