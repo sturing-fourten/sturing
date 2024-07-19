@@ -2,6 +2,7 @@ import { ICONS, BOOKMARK } from "@/constant/icons";
 import GoBackButton from "./GoBackButton";
 import Link from "next/link";
 import SaveButton from "./SaveButton";
+import ShareButton from "./ShareButton";
 
 export type TopBarVariant = "share" | "chat" | "back" | "save" | "edit";
 
@@ -15,7 +16,7 @@ interface TopBarProps {
   onSave?: () => void;
 }
 
-const { share, more, message, shareWhite, moreWhite } = ICONS;
+const { message } = ICONS;
 
 export default function TopBar({
   variant,
@@ -26,26 +27,12 @@ export default function TopBar({
   onCancel,
   onSave,
 }: TopBarProps) {
-  const shareIcon = isWhite ? shareWhite : share;
-  const moreIcon = isWhite ? moreWhite : more;
-
   return (
     <div className="w-full h-[54px] flex justify-between items-center px-4">
       {(variant === "share" || variant === "chat" || variant === "back" || variant === "edit") && (
         <GoBackButton isWhite={isWhite} />
       )}
-      {variant === "share" && (
-        <div className="flex justify-center items-center gap-3">
-          <button type="button">
-            <img src={shareIcon.src} alt={shareIcon.alt} width={24} height={24} />
-          </button>
-          {showMore && (
-            <button type="button">
-              <img src={moreIcon.src} alt={moreIcon.alt} width={24} height={24} />
-            </button>
-          )}
-        </div>
-      )}
+      {variant === "share" && <ShareButton showMore={showMore} isWhite={isWhite} />}
       {variant === "chat" && (
         <>
           <span className={`text-[18px] font-semibold tracking-[-0.36px] leading-[27px] ${showBookmark && "ml-8"}`}>
