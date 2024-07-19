@@ -2,6 +2,7 @@ import { Types } from "mongoose";
 
 export type TProgressGaugeItem = {
   teamMemberId: Types.ObjectId;
+  userId: Types.ObjectId;
   data: number;
 };
 
@@ -12,6 +13,7 @@ export type TProgressGauge = {
 
 export type TAttendanceItem = {
   teamMemberId: Types.ObjectId;
+  userId: Types.ObjectId;
   data: {
     date: Date;
     isAttended: boolean;
@@ -25,10 +27,19 @@ export type TAttendance = {
 
 export type TChecklistItem = {
   teamMemberId: Types.ObjectId;
-  data: {
-    date: Date;
-    isChecked: boolean;
-  };
+  userId: Types.ObjectId;
+  data: TChecklistDataList[];
+};
+
+type TChecklistDataList = {
+  date: Date;
+  task: TTaskList[];
+};
+
+type TTaskList = {
+  task: string;
+  like: number;
+  isChecked: boolean;
 };
 
 export type TChecklist = {
@@ -39,6 +50,7 @@ export type TChecklist = {
 export type TIsQualifiedItem = {
   _id: Types.ObjectId;
   teamMemberId: Types.ObjectId;
+  userId: Types.ObjectId;
   data: boolean;
 };
 
@@ -51,5 +63,5 @@ export type TDashboardResponse = {
   isQualified: TIsQualifiedItem[];
   createdAt: Date;
   updatedAt: Date;
-  // __v: number;
+  __v: number;
 };
