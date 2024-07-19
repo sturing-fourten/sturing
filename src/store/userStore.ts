@@ -5,6 +5,7 @@ interface UserState {
   user: EditProfileType | null;
   fetchUser: () => Promise<void>;
   setUser: (user: EditProfileType) => void;
+  reset: () => void;
 }
 
 export const useUserStore = create<UserState>((set) => ({
@@ -23,4 +24,5 @@ export const useUserStore = create<UserState>((set) => ({
       set({ user: null });
     }
   },
+  reset: () => set({ user: null }),
 }));
