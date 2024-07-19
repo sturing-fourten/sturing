@@ -97,6 +97,7 @@ export default function DashBoardFreePage() {
     <form onSubmit={handleSubmit}>
       <div className="w-full h-dvh flex-col inline-flex">
         <TopBar variant="back" />
+        <hr className="w-full" />
         <div className="w-full px-[22px] py-[16px] flex-col gap-5 flex flex-1">
           <Title>자유롭게 글을 작성해 주세요</Title>
           <WriteContent
