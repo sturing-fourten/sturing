@@ -3,11 +3,12 @@ import { kakaoLogo } from "../../../public/icons/icons";
 import Image from "next/image";
 
 type KakaoShareButtonProps = {
-  description?: string;
+  studyTitle?: string;
 };
 
-export default function KakaoShareButton({ description }: KakaoShareButtonProps) {
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+export default function KakaoShareButton({ studyTitle }: KakaoShareButtonProps) {
+  // const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareUrl = window.location.href;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -23,12 +24,25 @@ export default function KakaoShareButton({ description }: KakaoShareButtonProps)
     const { Kakao } = window;
 
     Kakao.Share.sendDefault({
-      objectType: "text",
-      text: "이 스터디 정보 같이 봐요!",
-      link: {
-        mobileWebUrl: shareUrl,
-        webUrl: shareUrl,
+      objectType: "feed",
+      content: {
+        title: studyTitle ?? "Sturing",
+        description: "이 스터디 정보 같이 봐요!",
+        imageUrl: "icons/defaultProfileImage.svg",
+        link: {
+          mobileWebUrl: shareUrl,
+          webUrl: shareUrl,
+        },
       },
+      buttons: [
+        {
+          title: "이 스터디 정보 같이 봐요!",
+          link: {
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
+          },
+        },
+      ],
     });
   };
 
