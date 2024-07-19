@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { TCategory } from "./api/study";
+import { TSortBy } from "./filter";
 
 export type TTabMenuLinkUnderlinedItem = {
   id: string;

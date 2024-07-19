@@ -9,14 +9,19 @@ import { FormEvent, useState } from "react";
 export default function TopSearchBar() {
   const params = useSearchParams();
   const search = params.get("search");
-  const { setSearchQuery } = useFilterStore();
+  const { setSearchQuery, resetFilters, memberCount } = useFilterStore();
   const [inputValue, setValue] = useState(search);
   const router = useRouter();
+  // if (search) {
+  //   setSearchQuery(search);
+  // }
 
   const handleInputSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    resetFilters();
     if (inputValue) {
       setSearchQuery(inputValue);
+
       router.push(`/search/result?search=${inputValue}`);
     }
   };
@@ -35,7 +40,11 @@ export default function TopSearchBar() {
               placeholder="관심 스터디 분야나 강의명을 검색해 보세요"
               className="w-full h-9 bg-main-100 focus-visible:outline-none rounded-full pl-4 py-[7px] pr-[46px] text-sm leading-snug font-semibold text-gray-1000 placeholder:text-gray-600"
             />
-            <button onClick={handleInputSubmit} type="submit" className="absolute right-0 pr-4 top-2">
+            <button
+              onClick={handleInputSubmit}
+              type="submit"
+              className="absolute right-0 pr-4 top-2"
+              disabled={!inputValue}>
               <img src={ICONS.search.src} alt={ICONS.search.alt} />
             </button>
           </div>

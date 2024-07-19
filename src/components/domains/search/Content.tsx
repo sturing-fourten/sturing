@@ -1,7 +1,11 @@
+"use client";
+
 import CardList from "@/components/commons/CardList";
 import SearchBar from "@/components/commons/SearchBar";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import SearchTag from "@/components/domains/search/SearchTag";
+import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
+import { useEffect } from "react";
 
 export default function Content() {
   return (

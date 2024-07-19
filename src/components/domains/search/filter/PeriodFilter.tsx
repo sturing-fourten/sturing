@@ -1,9 +1,11 @@
 import { useState } from "react";
 import CalenderDropdown from "../../recruit/studyDetail/CalenderDropdown";
 import { DateRange } from "react-day-picker";
+import { useFilterStore } from "@/store/FilterStore";
 
 export default function PeriodFilter() {
   const [date, setDate] = useState<DateRange>({ from: new Date(), to: new Date() });
+  const { setDateFilter } = useFilterStore();
 
   return (
     <>
