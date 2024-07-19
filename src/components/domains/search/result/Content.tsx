@@ -80,7 +80,7 @@ export default function Content() {
                     studyList.slice(0, 4).map((study: TStudyRecruitCardData) => (
                       <div key={study.id} className="w-full">
                         <StudyRecruitCard
-                          RecruitCardData={study}
+                          recruitCardData={study}
                           onClick={() => {
                             router.push(`/study/${study.id}`);
                           }}
@@ -92,7 +92,7 @@ export default function Content() {
                   ) : (
                     studyList.map((study: TStudyRecruitCardData) => (
                       <StudyRecruitCard
-                        RecruitCardData={study}
+                        recruitCardData={study}
                         onClick={() => {
                           router.push(`/study/${study.id}`);
                         }}

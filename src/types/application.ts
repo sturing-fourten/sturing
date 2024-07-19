@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { TMyStudy } from "./study";
 
 export type TRole =
@@ -21,6 +22,10 @@ export type TApplication = {
   nickname: string;
   profileImageUrl: string;
   status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
+  levels: {
+    _id: Types.ObjectId;
+    levels: string;
+  };
 };
 
 export type TApplicationSummary = Omit<TApplication, "resolution" | "role">;

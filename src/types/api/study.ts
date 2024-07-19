@@ -13,7 +13,7 @@ export type TCategory =
   | "SELF-DEVELOPMENT";
 
 export type TTeamMember = {
-  memberId: mongoose.Types.ObjectId;
+  memberId: string;
   nickname: string;
   profileImageUrl: string;
   role: TRole;
