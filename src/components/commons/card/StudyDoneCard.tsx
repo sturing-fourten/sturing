@@ -13,6 +13,7 @@ interface IStudyDoneCardProps {
 export default async function StudyDoneCard(props: IStudyDoneCardProps) {
   const {
     study: {
+      _id: studyId,
       title,
       startDate,
       endDate,
@@ -30,9 +31,6 @@ export default async function StudyDoneCard(props: IStudyDoneCardProps) {
   const session = await getSession();
   const myUserId = session?.user?.id;
 
-  /**
-   * @todo teamMembersId 타입 수정
-   */
   const teamMemberList = (teamMembersId as TTeamMembersIdAddedMember)?.members?.filter(
     (member) => member.userId._id.toString() !== myUserId,
   );
@@ -41,7 +39,9 @@ export default async function StudyDoneCard(props: IStudyDoneCardProps) {
   const where = (format === "ONLINE" ? platform : location) ?? "";
 
   return (
-    <article className="flex flex-col gap-5 py-6 px-5 border border-gray-300 rounded-lg bg-white">
+    <Link
+      className="flex flex-col gap-5 py-6 px-5 border border-gray-300 rounded-lg bg-white"
+      href={`/study/${studyId}/dashboard`}>
       <div>
         <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
         <p className="mt-2 mb-3 text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
@@ -52,7 +52,7 @@ export default async function StudyDoneCard(props: IStudyDoneCardProps) {
         <TeamMemberReviewItem key={member.userId?._id.toString()} member={member} />
       ))}
       <StudyCardButton>내가 받은 후기 보기</StudyCardButton>
-    </article>
+    </Link>
   );
 }
 

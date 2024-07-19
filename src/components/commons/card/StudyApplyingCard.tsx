@@ -4,6 +4,7 @@ import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 import { getDateRange } from "@/utils/getDateRange";
 import { getSession } from "@/lib/database/getSession";
+import Link from "next/link";
 
 interface IStudyApplyingCardProps {
   study: TMyStudy;
@@ -12,7 +13,7 @@ interface IStudyApplyingCardProps {
 export default async function StudyApplyingCard(props: IStudyApplyingCardProps) {
   const {
     study: {
-      _id,
+      _id: studyId,
       title,
       startDate,
       endDate,
@@ -22,7 +23,6 @@ export default async function StudyApplyingCard(props: IStudyApplyingCardProps) 
         platform,
         location,
       },
-      task,
       teamMembersId,
     },
   } = props;
@@ -37,7 +37,9 @@ export default async function StudyApplyingCard(props: IStudyApplyingCardProps) 
   )?.status;
 
   return (
-    <article className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg">
+    <Link
+      className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg"
+      href={`/study/${studyId}/dashboard`}>
       {status && <StudyApplyInfo status={status} />}
       <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
       <p className="text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
@@ -46,6 +48,6 @@ export default async function StudyApplyingCard(props: IStudyApplyingCardProps) 
         <StudyCardButton>지원서 보기</StudyCardButton>
         <StudyCardButton>지원 취소</StudyCardButton>
       </div>
-    </article>
+    </Link>
   );
 }
