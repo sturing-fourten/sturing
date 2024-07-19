@@ -1,4 +1,5 @@
 import { DateRange } from "react-day-picker";
+import { TLectureListCardData } from "./api/lecture";
 
 export interface LectureType {
   lecture: string;
@@ -30,6 +31,8 @@ export interface TeamMemberInfoType {
 export interface RecruitState {
   lecture: string;
   setLecture: (lecture: string) => void;
+  lectureList: TLectureListCardData[];
+  setLectureList: (lecture: TLectureListCardData[]) => void;
   category: string;
   setCategory: (category: string) => void;
   image: string;

@@ -5,6 +5,8 @@ import { create } from "zustand";
 export const useRecruitStore = create<RecruitState>((set) => ({
   lecture: "",
   setLecture: (lecture) => set({ lecture: lecture }),
+  lectureList: [],
+  setLectureList: (lectureList) => set({ lectureList: lectureList }),
   category: "",
   setCategory: (category) => set({ category: category }),
   image: "",
@@ -48,4 +50,5 @@ export const useRecruitStore = create<RecruitState>((set) => ({
 export const useLocationsStore = create<LocationsState>((set) => ({
   locations: [],
   setLocations: (locations) => set({ locations: locations }),
+  reset: () => set({ locations: [] }),
 }));

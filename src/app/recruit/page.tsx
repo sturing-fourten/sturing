@@ -24,7 +24,7 @@ export default function Recruit() {
   const resetRecruitAll = useRecruitReset();
 
   // SelectLectureStore 상태와 업데이트 함수 사용
-  const { lecture, category, setLecture, setCategory } = useRecruitStore();
+  const { lecture, lectureList, category, setLecture, setLectureList, setCategory } = useRecruitStore();
 
   // StudyContentStore 상태와 업데이트 함수 사용
   const {
@@ -157,6 +157,7 @@ export default function Recruit() {
     if (savedDraft) {
       const {
         lecture,
+        lectureList,
         category,
         image,
         title,
@@ -176,6 +177,7 @@ export default function Recruit() {
       } = savedDraft;
 
       setLecture(lecture);
+      setLectureList(lectureList);
       setCategory(category);
       setImage(image);
       setTitle(title);
@@ -200,6 +202,7 @@ export default function Recruit() {
   const handleSave = () => {
     const draftData = {
       lecture,
+      lectureList,
       category,
       image,
       title,
