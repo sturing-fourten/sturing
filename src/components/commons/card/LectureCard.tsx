@@ -4,12 +4,12 @@ import { TagMain } from "../tag/TagMain";
 import { TagLight } from "../tag/TagLight";
 import { TagRate } from "../tag/TagRate";
 import { CATEGORY } from "@/constant/category";
-import { TLectureInfoData } from "@/types/api/lecture";
+import { TLectureInfoData, TLectureListCardData } from "@/types/api/lecture";
 
 interface LectureCardProps {
   variant: "card" | "info";
   isScraped?: boolean;
-  lecture: TLectureInfoData;
+  lecture: TLectureInfoData | TLectureListCardData;
 }
 
 export default function LectureCard({ variant, lecture, isScraped }: LectureCardProps) {

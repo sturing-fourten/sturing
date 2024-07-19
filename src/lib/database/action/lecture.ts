@@ -1,23 +1,30 @@
 "use server";
 
 import { TLectureDetailData } from "@/types/api/lecture";
+import { TCategory } from "@/types/api/study";
+import { TLectureListQuery } from "@/types/filter";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export const getLectureListAction = async () => {
+export const getLectureListAction = async (query: TLectureListQuery, page: number) => {
+  const { categories, search } = query;
+  const categoryQuery = categories.length > 0 ? categories.join() : "";
+  const searchQuery = search && search.trim();
+
   try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/lecture`, {
-      method: "GET",
-    });
+    const response = await fetch(
+      `${process.env.LOCAL_URL}/api/lecture?category=${categoryQuery}&search=${searchQuery}`,
+    );
 
     if (!response.ok) {
       throw new Error("강의 리스트 불러오기 실패");
     }
 
     const data = await response.json();
-    return data.lectureList;
+    return data;
   } catch (error: any) {
-    console.log("error", error.message);
+    console.error("error", error.message);
+    throw error;
   }
 };
 

@@ -14,6 +14,8 @@ import { TCategory, TStudyListData } from "@/types/api/study";
 import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import NoResultText from "@/components/commons/NoResultText";
+import { CATEGORY_MAP_TO_KO } from "@/utils/categoryMap";
 
 export default function Contents() {
   const [TopSectionStudyList, setTopSectionStudyList] = useState<TStudyListData>([]);
@@ -142,10 +144,10 @@ export default function Contents() {
               />
             ))
           ) : (
-            <div className="flex w-full items-center justify-center h-[80px] mr-4 mt-4">
-              <span className="text-gray-800 text-base">{`${
-                userInterestCategory || "관심"
-              }분야의 첫번째 스터디를 개설해 보세요!`}</span>
+            <div className="mr-4 mt-4">
+              <NoResultText>{`${
+                CATEGORY_MAP_TO_KO[userInterestCategory] || "관심"
+              }분야의 첫번째 스터디를 개설해 보세요!`}</NoResultText>
             </div>
           )}
         </CardList>
@@ -169,10 +171,8 @@ export default function Contents() {
               />
             ))
           ) : (
-            <div className="flex w-full items-center justify-center h-[80px] mr-4 mt-4">
-              <span className="text-gray-800 text-base">{`${
-                userLocation || "회원님"
-              }의 첫번째 스터디를 개설해보세요!`}</span>
+            <div className="mr-4 mt-4">
+              <NoResultText>{`${userLocation || "회원님"}의 첫번째 스터디를 개설해보세요!`}</NoResultText>
             </div>
           )}
         </CardList>

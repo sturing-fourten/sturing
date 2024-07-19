@@ -7,45 +7,57 @@ import LectureCard from "@/components/commons/card/LectureCard";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import { useEffect, useState } from "react";
 import SortFilterButton from "./SortFilterButton";
-import { getLectureListAction } from "@/lib/database/action/lecture";
-
-import { LectureData, StudyData } from "@/types/studyDetail";
-import { useSearchTabMenuStore } from "@/store/FilterStore";
-import { StudyData } from "@/types/studyDetail";
+import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
 import Link from "next/link";
-import { TLectureInfoData } from "@/types/api/lecture";
+import { TLectureListCardData } from "@/types/api/lecture";
+import { TStudyRecruitCardData } from "@/types/api/study";
+import { useRouter } from "next/navigation";
+import NoResultText from "@/components/commons/NoResultText";
+
+import { TLectureListQuery, TStudyListQuery } from "@/types/filter";
+import { useSearchResultStore } from "@/store/SearchResultStore";
 
 export default function Content() {
   const { menu, setTabMenu } = useSearchTabMenuStore();
-  const [lectures, setLectures] = useState<TLectureInfoData[]>([]);
-  const [studies, setStudies] = useState<StudyData[]>([]);
+  const {
+    studyList,
+    lectureList,
+    fetchLectureList,
+    setLectureList,
+    lecturePage,
+    setStudyList,
+    studyPage,
+    fetchStudyList,
+  } = useSearchResultStore();
 
-  const fetchStudyListData = async () => {
-    try {
-      const res = await fetch(`/api/study/list`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const data = await res.json();
-      setStudies(data);
-    } catch (error) {
-      console.error(error);
-    }
+  const router = useRouter();
+  const { searchQuery, categories, locations, memberCount, startDate, endDate, levels, roles, sortBy } =
+    useFilterStore();
+
+  const studyQuery: TStudyListQuery = {
+    search: searchQuery,
+    categories,
+    locations,
+    memberCount,
+    startDate,
+    endDate,
+    levels,
+    roles,
+    sortBy,
   };
 
-  const fetchLectureListData = async () => {
-    try {
-      const data = await getLectureListAction();
-      setLectures(data);
-    } catch (error) {
-      console.error(error);
-    }
+  const lectureQuery: TLectureListQuery = { categories, search: searchQuery };
+
+  const fetchSearchResult = async () => {
+    const studyListData = await fetchStudyList(studyQuery, studyPage);
+    setStudyList(studyListData);
+    const lectureListData = await fetchLectureList(lectureQuery, lecturePage);
+    setLectureList(lectureListData);
   };
 
   useEffect(() => {
-    fetchLectureListData();
-    fetchStudyListData();
-  }, []);
+    fetchSearchResult();
+  }, [searchQuery, memberCount, categories, locations, startDate, endDate, levels, roles, sortBy]);
 
   return (
     <>
@@ -61,14 +73,41 @@ export default function Content() {
               <h1 className="text-base text-gray-1000 font-semibold leading-snug mb-[17px]">스터디</h1>
             )}
             <div className="flex flex-col gap-5 items-end">
-              {menu === "total" && <SortFilterButton />}
+              {menu === "study" && <SortFilterButton />}
               <CardList>
-                {/* {menu === "total"
-                  ? studies.slice(0, 4).map((study: StudyData) => <StudyRecruitCard key={study._id} isMini isScraped />)
-                  : studies.map((study: StudyData) => <StudyRecruitCard key={study._id} isMini isScraped />)} */}
+                {studyList.length !== 0 ? (
+                  menu === "total" ? (
+                    studyList.slice(0, 4).map((study: TStudyRecruitCardData) => (
+                      <div key={study.id} className="w-full">
+                        <StudyRecruitCard
+                          RecruitCardData={study}
+                          onClick={() => {
+                            router.push(`/study/${study.id}`);
+                          }}
+                          isMini
+                          isScraped
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    studyList.map((study: TStudyRecruitCardData) => (
+                      <StudyRecruitCard
+                        RecruitCardData={study}
+                        onClick={() => {
+                          router.push(`/study/${study.id}`);
+                        }}
+                        key={study.id}
+                        isMini
+                        isScraped
+                      />
+                    ))
+                  )
+                ) : (
+                  <NoResultText>검색 결과가 없습니다.</NoResultText>
+                )}
               </CardList>
             </div>
-            {menu === "total" && (
+            {studyList.length !== 0 && menu === "total" && (
               <Button
                 onClick={() => setTabMenu("study")}
                 varient="ghost"
@@ -85,19 +124,25 @@ export default function Content() {
               <h1 className="text-base text-gray-1000 font-semibold leading-snug mb-[17px]">강의</h1>
             )}
             <div className="flex flex-col gap-[14px]">
-              {menu === "total"
-                ? lectures?.slice(0, 2).map((lecture: TLectureInfoData) => (
+              {lectureList.length !== 0 ? (
+                menu === "total" ? (
+                  lectureList.slice(0, 2).map((lecture: TLectureListCardData) => (
                     <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
                       <LectureCard lecture={lecture} variant="card" isScraped />
                     </Link>
                   ))
-                : lectures?.map((lecture: TLectureInfoData) => (
+                ) : (
+                  lectureList.map((lecture: TLectureListCardData) => (
                     <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
                       <LectureCard lecture={lecture} variant="card" isScraped />
                     </Link>
-                  ))}
+                  ))
+                )
+              ) : (
+                <NoResultText>검색 결과가 없습니다.</NoResultText>
+              )}
             </div>
-            {menu === "total" && (
+            {lectureList.length !== 0 && menu === "total" && (
               <Button
                 onClick={() => setTabMenu("lecture")}
                 varient="ghost"

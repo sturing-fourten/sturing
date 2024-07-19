@@ -7,6 +7,8 @@ import { IMAGES_DEFAUlT } from "@/constant/images";
 import { getDate } from "date-fns";
 import { formatDate } from "@/utils/formatDate";
 import { useRouter } from "next/router";
+import { PROGRESSWAY_LIST } from "@/constant/progressWay";
+import { CATEGORY_MAP_TO_KO } from "@/utils/categoryMap";
 
 interface IStudyRecruitCardProps {
   isMini?: boolean;
@@ -30,14 +32,14 @@ export function StudyRecruitCard({ isMini, isScraped, RecruitCardData, onClick }
   const formattedStartDate = formatDate(startDate);
   const formattedEndDate = formatDate(endDate);
   const studySchedule =
-    meeting.schedule.time === "추후협의"
+    meeting.schedule?.time === "추후협의"
       ? "모집 날짜 미정"
       : `매주 ${meeting.schedule.day.slice(0, 1)} ${meeting.schedule.time}`;
 
   return (
     <article onClick={onClick} className={`flex flex-col gap-3 shrink-0 ${isMini ? "w-full" : "w-[185px]"}`}>
       <section
-        className={`relative rounded-lg bg-cover bg-center bg-no-repeat overflow-hidden  ${
+        className={`relative rounded-lg bg-cover bg-center bg-no-repeat overflow-hidden border border-gray-300  ${
           isMini ? "h-[92px] sm:h-[150px]" : "h-[100px]"
         }`}
         style={{
@@ -56,10 +58,10 @@ export function StudyRecruitCard({ isMini, isScraped, RecruitCardData, onClick }
       </section>
       <section>
         <div className="flex gap-1 mb-1">
-          <TagMain>{meeting.format}</TagMain>
-          <TagLight>{category}</TagLight>
+          <TagMain>{PROGRESSWAY_LIST[meeting.format]}</TagMain>
+          <TagLight>{CATEGORY_MAP_TO_KO[category]}</TagLight>
         </div>
-        <p className="mb-3 text-4 font-semibold tracking-[-0.32px] text-black loading line-clamp-2 ">{title}</p>
+        <p className="mb-3 text-4 font-semibold tracking-[-0.32px] text-black leading-normal line-clamp-1 ">{title}</p>
         <div className="flex items-center text-[12px] font-medium tracking-[-0.36px] text-gray-600">
           <Image className="mr-[2px]" src={date} alt="date icon" width={18} height={18} />
           <span>{`${formattedStartDate}-${formattedEndDate}`}</span>
