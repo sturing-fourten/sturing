@@ -1,20 +1,28 @@
 import { ICONS } from "@/constant/icons";
 import Image from "next/image";
-import { useRef } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 
 interface ImageUploadProps {
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   image: string | undefined;
   setImage: (image: string) => void;
+  setPreviewImage: Dispatch<SetStateAction<string>>;
+  previewImage: string;
 }
+
 export default function ImageUpload(props: ImageUploadProps) {
-  const { handleFileChange, image, setImage } = props;
+  const { handleFileChange, image, setImage, setPreviewImage, previewImage } = props;
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleUploadClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  };
+
+  const handleImageDelete = () => {
+    setImage("");
+    setPreviewImage("");
   };
 
   return (
@@ -34,18 +42,18 @@ export default function ImageUpload(props: ImageUploadProps) {
         />
         <img src={ICONS.camera.src} width={16} height={16} alt={ICONS.camera.alt} />
       </button>
-      {image ? (
-        <div className="relative ">
-          <div className="w-16 h-16 flex justify-center items-center rounded-md border border-neutral-200 ">
+      {previewImage ? (
+        <div className="relative">
+          <div className="w-16 h-16 flex justify-center items-center rounded-md border border-neutral-200">
             <Image
-              src={image}
+              src={previewImage}
               alt="업로드된 사진 미리보기"
               width={70}
               height={70}
               className="w-full h-full rounded-md object-cover"
             />
           </div>
-          <button className="absolute -top-1.5 -right-1.5" onClick={() => setImage("")}>
+          <button type="button" className="absolute -top-1.5 -right-1.5" onClick={handleImageDelete}>
             <img src={ICONS.imageCancel.src} alt={ICONS.imageCancel.alt} />
           </button>
         </div>

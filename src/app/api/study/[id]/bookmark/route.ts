@@ -75,6 +75,7 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request): Promise<NextResponse> {
   const { _id } = await req.json();
+
   try {
     await connectDB();
 

@@ -1,4 +1,5 @@
 import connectDB from "@/lib/database/db";
+import { getSession } from "@/lib/database/getSession";
 import { Application } from "@/schema/applicationSchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 

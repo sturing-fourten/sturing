@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useRecruitStore } from "@/store/recruitStore";
+import { useApplyStore } from "@/store/applyStore";
 
 export function useRecruitReset() {
   const setLecture = useRecruitStore((state) => state.setLecture);
@@ -59,4 +60,18 @@ export function useRecruitReset() {
   ]);
 
   return resetRecruitAll;
+}
+
+export function useApplyReset() {
+  const setTitle = useApplyStore((state) => state.setTitle);
+  const setResolution = useApplyStore((state) => state.setResolution);
+  const setRole = useApplyStore((state) => state.setRole);
+
+  const resetApplyAll = useCallback(() => {
+    setTitle("");
+    setResolution("");
+    setRole("");
+  }, [setTitle, setResolution, setRole]);
+
+  return resetApplyAll;
 }

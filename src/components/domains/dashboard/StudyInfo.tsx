@@ -4,27 +4,55 @@ import { downArrowGray } from "@/../public/icons/icons";
 import DetailInfo from "../detail/DetailInfo";
 import { STUDY_RECRUIT_INFO } from "@/constant/study";
 import LectureLinkBanner from "@/components/commons/LectureLinkBanner";
+import { getDateRangeWithWeeks } from "@/utils/getDateRangeWithWeeks";
+import { getDateRange } from "@/utils/getDateRange";
+import { CATEGORY } from "@/constant/category";
 
 const { meeting, task, location } = STUDY_RECRUIT_INFO;
 
-export default function StudyInfo() {
+const getStudyInfo = async (id: string) => {
+  try {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/study/${id}`);
+    const studyData = await response.json();
+    return studyData;
+  } catch (error) {
+    console.error("Error fetching study", error);
+    throw error;
+  }
+};
+
+export default async function StudyInfo({ params }: { params: string }) {
+  const study = await getStudyInfo(params);
+  const studyData = study.study;
+
+  const getStatus = () => {
+    switch (studyData.meeting.format) {
+      case "ONLINE":
+        return "온라인";
+      case "OFFLINE":
+        return "오프라인";
+      default:
+        return "온/오프라인";
+    }
+  };
+
   return (
     <div className="pt-[10px] pb-11 px-4">
       <div className="flex items-center gap-[10px] mb-[14px]">
         <div className="flex items-center gap-2">
-          <TagBase className="bg-main-100 text-gray-700 border-transparent">오프라인</TagBase>
-          <TagBase className="bg-main-100 text-gray-700 border-transparent">디자인</TagBase>
+          <TagBase className="bg-main-100 text-gray-700 border-transparent">{getStatus()}</TagBase>
+          <TagBase className="bg-main-100 text-gray-700 border-transparent">{CATEGORY(studyData.category)}</TagBase>
         </div>
         <div className="flex items-center text-gray-400 text-[12px] font-medium tracking-[-0.36px]">
-          {"온라인"}
+          {getDateRangeWithWeeks(studyData.startDate, studyData.endDate)}
           <span className="w-[1px] h-3 mx-2 bg-gray-400"></span>
-          {"06.01~08.01"}
+          {getDateRange(studyData.startDate, studyData.endDate)}
         </div>
       </div>
 
-      <div className="mb-5 text-white text-xl font-semibold leading-7">{"UXUI 디자이너 본질 강화 피그마 스터디"}</div>
+      <div className="mb-5 text-white text-xl font-semibold leading-7">{studyData.title}</div>
 
-      <LectureLinkBanner href="" title="UXUI 디자이너가 피그마를 활용해 포트폴리오를 쌓는 법 A to Z" />
+      <LectureLinkBanner href={study.lecture.link} title={study.lecture.title} />
 
       <details className="">
         <summary className="absolute bottom-0 flex items-center justify-center w-[calc(100%-32px)] h-11 text-center list-none cursor-pointer">
@@ -32,9 +60,14 @@ export default function StudyInfo() {
         </summary>
 
         <section className="flex flex-col gap-2 justify-start pt-4">
-          <DetailInfo icon={meeting.icon} title={meeting.title} content="토요일 오후 8:00 온라인 진행" isWhite={true} />
-          <DetailInfo icon={task.icon} title={task.title} content="스터디 게시판 사진 인증" isWhite={true} />
-          <DetailInfo icon={location.icon} title={location.title} content="서울특별시 중구" isWhite={true} />
+          <DetailInfo
+            icon={meeting.icon}
+            title={meeting.title}
+            content={`${studyData.meeting.schedule.day} ${studyData.meeting.schedule.time} ${getStatus()} 진행`}
+            isWhite={true}
+          />
+          <DetailInfo icon={task.icon} title={task.title} taskContent={studyData.task} isWhite={true} />
+          <DetailInfo icon={location.icon} title={location.title} content={studyData.meeting.location} isWhite={true} />
         </section>
       </details>
     </div>

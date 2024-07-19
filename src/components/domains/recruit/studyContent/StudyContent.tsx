@@ -15,6 +15,7 @@ interface StudyContentProps {
 
 export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   const [fileToRead, setFileToRead] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string>("");
 
   const image = useRecruitStore((state) => state.image);
   const setImage = useRecruitStore((state) => state.setImage);
@@ -55,17 +56,7 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
   };
 
   useEffect(() => {
-    const loadImageFromFile = async (file: File) => {
-      return new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const newImage = reader.result as string;
-          resolve(newImage);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    };
+    if (!fileToRead) return;
 
     const uploadImageToServer = async (file: File) => {
       try {
@@ -73,29 +64,23 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
           method: "POST",
           body: file,
         });
-
         const newBlob = (await response.json()) as PutBlobResult;
         const uploadImage = newBlob.url;
-        return uploadImage;
-      } catch (error) {
-        console.error(error);
+        setImage(uploadImage);
+      } catch (error: any) {
+        console.error("Error uploading Image:", error.message);
         throw error;
       }
     };
 
-    const processImageUpload = async () => {
-      if (fileToRead) {
-        try {
-          const [imageUrl] = await Promise.all([loadImageFromFile(fileToRead), uploadImageToServer(fileToRead)]);
-          setImage(imageUrl);
-          setFileToRead(null);
-        } catch (error) {
-          console.error("Error processing image upload:", error);
-        }
-      }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const newImage = reader.result as string;
+      setPreviewImage(newImage);
     };
+    reader.readAsDataURL(fileToRead);
 
-    processImageUpload();
+    uploadImageToServer(fileToRead).finally(() => setFileToRead(null));
   }, [fileToRead, setImage]);
 
   useEffect(() => {
@@ -107,7 +92,13 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
       <Title>스터디에 대해 소개해 주세요.</Title>
       <div className="flex-col justify-start items-start gap-3 inline-flex">
         <Subtitle>스터디 대표 사진</Subtitle>
-        <ImageUpload handleFileChange={handleFileChange} image={image} setImage={setImage} />
+        <ImageUpload
+          handleFileChange={handleFileChange}
+          image={previewImage || image} // 미리보기 이미지 또는 실제 업로드된 이미지를 표시
+          setImage={setImage}
+          setPreviewImage={setPreviewImage}
+          previewImage={previewImage}
+        />
       </div>
       <div className="flex-col gap-3 inline-flex">
         <Subtitle>스터디 제목</Subtitle>

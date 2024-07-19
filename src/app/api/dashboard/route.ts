@@ -24,7 +24,27 @@ export async function GET(request: Request) {
 
     if (!dashboard) throw new Error("대시보드 정보가 없습니다.");
 
-    return Response.json(dashboard);
+    const teamMembers = await TeamMembers.findOne({ studyId, "members.status": "ACCEPTED" });
+
+    let acceptedTeamMembers = [];
+
+    if (teamMembers) {
+      acceptedTeamMembers = await Promise.all(
+        teamMembers.members.map(async (member: any) => {
+          const user = await User.findById(member.userId);
+          return {
+            memberId: member.userId,
+            nickname: user.nickname,
+            profileImageUrl: user.profileImageUrl,
+            role: member.role,
+            isOwner: member.isOwner,
+            status: member.status,
+          };
+        }),
+      );
+    }
+
+    return Response.json({ dashboard, teamMemberList: acceptedTeamMembers });
   } catch (error: any) {
     throw new Error(error);
   }

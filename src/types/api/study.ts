@@ -1,5 +1,6 @@
 import { TRole } from "@/constant/teamMemberInfo";
 import { TLectureInfoData } from "./lecture";
+import mongoose from "mongoose";
 
 export type TCategory =
   | "DESIGN"
@@ -11,8 +12,8 @@ export type TCategory =
   | "LICENSE"
   | "SELF-DEVELOPMENT";
 
-type TTeamMember = {
-  memberId: string;
+export type TTeamMember = {
+  memberId: mongoose.Types.ObjectId;
   nickname: string;
   profileImageUrl: string;
   role: TRole;
@@ -38,6 +39,7 @@ type TStudyDetail = {
   };
   startDate: Date;
   endDate: Date;
+  status: string;
   moodKeywords: string[];
   task: string[];
   wantedMember: {
