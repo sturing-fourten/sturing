@@ -66,10 +66,18 @@ details[open] summary img {
 }
 
 /* Scroll Bar Custom _ Chrome, Edge, Safari */
-*::-webkit-scrollbar {
-  @apply w-2 h-2;
+/* body {
+  @apply [overflow:overlay];
 }
 
-*::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar {
+  @apply w-1.5 h-1.5;
+}
+
+body::-webkit-scrollbar-thumb {
   @apply rounded-lg bg-blue-500;
 }
+
+body::-webkit-scrollbar-track {
+  @apply bg-transparent;
+} */

@@ -1,3 +1,5 @@
+import { TMyStudy } from "./study";
+
 export type TRole =
   | "leader"
   | "viceLeader"
@@ -23,3 +25,7 @@ export type TApplication = {
 
 export type TApplicationSummary = Omit<TApplication, "resolution" | "role">;
 export type TApplicationList = TApplicationSummary[];
+export type TApplicationListResponse = {
+  study: TMyStudy;
+  applicationList: TApplicationSummary[];
+};

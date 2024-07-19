@@ -20,9 +20,14 @@ export async function GET(request: Request) {
 
     const studyIds = teamMembers.map((member) => member.studyId);
 
-    // 1) 내가 참여하고 있는 모든 스터디 목록 조회
-    const studyList = await Study.find({ _id: { $in: studyIds } }, { meeting: 1, startDate: 1, endDate: 1, title: 1 });
-
+    // 1) 내가 참여하고 있는 모든 스터디 중 PROGRESS 상태인 것만 조회
+    const studyList = await Study.find(
+      {
+        _id: { $in: studyIds },
+        status: "PROGRESS",
+      },
+      { meeting: 1, startDate: 1, endDate: 1, title: 1 },
+    );
     // 2) 모든 스터디의 7일 내 미팅으로 리스트 생성
     let upcomingMeetingList: TUpcomingMeetingList = [];
     studyList.forEach((study) => {

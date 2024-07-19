@@ -7,7 +7,7 @@ export type TTabMenuLinkUnderlinedItem = {
   count?: number;
 };
 
-export type THrefType = "/mystudy/recruitment" | "/mystudy/done" | "/mystudy/";
+export type THrefType = "/mystudy/waiting" | "/mystudy/done" | "/mystudy/progress";
 
 export type TMyStudyTabMenuLinkUnderlinedItem = {
   id: string;
@@ -51,7 +51,7 @@ export type UserFavoriteFieldType = {
   freewheeling: StudyCategory;
 };
 
-export type TStudy = {
+export type TMyStudy = {
   _id: mongoose.Types.ObjectId;
   category: "DESIGN" | "DEVELOP" | "BUSINESS" | "MARKETING" | "ECONOMY" | "LANGUAGE" | "LICENSE" | "SELF-DEVELOPMENT";
   ownerId: mongoose.Types.ObjectId;

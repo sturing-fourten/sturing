@@ -7,6 +7,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { TUpcomingMeetingList } from "@/utils/generateMeetingList";
+import NoList from "./NoList";
 
 interface IStudyUpcomingListProps {
   upComingMeetingList: TUpcomingMeetingList;
@@ -26,14 +27,17 @@ export default function StudyUpcomingList({ upComingMeetingList }: IStudyUpcomin
         navigation={false}
         pagination={true}
         modules={[Pagination]}>
-        {upComingMeetingList &&
-          upComingMeetingList?.map((meeting, index) => (
+        {upComingMeetingList && upComingMeetingList.length > 0 ? (
+          upComingMeetingList.map((meeting, index) => (
             <SwiperSlide key={index}>
               <div className="h-[184px]">
                 <StudyUpcomingCard className={"bg-white"} meeting={meeting} />
               </div>
             </SwiperSlide>
-          ))}
+          ))
+        ) : (
+          <NoList>2주 내에 예정된 미팅이 없어요.</NoList>
+        )}
       </Swiper>
     </>
   );

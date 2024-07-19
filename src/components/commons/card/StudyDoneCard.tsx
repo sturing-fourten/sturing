@@ -2,12 +2,12 @@ import Link from "next/link";
 import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 import StudyCardLink from "./element/StudyCardLink";
-import { TMember, TMemberUserIdAddedUser, TStudy, TTeamMembersIdAddedMember } from "@/types/study";
+import { TMember, TMemberUserIdAddedUser, TMyStudy, TTeamMembersIdAddedMember } from "@/types/study";
 import { getDateRange } from "@/utils/getDateRange";
 import { getSession } from "@/lib/database/getSession";
 
 interface IStudyDoneCardProps {
-  study: TStudy;
+  study: TMyStudy;
 }
 
 export default async function StudyDoneCard(props: IStudyDoneCardProps) {
@@ -34,7 +34,7 @@ export default async function StudyDoneCard(props: IStudyDoneCardProps) {
    * @todo teamMembersId 타입 수정
    */
   const teamMemberList = (teamMembersId as TTeamMembersIdAddedMember)?.members?.filter(
-    (member) => member.userId?._id.toString() !== myUserId,
+    (member) => member.userId._id.toString() !== myUserId,
   );
 
   const dateRange = getDateRange(startDate, endDate);
@@ -60,6 +60,7 @@ function TeamMemberReviewItem({ member }: { member: TMember }) {
   /**
    * @todo review 유무 연동
    */
+
   const review = false;
   const user = member.userId as TMemberUserIdAddedUser;
   return (

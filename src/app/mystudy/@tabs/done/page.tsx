@@ -1,15 +1,25 @@
-import StudyDoneCard from "@/components/commons/card/StudyDoneCard";
-import { fetchDoneStudyListAction } from "@/lib/database/action/myStudyList";
 import { useMyStudyListStore } from "@/store/myStudyListStore";
+import { TMyStudy } from "@/types/study";
+import { fetchDoneStudyListAction } from "@/lib/database/action/myStudyList";
+import NoList from "@/components/domains/mystudy/NoList";
+import StudyDoneCard from "@/components/commons/card/StudyDoneCard";
 
 export default async function DoneTabPage() {
-  const currentListType = useMyStudyListStore.getState().currentListType;
-  if (currentListType === "DONE") await fetchDoneStudyListAction();
-  const currentStudyList = useMyStudyListStore.getState().currentStudyList;
+  const myStudyListType = useMyStudyListStore.getState().myStudyListType;
+  let myStudyList: TMyStudy[] = [];
 
+  if (myStudyListType === "DONE") {
+    myStudyList = await fetchDoneStudyListAction();
+  }
   return (
-    <div className="flex flex-col gap-3 py-5 px-4">
-      {currentStudyList && currentStudyList.map((study) => <StudyDoneCard key={study._id.toString()} study={study} />)}
-    </div>
+    <>
+      {myStudyList &&
+        myStudyListType === "DONE" &&
+        (myStudyList.length === 0 ? (
+          <NoList>완료된 스터디가 없어요.</NoList>
+        ) : (
+          myStudyList.map((study) => <StudyDoneCard key={study._id.toString()} study={study} />)
+        ))}
+    </>
   );
 }
