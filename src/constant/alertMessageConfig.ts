@@ -32,4 +32,10 @@ export const ALERT_MESSAGE_CONFIG: AlertMessageConfig = {
     title: "서비스 준비 중입니다!",
     content: `보다 더 나은 서비스 제공을 위하여 페이지 준비 중입니다.\n빠른 시일 내에 준비하여 찾아뵙겠습니다.`,
   },
+  board: {
+    src: ICONS.success.src,
+    alt: ICONS.success.alt,
+    title: "글 작성을 완료했습니다!",
+    content: `해당 스터디 게시판 탭에서\n작성한 글을 확인할 수 있어요.`,
+  },
 };
