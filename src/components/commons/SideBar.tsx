@@ -3,7 +3,8 @@ import { EditProfileType } from "@/types/editProfile";
 import Avatar from "./Avatar";
 import Link from "next/link";
 import GitHubLoginButton from "./GitHubLoginButton";
-import { githubLogin } from "@/lib/database/action/login";
+import { githubLogin, kakaoLogin } from "@/lib/database/action/login";
+import KakaoLoginButton from "./KakaoLoginButton";
 
 interface SideBarProps {
   sideBar: boolean;
@@ -46,9 +47,14 @@ export default function SideBar({ sideBar, setSideBar, user }: SideBarProps) {
           <div className="flex flex-col items-center justify-center gap-[5px]">
             <img src={LOGO.logoText.src} alt={LOGO.logoText.alt} width={155} height={48} />
           </div>
-          <form action={githubLogin}>
-            <GitHubLoginButton />
-          </form>
+          <div className="flex flex-col gap-2">
+            <form action={githubLogin}>
+              <GitHubLoginButton />
+            </form>
+            <form action={kakaoLogin}>
+              <KakaoLoginButton />
+            </form>
+          </div>
         </div>
       )}
       <div className="flex flex-col gap-[24px] border-t border-gray-300 pt-[40px]">

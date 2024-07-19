@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
     ageIsVisible: { type: Boolean, default: false },
     gender: { type: String, default: "" },
     genderIsVisible: { type: Boolean, default: false },
-    authProvider: { type: String, enum: ["github"], default: "github" },
+    authProvider: { type: String, enum: ["github", "kakao"], default: "github" },
   },
   { timestamps: true },
 );

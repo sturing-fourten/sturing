@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import KakaoProvider from "next-auth/providers/kakao";
 import connectDB from "./lib/database/db";
 import generateRandomNickName from "random-korean-nickname-generator";
 import { User } from "./schema/userSchema";
@@ -9,6 +10,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     GitHub({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET,
     }),
   ],
   callbacks: {
@@ -27,6 +32,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             nickname: generateRandomNickName(),
             profileImageUrl: image,
             authProvider: "github",
+          }).save();
+          user.id = newUser._id;
+        } else {
+          user.id = existingUser._id;
+        }
+        return true;
+      } else if (account?.provider === "kakao") {
+        const { name, email, image } = user;
+        await connectDB();
+        const existingUser = await User.findOne({
+          email,
+          authProvider: "kakao",
+        });
+        if (!existingUser) {
+          const newUser = await new User({
+            name,
+            email,
+            nickname: generateRandomNickName(),
+            profileImageUrl: image,
+            authProvider: "kakao",
           }).save();
           user.id = newUser._id;
         } else {
