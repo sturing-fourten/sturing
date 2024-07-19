@@ -137,7 +137,7 @@ export default function Contents() {
             TopSectionStudyList.map((study) => (
               <StudyRecruitCard
                 key={study.id}
-                RecruitCardData={study}
+                recruitCardData={study}
                 onClick={() => {
                   router.push(`/study/${study.id}`);
                 }}
@@ -164,7 +164,7 @@ export default function Contents() {
             BottomSectionStudyList.map((study) => (
               <StudyRecruitCard
                 key={study.id}
-                RecruitCardData={study}
+                recruitCardData={study}
                 onClick={() => {
                   router.push(`/study/${study.id}`);
                 }}

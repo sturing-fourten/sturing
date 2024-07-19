@@ -13,11 +13,11 @@ import { CATEGORY_MAP_TO_KO } from "@/utils/categoryMap";
 interface IStudyRecruitCardProps {
   isMini?: boolean;
   isScraped?: boolean;
-  RecruitCardData: TStudyRecruitCardData;
+  recruitCardData: TStudyRecruitCardData;
   onClick?: () => void;
 }
 
-export function StudyRecruitCard({ isMini, isScraped, RecruitCardData, onClick }: IStudyRecruitCardProps) {
+export function StudyRecruitCard({ isMini, isScraped, recruitCardData, onClick }: IStudyRecruitCardProps) {
   const {
     category,
     title,
@@ -28,7 +28,7 @@ export function StudyRecruitCard({ isMini, isScraped, RecruitCardData, onClick }
     wantedMemberCount,
     acceptedTeamMemberCount,
     isBookmark,
-  } = RecruitCardData;
+  } = recruitCardData;
   const formattedStartDate = formatDate(startDate);
   const formattedEndDate = formatDate(endDate);
   const studySchedule =

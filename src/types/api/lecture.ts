@@ -1,4 +1,4 @@
-import { TCategory, TStudyDetailInfoData } from "./study";
+import { TCategory, TStudyDetailInfoData, TStudyRecruitCardData } from "./study";
 
 export type TLectureInfoData = {
   _id: string;
@@ -27,7 +27,7 @@ export type TRelatedStudy = TStudyDetailInfoData;
 
 export type TLectureDetailData = {
   lecture: TLectureInfoData;
-  relatedStudyList: TRelatedStudy[];
+  relatedStudyList: TStudyRecruitCardData[];
 };
 
 export type TLectureListCardData = {
