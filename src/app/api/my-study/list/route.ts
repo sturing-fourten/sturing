@@ -76,14 +76,14 @@ export async function GET(request: Request) {
           },
         });
         const studyIdList = teamMembers.map((member) => member.studyId);
-
-        return Response.json({
+        const result = {
           recruitStartOwnerStudyList: studyList,
           recruitStartMemberStudyListCount: await Study.countDocuments({
             _id: { $in: studyIdList },
             status: "RECRUIT_START",
           }),
-        });
+        };
+        return Response.json(result);
       }
 
       case "RECRUIT_START_MEMBER": {

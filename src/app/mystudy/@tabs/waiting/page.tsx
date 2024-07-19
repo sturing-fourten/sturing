@@ -30,6 +30,7 @@ export default async function WaitingTabPage() {
   if (myStudyListType === "RECRUIT_START_MEMBER") {
     myStudyList = await fetchRecruitStartMemberStudyListAction();
   }
+
   return (
     <>
       <nav className="flex gap-3 pt-5 px-4">
