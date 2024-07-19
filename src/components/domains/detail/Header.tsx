@@ -7,6 +7,7 @@ import { IMAGES_DEFAUlT } from "@/constant/images";
 import { CATEGORY } from "@/constant/category";
 import { TLectureInfoData } from "@/types/api/lecture";
 import { TStudyDetailInfoData } from "@/types/api/study";
+import { getDateRangeWithWeeks } from "@/utils/getDateRangeWithWeeks";
 
 interface BannerProps {
   page: "study" | "lecture";
@@ -19,7 +20,7 @@ const { study, lecture } = IMAGES_DEFAUlT;
 export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
   const { online: lectureOnline, platform, category: lectureCategory, rating, title: lectureTitle, link } = lectureInfo;
   const studyOnline = studyInfo?.meeting?.format || "ONLINE";
-  const { category: studyCategory = "", title: studyTitle, startDate } = studyInfo || {};
+  const { category: studyCategory = "", title: studyTitle, startDate, endDate } = studyInfo || {};
   const studyImageUrl = studyInfo?.imageUrl;
   const isStudy = page === "study";
   const defaultImageUrl = isStudy ? study.src : lecture.src;
@@ -78,7 +79,7 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
         </h1>
         {isStudy && (
           <div className="mt-6 w-[149px] h-[18px] flex justify-start items-center gap-2.5 leading-[150%] tracking-[-0.36px] text-gray-300 text-[12px] font-medium text-nowrap ">
-            <p>몇주 진행</p>
+            <p>{getDateRangeWithWeeks(startDate || "", endDate || "")}</p>
             <div className="w-[1px] h-[12px] bg-gray-400" />
             <p>{`${studyStartDate} 부터 시작`}</p>
           </div>

@@ -38,6 +38,7 @@ type TStudyDetail = {
   };
   startDate: Date;
   endDate: Date;
+  status: string;
   moodKeywords: string[];
   task: string[];
   wantedMember: {

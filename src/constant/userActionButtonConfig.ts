@@ -12,6 +12,7 @@ type TUserActionButtonConfig = {
     APPLIED: ButtonMapped;
     APPLIED_VIEW: ButtonMapped;
     ACCEPTED: ButtonMapped;
+    RECRUIT_END: ButtonMapped;
   };
 };
 
@@ -41,7 +42,10 @@ const userActionButtonConfig: TUserActionButtonConfig = {
       text: "스터디 탈퇴하기",
       disabled: false,
     },
-    //모집마감 추가
+    RECRUIT_END: {
+      text: "모집 마감",
+      disabled: true,
+    },
   },
 };
 
