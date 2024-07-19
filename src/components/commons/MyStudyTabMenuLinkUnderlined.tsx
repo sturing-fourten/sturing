@@ -19,7 +19,7 @@ export function MyStudyTabMenuLinkUnderlined(props: TMyStudyTabMenuLinkUnderline
       <input type="hidden" name="href" value={href} />
       <button className="w-full flex justify-center items-center gap-1 ">
         <span>{title}</span>
-        <span>{count}</span>
+        {count && count > 0 && <span>{count}</span>}
       </button>
     </form>
   );

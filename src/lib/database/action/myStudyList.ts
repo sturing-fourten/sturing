@@ -20,7 +20,6 @@ export const fetchProgressStudyListAction: TMyStudyListAction = async () => {
     if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
     const { progressStudyList, recruitEndStudyListCount } = await response.json();
-    if (!progressStudyList || !recruitEndStudyListCount) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
     useMyStudyListStore.getState().setProgressStudyListCount(progressStudyList.length);
     useMyStudyListStore.getState().setRecruitEndStudyListCount(recruitEndStudyListCount);
@@ -41,7 +40,6 @@ export const fetchRecruitEndStudyListAction: TMyStudyListAction = async () => {
     if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
     const { recruitEndStudyList, progressStudyListCount } = await response.json();
-    if (!recruitEndStudyList || !progressStudyListCount) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
     useMyStudyListStore.getState().setRecruitEndStudyListCount(recruitEndStudyList.length);
     useMyStudyListStore.getState().setProgressStudyListCount(progressStudyListCount);
@@ -61,9 +59,8 @@ export const fetchRecruitStartOwnerStudyListAction: TMyStudyListAction = async (
     const response = await fetch(url);
     if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
 
-    const { recruitStartOwnerStudyList, recruitStartMemberStudyListCount } = await response.json();
-    if (!recruitStartOwnerStudyList || !recruitStartMemberStudyListCount)
-      throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+    const result = await response.json();
+    const { recruitStartOwnerStudyList, recruitStartMemberStudyListCount } = result;
 
     useMyStudyListStore.getState().setRecruitStartOwnerStudyListCount(recruitStartOwnerStudyList.length);
     useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyListCount);
@@ -82,16 +79,16 @@ export const fetchRecruitStartMemberStudyListAction: TMyStudyListAction = async 
     const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${userId}&listType=RECRUIT_START_MEMBER`;
     const response = await fetch(url);
     if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
-
-    const { recruitStartMemberStudyList, recruitStartOwnerStudyListCount } = await response.json();
-    if (!recruitStartMemberStudyList || !recruitStartOwnerStudyListCount)
-      throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+    const result = await response.json();
+    const { recruitStartMemberStudyList, recruitStartOwnerStudyListCount } = result;
 
     useMyStudyListStore.getState().setRecruitStartMemberStudyListCount(recruitStartMemberStudyList.length);
     useMyStudyListStore.getState().setRecruitStartOwnerStudyListCount(recruitStartOwnerStudyListCount);
     revalidatePath("/mystudy/waiting");
     return recruitStartMemberStudyList;
-  } catch (error) {}
+  } catch (error) {
+    console.log("error", error);
+  }
 };
 
 export const fetchDoneStudyListAction: TMyStudyListAction = async () => {

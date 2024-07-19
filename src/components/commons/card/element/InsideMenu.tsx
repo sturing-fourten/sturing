@@ -39,7 +39,9 @@ export function InsideMenu(props: any) {
     ${isCurrent ? "bg-main-100 border-main-300" : "bg-white border-main-200"}
     `}>
         <span className="text-gray-900 text-sm font-medium leading-tight">{title}</span>
-        <span className="text-gray-900 text-sm font-medium leading-tight">{listTypeCount}</span>
+        {!!listTypeCount && listTypeCount > 0 && (
+          <span className="text-gray-900 text-sm font-medium leading-tight">{listTypeCount}</span>
+        )}
       </button>
     </form>
   );

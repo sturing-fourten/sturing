@@ -1,5 +1,6 @@
 import connectDB from "@/lib/database/db";
 import { Application } from "@/schema/applicationSchema";
+import { Matching } from "@/schema/matchingSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 import { User } from "@/schema/userSchema";
@@ -23,7 +24,8 @@ export async function GET(request: Request) {
           { studyId, "members.userId": application.userId },
           { "members.$": 1, _id: 0 },
         );
-        const [user, teamMember] = await Promise.all([userPromise, teamMemberPromise]);
+        const levelsPromise = Matching.findOne({ userId: application.userId }).select("levels");
+        const [user, teamMember, levels] = await Promise.all([userPromise, teamMemberPromise, levelsPromise]);
         const { members } = teamMember;
         return {
           _id: application._id,
@@ -35,6 +37,7 @@ export async function GET(request: Request) {
           nickname: user.nickname,
           profileImageUrl: user.profileImageUrl,
           status: members[0].status,
+          levels,
         };
       }),
     );
