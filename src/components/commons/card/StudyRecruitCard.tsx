@@ -37,7 +37,9 @@ export function StudyRecruitCard({ isMini, isScraped, recruitCardData, onClick }
       : `매주 ${meeting.schedule.day.slice(0, 1)} ${meeting.schedule.time}`;
 
   return (
-    <article onClick={onClick} className={`flex flex-col gap-3 shrink-0 ${isMini ? "w-full" : "w-[185px]"}`}>
+    <article
+      onClick={onClick}
+      className={`flex flex-col gap-3 shrink-0 cursor-pointer ${isMini ? "w-full" : "w-[185px]"}`}>
       <section
         className={`relative rounded-lg bg-cover bg-center bg-no-repeat overflow-hidden border border-gray-300  ${
           isMini ? "h-[92px] sm:h-[150px]" : "h-[100px]"
