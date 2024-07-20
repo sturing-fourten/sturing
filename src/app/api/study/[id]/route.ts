@@ -29,23 +29,24 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     const { _id, category, online, platform, rating, title, instructor, link } = lectureData;
     const lectureResult = { id: _id, category, online, platform, rating, title, instructor, link };
 
-    const teamMembers = await TeamMembers.findOne({ studyId, "members.status": "ACCEPTED" });
-
+    const teamMembers = await TeamMembers.findOne({ studyId });
     let acceptedTeamMembers = [];
 
     if (teamMembers) {
       acceptedTeamMembers = await Promise.all(
-        teamMembers.members.map(async (member: any) => {
-          const user = await User.findById(member.userId);
-          return {
-            memberId: member.userId,
-            nickname: user.nickname,
-            profileImageUrl: user.profileImageUrl,
-            role: member.role,
-            isOwner: member.isOwner,
-            status: member.status,
-          };
-        }),
+        teamMembers.members
+          // .filter((member: any) => member.status === "ACCEPTED")   //유저 정보 받은 후 처리\
+          .map(async (member: any) => {
+            const user = await User.findById(member.userId);
+            return {
+              memberId: member.userId,
+              nickname: user.nickname,
+              profileImageUrl: user.profileImageUrl,
+              role: member.role,
+              isOwner: member.isOwner,
+              status: member.status,
+            };
+          }),
       );
     }
 

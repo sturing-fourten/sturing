@@ -74,38 +74,36 @@ export default function Content() {
             )}
             <div className="flex flex-col gap-5 items-end">
               {menu === "study" && <SortFilterButton />}
-              <CardList>
-                {studyList.length !== 0 ? (
-                  menu === "total" ? (
-                    studyList.slice(0, 4).map((study: TStudyRecruitCardData) => (
-                      <div key={study.id} className="w-full">
+              {studyList.length !== 0 ? (
+                <CardList>
+                  {menu === "total"
+                    ? studyList.slice(0, 4).map((study: TStudyRecruitCardData) => (
+                        <div key={study.id} className="w-full">
+                          <StudyRecruitCard
+                            recruitCardData={study}
+                            onClick={() => {
+                              router.push(`/study/${study.id}`);
+                            }}
+                            isMini
+                            isScraped
+                          />
+                        </div>
+                      ))
+                    : studyList.map((study: TStudyRecruitCardData) => (
                         <StudyRecruitCard
                           recruitCardData={study}
                           onClick={() => {
                             router.push(`/study/${study.id}`);
                           }}
+                          key={study.id}
                           isMini
                           isScraped
                         />
-                      </div>
-                    ))
-                  ) : (
-                    studyList.map((study: TStudyRecruitCardData) => (
-                      <StudyRecruitCard
-                        recruitCardData={study}
-                        onClick={() => {
-                          router.push(`/study/${study.id}`);
-                        }}
-                        key={study.id}
-                        isMini
-                        isScraped
-                      />
-                    ))
-                  )
-                ) : (
-                  <NoResultText>검색 결과가 없습니다.</NoResultText>
-                )}
-              </CardList>
+                      ))}
+                </CardList>
+              ) : (
+                <NoResultText>검색 결과가 없습니다.</NoResultText>
+              )}
             </div>
             {studyList.length !== 0 && menu === "total" && (
               <Button

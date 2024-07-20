@@ -158,8 +158,10 @@ export async function GET(request: Request) {
       studyList = await Promise.all(
         studyListData.map(async (study) => {
           const { _id, ownerId, category, title, imageUrl, startDate, endDate, meeting, wantedMember } = study;
-          const acceptedTeamMembers = await TeamMembers.findOne({ studyId: _id, "members.status": "ACCEPTED" });
-          const acceptedCount = acceptedTeamMembers ? acceptedTeamMembers.members.length : 0;
+          const teamMembers = await TeamMembers.findOne({ studyId: _id });
+          const acceptedTeamMembers = teamMembers.members.filter((member: any) => member.status === "ACCEPTED");
+
+          const acceptedCount = acceptedTeamMembers ? acceptedTeamMembers.length : 0;
           const wantedMemberCount = wantedMember?.count || "제한없음";
           return {
             id: _id.toString(),

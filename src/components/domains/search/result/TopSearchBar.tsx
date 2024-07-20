@@ -4,17 +4,14 @@ import GoBackButton from "@/components/commons/GoBackButton";
 import { ICONS } from "@/constant/icons";
 import { useFilterStore } from "@/store/FilterStore";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 export default function TopSearchBar() {
   const params = useSearchParams();
   const search = params.get("search");
-  const { setSearchQuery, resetFilters, memberCount } = useFilterStore();
-  const [inputValue, setValue] = useState(search);
+  const { setSearchQuery, resetFilters } = useFilterStore();
+  const [inputValue, setValue] = useState("");
   const router = useRouter();
-  // if (search) {
-  //   setSearchQuery(search);
-  // }
 
   const handleInputSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -25,6 +22,13 @@ export default function TopSearchBar() {
       router.push(`/search/result?search=${inputValue}`);
     }
   };
+
+  useEffect(() => {
+    if (search) {
+      setValue(search);
+      setSearchQuery(search);
+    }
+  }, [search]);
 
   return (
     <>

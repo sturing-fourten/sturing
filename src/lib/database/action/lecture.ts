@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 
 export const getLectureListAction = async (query: TLectureListQuery, page: number) => {
   const { categories, search } = query;
+
   const categoryQuery = categories.length > 0 ? categories.join() : "";
   const searchQuery = search && search.trim();
 
