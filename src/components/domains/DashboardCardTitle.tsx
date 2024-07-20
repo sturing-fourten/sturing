@@ -11,7 +11,7 @@ export default function DashboardCardTitle(props: IDashboardCardTitleProps) {
   return (
     <>
       <div className="flex items-center gap-2">
-        <span className="text-black text-base font-semibold leading-normal">{title}</span>
+        <span className="h-[25px] text-black text-base font-semibold leading-normal">{title}</span>
         {children}
         {isEditing && (
           <button className="ml-auto">

@@ -4,6 +4,7 @@ import { TChecklistItem } from "@/types/dashboard";
 import { TStudyDetailInfoData } from "@/types/api/study";
 import { MemberItem } from "./MemberItem";
 import { TodoItem } from "./TodoItem";
+import { useDashboardStore } from "@/store/dashboardStore";
 
 // 체크리스트를 직접 데이터베이스에 접근하게 되면 버그 발생, 추후 개발 필요.
 export default function StudyMemberChecklistCard({
@@ -15,7 +16,7 @@ export default function StudyMemberChecklistCard({
   teamMember: TStudyDetailInfoData["teamMemberList"];
   userId: string;
 }) {
-  const isEditing = true;
+  const isEditing = useDashboardStore.getState().isEditing;
 
   return (
     <DashboardCardLayout>
@@ -25,7 +26,7 @@ export default function StudyMemberChecklistCard({
 
       <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide my-4">
         {list.map((item) => {
-          const member = teamMember.find((member) => member.memberId === item.userId);
+          const member = teamMember.find((member) => member.memberId === item.userId.toString());
           return (
             <MemberItem
               key={item.teamMemberId.toString()}

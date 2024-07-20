@@ -5,6 +5,7 @@ import { TAttendanceItem } from "@/types/dashboard";
 import { TStudyDetailInfoData } from "@/types/api/study";
 import { getSession } from "@/lib/database/getSession";
 import { format } from "date-fns";
+import { useDashboardStore } from "@/store/dashboardStore";
 
 export default function StudyMemberAttendanceCard({
   list,
@@ -13,7 +14,7 @@ export default function StudyMemberAttendanceCard({
   list: TAttendanceItem[];
   teamMember: TStudyDetailInfoData["teamMemberList"];
 }) {
-  const isEditing = true;
+  const isEditing = useDashboardStore.getState().isEditing;
 
   return (
     <DashboardCardLayout>
@@ -22,7 +23,7 @@ export default function StudyMemberAttendanceCard({
       </DashboardCardTitle>
       <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide mt-4">
         {list.map((item) => {
-          const member = teamMember.find((member) => member.memberId === item.userId);
+          const member = teamMember.find((member) => member.memberId === item.userId.toString());
           return <MemberItem key={item.teamMemberId.toString()} nickname={member?.nickname || ""} item={item} />;
         })}
       </ul>

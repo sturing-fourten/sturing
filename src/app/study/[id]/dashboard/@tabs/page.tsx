@@ -6,7 +6,8 @@ import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMembe
 import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardConnector";
 import { getSession } from "@/lib/database/getSession";
-import { activateFunctionAction } from "@/lib/database/action/dashboard";
+import { activateFunctionAction, setIsEditingAction } from "@/lib/database/action/dashboard";
+import { useDashboardStore } from "@/store/dashboardStore";
 
 interface ITeamTabProps {
   params: {
@@ -34,8 +35,6 @@ export default async function TeamTab(props: ITeamTabProps) {
   if (!dashboard) return;
   const { progressGauge, attendance, checkList } = dashboard;
 
-  console.log(dashboard);
-
   const isProgressGaugeExist = progressGauge.isActive;
   const isAttendanceExist = attendance.isActive;
   const isCheckListExist = checkList.isActive;
@@ -54,7 +53,12 @@ export default async function TeamTab(props: ITeamTabProps) {
 
   return (
     <section className="flex flex-col py-7 px-4 relative z-[1]">
-      {isAnyFeatureExist && <StudyFunctionEditButton />}
+      {isAnyFeatureExist && (
+        <form className="self-end" action={setIsEditingAction}>
+          <input type="hidden" name="studyId" value={studyId} />
+          <StudyFunctionEditButton />
+        </form>
+      )}
 
       <div className="flex flex-col gap-4">
         {isProgressGaugeExist && (

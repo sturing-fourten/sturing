@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getSession } from "../getSession";
+import { useDashboardStore } from "@/store/dashboardStore";
 
 export const activateFunctionAction = async (formData: FormData) => {
   const session = await getSession();
@@ -24,9 +25,16 @@ export const activateFunctionAction = async (formData: FormData) => {
     }
 
     const path = `/study/${studyId}/dashboard`;
-    console.log(path);
     revalidatePath(path);
   } catch (error) {
     console.log("error", error);
   }
+};
+
+export const setIsEditingAction = (formData: FormData) => {
+  const studyId = formData.get("studyId");
+  useDashboardStore.getState().setIsEditing();
+
+  const path = `/study/${studyId}/dashboard`;
+  revalidatePath(path, "layout");
 };
