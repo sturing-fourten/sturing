@@ -12,12 +12,11 @@ export async function GET(request: Request) {
   const role = searchParams.get("role")?.split(",").filter(Boolean);
   const age = searchParams.get("age")?.split(",").filter(Boolean);
   const level = searchParams.get("level")?.split(",").filter(Boolean);
-  const memberCountStr = searchParams.get("memberCount");
+  const memberCount = searchParams.get("memberCount");
   const location = searchParams.get("location")?.split(",").filter(Boolean);
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
   //헤더로 유저정보 받기 (북마크 여부 확인)
-  const memberCount = memberCountStr ? parseInt(memberCountStr, 10) : null;
 
   await connectDB();
 
@@ -48,7 +47,7 @@ export async function GET(request: Request) {
     query["wantedMember.career"] = { $in: level };
   }
 
-  if (memberCount !== null) {
+  if (memberCount && Number(memberCount) > 1) {
     query["wantedMember.count"] = memberCount;
   }
 
@@ -67,7 +66,7 @@ export async function GET(request: Request) {
   } else if (sortBy === "POPULAR") {
     sortOption = { popularScore: -1, createdAt: 1 };
   }
-
+  console.log("query", query);
   try {
     let studyListData;
 

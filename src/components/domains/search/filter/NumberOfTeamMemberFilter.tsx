@@ -8,6 +8,8 @@ export default function NumberOfTeamMemberFilter() {
   const handleMinusNumber = () => {
     if (memberCount > 1) {
       setMemberCountFilter(memberCount - 1);
+    } else if (memberCount === 1) {
+      setMemberCountFilter(1);
     }
   };
 
@@ -22,6 +24,7 @@ export default function NumberOfTeamMemberFilter() {
           {"함께하고 싶은 팀원 수 (본인 포함)"}
         </div>
         <NumberOfTeamMember
+          isFilter
           handleMinusNumber={handleMinusNumber}
           handlePlusNumber={handlePlusNumber}
           numberOfTeamMembers={memberCount}
