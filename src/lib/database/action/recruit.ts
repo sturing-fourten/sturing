@@ -20,7 +20,8 @@ export async function recruitAction(formData: FormData) {
   const taskData = formData.get("selectedAssignment");
   const moodKeywords = typeof moodData === "string" ? moodData.split(",") : [];
   const tasks = typeof taskData === "string" ? taskData.split(",") : [];
-  const career = formData.get("career");
+  const careerData = formData.get("career");
+  const career = typeof careerData === "string" ? careerData.split(",") : [];
   const count = formData.get("numberOfTeamMembers");
   const ageData = formData.get("ages");
   const roleData = formData.get("role");
