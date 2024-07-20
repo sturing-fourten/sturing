@@ -54,7 +54,7 @@ export default function Gnb() {
           <img src={LOGO.logoText.src} alt={LOGO.logoText.alt} width={78} height={24} />
         </Link>
       </div>
-      {sideBar && <SideBar sideBar={sideBar} setSideBar={setSideBar} user={user} />}
+      <SideBar sideBar={sideBar} setSideBar={setSideBar} user={user} />
       {user ? (
         <div className="flex justify-center items-center gap-3">
           <button>
