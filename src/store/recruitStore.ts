@@ -1,3 +1,4 @@
+import { TLectureInfoData } from "@/types/api/lecture";
 import { LocationsState } from "@/types/matching";
 import { RecruitState } from "@/types/recruit";
 import { create } from "zustand";
@@ -5,6 +6,12 @@ import { create } from "zustand";
 export const useRecruitStore = create<RecruitState>((set) => ({
   lecture: "",
   setLecture: (lecture) => set({ lecture: lecture }),
+  lectureList: [],
+  setLectureList: (lectureList) => set({ lectureList: lectureList }),
+  existingLectureId: "",
+  setExistingLectureId: (id: string) => set({ existingLectureId: id }),
+  existingLecture: null,
+  setExistingLecture: (lecture: TLectureInfoData) => set({ existingLecture: lecture }),
   category: "",
   setCategory: (category) => set({ category: category }),
   image: "",
@@ -48,4 +55,5 @@ export const useRecruitStore = create<RecruitState>((set) => ({
 export const useLocationsStore = create<LocationsState>((set) => ({
   locations: [],
   setLocations: (locations) => set({ locations: locations }),
+  reset: () => set({ locations: [] }),
 }));
