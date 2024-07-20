@@ -4,6 +4,7 @@ import { useApplyStore } from "@/store/applyStore";
 
 export function useRecruitReset() {
   const setLecture = useRecruitStore((state) => state.setLecture);
+  const setLectureList = useRecruitStore((state) => state.setLectureList);
   const setCategory = useRecruitStore((state) => state.setCategory);
   const setImage = useRecruitStore((state) => state.setImage);
   const setTitle = useRecruitStore((state) => state.setTitle);
@@ -23,6 +24,7 @@ export function useRecruitReset() {
 
   const resetRecruitAll = useCallback(() => {
     setLecture("");
+    setLectureList([]);
     setCategory("");
     setImage("");
     setTitle("");
@@ -41,6 +43,7 @@ export function useRecruitReset() {
     setRole([]);
   }, [
     setLecture,
+    setLectureList,
     setCategory,
     setImage,
     setTitle,
