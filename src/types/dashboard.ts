@@ -65,3 +65,5 @@ export type TDashboardResponse = {
   updatedAt: Date;
   __v: number;
 };
+
+export type TFunctionType = "progressGauge" | "attendance" | "checkList";
