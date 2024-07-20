@@ -12,6 +12,7 @@ interface TopBarProps {
   isWhite?: boolean;
   children?: React.ReactNode;
   showBookmark?: boolean;
+  isBackToHome?: boolean;
   onCancel?: () => void;
   onSave?: () => void;
 }
@@ -26,11 +27,12 @@ export default function TopBar({
   showBookmark,
   onCancel,
   onSave,
+  isBackToHome = false,
 }: TopBarProps) {
   return (
     <div className="w-full h-[54px] flex justify-between items-center px-4">
       {(variant === "share" || variant === "chat" || variant === "back" || variant === "edit") && (
-        <GoBackButton isWhite={isWhite} />
+        <GoBackButton isBackToHome={isBackToHome} isWhite={isWhite} />
       )}
       {variant === "share" && <ShareButton showMore={showMore} isWhite={isWhite} />}
       {variant === "chat" && (
