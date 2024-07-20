@@ -1,6 +1,5 @@
 import { TRole } from "@/constant/teamMemberInfo";
 import { TLectureInfoData } from "./lecture";
-import mongoose from "mongoose";
 
 export type TCategory =
   | "DESIGN"
@@ -32,6 +31,7 @@ type TStudyDetail = {
   meeting: {
     format: string;
     platform: string;
+    location: string;
     schedule: {
       day: string;
       time: string;

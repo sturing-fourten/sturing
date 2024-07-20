@@ -25,7 +25,7 @@ export default function RecruitInfo({ study, lecture }: IRecruitInfoProps) {
         <span
           key={item}
           className="inline-flex items-center h-[33px] px-3 text-center border border-main-500 rounded-[3px] text-[14px] font-medium text-main-500 tracking-[-0.42px]">
-          {typeof listItem === "string" ? listItem : listItem.name}
+          {typeof listItem === "string" ? listItem : listItem?.name}
         </span>
       );
     });
@@ -40,7 +40,11 @@ export default function RecruitInfo({ study, lecture }: IRecruitInfoProps) {
           content={`매주 ${study.meeting.schedule.day} ${study.meeting.schedule.time} 진행`}
         />
         <DetailInfo icon={task.icon} title={task.title} taskContent={study.task} />
-        <DetailInfo icon={location.icon} title={location.title} content={study.meeting.platform} />
+        <DetailInfo
+          icon={location.icon}
+          title={location.title}
+          content={study.meeting.platform || study.meeting.location}
+        />
       </section>
       <HorizontalDivider />
       <StudyDetailCardLayout addStyle="mt-5">
