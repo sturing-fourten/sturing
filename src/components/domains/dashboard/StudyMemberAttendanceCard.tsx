@@ -5,22 +5,24 @@ import { TAttendanceItem } from "@/types/dashboard";
 import { TStudyDetailInfoData } from "@/types/api/study";
 import { getSession } from "@/lib/database/getSession";
 import { format } from "date-fns";
-import { useDashboardStore } from "@/store/dashboardStore";
 
 export default function StudyMemberAttendanceCard({
   list,
   teamMember,
+  dashboardId,
+  studyId,
 }: {
   list: TAttendanceItem[];
   teamMember: TStudyDetailInfoData["teamMemberList"];
+  dashboardId: string;
+  studyId: string;
 }) {
-  const isEditing = useDashboardStore.getState().isEditing;
-
   return (
     <DashboardCardLayout>
-      <DashboardCardTitle isEditing={isEditing} title="출석체크">
+      <DashboardCardTitle type="attendance" dashboardId={dashboardId} studyId={studyId}>
         <span className="text-gray-600 text-sm font-medium leading-snug">{format(new Date(), "M월 d일")}</span>
       </DashboardCardTitle>
+
       <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide mt-4">
         {list.map((item) => {
           const member = teamMember.find((member) => member.memberId === item.userId.toString());

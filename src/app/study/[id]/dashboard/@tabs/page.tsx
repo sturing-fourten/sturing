@@ -6,8 +6,7 @@ import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMembe
 import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardConnector";
 import { getSession } from "@/lib/database/getSession";
-import { activateFunctionAction, setIsEditingAction } from "@/lib/database/action/dashboard";
-import { useDashboardStore } from "@/store/dashboardStore";
+import { toggleFunctionIsActive, setIsEditingAction } from "@/lib/database/action/dashboard";
 
 interface ITeamTabProps {
   params: {
@@ -31,9 +30,8 @@ export default async function TeamTab(props: ITeamTabProps) {
   const userId = session?.user?.id;
 
   const { dashboard, teamMemberList } = await getDashboardInfo(studyId);
-
   if (!dashboard) return;
-  const { progressGauge, attendance, checkList } = dashboard;
+  const { progressGauge, attendance, checkList, _id: dashboardId } = dashboard;
 
   const isProgressGaugeExist = progressGauge.isActive;
   const isAttendanceExist = attendance.isActive;
@@ -63,19 +61,35 @@ export default async function TeamTab(props: ITeamTabProps) {
       <div className="flex flex-col gap-4">
         {isProgressGaugeExist && (
           <div className="relative">
-            <StudyMemberProgressGaugeCard list={progressGauge.list} teamMember={teamMemberList} />
+            <StudyMemberProgressGaugeCard
+              list={progressGauge.list}
+              teamMember={teamMemberList}
+              dashboardId={dashboardId}
+              studyId={studyId}
+            />
             {progressGaugeHasNext && <FunctionCardConnector />}
           </div>
         )}
         {isAttendanceExist && (
           <div className="relative">
-            <StudyMemberAttendanceCard list={attendance.list} teamMember={teamMemberList} />
+            <StudyMemberAttendanceCard
+              list={attendance.list}
+              teamMember={teamMemberList}
+              dashboardId={dashboardId}
+              studyId={studyId}
+            />
             {attendanceHasNext && <FunctionCardConnector />}
           </div>
         )}
         {isCheckListExist && (
           <div className="relative">
-            <StudyMemberChecklistCard userId={userId || ""} list={checkList.list} teamMember={teamMemberList} />
+            <StudyMemberChecklistCard
+              userId={userId || ""}
+              list={checkList.list}
+              teamMember={teamMemberList}
+              dashboardId={dashboardId}
+              studyId={studyId}
+            />
             {checkListExist && <FunctionCardConnector />}
           </div>
         )}
@@ -85,26 +99,26 @@ export default async function TeamTab(props: ITeamTabProps) {
       {isAnyFeatureNotExist && (
         <div className="flex flex-col gap-4 mt-4">
           {!isProgressGaugeExist && (
-            <form action={activateFunctionAction}>
+            <form action={toggleFunctionIsActive}>
               <input type="hidden" name="functionType" value="progressGauge" />
-              <input type="hidden" name="dashboardId" value={dashboard._id} />
+              <input type="hidden" name="dashboardId" value={dashboardId} />
               <input type="hidden" name="studyId" value={studyId} />
               <StudyAddFunctionCard title="진척도" />
             </form>
           )}
           {!isAttendanceExist && (
-            <form action={activateFunctionAction}>
+            <form action={toggleFunctionIsActive}>
               <input type="hidden" name="functionType" value="attendance" />
-              <input type="hidden" name="dashboardId" value={dashboard._id} />
+              <input type="hidden" name="dashboardId" value={dashboardId} />
               <input type="hidden" name="studyId" value={studyId} />
               <StudyAddFunctionCard title="출석체크" />
             </form>
           )}
 
           {!isCheckListExist && (
-            <form action={activateFunctionAction}>
+            <form action={toggleFunctionIsActive}>
               <input type="hidden" name="functionType" value="checkList" />
-              <input type="hidden" name="dashboardId" value={dashboard._id} />
+              <input type="hidden" name="dashboardId" value={dashboardId} />
               <input type="hidden" name="studyId" value={studyId} />
               <StudyAddFunctionCard title="체크리스트" />
             </form>

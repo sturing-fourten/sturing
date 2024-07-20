@@ -4,23 +4,24 @@ import { TChecklistItem } from "@/types/dashboard";
 import { TStudyDetailInfoData } from "@/types/api/study";
 import { MemberItem } from "./MemberItem";
 import { TodoItem } from "./TodoItem";
-import { useDashboardStore } from "@/store/dashboardStore";
 
 // 체크리스트를 직접 데이터베이스에 접근하게 되면 버그 발생, 추후 개발 필요.
 export default function StudyMemberChecklistCard({
   list,
   teamMember,
+  dashboardId,
+  studyId,
   userId,
 }: {
   list: TChecklistItem[];
   teamMember: TStudyDetailInfoData["teamMemberList"];
+  dashboardId: string;
+  studyId: string;
   userId: string;
 }) {
-  const isEditing = useDashboardStore.getState().isEditing;
-
   return (
     <DashboardCardLayout>
-      <DashboardCardTitle isEditing={isEditing} title="체크리스트">
+      <DashboardCardTitle type="checkList" dashboardId={dashboardId} studyId={studyId}>
         <span className="text-main-500 text-sm font-semibold leading-snug">{``}</span>
       </DashboardCardTitle>
 

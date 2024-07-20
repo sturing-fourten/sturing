@@ -23,16 +23,16 @@ export async function PATCH(request: Request) {
     let updateQuery;
     switch (functionType) {
       case "progressGauge":
-        updateQuery = { "progressGauge.isActive": true };
+        updateQuery = { "progressGauge.isActive": !dashboard.progressGauge.isActive };
         break;
       case "attendance":
-        updateQuery = { "attendance.isActive": true };
+        updateQuery = { "attendance.isActive": !dashboard.attendance.isActive };
         break;
       case "checkList":
-        updateQuery = { "checkList.isActive": true };
+        updateQuery = { "checkList.isActive": !dashboard.checkList.isActive };
         break;
     }
-    const updatedDashboard = await Dashboard.findByIdAndUpdate(dashboardId, { $set: updateQuery }, { new: true });
+    await Dashboard.findByIdAndUpdate(dashboardId, { $set: updateQuery }, { new: true });
 
     return Response.json({ message: "스터디가 시작 되었습니다." }, { status: 200 });
   } catch (error: any) {

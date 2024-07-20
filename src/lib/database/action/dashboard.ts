@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { getSession } from "../getSession";
 import { useDashboardStore } from "@/store/dashboardStore";
 
-export const activateFunctionAction = async (formData: FormData) => {
+export const toggleFunctionIsActive = async (formData: FormData) => {
   const session = await getSession();
   const userId = session?.user?.id;
   const functionType = formData.get("functionType");
@@ -12,7 +12,7 @@ export const activateFunctionAction = async (formData: FormData) => {
   const studyId = formData.get("studyId");
 
   try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/activate-function`, {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/toggle-function-isactive`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

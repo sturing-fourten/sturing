@@ -3,20 +3,21 @@ import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 import { TProgressGaugeItem } from "@/types/dashboard";
 import { TStudyDetailInfoData } from "@/types/api/study";
-import { useDashboardStore } from "@/store/dashboardStore";
 
 export default function StudyMemberProgressGaugeCard({
   list,
   teamMember,
+  dashboardId,
+  studyId,
 }: {
   list: TProgressGaugeItem[];
   teamMember: TStudyDetailInfoData["teamMemberList"];
+  dashboardId: string;
+  studyId: string;
 }) {
-  const isEditing = useDashboardStore.getState().isEditing;
-
   return (
     <DashboardCardLayout>
-      <DashboardCardTitle isEditing={isEditing} title="진척도" />
+      <DashboardCardTitle type="progressGauge" dashboardId={dashboardId} studyId={studyId} />
       <ul className="flex flex-col gap-3 max-h-[196px] overflow-y-scroll scrollbar-hide">
         {list.map((item) => {
           const member = teamMember.find((member) => member.memberId === item.userId.toString());
