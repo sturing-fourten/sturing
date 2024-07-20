@@ -29,6 +29,8 @@ export const FooterLinks = ({ user }: { user: EditProfileType | null }) => {
   const handleLogout = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    await logout();
+
     useUserStore.getState().reset();
     useLevelsStore.getState().reset();
     useProgressWayStore.getState().reset();
@@ -36,7 +38,6 @@ export const FooterLinks = ({ user }: { user: EditProfileType | null }) => {
     useMoodsStore.getState().reset();
     useMatchingStore.getState().reset();
 
-    await logout();
     window.location.reload();
   };
 
