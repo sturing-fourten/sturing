@@ -35,7 +35,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     if (teamMembers) {
       acceptedTeamMembers = await Promise.all(
         teamMembers.members
-          // .filter((member: any) => member.status === "ACCEPTED")
+          // .filter((member: any) => member.status === "ACCEPTED")   //유저 정보 받은 후 처리\
           .map(async (member: any) => {
             const user = await User.findById(member.userId);
             return {
