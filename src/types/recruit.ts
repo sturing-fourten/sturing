@@ -36,7 +36,7 @@ export interface RecruitState {
   existingLectureId: string;
   setExistingLectureId: (id: string) => void;
   existingLecture: TLectureInfoData | null;
-  setExistingLecture: (lecture: TLectureInfoData) => void;
+  setExistingLecture: (lecture: TLectureInfoData | null) => void;
   category: string;
   setCategory: (category: string) => void;
   image: string;
