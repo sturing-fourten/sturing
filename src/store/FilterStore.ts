@@ -61,7 +61,7 @@ export const useFilterStore = create<Filter>((set) => ({
   setMemberCountFilter: (count) => set({ memberCount: count }),
   setDateFilter: (startDate, endDate) => set({ startDate, endDate }),
   setSearchQuery: (query) => {
-    query && set({ searchQuery: query });
+    set({ searchQuery: query });
   },
   resetFilters: () => set(initialState),
 }));

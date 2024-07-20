@@ -64,7 +64,7 @@ export default function FilterModal({ onClose, onClick, menu }: FilterModalProps
                 />
               ))}
             </nav>
-            <div className="pt-[30px] px-4 h-[453px] overflow-y-auto ">
+            <div className="pt-[30px] px-4 h-[460px] overflow-y-auto ">
               {menu === CATEGORY.id && <CategoryFilter />}
               {menu === LOCATION.id && <LocationFilter />}
               {menu === NUMBER_OF_TEAM.id && <NumberOfTeamMemberFilter />}
