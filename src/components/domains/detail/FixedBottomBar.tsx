@@ -5,7 +5,7 @@ import { TStudyDetailInfoData } from "@/types/api/study";
 interface FixedBottomBarProps {
   page: "lecture" | "study";
   id: string;
-  study: TStudyDetailInfoData;
+  study?: TStudyDetailInfoData;
 }
 
 export default async function FixedBottomBar({ page, id, study }: FixedBottomBarProps) {
