@@ -15,7 +15,7 @@ export default function RatingCards({ reviewData }: RatingCardsProps) {
   return (
     <>
       <ul className="flex flex-col gap-[14px] pb-12">
-        {reviewData.map(({ reviewer, rating, comment, _id }) => (
+        {reviewData.slice(0, 3).map(({ reviewer, rating, comment, _id }) => (
           <li
             key={_id}
             className="justify-start list-none border border-gray-300 rounded-[5px] w-full px-4 py-[13px] text-[14px] sm:text-base leading-[150%] tracking-[-0.28px]">
