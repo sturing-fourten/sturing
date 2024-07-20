@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getSession } from "../getSession";
-import { useDashboardStore } from "@/store/dashboardStore";
+import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 
 export const toggleFunctionIsActive = async (formData: FormData) => {
   const session = await getSession();
@@ -33,7 +33,7 @@ export const toggleFunctionIsActive = async (formData: FormData) => {
 
 export const setIsEditingAction = (formData: FormData) => {
   const studyId = formData.get("studyId");
-  useDashboardStore.getState().setIsEditing();
+  useDashboardTeamStore.getState().setIsEditing();
 
   const path = `/study/${studyId}/dashboard`;
   revalidatePath(path, "layout");

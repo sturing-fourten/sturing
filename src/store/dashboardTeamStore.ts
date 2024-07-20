@@ -4,7 +4,7 @@ interface IInitialState {
   isEditing: boolean;
 }
 
-interface IDashboardState extends IInitialState {
+interface IDashboardTeamState extends IInitialState {
   setIsEditing: () => void;
 }
 
@@ -12,7 +12,7 @@ const initialState: IInitialState = {
   isEditing: false,
 };
 
-export const useDashboardStore = create<IDashboardState>((set) => ({
+export const useDashboardTeamStore = create<IDashboardTeamState>((set) => ({
   ...initialState,
   setIsEditing: () => set((state) => ({ isEditing: !state.isEditing })),
 }));
