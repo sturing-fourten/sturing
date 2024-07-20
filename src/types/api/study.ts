@@ -44,7 +44,7 @@ type TStudyDetail = {
   task: string[];
   wantedMember: {
     career: string[];
-    count: number;
+    count: number | "제한없음";
     age: string[];
     role: TRole[];
   };

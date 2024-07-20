@@ -33,7 +33,11 @@ export default function RecruitInfo({ study, lecture }: IRecruitInfoProps) {
   return (
     <article id="recruit_Info">
       <section className="flex flex-col gap-3 justify-start py-5">
-        <DetailInfo icon={teamMember.icon} title={teamMember.title} content={`최대 ${study.wantedMember.count}명`} />
+        <DetailInfo
+          icon={teamMember.icon}
+          title={teamMember.title}
+          content={`최대 ${study.wantedMember.count}${study.wantedMember.count === "제한없음" ? "" : "명"}`}
+        />
         <DetailInfo
           icon={meeting.icon}
           title={meeting.title}
