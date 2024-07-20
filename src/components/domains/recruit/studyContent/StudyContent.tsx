@@ -94,7 +94,7 @@ export default function StudyContent({ onIntroduceChange }: StudyContentProps) {
         <Subtitle>스터디 대표 사진</Subtitle>
         <ImageUpload
           handleFileChange={handleFileChange}
-          image={previewImage || image} // 미리보기 이미지 또는 실제 업로드된 이미지를 표시
+          image={previewImage || image}
           setImage={setImage}
           setPreviewImage={setPreviewImage}
           previewImage={previewImage}

@@ -24,7 +24,16 @@ export default function Recruit() {
   const resetRecruitAll = useRecruitReset();
 
   // SelectLectureStore 상태와 업데이트 함수 사용
-  const { lecture, category, setLecture, setCategory } = useRecruitStore();
+  const {
+    lecture,
+    lectureList,
+    existingLecture,
+    category,
+    setLecture,
+    setLectureList,
+    setExistingLecture,
+    setCategory,
+  } = useRecruitStore();
 
   // StudyContentStore 상태와 업데이트 함수 사용
   const {
@@ -70,7 +79,11 @@ export default function Recruit() {
   };
 
   const handleLectureChange = (lecture: string, category: string) => {
-    setLecture(lecture);
+    if (existingLecture) {
+      setLecture(existingLecture._id);
+    } else {
+      setLecture(lecture);
+    }
     setCategory(category);
   };
 
@@ -111,7 +124,7 @@ export default function Recruit() {
     if (steps === 1) {
       return !lecture || !category;
     } else if (steps === 2) {
-      return !title || !introduction || !progressWay;
+      return !title || title.length < 14 || !introduction || !progressWay;
     } else if (steps === 3) {
       return !date || !day || !time;
     } else if (steps === 4) {
@@ -152,11 +165,24 @@ export default function Recruit() {
     }
   };
 
+  const handleCancle = () => {
+    resetRecruitAll();
+    clearDraft(STORAGE_KEY);
+  };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      handleCancle();
+    }
+  }, [isSubmitted]);
+
   useEffect(() => {
     const savedDraft = loadDraft(STORAGE_KEY);
     if (savedDraft) {
       const {
         lecture,
+        lectureList,
+        existingLecture,
         category,
         image,
         title,
@@ -176,6 +202,8 @@ export default function Recruit() {
       } = savedDraft;
 
       setLecture(lecture);
+      setLectureList(lectureList);
+      setExistingLecture(existingLecture);
       setCategory(category);
       setImage(image);
       setTitle(title);
@@ -192,14 +220,14 @@ export default function Recruit() {
       setNumberOfTeamMembers(numberOfTeamMembers);
       setAges(ages);
       setRole(role);
-
-      clearDraft(STORAGE_KEY);
     }
   }, []);
 
   const handleSave = () => {
     const draftData = {
       lecture,
+      lectureList,
+      existingLecture,
       category,
       image,
       title,
@@ -220,12 +248,6 @@ export default function Recruit() {
     saveDraft(draftData, STORAGE_KEY);
   };
 
-  useEffect(() => {
-    if (isSubmitted) {
-      resetRecruitAll();
-    }
-  }, [isSubmitted]);
-
   if (isSubmitted) {
     return <FindTeamMember studyId={studyId} />;
   }
@@ -233,7 +255,7 @@ export default function Recruit() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="w-full h-dvh flex-col inline-flex">
-        <TopBar variant="save" onCancel={resetRecruitAll} onSave={handleSave} />
+        <TopBar variant="save" onCancel={handleCancle} onSave={handleSave} />
         <ProgressBar maxSteps={4} steps={steps} />
         <div className="overflow-auto flex-1">
           {steps === 1 && <SelectLecture onLectureChange={handleLectureChange} />}
