@@ -60,7 +60,7 @@ import logoColor from "./logo-color.svg";
 import logoCreate from "./logo-create.svg";
 import logoText from "./textlogo.svg";
 import githubLogo from "./github-logo.svg";
-import kakaoLogo from "./kakao-logo.png";
+import kakaoLogo from "./kakao-logo.svg";
 
 // bookmark
 import bookmarkGrayOn from "./bookmark-gray-on.svg";
