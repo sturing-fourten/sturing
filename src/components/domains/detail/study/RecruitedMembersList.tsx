@@ -4,6 +4,7 @@ import StudyDetailCardLayout from "./elements/layouts/StudyDetailCardLayout";
 import Title from "../Title";
 import MemberProfile from "./elements/MemberProfile";
 import { TStudyDetailInfoData } from "@/types/api/study";
+import { ROLE_LIST, TRole } from "@/constant/teamMemberInfo";
 
 interface IRecruitedMembersListProps {
   study: TStudyDetailInfoData["study"];
@@ -27,7 +28,7 @@ export default function RecruitedMembersList({ study, memberList }: IRecruitedMe
               key={member.memberId.toString()}
               nickname={member.nickname}
               profileImageUrl={member.profileImageUrl}
-              role={member.role}
+              role={ROLE_LIST[member.role].name}
               isLeader={member.isOwner}
               status={member.status}
             />
