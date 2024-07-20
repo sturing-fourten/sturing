@@ -14,7 +14,8 @@ export default function SearchBar({ inputValue, onInputChange, onSearch }: Searc
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // 기본 동작을 방지
+      e.preventDefault();
+      e.stopPropagation();
       onSearch();
     }
   };

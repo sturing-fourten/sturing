@@ -5,7 +5,6 @@ import CategoryList from "./CategoryList";
 import FavoriteListButton from "./FavoriteListButton";
 import SearchBar from "./SearchBar";
 import { useRecruitStore } from "@/store/recruitStore";
-import { TLectureListCardData } from "@/types/api/lecture";
 import LectureCard from "./LectureCard";
 
 interface SelectLectureProps {
@@ -14,10 +13,18 @@ interface SelectLectureProps {
 
 export default function SelectLecture({ onLectureChange }: SelectLectureProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [hasNextPage, setHasNextPage] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [existingLectureId, setExistingLectureId] = useState<string>("");
 
-  const { lecture, setLecture, lectureList, setLectureList, category, setCategory } = useRecruitStore();
+  const {
+    lecture,
+    setLecture,
+    existingLecture,
+    setExistingLecture,
+    lectureList,
+    setLectureList,
+    category,
+    setCategory,
+  } = useRecruitStore();
 
   const fetchLectureList = async (searchQuery: string | null) => {
     try {
@@ -26,14 +33,20 @@ export default function SelectLecture({ onLectureChange }: SelectLectureProps) {
         throw new Error("Failed to fetch lecture list");
       }
       const data = await res.json();
-      const { lectureList, hasNextPage, currentPage } = data;
+      const { lectureList } = data;
       setLectureList(lectureList);
-      setHasNextPage(hasNextPage);
-      setCurrentPage(currentPage);
     } catch (error) {
       console.error("POST 요청 실패:", error);
     }
   };
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    const lectureId = query.get("lectureId");
+    if (lectureId) {
+      setExistingLectureId(lectureId);
+    }
+  }, []);
 
   const handleSearch = () => {
     fetchLectureList(searchQuery);
@@ -44,29 +57,62 @@ export default function SelectLecture({ onLectureChange }: SelectLectureProps) {
   };
 
   useEffect(() => {
+    if (existingLectureId) {
+      const fetchLectureDetails = async (lectureId: string) => {
+        try {
+          const res = await fetch(`/api/lecture/${lectureId}`);
+          if (!res.ok) {
+            throw new Error("Failed to fetch lecture details");
+          }
+          const selectedlecture = await res.json();
+
+          setExistingLecture(selectedlecture.lecture);
+          setCategory(selectedlecture.lecture.category);
+          setLecture(selectedlecture.lecture._id);
+        } catch (error) {
+          console.error("Failed to fetch lecture details:", error);
+        }
+      };
+
+      fetchLectureDetails(existingLectureId);
+    }
+  }, [existingLectureId]);
+
+  useEffect(() => {
     onLectureChange(lecture, category);
   }, [lecture, category]);
-
-  // console.log(lecture);
 
   return (
     <div className="w-full px-[22px] py-[16px] flex-col gap-5 inline-flex">
       <Title>함께 들을 강의를 선택해 볼까요?</Title>
-      <div className="flex-col gap-2 inline-flex">
-        <SearchBar inputValue={searchQuery} onInputChange={setSearchQuery} onSearch={handleSearch} />
-      </div>
-      <FavoriteListButton onClick={() => {}} />
+      {!existingLectureId && (
+        <>
+          <div className="flex-col gap-2 inline-flex">
+            <SearchBar inputValue={searchQuery} onInputChange={setSearchQuery} onSearch={handleSearch} />
+          </div>
+          <FavoriteListButton onClick={() => {}} />
+        </>
+      )}
       <div>
-        {lectureList.length > 0 && (
+        {(lectureList.length > 0 || existingLecture) && (
           <div className="w-full flex-col gap-5 inline-flex">
-            {lectureList.map((lectureItem) => (
+            {existingLecture ? (
               <LectureCard
-                key={lectureItem.id}
-                lecture={lectureItem}
-                isSelected={lecture === lectureItem.id}
+                key={existingLecture._id}
+                existingLecture={existingLecture}
+                isSelected={true}
                 setIsLecture={setLecture}
               />
-            ))}
+            ) : (
+              lectureList.map((lectureItem) => (
+                <LectureCard
+                  key={lectureItem.id}
+                  lecture={lectureItem}
+                  isSelected={lecture === lectureItem.id}
+                  setIsLecture={setLecture}
+                />
+              ))
+            )}
             <div className="flex-col gap-3 inline-flex">
               <Subtitle>카테고리</Subtitle>
               <CategoryList selectedCategory={category} handleCategoryToggle={handleCategoryToggle} />
