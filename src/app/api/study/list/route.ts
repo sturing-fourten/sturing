@@ -66,7 +66,7 @@ export async function GET(request: Request) {
   } else if (sortBy === "POPULAR") {
     sortOption = { popularScore: -1, createdAt: 1 };
   }
-  console.log("query", query);
+
   try {
     let studyListData;
 
