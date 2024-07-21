@@ -33,7 +33,7 @@ export default async function StudyApplyingCard(props: IStudyApplyingCardProps) 
   const dateRange = getDateRange(startDate, endDate);
   const where = (format === "ONLINE" ? platform : location) ?? "";
   const status = (teamMembersId as TTeamMembersIdAddedMember)?.members?.find(
-    (member) => member.userId?._id.toString() !== userId,
+    (member) => member.userId.toString() === userId,
   )?.status;
 
   return (
