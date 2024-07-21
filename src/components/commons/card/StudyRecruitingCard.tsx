@@ -35,17 +35,19 @@ export default function StudyRecruitingCard(props: IStudyRecruitingCardProps) {
     (member) => member.status === "ACCEPTED",
   )?.length;
   return (
-    <Link className="py-6 px-5 border border-gray-300 bg-white rounded-lg" href={`/study/${studyId}`}>
-      <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
-      <p className="mt-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
-      <hr className="my-4" />
-      <StudyDetailInfo
-        className="mb-4"
-        meetingDay={meetingDay}
-        task={getMeetingInfoTaskText(task)}
-        memberCount={memberCount}
-      />
+    <div className="py-6 px-5 border border-gray-300 bg-white rounded-lg">
+      <Link href={`/study/${studyId}`}>
+        <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
+        <p className="mt-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
+        <hr className="my-4" />
+        <StudyDetailInfo
+          className="mb-4"
+          meetingDay={meetingDay}
+          task={getMeetingInfoTaskText(task)}
+          memberCount={memberCount}
+        />
+      </Link>
       <StudyCardLink href={`/application-list/${studyId}`}>지원서 리스트 보기</StudyCardLink>
-    </Link>
+    </div>
   );
 }

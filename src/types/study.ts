@@ -115,6 +115,7 @@ export type TMemberUserIdAddedUser = {
 };
 
 export type TMember = {
+  _id: mongoose.Types.ObjectId;
   userId: mongoose.Types.ObjectId | TMemberUserIdAddedUser;
   role:
     | "leader"
