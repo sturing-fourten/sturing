@@ -32,7 +32,7 @@ export default function StudyRecruitingCard(props: IStudyRecruitingCardProps) {
   const memberCount = (teamMembersId as TTeamMembersIdAddedMember)?.members?.length;
 
   return (
-    <Link className="py-6 px-5 border border-gray-300 bg-white rounded-lg" href={`/study/${studyId}/dashboard`}>
+    <Link className="py-6 px-5 border border-gray-300 bg-white rounded-lg" href={`/study/${studyId}`}>
       <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
       <p className="mt-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
       <hr className="my-4" />

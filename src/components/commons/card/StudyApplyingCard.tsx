@@ -39,7 +39,7 @@ export default async function StudyApplyingCard(props: IStudyApplyingCardProps) 
   return (
     <Link
       className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg"
-      href={`/study/${studyId}/dashboard`}>
+      href={`/study/${studyId}`}>
       {status && <StudyApplyInfo status={status} />}
       <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
       <p className="text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
