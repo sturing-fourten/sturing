@@ -1,7 +1,6 @@
 import RecruitInfo from "./RecruitInfo";
 import RecruitedMembersList from "./RecruitedMembersList";
 import RecruitComments from "./RecruitComments";
-import { TLectureInfoData } from "@/types/api/lecture";
 import { TComment, TStudyDetailInfoData } from "@/types/api/study";
 import { getSession } from "@/lib/database/getSession";
 import DetailTabMenu from "@/components/commons/DetailTabMenu";

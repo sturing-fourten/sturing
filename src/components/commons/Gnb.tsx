@@ -47,19 +47,19 @@ export default function Gnb() {
   return (
     <div className="sticky top-0 bg-white w-full h-[54px] z-[1100] flex justify-between items-center px-4 border-b border-gray-300">
       <div className="flex justify-center items-center gap-2">
-        <button onClick={handleSideBar}>
+        <button type="button" onClick={handleSideBar}>
           <img src={ICONS.menu.src} alt={ICONS.menu.alt} width={24} height={24} />
         </button>
         <Link href="/">
           <img src={LOGO.logoText.src} alt={LOGO.logoText.alt} width={78} height={24} />
         </Link>
       </div>
-      {sideBar && <SideBar sideBar={sideBar} setSideBar={setSideBar} user={user} />}
+      <SideBar sideBar={sideBar} setSideBar={setSideBar} user={user} />
       {user ? (
         <div className="flex justify-center items-center gap-3">
-          <button>
+          <Link href="/preparing">
             <img src={ICONS.alarm.src} alt={ICONS.alarm.alt} width={24} height={24} />
-          </button>
+          </Link>
           <Link href="/mypage">
             <img src={ICONS.mypage.src} alt={ICONS.mypage.alt} width={24} height={24} />
           </Link>

@@ -8,7 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 interface UserActionButtonProps {
   page: "lecture" | "study";
   userId: string;
-  study: TStudyDetailInfoData;
+  study?: TStudyDetailInfoData;
 }
 
 export default function UserActionButton({ page, userId, study }: UserActionButtonProps) {

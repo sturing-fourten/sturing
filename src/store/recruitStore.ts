@@ -11,7 +11,7 @@ export const useRecruitStore = create<RecruitState>((set) => ({
   existingLectureId: "",
   setExistingLectureId: (id: string) => set({ existingLectureId: id }),
   existingLecture: null,
-  setExistingLecture: (lecture: TLectureInfoData) => set({ existingLecture: lecture }),
+  setExistingLecture: (lecture: TLectureInfoData | null) => set({ existingLecture: lecture }),
   category: "",
   setCategory: (category) => set({ category: category }),
   image: "",
