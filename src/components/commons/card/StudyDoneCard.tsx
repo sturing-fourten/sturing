@@ -32,7 +32,7 @@ export default async function StudyDoneCard(props: IStudyDoneCardProps) {
   const myUserId = session?.user?.id;
 
   const teamMemberList = (teamMembersId as TTeamMembersIdAddedMember)?.members?.filter(
-    (member) => member.userId._id.toString() !== myUserId,
+    (member) => member.userId._id.toString() !== myUserId && member.status === "ACCEPTED",
   );
 
   const dateRange = getDateRange(startDate, endDate);

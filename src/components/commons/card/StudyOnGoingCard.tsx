@@ -30,7 +30,9 @@ export default function StudyOnGoingCard(props: IStudyOnGoingCardProps) {
   const dateRange = getDateRange(startDate, endDate);
   const where = (format === "ONLINE" ? platform : location) ?? "";
   const meetingDay = `매주 ${day}`;
-  const memberCount = (teamMembersId as TTeamMembersIdAddedMember)?.members?.length;
+  const memberCount = (teamMembersId as TTeamMembersIdAddedMember)?.members?.filter(
+    (member) => member.status === "ACCEPTED",
+  )?.length;
 
   return (
     <Link
