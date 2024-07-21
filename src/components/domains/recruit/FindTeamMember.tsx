@@ -1,4 +1,5 @@
 import Button from "@/components/commons/Button";
+import { useUserStore } from "@/store/userStore";
 import Link from "next/link";
 
 interface FindTeamMemberProps {
@@ -6,6 +7,7 @@ interface FindTeamMemberProps {
 }
 
 export default function FindTeamMember({ studyId }: FindTeamMemberProps) {
+  const { user } = useUserStore();
   return (
     <div className="w-full h-dvh px-[22px] py-[16px] flex-col inline-flex">
       <div className="overflow-auto flex-1 mt-[55px]">
@@ -19,7 +21,9 @@ export default function FindTeamMember({ studyId }: FindTeamMemberProps) {
           </div>
           <div className="flex-col inline-flex gap-5">
             <div className="flex justify-between items-center">
-              <div className="text-zinc-800 text-base font-medium leading-normal">웅진님과 맞는 추천 팀원</div>
+              <div className="text-zinc-800 text-base font-medium leading-normal">
+                {user?.nickname || "회원"}님과 맞는 추천 팀원
+              </div>
               <div className="flex items-center text-right text-neutral-400 text-sm font-medium leading-tight">
                 전체보기 <img src="/icons/arrow-gray.svg" />
               </div>

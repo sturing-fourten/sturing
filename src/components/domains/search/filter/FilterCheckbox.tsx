@@ -3,7 +3,7 @@ import { ICONS } from "@/constant/icons";
 
 interface CheckboxProps {
   title: string;
-  count: string;
+  count: number;
   checked?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

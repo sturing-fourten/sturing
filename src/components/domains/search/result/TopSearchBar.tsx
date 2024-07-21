@@ -27,6 +27,9 @@ export default function TopSearchBar() {
     if (search) {
       setValue(search);
       setSearchQuery(search);
+    } else {
+      setValue("");
+      setSearchQuery("");
     }
   }, [search]);
 

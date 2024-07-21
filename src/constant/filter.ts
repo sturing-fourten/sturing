@@ -1,3 +1,4 @@
+import { TCategory } from "@/types/api/study";
 import { TFilterMenu, TFilterMenuList, TSortBy, TSortByMAPPING } from "@/types/filter";
 
 export const SORT_BY_FILTER: { option: TSortByMAPPING; value: TSortBy }[] = [
@@ -42,4 +43,15 @@ export const FILTER_MENU_LIST: TFilterMenuList[] = [
     id: ROLE.id,
     title: ROLE.title,
   },
+];
+
+export const CATEGORY_CHECKBOX: { id: TCategory; title: string }[] = [
+  { id: "DESIGN", title: "디자인" },
+  { id: "DEVELOP", title: "개발 · 테크" },
+  { id: "MARKETING", title: "기획 · 마케팅" },
+  { id: "BUSINESS", title: "비즈니스" },
+  { id: "ECONOMY", title: "경제" },
+  { id: "LANGUAGE", title: "외국어" },
+  { id: "LICENSE", title: "자격증" },
+  { id: "SELF-DEVELOPMENT", title: "자기계발" },
 ];

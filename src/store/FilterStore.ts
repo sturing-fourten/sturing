@@ -25,6 +25,7 @@ export interface Filter extends InitialState {
   setDateFilter: (startDate: Date, endDate: Date) => void;
   setSearchQuery: (query: string | null) => void;
   resetFilters: () => void;
+  resetCategoryFilter: () => void;
 }
 
 const initialState: InitialState = {
@@ -61,9 +62,10 @@ export const useFilterStore = create<Filter>((set) => ({
   setMemberCountFilter: (count) => set({ memberCount: count }),
   setDateFilter: (startDate, endDate) => set({ startDate, endDate }),
   setSearchQuery: (query) => {
-    query && set({ searchQuery: query });
+    set({ searchQuery: query });
   },
   resetFilters: () => set(initialState),
+  resetCategoryFilter: () => set({ categories: [] }),
 }));
 
 export const useSearchTabMenuStore = create<SearchTabMenu>((set) => ({
