@@ -7,6 +7,7 @@ import LectureLinkBanner from "@/components/commons/LectureLinkBanner";
 import { getDateRangeWithWeeks } from "@/utils/getDateRangeWithWeeks";
 import { getDateRange } from "@/utils/getDateRange";
 import { CATEGORY } from "@/constant/category";
+import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 
 const { meeting, task, location } = STUDY_RECRUIT_INFO;
 
@@ -21,26 +22,43 @@ const getStudyInfo = async (id: string) => {
   }
 };
 
+const getStatus = (format: any) => {
+  switch (format) {
+    case "ONLINE":
+      return "온라인";
+    case "OFFLINE":
+      return "오프라인";
+    default:
+      return "온/오프라인";
+  }
+};
+
+const getWhere = (meeting: any) => {
+  if (meeting.location !== "") {
+    return meeting.location;
+  } else if (meeting.platform !== "") {
+    return meeting.platform;
+  } else {
+    return "미정";
+  }
+};
+
 export default async function StudyInfo({ params }: { params: string }) {
   const study = await getStudyInfo(params);
   const studyData = study.study;
 
-  const getStatus = () => {
-    switch (studyData.meeting.format) {
-      case "ONLINE":
-        return "온라인";
-      case "OFFLINE":
-        return "오프라인";
-      default:
-        return "온/오프라인";
-    }
-  };
+  useDashboardTeamStore.getState().setStudyInfo({
+    startDate: studyData.startDate,
+    endDate: studyData.endDate,
+  });
 
   return (
     <div className="pt-[10px] pb-11 px-4">
       <div className="flex items-center gap-[10px] mb-[14px]">
         <div className="flex items-center gap-2">
-          <TagBase className="bg-main-100 text-gray-700 border-transparent">{getStatus()}</TagBase>
+          <TagBase className="bg-main-100 text-gray-700 border-transparent">
+            {getStatus(studyData.meeting.format)}
+          </TagBase>
           <TagBase className="bg-main-100 text-gray-700 border-transparent">{CATEGORY(studyData.category)}</TagBase>
         </div>
         <div className="flex items-center text-gray-400 text-[12px] font-medium tracking-[-0.36px]">
@@ -63,11 +81,18 @@ export default async function StudyInfo({ params }: { params: string }) {
           <DetailInfo
             icon={meeting.icon}
             title={meeting.title}
-            content={`${studyData.meeting.schedule.day} ${studyData.meeting.schedule.time} ${getStatus()} 진행`}
+            content={`${studyData.meeting.schedule.day} ${studyData.meeting.schedule.time} ${getStatus(
+              studyData.meeting.format,
+            )} 진행`}
             isWhite={true}
           />
           <DetailInfo icon={task.icon} title={task.title} taskContent={studyData.task} isWhite={true} />
-          <DetailInfo icon={location.icon} title={location.title} content={studyData.meeting.location} isWhite={true} />
+          <DetailInfo
+            icon={location.icon}
+            title={location.title}
+            content={getWhere(studyData.meeting)}
+            isWhite={true}
+          />
         </section>
       </details>
     </div>
