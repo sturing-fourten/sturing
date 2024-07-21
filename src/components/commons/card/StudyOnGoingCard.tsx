@@ -3,6 +3,7 @@ import { StudyDetailInfo } from "./element/StudyDetailInfo";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 import { getDateRange } from "@/utils/getDateRange";
 import Link from "next/link";
+import { getMeetingInfoTaskText } from "@/utils/getMeetingInfoTaskText";
 
 interface IStudyOnGoingCardProps {
   isStarted: boolean;
@@ -23,6 +24,7 @@ export default function StudyOnGoingCard(props: IStudyOnGoingCardProps) {
         platform,
         location,
       },
+      task,
       teamMembersId,
     },
   } = props;
@@ -30,8 +32,9 @@ export default function StudyOnGoingCard(props: IStudyOnGoingCardProps) {
   const dateRange = getDateRange(startDate, endDate);
   const where = (format === "ONLINE" ? platform : location) ?? "";
   const meetingDay = `매주 ${day}`;
-  const memberCount = (teamMembersId as TTeamMembersIdAddedMember)?.members?.length;
-
+  const memberCount = (teamMembersId as TTeamMembersIdAddedMember)?.members?.filter(
+    (member) => member.status === "ACCEPTED",
+  )?.length;
   return (
     <Link
       href={`/study/${studyId}/dashboard`}
@@ -41,7 +44,7 @@ export default function StudyOnGoingCard(props: IStudyOnGoingCardProps) {
       <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
       <p className="mt-2 text-gray-1000 text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
       <hr className="my-4" />
-      <StudyDetailInfo meetingDay={meetingDay} task={"과제 없음"} memberCount={memberCount} />
+      <StudyDetailInfo meetingDay={meetingDay} task={getMeetingInfoTaskText(task)} memberCount={memberCount} />
     </Link>
   );
 }

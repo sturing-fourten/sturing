@@ -100,6 +100,9 @@ export async function GET(request: Request) {
         const studyList = await Study.find({
           _id: { $in: studyIdList },
           status: "RECRUIT_START",
+        }).populate({
+          path: "teamMembersId",
+          select: "members",
         });
 
         return Response.json({
