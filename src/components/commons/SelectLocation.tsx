@@ -96,7 +96,7 @@ export default function SelectLocation({ setIsSelected }: StepsProps) {
           !
         </span>
         <span className="text-[13px] tracking-[-0.22px] leading-[16px] text-gray-900">
-          첫 번째로 선택한 장소가 대표 장소로 설정됩니다.
+          첫 번째로 표시된 장소를 기반으로 매칭 서비스가 제공됩니다.
         </span>
       </div>
       {selectedLocations.length > 0 && (

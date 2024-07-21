@@ -63,7 +63,7 @@ export default function MoodStep({ userNickname, setIsSelected }: StepsProps) {
           !
         </span>
         <span className="text-[13px] tracking-[-0.22px] leading-[16px] text-gray-900">
-          첫 번째로 선택한 분위기가 대표 분위기로 설정됩니다.
+          대표 아이콘이 표시된 항목을 기반으로 매칭 서비스가 제공됩니다.
         </span>
       </div>
     </div>
