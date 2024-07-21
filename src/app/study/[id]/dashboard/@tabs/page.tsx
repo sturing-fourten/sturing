@@ -78,7 +78,7 @@ export default async function TeamTab(props: ITeamTabProps) {
             {checkListExist && <FunctionCardConnector />}
           </div>
         )}
-        {isProofListExist && <StudyPhotoProof />}
+        {/* {isProofListExist && <StudyPhotoProof />} */}
       </div>
 
       {isAnyFeatureNotExist && (
@@ -107,7 +107,7 @@ export default async function TeamTab(props: ITeamTabProps) {
               <StudyAddFunctionCard title="체크리스트" />
             </form>
           )}
-          {!isProofListExist && <StudyAddFunctionCard title="사진 인증" />}
+          {/* {!isProofListExist && <StudyAddFunctionCard title="사진 인증" />} */}
         </div>
       )}
     </section>
