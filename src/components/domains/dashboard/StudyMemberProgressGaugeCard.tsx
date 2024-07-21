@@ -2,19 +2,10 @@ import ProgressItem from "./ProgressItem";
 import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 import { TProgressGaugeItem } from "@/types/dashboard";
-import { TStudyDetailInfoData } from "@/types/api/study";
+import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 
-export default function StudyMemberProgressGaugeCard({
-  list,
-  teamMember,
-  dashboardId,
-  studyId,
-}: {
-  list: TProgressGaugeItem[];
-  teamMember: TStudyDetailInfoData["teamMemberList"];
-  dashboardId: string;
-  studyId: string;
-}) {
+export default function StudyMemberProgressGaugeCard({ list }: { list: TProgressGaugeItem[] }) {
+  const { studyId, dashboardId, teamMember } = useDashboardTeamStore.getState().dashboardInfo;
   return (
     <DashboardCardLayout>
       <DashboardCardTitle type="progressGauge" dashboardId={dashboardId} studyId={studyId} />

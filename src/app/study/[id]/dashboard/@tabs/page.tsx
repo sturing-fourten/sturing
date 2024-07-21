@@ -5,8 +5,8 @@ import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMember
 import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMemberAttendanceCard";
 import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardConnector";
-import { getSession } from "@/lib/database/getSession";
 import { toggleFunctionIsActive, setIsEditingAction } from "@/lib/database/action/dashboard";
+import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 
 interface ITeamTabProps {
   params: {
@@ -26,12 +26,15 @@ const getDashboardInfo = async (id: string) => {
 
 export default async function TeamTab(props: ITeamTabProps) {
   const studyId = props.params.id;
-  const session = await getSession();
-  const userId = session?.user?.id;
 
   const { dashboard, teamMemberList } = await getDashboardInfo(studyId);
-  if (!dashboard) return;
+  if (!dashboard || !teamMemberList) return;
   const { progressGauge, attendance, checkList, _id: dashboardId } = dashboard;
+  useDashboardTeamStore.getState().setDashboardInfo({
+    studyId,
+    dashboardId,
+    teamMember: teamMemberList,
+  });
 
   const isProgressGaugeExist = progressGauge.isActive;
   const isAttendanceExist = attendance.isActive;
@@ -41,10 +44,8 @@ export default async function TeamTab(props: ITeamTabProps) {
    */
   // const isProofListExist = proofList.isActive;
   const isProofListExist = false;
-
   const isAnyFeatureExist = isProgressGaugeExist || isAttendanceExist || isCheckListExist || isProofListExist;
   const isAnyFeatureNotExist = !isProgressGaugeExist || !isAttendanceExist || !isCheckListExist || !isProofListExist;
-
   const progressGaugeHasNext = isAttendanceExist || isCheckListExist || isProofListExist;
   const attendanceHasNext = isCheckListExist || isProofListExist;
   const checkListExist = isProofListExist;
@@ -61,35 +62,19 @@ export default async function TeamTab(props: ITeamTabProps) {
       <div className="flex flex-col gap-4">
         {isProgressGaugeExist && (
           <div className="relative">
-            <StudyMemberProgressGaugeCard
-              list={progressGauge.list}
-              teamMember={teamMemberList}
-              dashboardId={dashboardId}
-              studyId={studyId}
-            />
+            <StudyMemberProgressGaugeCard list={progressGauge.list} />
             {progressGaugeHasNext && <FunctionCardConnector />}
           </div>
         )}
         {isAttendanceExist && (
           <div className="relative">
-            <StudyMemberAttendanceCard
-              list={attendance.list}
-              teamMember={teamMemberList}
-              dashboardId={dashboardId}
-              studyId={studyId}
-            />
+            <StudyMemberAttendanceCard list={attendance.list} />
             {attendanceHasNext && <FunctionCardConnector />}
           </div>
         )}
         {isCheckListExist && (
           <div className="relative">
-            <StudyMemberChecklistCard
-              userId={userId || ""}
-              list={checkList.list}
-              teamMember={teamMemberList}
-              dashboardId={dashboardId}
-              studyId={studyId}
-            />
+            <StudyMemberChecklistCard list={checkList.list} />
             {checkListExist && <FunctionCardConnector />}
           </div>
         )}
@@ -114,7 +99,6 @@ export default async function TeamTab(props: ITeamTabProps) {
               <StudyAddFunctionCard title="출석체크" />
             </form>
           )}
-
           {!isCheckListExist && (
             <form action={toggleFunctionIsActive}>
               <input type="hidden" name="functionType" value="checkList" />

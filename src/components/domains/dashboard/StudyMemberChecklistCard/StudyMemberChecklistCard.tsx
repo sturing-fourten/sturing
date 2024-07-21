@@ -1,24 +1,17 @@
 import DashboardCardLayout from "../DashboardCardLayout";
 import DashboardCardTitle from "../../DashboardCardTitle";
 import { TChecklistItem } from "@/types/dashboard";
-import { TStudyDetailInfoData } from "@/types/api/study";
 import { MemberItem } from "./MemberItem";
 import { TodoItem } from "./TodoItem";
+import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
+import { getSession } from "@/lib/database/getSession";
 
 // 체크리스트를 직접 데이터베이스에 접근하게 되면 버그 발생, 추후 개발 필요.
-export default function StudyMemberChecklistCard({
-  list,
-  teamMember,
-  dashboardId,
-  studyId,
-  userId,
-}: {
-  list: TChecklistItem[];
-  teamMember: TStudyDetailInfoData["teamMemberList"];
-  dashboardId: string;
-  studyId: string;
-  userId: string;
-}) {
+export default async function StudyMemberChecklistCard({ list }: { list: TChecklistItem[] }) {
+  const { studyId, dashboardId, teamMember } = useDashboardTeamStore.getState().dashboardInfo;
+  const session = await getSession();
+  const userId = session?.user?.id ?? "";
+
   return (
     <DashboardCardLayout>
       <DashboardCardTitle type="checkList" dashboardId={dashboardId} studyId={studyId}>
@@ -40,11 +33,11 @@ export default function StudyMemberChecklistCard({
         })}
       </ul>
 
-      <ul className="flex flex-col gap-0.5">
+      {/* <ul className="flex flex-col gap-0.5">
         {[1, 2].map((todo, index) => (
           <TodoItem key={index} checked={false} />
         ))}
-      </ul>
+      </ul> */}
     </DashboardCardLayout>
   );
 }

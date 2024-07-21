@@ -11,13 +11,15 @@ export type TProgressGauge = {
   list: TProgressGaugeItem[];
 };
 
+export type TAttendanceData = {
+  date: Date;
+  isAttended: boolean;
+};
+
 export type TAttendanceItem = {
   teamMemberId: Types.ObjectId;
   userId: Types.ObjectId;
-  data: {
-    date: Date;
-    isAttended: boolean;
-  };
+  data: TAttendanceData[];
 };
 
 export type TAttendance = {
