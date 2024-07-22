@@ -9,6 +9,7 @@ import {
 import { useUserStore } from "@/store/userStore";
 import { EditProfileType } from "@/types/editProfile";
 import Link from "next/link";
+import { showToast } from "../Toast";
 
 const NavLink = ({ href, text }: { href: string; text: string }) => (
   <Link href={href}>
@@ -38,14 +39,24 @@ export const FooterLinks = ({ user }: { user: EditProfileType | null }) => {
     useMoodsStore.getState().reset();
     useMatchingStore.getState().reset();
 
-    window.location.reload();
+    showToast("성공적으로 로그아웃되었습니다.");
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   };
 
   return (
     <div className="flex flex-col gap-[22px] border-t border-gray-300 pt-[40px]">
-      <button className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">공지사항</button>
-      <button className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">고객센터</button>
-      <button className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">설정</button>
+      <button type="button" className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">
+        공지사항
+      </button>
+      <button type="button" className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">
+        고객센터
+      </button>
+      <button type="button" className="flex text-gray-600 text-[18px] font-normal leading-[26px] tracking-[-0.54px]">
+        설정
+      </button>
       {user && (
         <form onSubmit={handleLogout}>
           <button
