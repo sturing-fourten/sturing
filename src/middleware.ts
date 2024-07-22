@@ -1,7 +1,7 @@
 import { auth as middleware } from "@/auth";
 import { NextResponse } from "next/server";
 
-const onlyLoggedInRoute = ["/mystudy", "/mypage", "/edit-profile", "/matching", "/recruit"];
+const onlyLoggedInRoute = ["/mystudy", "/mypage", "/edit-profile", "/matching", "/recruit", "/apply"];
 const routePattern = new RegExp(`^(${onlyLoggedInRoute.join("|")})`);
 
 export default middleware((req) => {
