@@ -220,6 +220,8 @@ export default function Recruit() {
       setNumberOfTeamMembers(numberOfTeamMembers);
       setAges(ages);
       setRole(role);
+
+      clearDraft(STORAGE_KEY);
     }
   }, []);
 
