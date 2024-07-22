@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { SelectApplyState } from "@/types/apply";
 
 export const useApplyStore = create<SelectApplyState>((set) => ({

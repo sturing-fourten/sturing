@@ -1,14 +1,14 @@
 import { usePathname } from "next/navigation";
 import ModalContainer from "./ModalContainer";
 import Button from "../commons/Button";
-import { kakaoLogo } from "../../../public/icons/icons";
 import KakaoShareButton from "../commons/KakaoShare";
+import { showToast } from "../commons/Toast";
 
 interface ShareModalProps {
   onClose: () => void;
 }
 
-const copyURL = (currentUrl: string) => {
+const copyURL = async (currentUrl: string) => {
   const userAgent = window.navigator.userAgent;
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
   if (isMobile) {
@@ -25,14 +25,13 @@ const copyURL = (currentUrl: string) => {
         .catch((error) => {});
     }
   } else {
-    const textArea = document.createElement("textarea");
-    textArea.value = currentUrl.toString();
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
-    alert(`클립보드에 저장되었어요.`);
-    return isMobile;
+    try {
+      await navigator.clipboard.writeText(currentUrl);
+      showToast("클립보드에 저장되었습니다.");
+      return isMobile;
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 

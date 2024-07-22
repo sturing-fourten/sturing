@@ -88,5 +88,5 @@ export const STUDY_RECRUIT_INFO = {
   teamMember: { title: "팀원", icon: { src: ICONS.postInfoTeamMember.src, alt: ICONS.postInfoTeamMember.alt } },
   meeting: { title: "일정", icon: { src: ICONS.postInfoMeeting.src, alt: ICONS.postInfoMeeting.alt } },
   task: { title: "과제", icon: { src: ICONS.postInfoTask.src, alt: ICONS.postInfoTask.alt } },
-  location: { title: "위치", icon: { src: ICONS.postInfoLocation.src, alt: ICONS.postInfoLocation.alt } },
+  location: { title: "장소", icon: { src: ICONS.postInfoLocation.src, alt: ICONS.postInfoLocation.alt } },
 };

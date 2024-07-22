@@ -1,5 +1,5 @@
 import { DashboardNoticeState, DashboardFreeState, DashboardTaskState } from "@/types/dashboard-notice";
-import create from "zustand";
+import { create } from "zustand";
 
 export const useDashBordNoticestore = create<DashboardNoticeState>((set) => ({
   title: "",
