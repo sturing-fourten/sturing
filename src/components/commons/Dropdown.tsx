@@ -1,20 +1,17 @@
 import React, { useState, ReactElement, cloneElement } from "react";
-import TextField from "./TextField";
 import { ICONS } from "@/constant/icons";
 
 interface DropdownProps {
-  type: string;
-  name: string;
-  addStyle?: string;
   children: React.ReactNode;
   value: string;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  preventClose?: boolean;
+  autoClose?: boolean;
+  placeholder?: string;
 }
 
 export default function Dropdown(props: DropdownProps) {
-  const { type, name, addStyle, children, onBlur, value, onChange, preventClose } = props;
+  const { children, onBlur, value, onChange, autoClose, placeholder } = props;
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
 
   const handleDropdown = () => {
@@ -22,7 +19,7 @@ export default function Dropdown(props: DropdownProps) {
   };
 
   const handleChildClick = () => {
-    if (!preventClose) {
+    if (autoClose) {
       setOpenDropdown(false);
     }
   };
@@ -41,17 +38,17 @@ export default function Dropdown(props: DropdownProps) {
 
   return (
     <div className="relative">
-      <TextField
-        type={type}
-        name={name}
-        addStyle={`w-full flex-col justify-start items-start inline-flex text-sm font-medium ${addStyle} ${
+      <div
+        className={`w-full flex-col justify-start items-start inline-flex font-medium border border-gray-300 bg-white py-3 px-4 gap-2 rounded-[5px] text-[14px] font tracking-[-0.42px] leading-[22px] cursor-pointer ${
           openDropdown ? "h-full" : ""
         }`}
         onBlur={onBlur}
-        value={value}
-        onChange={onChange}>
+        onChange={onChange}
+        onClick={handleDropdown}>
+        <span className={`text-gray-500 ${value ? "hidden" : "w-[180px]"}`}>{placeholder}</span>
+        <span className={`text-gray-900 ${value ? "font-semibold w-[180px]" : "hidden"}`}>{value}</span>
         {openDropdown ? clonedChildren : undefined}
-      </TextField>
+      </div>
       <button type="button" className="absolute top-[11px] right-4" onClick={handleDropdown}>
         <img
           className={`w-6 h-6 ${openDropdown ? "-rotate-90" : "rotate-90"}`}

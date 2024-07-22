@@ -11,8 +11,8 @@ export default function OnlineDropdown() {
   };
 
   return (
-    <Dropdown type="text" name="day" value={online} onChange={(e) => setOnline(e.target.value)}>
-      <div className="w-full flex-col inline-flex justify-center items-start mt-2">
+    <Dropdown value={online} placeholder="온라인 장소를 선택해 주세요" onChange={(e) => setOnline(e.target.value)}>
+      <div className="w-full flex-col inline-flex justify-center mt-2">
         <div className="w-full h-px rotate-180 border border-neutral-200 z-toast"></div>
         <div className="w-full h-44 overflow-auto mt-2">
           {Object.keys(ONLINE_LIST).map((key) => (

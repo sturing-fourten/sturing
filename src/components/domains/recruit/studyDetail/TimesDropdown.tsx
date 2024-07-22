@@ -14,7 +14,7 @@ export default function TimesDropdown(props: TimesDropdownProps) {
   };
 
   return (
-    <Dropdown type="text" name="time" value={time} onChange={(e) => setTime(e.target.value)}>
+    <Dropdown value={time} placeholder="시간을 선택해 주세요" onChange={(e) => setTime(e.target.value)}>
       <div className="w-full flex-col inline-flex justify-center items-start mt-2">
         <div className="w-full h-px rotate-180 border border-neutral-200 z-toast"></div>
         <div className="w-full h-44 overflow-auto mt-2">
