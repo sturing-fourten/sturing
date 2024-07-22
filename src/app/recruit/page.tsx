@@ -98,8 +98,8 @@ export default function Recruit() {
     date: DateRange,
     day: string,
     time: string,
-    selectedMood: string[] = [],
-    selectedAssignment: string[] = [],
+    selectedMood: string[] | null,
+    selectedAssignment: string[] | null,
   ) => {
     setDate(date);
     setDay(day);
