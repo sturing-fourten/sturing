@@ -8,7 +8,7 @@ export default middleware((req) => {
   const { pathname } = req.nextUrl;
   const isOnlyLoggedInRoute = routePattern.test(pathname);
   if (!req.auth && isOnlyLoggedInRoute) {
-    return Response.redirect(new URL("/", req.nextUrl));
+    return Response.redirect(new URL("/login", req.nextUrl));
   } else {
     const requestHeaders = new Headers(req.headers);
     requestHeaders.set("x-pathname", req.nextUrl.pathname);
