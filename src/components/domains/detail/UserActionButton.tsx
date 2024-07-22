@@ -45,7 +45,7 @@ export default function UserActionButton({ page, userId, study }: UserActionButt
 
   const goToApplyPage = () => {
     if (userStatus === "NOT_APPLIED") {
-      router.push(`/study/${id}/apply`); // 지원서 작성 페이지로 연결, 스터디 아이디 가져가야함
+      router.push(`/apply/${id}`); // 지원서 작성 페이지로 연결, 스터디 아이디 가져가야함
     }
   };
 
