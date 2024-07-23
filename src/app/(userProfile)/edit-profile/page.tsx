@@ -54,7 +54,7 @@ export default function MypageEdit() {
           </div>
           <div className="w-full flex-col inline-flex justify-start items-start gap-6 px-4">
             <Title>기본정보</Title>
-            <EditInput maxLength={8} name="name" inputValue={name} setInputValue={setName}>
+            <EditInput disabled name="name" inputValue={name} setInputValue={setName}>
               사용자 이름
             </EditInput>
             <EditInput disabled inputValue={user?.email || ""}>
