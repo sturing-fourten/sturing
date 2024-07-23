@@ -19,36 +19,22 @@ export default function ApplicationContents({ applicationData }: ApplicationCont
 
   return (
     <div className="flex-col justify-between w-full px-4 mt-5">
-      <div className="w-full mt-8">
-        <div className="flex flex-col gap-3 w-full">
+      <div className="w-full mt-8 flex flex-col gap-5">
+        <section className="flex flex-col gap-3 w-full">
           <span className="text-gray-900 text-4 font-semibold tracking-[-0.42px] leading-[22px]">
             스터디 지원글 제목
           </span>
           <div className="w-full py-3 px-4 resize-none rounded-[5px] border border-gray-300 text-[14px] font-medium text-gray-900">
             {title}
           </div>
-          <div className="flex justify-end gap-1">
-            <span className="text-end text-[12px] font-normal tracking-[-0.36px] leading-[18px] text-gray-900">
-              {title.length}
-            </span>
-            <span className="text-end text-[12px] font-normal tracking-[-0.36px] leading-[18px] text-gray-400">
-              / 24
-            </span>
-          </div>
-        </div>
-        <div className="flex flex-col gap-3 w-full">
+        </section>
+        <section className="flex flex-col gap-3 w-full">
           <span className="text-gray-900 text-4 font-semibold tracking-[-0.42px] leading-[22px]">지원자의 각오</span>
           <div className="w-full h-[230px] py-3 px-4 resize-none rounded-[5px] border border-gray-300 text-[14px] font-medium text-gray-900">
             {resolution}
           </div>
-          <div className="flex justify-end gap-1">
-            <span className="text-end text-[12px] font-normal tracking-[-0.36px] leading-[18px] text-gray-900">
-              {resolution.length}
-            </span>
-            <span className="text-end text-[12px] font-normal tracking-[-0.36px] leading-[18px] text-gray-400">
-              / 500
-            </span>
-          </div>
+        </section>
+        <section className="flex flex-col gap-3">
           <span className="text-gray-900 text-4 font-semibold tracking-[-0.42px] leading-[22px]">
             지원자가 희망하는 역할
           </span>
@@ -60,7 +46,7 @@ export default function ApplicationContents({ applicationData }: ApplicationCont
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
