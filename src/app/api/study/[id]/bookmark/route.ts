@@ -1,5 +1,6 @@
 import connectDB from "@/lib/database/db";
 import { StudyBookmark } from "@/schema/bookmarkSchema";
+import { Study } from "@/schema/studySchema";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
@@ -56,6 +57,7 @@ export async function POST(req: Request) {
     };
 
     await StudyBookmark.create(newLectureBookmark);
+    await Study.findByIdAndUpdate(studyId, { $inc: { scrapCount: 1 } }, { new: true });
 
     return Response.json(
       { message: "스터디 찜하기 성공!" },
@@ -80,6 +82,7 @@ export async function DELETE(req: Request): Promise<NextResponse> {
     await connectDB();
 
     const response = await StudyBookmark.findByIdAndDelete(_id);
+    await Study.findByIdAndUpdate(_id, { $inc: { scrapCount: -1 } }, { new: true });
     if (!response) {
       return NextResponse.json({ message: "사용자를 찾을 수 없습니다." }, { status: 404 });
     }

@@ -3,8 +3,10 @@ import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 import { TStudyListData } from "@/types/api/study";
 import { CATEGORY_MAP_TO_ENG } from "@/utils/categoryMap";
+import { NextRequest } from "next/server";
+import { StudyBookmark } from "@/schema/bookmarkSchema";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const category = searchParams.get("category")?.split(",").filter(Boolean);
   const search = searchParams.get("search");
@@ -19,6 +21,8 @@ export async function GET(request: Request) {
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
   //헤더로 유저정보 받기 (북마크 여부 확인)
+  const token = request.headers.get("Authorization");
+  let userId = token?.split(" ")[1];
 
   await connectDB();
 
@@ -172,7 +176,7 @@ export async function GET(request: Request) {
           const { _id, ownerId, category, title, imageUrl, startDate, endDate, meeting, wantedMember } = study;
           const teamMembers = await TeamMembers.findOne({ studyId: _id });
           const acceptedTeamMembers = teamMembers.members.filter((member: any) => member.status === "ACCEPTED");
-
+          const isBookmarked = userId ? Boolean(await StudyBookmark.findOne({ studyId: _id, userId })) : false;
           const acceptedCount = acceptedTeamMembers ? acceptedTeamMembers.length : 0;
           const wantedMemberCount = wantedMember?.count || "제한없음";
           return {
@@ -186,6 +190,7 @@ export async function GET(request: Request) {
             meeting,
             wantedMemberCount,
             acceptedTeamMemberCount: acceptedCount,
+            isBookmarked: !!isBookmarked,
           };
         }),
       );
