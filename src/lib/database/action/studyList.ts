@@ -17,13 +17,20 @@ export const getStudyListAction = async (query: TStudyListQuery, page: number) =
   const endDateQuery = endDate || "";
 
   const filterQuery = `search=${searchQuery}&category=${categoryQuery}&location=${locationQuery}&memberCount=${memberCountQuery}&startDate=${startDateQuery}&endDate=${endDateQuery}&level=${levelQuery}&role=${roleQuery}`;
+  const session = await getSession();
+  const userId = session?.user?.id || "";
+
   try {
     const res = await fetch(
       `${process.env.LOCAL_URL}/api/study/list?sortBy=${sortBy}&${filterQuery}&page=${page}&pageSize=8`,
       {
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
         cache: "no-store",
       },
     );
+
     if (!res.ok) {
       throw console.error("Failed to fetch data");
     }

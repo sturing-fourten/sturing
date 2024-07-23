@@ -74,10 +74,10 @@ export default function Content() {
             )}
             <div className="flex flex-col gap-5 items-end">
               {menu === "study" && <SortFilterButton />}
-              {studyList.length !== 0 ? (
+              {studyList?.length !== 0 ? (
                 <CardList>
                   {menu === "total"
-                    ? studyList.slice(0, 4).map((study: TStudyRecruitCardData) => (
+                    ? studyList?.slice(0, 4).map((study: TStudyRecruitCardData) => (
                         <div key={study.id} className="w-full">
                           <StudyRecruitCard
                             recruitCardData={study}
@@ -85,7 +85,6 @@ export default function Content() {
                               router.push(`/study/${study.id}`);
                             }}
                             isMini
-                            isScraped
                           />
                         </div>
                       ))
@@ -97,7 +96,6 @@ export default function Content() {
                           }}
                           key={study.id}
                           isMini
-                          isScraped
                         />
                       ))}
                 </CardList>
@@ -105,7 +103,7 @@ export default function Content() {
                 <NoResultText>검색 결과가 없습니다.</NoResultText>
               )}
             </div>
-            {studyList.length !== 0 && menu === "total" && (
+            {studyList?.length !== 0 && menu === "total" && (
               <Button
                 onClick={() => setTabMenu("study")}
                 varient="ghost"
@@ -122,17 +120,17 @@ export default function Content() {
               <h1 className="text-base text-gray-1000 font-semibold leading-snug mb-[17px]">강의</h1>
             )}
             <div className="flex flex-col gap-[14px]">
-              {lectureList.length !== 0 ? (
+              {lectureList?.length !== 0 ? (
                 menu === "total" ? (
                   lectureList.slice(0, 2).map((lecture: TLectureListCardData) => (
                     <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
-                      <LectureCard lecture={lecture} variant="card" isScraped={false} />
+                      <LectureCard lecture={lecture} variant="card" />
                     </Link>
                   ))
                 ) : (
                   lectureList.map((lecture: TLectureListCardData) => (
                     <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
-                      <LectureCard lecture={lecture} variant="card" isScraped={false} />
+                      <LectureCard lecture={lecture} variant="card" />
                     </Link>
                   ))
                 )
@@ -140,7 +138,7 @@ export default function Content() {
                 <NoResultText>검색 결과가 없습니다.</NoResultText>
               )}
             </div>
-            {lectureList.length !== 0 && menu === "total" && (
+            {lectureList?.length !== 0 && menu === "total" && (
               <Button
                 onClick={() => setTabMenu("lecture")}
                 varient="ghost"

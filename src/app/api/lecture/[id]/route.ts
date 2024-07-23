@@ -1,4 +1,5 @@
 import connectDB from "@/lib/database/db";
+import { LectureBookmark } from "@/schema/bookmarkSchema";
 import { Lecture } from "@/schema/lectureSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
@@ -6,7 +7,8 @@ import { TStudyListData } from "@/types/api/study";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   const id = params.id;
-
+  const token = req.headers.get("Authorization");
+  let userId = token?.split(" ")[1];
   try {
     await connectDB();
     const lecture = await Lecture.findById(id);
@@ -17,8 +19,9 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     const relatedStudyListData = await Study.find({ lectureId: id, status: "RECRUIT_START" });
 
     let relatedStudyList: TStudyListData = [];
-
-    //isBookmark 추가 예정.
+    const lectureBookmark = await LectureBookmark.find({ lectureId: id });
+    const scrapCount = lectureBookmark.length;
+    const isBookmarked = userId ? Boolean(await LectureBookmark.findOne({ lectureId: id, userId })) : false;
     if (relatedStudyListData) {
       relatedStudyList = await Promise.all(
         relatedStudyListData.map(async (study) => {
@@ -42,7 +45,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
       );
     }
 
-    return Response.json({ lecture, relatedStudyList });
+    return Response.json({ lecture, relatedStudyList, isBookmarked, scrapCount });
   } catch (error: any) {
     return Response.json({ message: "강의를 불러오는데 실패하였습니다." }, { status: 500 });
   }

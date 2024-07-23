@@ -45,9 +45,7 @@ export default function SuccessPage() {
           <h1 className="text-gray-900 text-[16px] font-[600] tracking-[-0.32px] leading-[24px]">{`${user?.nickname}님에게 딱 맞는 스터디 추천`}</h1>
           <CardList isSingleLine>
             {studyList?.length !== 0 ? (
-              studyList?.map((study) => (
-                <StudyRecruitCard key={study.id} isMini={false} isScraped={false} recruitCardData={study} />
-              ))
+              studyList?.map((study) => <StudyRecruitCard key={study.id} isMini={false} recruitCardData={study} />)
             ) : (
               <NoResultText>{`${
                 CATEGORY_MAP_TO_KO[userInterestCategory] || "관심"

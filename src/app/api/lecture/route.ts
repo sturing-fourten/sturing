@@ -1,4 +1,5 @@
 import connectDB from "@/lib/database/db";
+import { LectureBookmark } from "@/schema/bookmarkSchema";
 import { Lecture } from "@/schema/lectureSchema";
 import { CATEGORY_MAP_TO_ENG } from "@/utils/categoryMap";
 
@@ -9,6 +10,8 @@ export async function GET(request: Request) {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
+  const token = request.headers.get("Authorization");
+  let userId = token?.split(" ")[1];
   await connectDB();
 
   let query: { [key: string]: any } = {};
@@ -30,7 +33,7 @@ export async function GET(request: Request) {
       .skip((page - 1) * pageSize)
       .limit(pageSize);
 
-    const lectureList: {
+    let lectureList: {
       id: string;
       online: boolean;
       category: string;
@@ -41,17 +44,24 @@ export async function GET(request: Request) {
     }[] = [];
 
     if (lectureListData) {
-      for (const lecture of lectureListData) {
-        lectureList.push({
-          id: lecture._id.toString(),
-          online: lecture.online,
-          category: lecture.category,
-          platform: lecture.platform,
-          rating: lecture.rating,
-          title: lecture.title,
-          instructor: lecture.instructor,
-        });
-      }
+      lectureList = await Promise.all(
+        lectureListData.map(async (lecture) => {
+          const isBookmarked = userId
+            ? Boolean(await LectureBookmark.findOne({ lectureId: lecture._id, userId }))
+            : false;
+
+          return {
+            id: lecture._id.toString(),
+            online: lecture.online,
+            category: lecture.category,
+            platform: lecture.platform,
+            rating: lecture.rating,
+            title: lecture.title,
+            instructor: lecture.instructor,
+            isBookmarked: isBookmarked,
+          };
+        }),
+      );
     }
 
     const totalLectureCount = await Lecture.countDocuments(query);

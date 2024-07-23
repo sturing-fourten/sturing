@@ -8,13 +8,13 @@ import { TLectureInfoData, TLectureListCardData } from "@/types/api/lecture";
 
 interface LectureCardProps {
   variant: "card" | "info";
-  isScraped?: boolean;
+
   lecture: TLectureInfoData | TLectureListCardData;
 }
 
-export default function LectureCard({ variant, lecture, isScraped }: LectureCardProps) {
+export default function LectureCard({ variant, lecture }: LectureCardProps) {
   const isCard = variant === "card";
-  const { online, category, platform, rating, title, instructor } = lecture;
+  const { online, category, platform, rating, title, instructor, isBookmarked } = lecture;
 
   return (
     <article className={isCard ? "py-[13px] px-[17px] border border-gray-300 rounded-[5px] bg-white" : ""}>
@@ -27,7 +27,7 @@ export default function LectureCard({ variant, lecture, isScraped }: LectureCard
         </div>
         {isCard && (
           <button>
-            <Image src={isScraped ? bookmarkGrayOn : bookmarkGrayOff} alt="bookmark icon" width={24} height={24} />
+            <Image src={isBookmarked ? bookmarkGrayOn : bookmarkGrayOff} alt="bookmark icon" width={24} height={24} />
           </button>
         )}
       </section>

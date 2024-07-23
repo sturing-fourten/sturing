@@ -13,5 +13,5 @@ export type RecentViewedStudy = {
   meeting: { format: string; platform?: string; location?: string; schedule: { day: string; time: string } };
   wantedMemberCount: string | number;
   acceptedTeamMemberCount: number;
-  isBookmark?: boolean;
+  isBookmarked?: boolean;
 };

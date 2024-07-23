@@ -5,16 +5,25 @@ import { TCategory } from "@/types/api/study";
 import { TLectureListQuery } from "@/types/filter";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getSession } from "../getSession";
 
 export const getLectureListAction = async (query: TLectureListQuery, page: number) => {
   const { categories, search } = query;
 
   const categoryQuery = categories.length > 0 ? categories.join() : "";
   const searchQuery = search && search.trim();
+  const session = await getSession();
+  const userId = session?.user?.id || "";
 
   try {
     const response = await fetch(
       `${process.env.LOCAL_URL}/api/lecture?category=${categoryQuery}&search=${searchQuery}`,
+      {
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+        cache: "no-store",
+      },
     );
 
     if (!response.ok) {
@@ -30,8 +39,14 @@ export const getLectureListAction = async (query: TLectureListQuery, page: numbe
 };
 
 export const getLectureAction = async (id: string): Promise<TLectureDetailData> => {
+  const session = await getSession();
+  const userId = session?.user?.id || "";
   try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${id}`);
+    const response = await fetch(`${process.env.LOCAL_URL}/api/lecture/${id}`, {
+      headers: {
+        Authorization: "Bearer " + userId,
+      },
+    });
     const data = await response.json();
     return data;
   } catch (error: any) {
