@@ -1,5 +1,6 @@
 import connectDB from "@/lib/database/db";
 import { Dashboard } from "@/schema/dashboardSchema";
+import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 import { User } from "@/schema/userSchema";
 
@@ -44,7 +45,11 @@ export async function GET(request: Request) {
       );
     }
 
-    return Response.json({ dashboard, teamMemberList: acceptedTeamMembers });
+    const ownerId = acceptedTeamMembers.find((member) => member.isOwner === true).memberId;
+
+    const study = await Study.findById(studyId).select("startDate endDate");
+
+    return Response.json({ dashboard, teamMemberList: acceptedTeamMembers, ownerId, study });
   } catch (error: any) {
     throw new Error(error);
   }
