@@ -26,7 +26,7 @@ export const useRecruitStore = create<RecruitState>((set) => ({
   setOnline: (online) => set({ online: online }),
   address: "",
   setAddress: (address) => set({ address: address }),
-  date: { from: new Date(), to: new Date() },
+  date: { from: undefined, to: undefined },
   setDate: (date) => set({ date }),
   day: "",
   setDay: (day) => set({ day: day }),
@@ -38,7 +38,7 @@ export const useRecruitStore = create<RecruitState>((set) => ({
   setSelectedAssignment: (selectedAssignment) => set({ selectedAssignment: selectedAssignment }),
   career: [],
   setCareer: (career) => set({ career: career }),
-  numberOfTeamMembers: 1,
+  numberOfTeamMembers: 2,
   setNumberOfTeamMembers: (numberOfTeamMembers) =>
     set((state) => ({
       numberOfTeamMembers:

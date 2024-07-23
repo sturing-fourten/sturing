@@ -126,13 +126,13 @@ export default function Content() {
                 menu === "total" ? (
                   lectureList.slice(0, 2).map((lecture: TLectureListCardData) => (
                     <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
-                      <LectureCard lecture={lecture} variant="card" isScraped />
+                      <LectureCard lecture={lecture} variant="card" isScraped={false} />
                     </Link>
                   ))
                 ) : (
                   lectureList.map((lecture: TLectureListCardData) => (
                     <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
-                      <LectureCard lecture={lecture} variant="card" isScraped />
+                      <LectureCard lecture={lecture} variant="card" isScraped={false} />
                     </Link>
                   ))
                 )

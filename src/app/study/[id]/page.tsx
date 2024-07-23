@@ -1,11 +1,13 @@
 import FixedBottomBar from "@/components/domains/detail/FixedBottomBar";
 import Header from "@/components/domains/detail/Header";
 import Contents from "@/components/domains/detail/study/Contents";
+import { RecentViewedStudy } from "@/types/localStorage";
 
 const getStudyInfo = async (id: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/study/${id}`);
     const studyData = await response.json();
+
     return studyData;
   } catch (error) {
     console.error("Error fetching study", error);

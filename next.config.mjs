@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: "http",
         hostname: "t1.kakaocdn.net",
       },
+      {
+        protocol: "http",
+        hostname: "k.kakaocdn.net",
+      },
     ],
   },
   logging: {

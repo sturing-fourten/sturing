@@ -57,9 +57,9 @@ export interface RecruitState {
   setDay: (day: string) => void;
   time: string;
   setTime: (time: string) => void;
-  selectedMood?: string[];
+  selectedMood: string[] | null;
   setSelectedMood: (selectedMood: string[] | null) => void;
-  selectedAssignment?: string[];
+  selectedAssignment: string[] | null;
   setSelectedAssignment: (selectedAssignment: string[] | null) => void;
   career: string[];
   setCareer: (career: string[]) => void;

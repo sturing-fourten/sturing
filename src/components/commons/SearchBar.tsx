@@ -1,13 +1,16 @@
 "use client";
 import { ICONS } from "@/constant/icons";
+import useRecentKeywords from "@/hooks/useRecentKeywords";
 import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
+import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 interface SearchBarProps {
   placeholder: string;
+  handleAddKeyword: (text: string) => void;
 }
 
-export default function SearchBar({ placeholder, ...props }: SearchBarProps) {
+export default function SearchBar({ placeholder, handleAddKeyword, ...props }: SearchBarProps) {
   const [inputValue, setValue] = useState("");
   const { setSearchQuery, resetFilters } = useFilterStore();
   const { setTabMenu } = useSearchTabMenuStore();
@@ -16,10 +19,11 @@ export default function SearchBar({ placeholder, ...props }: SearchBarProps) {
   const handleInputSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputValue) {
+      router.push(`/search/result?search=${inputValue}`);
       setTabMenu("total");
       resetFilters();
       setSearchQuery(inputValue);
-      router.push(`/search/result?search=${inputValue}`);
+      handleAddKeyword(inputValue);
       setValue("");
     }
   };

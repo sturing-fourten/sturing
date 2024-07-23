@@ -16,6 +16,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import NoResultText from "@/components/commons/NoResultText";
 import { CATEGORY_MAP_TO_KO } from "@/utils/categoryMap";
+import SearchBar from "@/components/commons/SearchBar";
+import useRecentKeywords from "@/hooks/useRecentKeywords";
 
 export default function Contents() {
   const [TopSectionStudyList, setTopSectionStudyList] = useState<TStudyListData>([]);
@@ -24,6 +26,8 @@ export default function Contents() {
   const { user } = useUserStore();
   const { setCategoryFilter, setLocationFilter, setSortByFilter, resetFilters } = useFilterStore();
   const { setTabMenu } = useSearchTabMenuStore();
+  const userId = user ? user._id.toString() : null;
+  const { handleAddKeyword } = useRecentKeywords(userId);
 
   const router = useRouter();
 
@@ -109,86 +113,91 @@ export default function Contents() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full pb-[32px] pl-[16px]">
-      <div className="flex flex-col w-full gap-[20px]">
-        <Title onClick={() => handleStudyListSearchClick()}>분야별 스터디 탐색하기</Title>
-        <div className="flex items-center whitespace-nowrap scrollbar-hide overflow-auto overflow-x-scroll mb-[40px]">
-          <div className="inline-block">
-            {Object.entries(STUDY_CATEGORY_MENU).map(([key, { src, alt }]) => (
-              <StudyCategoryButton
-                onClick={() => handleCategoryButtonClick(key as TCategory)}
-                key={key}
-                src={src}
-                alt={alt}
-                addStyle="mr-[8px]">
-                {alt}
-              </StudyCategoryButton>
-            ))}
+    <>
+      <div className="flex w-full py-[32px] px-[16px]">
+        <SearchBar placeholder="관심 스터디 분야나 강의명을 검색해 보세요." handleAddKeyword={handleAddKeyword} />
+      </div>
+      <div className="flex flex-col items-center w-full pb-[32px] pl-[16px]">
+        <div className="flex flex-col w-full gap-[20px]">
+          <Title onClick={() => handleStudyListSearchClick()}>분야별 스터디 탐색하기</Title>
+          <div className="flex items-center whitespace-nowrap scrollbar-hide overflow-auto overflow-x-scroll mb-[40px]">
+            <div className="inline-block">
+              {Object.entries(STUDY_CATEGORY_MENU).map(([key, { src, alt }]) => (
+                <StudyCategoryButton
+                  onClick={() => handleCategoryButtonClick(key as TCategory)}
+                  key={key}
+                  src={src}
+                  alt={alt}
+                  addStyle="mr-[8px]">
+                  {alt}
+                </StudyCategoryButton>
+              ))}
+            </div>
           </div>
         </div>
+        <div className="w-full h-[8px] shrink-0 bg-[#F7F7F7] mb-[40px]" />
+        <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
+          <Title onClick={() => handleStudyListSearchClick("top")}>
+            {matching && userInterestCategory ? `${userName}님을 위한 ${interest} 스터디` : "이번주 인기 스터디"}
+          </Title>
+          <CardList isSingleLine>
+            {TopSectionStudyList.length !== 0 ? (
+              TopSectionStudyList.map((study) => (
+                <StudyRecruitCard
+                  key={study.id}
+                  recruitCardData={study}
+                  onClick={() => {
+                    router.push(`/study/${study.id}`);
+                  }}
+                />
+              ))
+            ) : (
+              <div className="mr-4 mt-4">
+                <NoResultText>{`${
+                  CATEGORY_MAP_TO_KO[userInterestCategory] || "관심"
+                }분야의 첫번째 스터디를 개설해 보세요!`}</NoResultText>
+              </div>
+            )}
+          </CardList>
+        </div>
+        <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
+          <Title
+            onClick={() => {
+              handleStudyListSearchClick("bottom");
+            }}>
+            {matching && repLocation ? "내 주변에 새로 개설된 스터디" : "새로 개설된 스터디"}
+          </Title>
+          <CardList isSingleLine>
+            {BottomSectionStudyList.length !== 0 ? (
+              BottomSectionStudyList.map((study) => (
+                <StudyRecruitCard
+                  key={study.id}
+                  recruitCardData={study}
+                  onClick={() => {
+                    router.push(`/study/${study.id}`);
+                  }}
+                />
+              ))
+            ) : (
+              <div className="mr-4 mt-4">
+                <NoResultText>{`${userLocation || "회원님"}의 첫번째 스터디를 개설해보세요!`}</NoResultText>
+              </div>
+            )}
+          </CardList>
+        </div>
+        <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
+          <Title onClick={() => {}}>{matching ? `${userName}님에게 딱 맞는 팀원 추천` : "스터링 활동 우수 팀원"}</Title>
+          <CardList isSingleLine>
+            <UserCard />
+            <UserCard />
+            <UserCard />
+            <UserCard />
+            <UserCard />
+            <UserCard />
+          </CardList>
+        </div>
+        <Event />
       </div>
-      <div className="w-full h-[8px] shrink-0 bg-[#F7F7F7] mb-[40px]" />
-      <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
-        <Title onClick={() => handleStudyListSearchClick("top")}>
-          {matching && userInterestCategory ? `${userName}님을 위한 ${interest} 스터디` : "이번주 인기 스터디"}
-        </Title>
-        <CardList isSingleLine>
-          {TopSectionStudyList.length !== 0 ? (
-            TopSectionStudyList.map((study) => (
-              <StudyRecruitCard
-                key={study.id}
-                recruitCardData={study}
-                onClick={() => {
-                  router.push(`/study/${study.id}`);
-                }}
-              />
-            ))
-          ) : (
-            <div className="mr-4 mt-4">
-              <NoResultText>{`${
-                CATEGORY_MAP_TO_KO[userInterestCategory] || "관심"
-              }분야의 첫번째 스터디를 개설해 보세요!`}</NoResultText>
-            </div>
-          )}
-        </CardList>
-      </div>
-      <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
-        <Title
-          onClick={() => {
-            handleStudyListSearchClick("bottom");
-          }}>
-          {matching && repLocation ? "내 주변에 새로 개설된 스터디" : "새로 개설된 스터디"}
-        </Title>
-        <CardList isSingleLine>
-          {BottomSectionStudyList.length !== 0 ? (
-            BottomSectionStudyList.map((study) => (
-              <StudyRecruitCard
-                key={study.id}
-                recruitCardData={study}
-                onClick={() => {
-                  router.push(`/study/${study.id}`);
-                }}
-              />
-            ))
-          ) : (
-            <div className="mr-4 mt-4">
-              <NoResultText>{`${userLocation || "회원님"}의 첫번째 스터디를 개설해보세요!`}</NoResultText>
-            </div>
-          )}
-        </CardList>
-      </div>
-      <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
-        <Title onClick={() => {}}>{matching ? `${userName}님에게 딱 맞는 팀원 추천` : "스터링 활동 우수 팀원"}</Title>
-        <CardList isSingleLine>
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-        </CardList>
-      </div>
-      <Event />
-    </div>
+    </>
   );
 }
