@@ -31,9 +31,11 @@ export default function StudyRecruitingCard(props: IStudyRecruitingCardProps) {
   const dateRange = getDateRange(startDate, endDate);
   const where = (format === "ONLINE" ? platform : location) ?? "";
   const meetingDay = `매주 ${day}`;
-  const memberCount = (teamMembersId as TTeamMembersIdAddedMember)?.members?.filter(
-    (member) => member.status === "ACCEPTED",
-  )?.length;
+  const memberCountAccepted = (teamMembersId as TTeamMembersIdAddedMember)?.members
+    ?.filter((member) => member.status === "ACCEPTED")
+    ?.length.toString();
+  const memberCountWanted = props?.study?.wantedMember?.count;
+
   return (
     <div className="py-6 px-5 border border-gray-300 bg-white rounded-lg">
       <Link href={`/study/${studyId}`}>
@@ -44,7 +46,7 @@ export default function StudyRecruitingCard(props: IStudyRecruitingCardProps) {
           className="mb-4"
           meetingDay={meetingDay}
           task={getMeetingInfoTaskText(task)}
-          memberCount={memberCount}
+          memberCount={memberCountWanted ? `${memberCountAccepted}/${memberCountWanted}` : memberCountAccepted}
         />
       </Link>
       <StudyCardLink href={`/application-list/${studyId}`}>지원서 리스트 보기</StudyCardLink>
