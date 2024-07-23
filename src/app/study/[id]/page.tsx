@@ -1,11 +1,18 @@
 import FixedBottomBar from "@/components/domains/detail/FixedBottomBar";
 import Header from "@/components/domains/detail/Header";
 import Contents from "@/components/domains/detail/study/Contents";
+import { getSession } from "@/lib/database/getSession";
 import { RecentViewedStudy } from "@/types/localStorage";
 
 const getStudyInfo = async (id: string) => {
+  const session = await getSession();
+  const userId = session?.user?.id || "";
   try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/study/${id}`);
+    const response = await fetch(`${process.env.LOCAL_URL}/api/study/${id}`, {
+      headers: {
+        Authorization: "Bearer " + userId,
+      },
+    });
     const studyData = await response.json();
 
     return studyData;

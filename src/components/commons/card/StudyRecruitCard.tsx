@@ -4,20 +4,18 @@ import { TagMain } from "../tag/TagMain";
 import { TagLight } from "../tag/TagLight";
 import { TStudyRecruitCardData } from "@/types/api/study";
 import { IMAGES_DEFAUlT } from "@/constant/images";
-import { getDate } from "date-fns";
 import { formatDate } from "@/utils/formatDate";
-import { useRouter } from "next/router";
 import { PROGRESSWAY_LIST } from "@/constant/progressWay";
 import { CATEGORY_MAP_TO_KO } from "@/utils/categoryMap";
 
 interface IStudyRecruitCardProps {
   isMini?: boolean;
-  isScraped?: boolean;
+  hideBookmark?: boolean;
   recruitCardData: TStudyRecruitCardData;
   onClick?: () => void;
 }
 
-export function StudyRecruitCard({ isMini, isScraped, recruitCardData, onClick }: IStudyRecruitCardProps) {
+export function StudyRecruitCard({ isMini, recruitCardData, onClick, hideBookmark = false }: IStudyRecruitCardProps) {
   const {
     category,
     title,
@@ -27,7 +25,7 @@ export function StudyRecruitCard({ isMini, isScraped, recruitCardData, onClick }
     meeting,
     wantedMemberCount,
     acceptedTeamMemberCount,
-    isBookmark,
+    isBookmarked,
   } = recruitCardData;
   const formattedStartDate = formatDate(startDate);
   const formattedEndDate = formatDate(endDate);
@@ -47,13 +45,15 @@ export function StudyRecruitCard({ isMini, isScraped, recruitCardData, onClick }
         style={{
           backgroundImage: `url(${imageUrl || IMAGES_DEFAUlT.study.src})`,
         }}>
-        <Image
-          className="absolute right-[8px] top-[8px] cursor-pointer"
-          src={isBookmark ? bookmarkWhiteOn : bookmarkWhiteOff}
-          alt="bookmark icon"
-          width={26}
-          height={26}
-        />
+        {!hideBookmark && (
+          <Image
+            className="absolute right-[8px] top-[8px] cursor-pointer"
+            src={isBookmarked ? bookmarkWhiteOn : bookmarkWhiteOff}
+            alt="bookmark icon"
+            width={26}
+            height={26}
+          />
+        )}
         <p className="absolute bottom-0 w-full py-[3px] bg-black/[.8] text-[12px] text-semibold text-center tracking-[-0.36px] text-white">
           {studySchedule}
         </p>

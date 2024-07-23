@@ -30,8 +30,8 @@ export type TStudyListQuery = {
   levels: string[];
   locations: string[];
   memberCount: number;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: string | null;
+  endDate: string | null;
   search: string | null;
 };
 

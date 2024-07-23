@@ -59,6 +59,7 @@ export type TStudyDetailInfoData = {
   study: TStudyDetail;
   lecture: TLectureInfoData;
   teamMemberList: TTeamMember[];
+  isBookmarked?: boolean;
   comment: TComment[];
 };
 
@@ -73,7 +74,7 @@ export type TStudyRecruitCardData = {
   meeting: { format: string; platform?: string; location?: string; schedule: { day: string; time: string } };
   wantedMemberCount: string | number;
   acceptedTeamMemberCount: number;
-  isBookmark?: boolean;
+  isBookmarked?: boolean;
 };
 
 export type TStudyListData = TStudyRecruitCardData[];

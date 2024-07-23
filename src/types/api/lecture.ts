@@ -21,6 +21,7 @@ export type TLectureInfoData = {
     created_at: string;
     _id: string;
   }[];
+  isBookmarked?: boolean;
 };
 
 export type TRelatedStudy = TStudyDetailInfoData;
@@ -28,6 +29,8 @@ export type TRelatedStudy = TStudyDetailInfoData;
 export type TLectureDetailData = {
   lecture: TLectureInfoData;
   relatedStudyList: TStudyRecruitCardData[];
+  isBookmarked?: boolean;
+  scrapCount?: number;
 };
 
 export type TLectureListCardData = {
@@ -38,6 +41,7 @@ export type TLectureListCardData = {
   rating: number;
   title: string;
   instructor: string;
+  isBookmarked?: boolean;
 };
 
 export type TLectureListData = TLectureListCardData[];

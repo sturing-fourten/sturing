@@ -43,11 +43,16 @@ export default function Contents() {
 
   const fetchTopSectionStudyList = async () => {
     try {
-      let query;
+      let query = "";
       if (matching && userInterestCategory) {
         query = `category=${userInterestCategory}`;
       }
-      const response = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR&${query}`, { next: { revalidate: 10 } });
+      const response = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR&${query}`, {
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+        next: { revalidate: 10 },
+      });
       if (response.ok) {
         const studyListData = await response.json();
         const { studyList } = studyListData;
@@ -61,11 +66,16 @@ export default function Contents() {
   };
   const fetchBottomSectionStudyList = async () => {
     try {
-      let query;
+      let query = "";
       if (matching && repLocation) {
         query = `location=${userLocation}`;
       }
-      const response = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST&${query}`, { next: { revalidate: 10 } });
+      const response = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST&${query}`, {
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+        next: { revalidate: 10 },
+      });
       if (response.ok) {
         const studyListData = await response.json();
         const { studyList } = studyListData;
