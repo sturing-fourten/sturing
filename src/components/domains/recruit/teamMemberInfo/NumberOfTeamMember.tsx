@@ -28,7 +28,7 @@ export default function NumberOfTeamMember(props: NumberOfTeamMemberProps) {
               src={ICONS.minusCircle.src}
               alt={ICONS.minusCircle.alt}
               onClick={() => handleMinusNumber()}
-              className={` ${numberOfTeamMembers <= 1 ? "opacity-25" : "opacity-100 cursor-pointer"}`}
+              className={` ${numberOfTeamMembers <= 2 ? "opacity-25" : "opacity-100 cursor-pointer"}`}
             />
 
             <div className="flex justify-center w-10">{memberCountDisplay}</div>

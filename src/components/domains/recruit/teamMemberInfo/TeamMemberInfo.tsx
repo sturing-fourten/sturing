@@ -73,7 +73,7 @@ export default function TeamMemberInfo({ onTeamMemberInfoChange }: TeamMemberInf
 
   const handleMinusNumber = () => {
     setNumberOfTeamMembers((prev) => {
-      if (typeof prev === "number" && prev > 1) {
+      if (typeof prev === "number" && prev > 2) {
         return prev - 1;
       }
       return prev;

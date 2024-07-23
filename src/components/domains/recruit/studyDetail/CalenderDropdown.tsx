@@ -2,6 +2,7 @@ import Dropdown from "../../../commons/Dropdown";
 import { Calendar } from "@/components/shadcn/ui/calendar";
 import { DateRange } from "react-day-picker";
 import { format, isBefore, startOfToday } from "date-fns";
+import { ko } from "date-fns/locale";
 
 interface CalenderDropdownProps {
   date: DateRange;
@@ -21,17 +22,20 @@ export default function CalenderDropdown(props: CalenderDropdownProps) {
     setDate(range);
   };
 
-  const formattedDate =
-    date?.from && date?.to ? `${format(date.from, "yyyy-MM-dd")} ~ ${format(date.to, "yyyy-MM-dd")}` : "";
+  const formattedDate = date?.from
+    ? date?.to
+      ? `${format(date.from, "yyyy-MM-dd", { locale: ko })} ~ ${format(date.to, "yyyy-MM-dd", { locale: ko })}`
+      : `${format(date.from, "yyyy-MM-dd", { locale: ko })}`
+    : "";
 
   return (
-    <Dropdown value={formattedDate} autoClose onChange={(e) => e.target.value}>
+    <Dropdown value={formattedDate} placeholder="진행기간을 선택해 주세요" autoClose onChange={(e) => e.target.value}>
       <div className="w-full flex-col inline-flex justify-center items-center mt-2">
         <div className="w-full h-px rotate-180 border border-neutral-200 z-toast"></div>
         <Calendar
           mode="range"
           initialFocus
-          defaultMonth={date?.from}
+          defaultMonth={date?.from || new Date()}
           selected={date}
           onSelect={handleDateChange}
           numberOfMonths={1}
