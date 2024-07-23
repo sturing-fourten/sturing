@@ -4,12 +4,27 @@ import { revalidatePath } from "next/cache";
 import { getSession } from "../getSession";
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 
+export const fetchStudyInfo = async (id: string) => {
+  try {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/study/${id}`);
+    const studyData = await response.json();
+
+    revalidatePath(`/study/${id}/dashboard`);
+    return studyData;
+  } catch (error) {
+    console.error("Error fetching study", error);
+    throw error;
+  }
+};
+
 export const toggleFunctionIsActive = async (formData: FormData) => {
   const session = await getSession();
   const userId = session?.user?.id;
+
   const functionType = formData.get("functionType");
   const dashboardId = formData.get("dashboardId");
   const studyId = formData.get("studyId");
+  if (!functionType || !dashboardId || !studyId) throw new Error("필수 정보가 없습니다.");
 
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/toggle-function-isactive`, {
@@ -29,14 +44,6 @@ export const toggleFunctionIsActive = async (formData: FormData) => {
   } catch (error) {
     console.log("error", error);
   }
-};
-
-export const setIsEditingAction = (formData: FormData) => {
-  const studyId = formData.get("studyId");
-  useDashboardTeamStore.getState().setIsEditing();
-
-  const path = `/study/${studyId}/dashboard`;
-  revalidatePath(path, "layout");
 };
 
 export const checkAttendanceAction = async (formData: FormData) => {

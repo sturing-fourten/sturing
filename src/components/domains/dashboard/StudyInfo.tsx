@@ -7,20 +7,9 @@ import LectureLinkBanner from "@/components/commons/LectureLinkBanner";
 import { getDateRangeWithWeeks } from "@/utils/getDateRangeWithWeeks";
 import { getDateRange } from "@/utils/getDateRange";
 import { CATEGORY } from "@/constant/category";
-import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
+import { fetchStudyInfo } from "@/lib/database/action/dashboard";
 
 const { meeting, task, location } = STUDY_RECRUIT_INFO;
-
-const getStudyInfo = async (id: string) => {
-  try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/study/${id}`);
-    const studyData = await response.json();
-    return studyData;
-  } catch (error) {
-    console.error("Error fetching study", error);
-    throw error;
-  }
-};
 
 const getStatus = (format: any) => {
   switch (format) {
@@ -44,13 +33,8 @@ const getWhere = (meeting: any) => {
 };
 
 export default async function StudyInfo({ params }: { params: string }) {
-  const study = await getStudyInfo(params);
+  const study = await fetchStudyInfo(params);
   const studyData = study.study;
-
-  useDashboardTeamStore.getState().setStudyInfo({
-    startDate: studyData.startDate,
-    endDate: studyData.endDate,
-  });
 
   return (
     <div className="pt-[10px] pb-11 px-4">
