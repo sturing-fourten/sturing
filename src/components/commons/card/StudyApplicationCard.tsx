@@ -8,7 +8,7 @@ import { CAREER_LIST } from "@/constant/teamMemberInfo";
 import { format } from "date-fns";
 
 export default function StudyApplicationCard(props: TApplicationSummary) {
-  const { profileImageUrl, status, nickname, title, levels, createdAt } = props;
+  const { _id, profileImageUrl, status, nickname, title, levels, createdAt } = props;
   const { interest, level } = getFirstInterestLevel(levels.levels);
 
   const applicationCreatedAt = createdAt ? `${format(new Date(createdAt), "yyyy.MM.dd HH:mm")} 지원` : "";
@@ -32,7 +32,7 @@ export default function StudyApplicationCard(props: TApplicationSummary) {
         </div>
       </section>
 
-      <StudyCardLink href="/">지원서 보기</StudyCardLink>
+      <StudyCardLink href={`/application/${_id}`}>지원서 보기</StudyCardLink>
     </article>
   );
 }
