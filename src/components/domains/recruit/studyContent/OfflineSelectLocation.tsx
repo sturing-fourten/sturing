@@ -7,7 +7,7 @@ import { useRecruitStore, useLocationsStore } from "@/store/recruitStore";
 
 export default function SelectLocation({ setIsSelected }: StepsProps) {
   const content = MATCHING_CONFIG.location.city;
-  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState("서울");
 
   const selectedLocations = useLocationsStore((state) => state.locations);
   const setSelectedLocations = useLocationsStore((state) => state.setLocations);

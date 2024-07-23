@@ -84,7 +84,11 @@ export default function SelectLecture({ onLectureChange }: SelectLectureProps) {
 
   return (
     <div className="w-full px-[22px] py-[16px] flex-col gap-5 inline-flex">
-      <Title>함께 들을 강의를 선택해 볼까요?</Title>
+      {existingLectureId ? (
+        <Title>이 강의로 스터디를 개설해 볼까요?</Title>
+      ) : (
+        <Title>함께 들을 강의를 선택해 볼까요?</Title>
+      )}
       {!existingLectureId && (
         <>
           <div className="flex-col gap-2 inline-flex">
