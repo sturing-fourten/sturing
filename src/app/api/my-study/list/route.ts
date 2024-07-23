@@ -124,7 +124,6 @@ export async function GET(request: Request) {
           }),
         );
 
-        console.log(enhancedStudyList);
         return Response.json({
           recruitStartMemberStudyList: enhancedStudyList,
           recruitStartOwnerStudyListCount: await Study.countDocuments({
