@@ -1,6 +1,4 @@
-import { useState } from "react";
-// import CalenderDropdown from "../../recruit/studyDetail/CalenderDropdown";
-// import { DateRange } from "react-day-picker";
+import { useEffect, useState } from "react";
 import { useFilterStore } from "@/store/FilterStore";
 import Dropdown from "../../../commons/Dropdown";
 import { Calendar } from "@/components/shadcn/ui/calendar";
@@ -9,12 +7,13 @@ import { format, isBefore, startOfToday } from "date-fns";
 import { ko } from "date-fns/locale";
 
 export default function PeriodFilter() {
-  const [date, setDate] = useState<DateRange | { from: undefined; to: undefined }>({ from: undefined, to: undefined });
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const { setDateFilter } = useFilterStore();
+  const { setStartDate, setEndDate, startDate, endDate, setSortByFilter } = useFilterStore();
 
-  // setDateFilter(date.from, date.to);
+  const [date, setDate] = useState<DateRange | { from: undefined; to: undefined }>({
+    from: startDate ? new Date(startDate) : undefined,
+    to: endDate ? new Date(endDate) : undefined,
+  });
+
   const handleDateChange = (range: DateRange | undefined) => {
     if (
       !range ||
@@ -24,8 +23,14 @@ export default function PeriodFilter() {
       return;
     }
     setDate(range);
-    setStartDate(range.from || null);
-    setEndDate(range.to || null);
+    if (range.from) {
+      const startDateISO = new Date(range.from).toISOString();
+      setStartDate(startDateISO);
+    }
+    if (range.to) {
+      const endDateISO = new Date(range.to).toISOString();
+      setEndDate(endDateISO);
+    }
   };
 
   const formattedDate = date?.from
@@ -33,6 +38,17 @@ export default function PeriodFilter() {
       ? `${format(date.from, "yyyy-MM-dd", { locale: ko })} ~ ${format(date.to, "yyyy-MM-dd", { locale: ko })}`
       : `${format(date.from, "yyyy-MM-dd", { locale: ko })}`
     : "";
+
+  useEffect(() => {
+    setDate({
+      from: startDate ? new Date(startDate) : undefined,
+      to: endDate ? new Date(endDate) : undefined,
+    });
+
+    if (startDate) {
+      setSortByFilter("DEADLINE");
+    }
+  }, [startDate, endDate]);
 
   return (
     <>

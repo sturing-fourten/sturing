@@ -22,7 +22,7 @@ interface FilterModalProps {
 }
 
 export default function FilterModal({ onClose, onClick, menu }: FilterModalProps) {
-  const { resetFilters } = useFilterStore();
+  const { resetFilters, categories, levels, locations, memberCount, roles, startDate } = useFilterStore();
   const { studyList, lectureList } = useSearchResultStore();
   const { menu: SearchTabMenu } = useSearchTabMenuStore();
   const handleFilterModalClose = () => {
@@ -38,6 +38,23 @@ export default function FilterModal({ onClose, onClick, menu }: FilterModalProps
         return studyList.length;
       case "lecture":
         return lectureList.length;
+    }
+  };
+
+  const selectedFilter = (filterId: TFilterMenuId) => {
+    switch (filterId) {
+      case "category":
+        return categories.length > 0;
+      case "location":
+        return locations.length > 0;
+      case "memberCount":
+        return memberCount > 1;
+      case "period":
+        return !!startDate;
+      case "level":
+        return levels.length > 0;
+      case "role":
+        return roles.length > 0;
     }
   };
 
@@ -58,8 +75,8 @@ export default function FilterModal({ onClose, onClick, menu }: FilterModalProps
                   key={filterMenu.id}
                   onClick={() => onClick(filterMenu.id)}
                   title={filterMenu.title}
-                  isSelected={menu === filterMenu.id}
-                  isUnderlined
+                  isSelected={menu === filterMenu.id || selectedFilter(filterMenu.id)}
+                  isUnderlined={menu === filterMenu.id}
                   isFilterTab
                 />
               ))}

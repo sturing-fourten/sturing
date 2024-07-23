@@ -16,6 +16,8 @@ export async function GET(request: Request) {
   const location = searchParams.get("location")?.split(",").filter(Boolean);
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+  const startDate = searchParams.get("startDate");
+  const endDate = searchParams.get("endDate");
   //헤더로 유저정보 받기 (북마크 여부 확인)
 
   await connectDB();
@@ -33,6 +35,17 @@ export async function GET(request: Request) {
       { title: { $regex: search, $options: "i" } },
       { category: mappedCategory || { $regex: search, $options: "i" } },
     ];
+  }
+
+  if (startDate && endDate) {
+    query.$and = [{ startDate: { $gte: new Date(startDate) } }, { endDate: { $lte: new Date(endDate) } }];
+  } else {
+    if (startDate) {
+      query.startDate = { $gte: new Date(startDate) };
+    }
+    if (endDate) {
+      query.endDate = { $lte: new Date(endDate) };
+    }
   }
 
   if (role && role.length > 0) {

@@ -10,8 +10,8 @@ interface InitialState {
   levels: string[];
   locations: string[];
   memberCount: number;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: string | null;
+  endDate: string | null;
 }
 
 export interface Filter extends InitialState {
@@ -22,7 +22,8 @@ export interface Filter extends InitialState {
   setLevelFilter: (level: string) => void;
   setLocationFilter: (location: string) => void;
   setMemberCountFilter: (count: number) => void;
-  setDateFilter: (startDate: Date, endDate: Date) => void;
+  setStartDate: (startDate: string) => void;
+  setEndDate: (endDate: string) => void;
   setSearchQuery: (query: string | null) => void;
   resetFilters: () => void;
   resetCategoryFilter: () => void;
@@ -60,7 +61,8 @@ export const useFilterStore = create<Filter>((set) => ({
       locations: toggleFilterInArray(state.locations, location),
     })),
   setMemberCountFilter: (count) => set({ memberCount: count }),
-  setDateFilter: (startDate, endDate) => set({ startDate, endDate }),
+  setStartDate: (startDate) => set({ startDate }),
+  setEndDate: (endDate) => set({ endDate }),
   setSearchQuery: (query) => {
     set({ searchQuery: query });
   },
