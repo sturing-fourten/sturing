@@ -106,7 +106,7 @@ export default function ApplyPage({ params: { id } }: IApplyPageProps) {
         <ProgressBar maxSteps={2} steps={steps} />
         <div className="overflow-auto flex-1">
           {steps === 1 && <WriteStep onWriteChange={handleWriteChange} />}
-          {steps === 2 && <RoleStep onRoleChange={handleRoleChange} />}
+          {steps === 2 && <RoleStep onRoleChange={handleRoleChange} studyId={id} />}
         </div>
         <footer className="flex gap-4 justify-center items-center w-full px-4 py-3">
           {steps === 1 ? (
