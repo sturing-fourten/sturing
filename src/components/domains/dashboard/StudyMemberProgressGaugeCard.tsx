@@ -4,14 +4,21 @@ import DashboardCardTitle from "../DashboardCardTitle";
 import { TProgressGaugeItem } from "@/types/dashboard";
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 
-export default function StudyMemberProgressGaugeCard({ list }: { list: TProgressGaugeItem[] }) {
-  const { studyId, dashboardId, teamMember } = useDashboardTeamStore.getState().dashboardInfo;
+export default function StudyMemberProgressGaugeCard({
+  list,
+  teamMemberList,
+}: {
+  list: TProgressGaugeItem[];
+  teamMemberList: any[];
+}) {
+  const { dashboardId, studyId } = useDashboardTeamStore.getState().dashboardInfo;
+
   return (
     <DashboardCardLayout>
       <DashboardCardTitle type="progressGauge" dashboardId={dashboardId} studyId={studyId} />
       <ul className="flex flex-col gap-3 max-h-[196px] overflow-y-scroll scrollbar-hide">
         {list.map((item) => {
-          const member = teamMember.find((member) => member.memberId === item.userId.toString());
+          const member = teamMemberList.find((member) => member.memberId === item.userId.toString());
           return (
             <ProgressItem
               key={item.teamMemberId.toString()}

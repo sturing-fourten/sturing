@@ -8,12 +8,18 @@ import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 import { checkAttendanceAction } from "@/lib/database/action/dashboard";
 import NoList from "../mystudy/NoList";
 
-export default function StudyMemberAttendanceCard({ list }: { list: TAttendanceItem[] }) {
-  const { studyId, dashboardId, teamMember } = useDashboardTeamStore.getState().dashboardInfo;
-  const { startDate, endDate } = useDashboardTeamStore.getState().studyInfo;
+export default function StudyMemberAttendanceCard({
+  list,
+  teamMemberList,
+}: {
+  list: TAttendanceItem[];
+  teamMemberList: any[];
+}) {
+  const { startDate, endDate } = useDashboardTeamStore.getState().dashboardInfo;
   if (!startDate || !endDate) return;
 
   const isTodayInRange = getIsTodayInRange(new Date(startDate), new Date(endDate));
+  const { dashboardId, studyId } = useDashboardTeamStore.getState().dashboardInfo;
 
   return (
     <DashboardCardLayout>
@@ -24,7 +30,7 @@ export default function StudyMemberAttendanceCard({ list }: { list: TAttendanceI
       {isTodayInRange ? (
         <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide mt-4">
           {list.map((item) => {
-            const member = teamMember.find((member) => member.memberId === item.userId.toString());
+            const member = teamMemberList.find((member) => member.memberId === item.userId.toString());
             return <MemberItem key={item.teamMemberId.toString()} nickname={member?.nickname || ""} item={item} />;
           })}
         </ul>
