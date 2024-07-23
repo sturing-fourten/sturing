@@ -53,13 +53,20 @@ export type UserFavoriteFieldType = {
   freewheeling: StudyCategory;
 };
 
+export type TWantedMember = {
+  career: string[];
+  count: string;
+  age: string[];
+  role: string[];
+};
+
 export type TMyStudy = {
   _id: mongoose.Types.ObjectId;
   category: "DESIGN" | "DEVELOP" | "BUSINESS" | "MARKETING" | "ECONOMY" | "LANGUAGE" | "LICENSE" | "SELF-DEVELOPMENT";
   ownerId: mongoose.Types.ObjectId;
   lectureId: mongoose.Types.ObjectId;
   title: string;
-  imageUrl: string;
+  imageUrl: string | null;
   description: string;
   meeting: {
     schedule: {
@@ -102,6 +109,10 @@ export type TMyStudy = {
   teamMembersId?: mongoose.Types.ObjectId | TTeamMembersIdAddedMember;
   createdAt: Date;
   updatedAt: Date;
+  scrapCount?: number;
+  wantedMember: TWantedMember;
+  __v?: number;
+  applicationCreatedAt?: Date;
 };
 
 export type TTeamMembersIdAddedMember = {

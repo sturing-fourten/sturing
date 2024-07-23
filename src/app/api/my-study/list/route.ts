@@ -1,4 +1,5 @@
 import connectDB from "@/lib/database/db";
+import { Application } from "@/schema/applicationSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 
@@ -102,11 +103,29 @@ export async function GET(request: Request) {
           status: "RECRUIT_START",
         }).populate({
           path: "teamMembersId",
-          select: "members",
+          model: "TeamMembers",
+          select: {
+            members: {
+              $elemMatch: { userId: userId },
+            },
+          },
         });
 
+        const enhancedStudyList = await Promise.all(
+          studyList.map(async (study) => {
+            // 내 지원서 id 추출
+            const myApplicationId = study.teamMembersId.members[0].applicationId;
+            // 지원서 생성일 조회
+            const application = await Application.findById({ _id: myApplicationId }, { createdAt: 1 });
+            return {
+              ...study.toObject(), // 스터디
+              applicationCreatedAt: application.createdAt, // 필드 추가
+            };
+          }),
+        );
+
         return Response.json({
-          recruitStartMemberStudyList: studyList,
+          recruitStartMemberStudyList: enhancedStudyList,
           recruitStartOwnerStudyListCount: await Study.countDocuments({
             ownerId: userId,
             status: "RECRUIT_START",

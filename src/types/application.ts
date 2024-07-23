@@ -26,6 +26,7 @@ export type TApplication = {
     _id: Types.ObjectId;
     levels: string;
   };
+  createdAt?: Date;
 };
 
 export type TApplicationSummary = Omit<TApplication, "resolution" | "role">;

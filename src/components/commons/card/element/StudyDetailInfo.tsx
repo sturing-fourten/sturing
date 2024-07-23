@@ -4,7 +4,7 @@ import { teammate, schedule, checkSquare } from "@/../public/icons/icons";
 interface IStudyDetailInfoProps {
   className?: string;
   meetingDay: string;
-  memberCount: number;
+  memberCount: string;
   task: string;
 }
 export function StudyDetailInfo(props: IStudyDetailInfoProps) {
