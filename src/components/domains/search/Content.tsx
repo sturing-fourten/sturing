@@ -6,16 +6,23 @@ import SearchBar from "@/components/commons/SearchBar";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import SearchTag from "@/components/domains/search/SearchTag";
 import useRecentKeywords from "@/hooks/useRecentKeywords";
-import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
 import { useUserStore } from "@/store/userStore";
-import { RecentKeyword } from "@/types/localStorage";
+import { TStudyRecruitCardData } from "@/types/api/study";
+import { RecentKeyword, RecentViewedStudy } from "@/types/localStorage";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Content() {
+  const [recentStudyList, setRecentStudyList] = useState<RecentViewedStudy[]>();
   const { user } = useUserStore();
   const userId = user ? user._id.toString() : null;
 
   const { recentKeywords, handleRemoveKeyword, handleClearKeywords, handleAddKeyword } = useRecentKeywords(userId);
+  useEffect(() => {
+    const recentStudyList = localStorage.getItem("recentStudy");
+    const parsedRecentStudyList = recentStudyList ? JSON.parse(recentStudyList) : [];
+    setRecentStudyList(parsedRecentStudyList);
+  }, []);
 
   return (
     <>
@@ -52,7 +59,7 @@ export default function Content() {
         )}
       </section>
       <section className="px-4 pb-10">
-        <h1 className="pb-5 text-base text-gray-1000 font-semibold leading-normal">인기 검색어</h1>
+        <h1 className="pb-5 text-base text-gray-1000 font-semibold leading-normal">추천 검색어</h1>
         <div className="flex items-center gap-x-3 gap-y-[11px] flex-wrap">
           <SearchTag text="개발" handleAddKeyword={handleAddKeyword} type="popular" />
           <SearchTag text="챌린지" handleAddKeyword={handleAddKeyword} type="popular" />
@@ -63,9 +70,16 @@ export default function Content() {
       <section className="pl-4 pb-10 sm:px-4">
         <h1 className="pb-5 text-base text-gray-1000 font-semibold leading-normal">최근 본 스터디</h1>
         <CardList isSingleLine>
-          {/* <StudyRecruitCard isMini={false} isScraped />
-          <StudyRecruitCard isMini={false} isScraped />
-          <StudyRecruitCard isMini={false} isScraped /> */}
+          {recentStudyList?.map((study) => (
+            <Link href={`/study/${study.id}`}>
+              <StudyRecruitCard
+                key={study.id}
+                isMini={false}
+                isScraped
+                recruitCardData={study as TStudyRecruitCardData}
+              />
+            </Link>
+          ))}
         </CardList>
       </section>
     </>
