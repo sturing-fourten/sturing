@@ -3,8 +3,8 @@ import StudyApplyInfo from "./element/StudyApplyInfo";
 import StudyCardButton from "./element/StudyCardButton";
 import StudyMeetingInfo from "./element/StudyMeetingInfo";
 import { getDateRange } from "@/utils/getDateRange";
-import { getSession } from "@/lib/database/getSession";
 import Link from "next/link";
+import { format } from "date-fns";
 
 interface IStudyApplyingCardProps {
   study: TMyStudy;
@@ -19,28 +19,27 @@ export default async function StudyApplyingCard(props: IStudyApplyingCardProps) 
       endDate,
       meeting: {
         schedule: { day },
-        format,
+        format: meetingFormat,
         platform,
         location,
       },
       teamMembersId,
+      applicationCreatedAt,
     },
   } = props;
 
-  const session = await getSession();
-  const userId = session?.user?.id;
-
   const dateRange = getDateRange(startDate, endDate);
-  const where = (format === "ONLINE" ? platform : location) ?? "";
-  const status = (teamMembersId as TTeamMembersIdAddedMember)?.members?.find(
-    (member) => member.userId.toString() === userId,
-  )?.status;
+  const where = (meetingFormat === "ONLINE" ? platform : location) ?? "";
+  const status = (teamMembersId as TTeamMembersIdAddedMember)?.members?.[0].status;
+  const myApplicationCreatedAt = applicationCreatedAt
+    ? `${format(new Date(applicationCreatedAt), "yyyy.MM.dd HH:mm")} 지원`
+    : "";
 
   return (
     <Link
       className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg"
       href={`/study/${studyId}`}>
-      {status && <StudyApplyInfo status={status} />}
+      {status && <StudyApplyInfo status={status} createAt={myApplicationCreatedAt} />}
       <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
       <p className="text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
       <hr className="bg-gray-300" />

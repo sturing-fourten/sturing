@@ -1,5 +1,6 @@
 interface IStudyApplyInfoProps {
   status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
+  createAt: string;
 }
 
 interface IApplyStatusProps {
@@ -22,11 +23,11 @@ const APPLY_STATUS_TYPE = {
   },
 };
 
-export default function StudyApplyInfo({ status }: IStudyApplyInfoProps) {
+export default function StudyApplyInfo({ status, createAt }: IStudyApplyInfoProps) {
   return (
     <section className="flex justify-between">
       <ApplyStatus status={status} />
-      <span className="text-main-400 text-[12px] font-normal tracking-[-0.36px]">{"2024.06.15 14:30 지원"}</span>
+      <span className="text-main-400 text-[12px] font-normal tracking-[-0.36px]">{createAt}</span>
     </section>
   );
 }

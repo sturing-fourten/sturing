@@ -112,6 +112,7 @@ export type TMyStudy = {
   scrapCount?: number;
   wantedMember: TWantedMember;
   __v?: number;
+  applicationCreatedAt?: Date;
 };
 
 export type TTeamMembersIdAddedMember = {
