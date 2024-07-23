@@ -19,10 +19,11 @@ const getProfileInfo = async (id: string) => {
 export default async function Profile({ params }: { params: { id: string } }) {
   const { id } = params;
   const profileData = await getProfileInfo(id);
+
   return (
     <>
       <div className="bg-gradient-to-br from-gradient-gray/30 to-gradient-to/30">
-        <TopBar variant="chat" />
+        <TopBar variant="back">{profileData.user.nickname}님의 프로필</TopBar>
         <HorizontalDivider addStyle="opacity-30" />
         <div className="px-4 pt-5 pb-7">
           <ProfileCard page="profile" profile={profileData} />
