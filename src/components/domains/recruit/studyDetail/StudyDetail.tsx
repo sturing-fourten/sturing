@@ -11,21 +11,29 @@ import StudyAssignmentToggle from "./StudyAssignmentToggle";
 import { useRecruitStore } from "@/store/recruitStore";
 
 interface StudyDetailProps {
-  onDetailChange: (date: DateRange, day: string, time: string, mood?: string[], assignment?: string[]) => void;
+  onDetailChange: (
+    date: DateRange,
+    day: string,
+    time: string,
+    mood: string[] | null,
+    assignment: string[] | null,
+  ) => void;
 }
 
 // 추후 협의에 관한 토글 로직 필요
 export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
-  const date = useRecruitStore((state) => state.date);
-  const setDate = useRecruitStore((state) => state.setDate);
-  const day = useRecruitStore((state) => state.day);
-  const setDay = useRecruitStore((state) => state.setDay);
-  const time = useRecruitStore((state) => state.time);
-  const setTime = useRecruitStore((state) => state.setTime);
-  const selectedMood = useRecruitStore((state) => state.selectedMood);
-  const setSelectedMood = useRecruitStore((state) => state.setSelectedMood);
-  const selectedAssignment = useRecruitStore((state) => state.selectedAssignment);
-  const setSelectedAssignment = useRecruitStore((state) => state.setSelectedAssignment);
+  const {
+    date,
+    setDate,
+    day,
+    setDay,
+    time,
+    setTime,
+    selectedMood = [],
+    setSelectedMood,
+    selectedAssignment = [],
+    setSelectedAssignment,
+  } = useRecruitStore();
 
   const handleMoodToggle = (moodName: string) => {
     if (selectedMood?.includes(moodName)) {
@@ -45,7 +53,7 @@ export default function StudyDetail({ onDetailChange }: StudyDetailProps) {
 
   useEffect(() => {
     onDetailChange(date, day, time, selectedMood, selectedAssignment);
-  }, [date, day, time]);
+  }, [date, day, time, selectedMood, selectedAssignment]);
 
   return (
     <div className="w-full px-[22px] py-[16px] flex-col gap-[30px] inline-flex">

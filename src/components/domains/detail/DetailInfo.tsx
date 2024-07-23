@@ -6,7 +6,7 @@ interface DetailInfoProps {
   title: string;
   content?: string;
   isWhite?: boolean;
-  taskContent?: string[];
+  taskContent?: string[] | null;
 }
 
 export default function DetailInfo({ icon, title, content, isWhite = false, taskContent }: DetailInfoProps) {

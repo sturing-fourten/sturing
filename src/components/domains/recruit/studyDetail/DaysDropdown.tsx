@@ -13,7 +13,7 @@ export default function DaysDropdown(props: DaysDropdownProps) {
   };
 
   return (
-    <Dropdown type="text" name="day" value={day} onChange={(e) => setDay(e.target.value)}>
+    <Dropdown value={day} placeholder="요일을 선택해 주세요" onChange={(e) => setDay(e.target.value)}>
       <div className="w-full flex-col inline-flex justify-center items-start mt-2">
         <div className="w-full h-px rotate-180 border border-neutral-200 z-toast"></div>
         <div className="w-full h-44 overflow-auto mt-2">

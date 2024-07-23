@@ -60,14 +60,15 @@ export default function RecruitInfo({ study, lecture }: IRecruitInfoProps) {
         <Title>해당 스터디의 분위기</Title>
         <HorizontalDivider addStyle="my-4" />
         <TagsLayout>
-          {study.moodKeywords.map((mood: string) => {
-            const moodData = USER_FAVORITE_FIELD_TYPE[mood as keyof typeof USER_FAVORITE_FIELD_TYPE];
-            return (
-              <MoodMiniTag key={mood} src={moodData?.src} alt={`${moodData?.alt} 아이콘`}>
-                {moodData?.alt}
-              </MoodMiniTag>
-            );
-          })}
+          {study.moodKeywords &&
+            study.moodKeywords.map((mood: string) => {
+              const moodData = USER_FAVORITE_FIELD_TYPE[mood as keyof typeof USER_FAVORITE_FIELD_TYPE];
+              return (
+                <MoodMiniTag key={mood} src={moodData?.src} alt={`${moodData?.alt} 아이콘`}>
+                  {moodData?.alt}
+                </MoodMiniTag>
+              );
+            })}
         </TagsLayout>
       </StudyDetailCardLayout>
       <StudyDetailCardLayout addStyle="mt-4">

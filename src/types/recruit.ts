@@ -17,8 +17,8 @@ export interface StudyDetailType {
   date: DateRange;
   day: string;
   time: string;
-  selectedMood?: string[];
-  selectedAssignment?: string[];
+  selectedMood: string[] | null;
+  selectedAssignment: string[] | null;
 }
 
 export interface TeamMemberInfoType {
@@ -58,9 +58,9 @@ export interface RecruitState {
   time: string;
   setTime: (time: string) => void;
   selectedMood?: string[];
-  setSelectedMood: (selectedMood: string[]) => void;
+  setSelectedMood: (selectedMood: string[] | null) => void;
   selectedAssignment?: string[];
-  setSelectedAssignment: (selectedAssignment: string[]) => void;
+  setSelectedAssignment: (selectedAssignment: string[] | null) => void;
   career: string[];
   setCareer: (career: string[]) => void;
   numberOfTeamMembers: number | "제한없음";
@@ -90,8 +90,8 @@ export interface RecruitType {
   startDate: Date;
   endDate: Date;
   status: string;
-  moodKeywords: string[];
-  task: string[];
+  moodKeywords: string[] | null;
+  task: string[] | null;
   wantedMember: {
     career: string[];
     count: number | "제한없음";
