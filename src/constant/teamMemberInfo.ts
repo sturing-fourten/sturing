@@ -8,7 +8,7 @@ export type TRole =
   | "schedule"
   | "attendance";
 
-type RoleType = {
+export type RoleType = {
   [key in TRole]: {
     name: string;
     role: string;

@@ -1,5 +1,6 @@
 "use client";
 import Avatar from "@/components/commons/Avatar";
+import { ROLE_LIST, RoleType } from "@/constant/teamMemberInfo";
 import { TChecklistItem } from "@/types/dashboard";
 import { useState } from "react";
 
@@ -35,7 +36,9 @@ export function MemberItem(props: IMemberItem) {
           } w-[48px] overflow-hidden whitespace-nowrap text-ellipsis`}>
           {nickname}
         </div>
-        <div className="text-center text-stone-500 text-xs font-normal leading-none">{role}</div>
+        <div className="text-center text-stone-500 text-xs font-normal leading-none">
+          {ROLE_LIST[role as keyof RoleType].name}
+        </div>
       </div>
     </li>
   );
