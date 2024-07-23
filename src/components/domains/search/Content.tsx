@@ -1,41 +1,63 @@
 "use client";
 
 import CardList from "@/components/commons/CardList";
+import NoResultText from "@/components/commons/NoResultText";
 import SearchBar from "@/components/commons/SearchBar";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import SearchTag from "@/components/domains/search/SearchTag";
+import useRecentKeywords from "@/hooks/useRecentKeywords";
 import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
-import { useEffect } from "react";
+import { useUserStore } from "@/store/userStore";
+import { RecentKeyword } from "@/types/localStorage";
+import { useEffect, useState } from "react";
 
 export default function Content() {
+  const { user } = useUserStore();
+  const userId = user ? user._id.toString() : null;
+
+  const { recentKeywords, handleRemoveKeyword, handleClearKeywords, handleAddKeyword } = useRecentKeywords(userId);
+
   return (
     <>
       <div className="flex w-full px-4 pt-5 pb-10 ">
-        <SearchBar placeholder="관심 스터디 분야나 강의명을 검색해 보세요." />
+        <SearchBar placeholder="관심 스터디 분야나 강의명을 검색해 보세요." handleAddKeyword={handleAddKeyword} />
       </div>
 
       <section className="px-4 pb-10">
         <div className="pb-5 flex items-center justify-between">
           <h1 className="text-base text-gray-800 font-semibold leading-normal">최근 검색어</h1>
-          <button className="text-gray-600 text-sm font-semibold leading-[21px]">전체삭제</button>
+          {recentKeywords.length !== 0 && (
+            <button className="text-gray-600 text-sm font-semibold leading-[21px]" onClick={handleClearKeywords}>
+              전체삭제
+            </button>
+          )}
         </div>
-        <div className="flex items-center gap-x-3 gap-y-[11px] flex-wrap">
-          <SearchTag content={"포트폴리오"} type="recent" />
-          <SearchTag content={"포트폴리오"} type="recent" />
-          <SearchTag content={"포트폴리오"} type="recent" />
-          <SearchTag content={"포트폴리오"} type="recent" />
-          <SearchTag content={"포트폴리오"} type="recent" />
-        </div>
+        {recentKeywords.length !== 0 ? (
+          <div className="flex items-center gap-x-3 gap-y-[11px] flex-wrap">
+            {recentKeywords.map((keyword: RecentKeyword) => (
+              <SearchTag
+                key={keyword.id}
+                text={keyword.text}
+                handleAddKeyword={handleAddKeyword}
+                handleRemoveClick={(e) => {
+                  e.stopPropagation();
+                  handleRemoveKeyword(keyword.id);
+                }}
+                type="recent"
+              />
+            ))}
+          </div>
+        ) : (
+          <NoResultText>최근 검색어가 없습니다.</NoResultText>
+        )}
       </section>
       <section className="px-4 pb-10">
         <h1 className="pb-5 text-base text-gray-1000 font-semibold leading-normal">인기 검색어</h1>
         <div className="flex items-center gap-x-3 gap-y-[11px] flex-wrap">
-          <SearchTag content="포트폴리오" type="popular" />
-          <SearchTag content="포트폴리오" type="popular" />
-          <SearchTag content="포트폴리오" type="popular" />
-          <SearchTag content="포트폴리오" type="popular" />
-          <SearchTag content="포트폴리오" type="popular" />
-          <SearchTag content="포트폴리오" type="popular" />
+          <SearchTag text="개발" handleAddKeyword={handleAddKeyword} type="popular" />
+          <SearchTag text="챌린지" handleAddKeyword={handleAddKeyword} type="popular" />
+          <SearchTag text="부트캠프" handleAddKeyword={handleAddKeyword} type="popular" />
+          <SearchTag text="디자인" handleAddKeyword={handleAddKeyword} type="popular" />
         </div>
       </section>
       <section className="pl-4 pb-10 sm:px-4">

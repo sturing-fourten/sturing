@@ -2,7 +2,9 @@
 
 import GoBackButton from "@/components/commons/GoBackButton";
 import { ICONS } from "@/constant/icons";
+import useRecentKeywords from "@/hooks/useRecentKeywords";
 import { useFilterStore } from "@/store/FilterStore";
+import { useUserStore } from "@/store/userStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -12,14 +14,18 @@ export default function TopSearchBar() {
   const { setSearchQuery, resetFilters } = useFilterStore();
   const [inputValue, setValue] = useState("");
   const router = useRouter();
+  const { user } = useUserStore();
+  const userId = user ? user._id.toString() : null;
+
+  const { handleAddKeyword } = useRecentKeywords(userId);
 
   const handleInputSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     resetFilters();
     if (inputValue) {
       setSearchQuery(inputValue);
-
       router.push(`/search/result?search=${inputValue}`);
+      handleAddKeyword(inputValue);
     }
   };
 

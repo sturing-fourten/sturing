@@ -76,18 +76,22 @@ export default function ProfileCard({ page, mypage, profile }: ProfileCardProps)
             팔로워 <span className="font-semibold text-black ml-1">7</span>
           </p>
         </div>
-        <div className="flex items-center gap-[10px]">
-          {isProfile ? visibleInfo(profile?.user || null) : visibleInfo(mypage?.user || null)}
-          <div className="flex gap-1 text-xs text-gray-1000 font-semibold">
-            {matchingLevelInfo(isProfile ? userLevel : myLevel)}
-          </div>
-        </div>
-        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide min-w-full">
-          {isProfile
-            ? matchingLocationInfo(profile?.matching?.locationIsVisible || false, userLocation)
-            : matchingLocationInfo(mypage?.matching?.locationIsVisible || false, myLocation)}
-          <InfoTag>{getMoodAltById(isProfile ? userMood : myMood)}</InfoTag>
-        </div>
+        {(mypage?.matching || profile?.matching) && (
+          <>
+            <div className="flex items-center gap-[10px]">
+              {isProfile ? visibleInfo(profile?.user || null) : visibleInfo(mypage?.user || null)}
+              <div className="flex gap-1 text-xs text-gray-1000 font-semibold">
+                {matchingLevelInfo(isProfile ? userLevel : myLevel)}
+              </div>
+            </div>
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide min-w-full">
+              {isProfile
+                ? matchingLocationInfo(profile?.matching?.locationIsVisible || false, userLocation)
+                : matchingLocationInfo(mypage?.matching?.locationIsVisible || false, myLocation)}
+              <InfoTag>{getMoodAltById(isProfile ? userMood : myMood)}</InfoTag>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
