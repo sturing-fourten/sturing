@@ -1,18 +1,42 @@
-"use client";
-
 import Title from "@/components/domains/apply/Title";
-import { ICONS } from "@/constant/icons";
 import RoleToggle from "../../recruit/teamMemberInfo/RoleToggle";
 import { ROLE_LIST, TRole } from "@/constant/teamMemberInfo";
 import { useApplyStore } from "@/store/applyStore";
+import { useEffect, useState } from "react";
+
+const fetchwantedRoleList = async (studyId: string) => {
+  try {
+    const response = await fetch(`/api/study/${studyId}`);
+    const data = await response.json();
+    return data.study.wantedMember.role;
+  } catch (error) {
+    console.error("Error fetching study", error);
+    throw error;
+  }
+};
 
 interface RoleStepProps {
   onRoleChange: (wantedRole: string) => void;
+  studyId: string;
 }
 
-export default function RoleStep({ onRoleChange }: RoleStepProps) {
+export default function RoleStep({ onRoleChange, studyId }: RoleStepProps) {
+  const [wantedRoleList, setWantedRoleList] = useState<string[]>([]);
   const role = useApplyStore((state) => state.role);
   const setRole = useApplyStore((state) => state.setRole);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const roles = await fetchwantedRoleList(studyId);
+        setWantedRoleList(roles);
+      } catch (error) {
+        console.error("Error fetching wanted role list", error);
+      }
+    };
+
+    fetchData();
+  }, [studyId]);
 
   const handleRoleToggle = (roleName: string) => {
     const newRole = role === roleName ? "" : roleName;
@@ -28,7 +52,7 @@ export default function RoleStep({ onRoleChange }: RoleStepProps) {
           개설자가 원하는 역할 목록이에요
         </span>
         <div className="grid grid-cols-2 flex-col gap-[15px]">
-          {Object.keys(ROLE_LIST).map((key) => (
+          {wantedRoleList.map((key) => (
             <RoleToggle
               key={key}
               isActive={role.includes(key)}
@@ -37,14 +61,6 @@ export default function RoleStep({ onRoleChange }: RoleStepProps) {
               roleDescription={ROLE_LIST[key as TRole].role}
             />
           ))}
-        </div>
-        <div className="w-full">
-          <button type="button" className="flex justify-center items-center gap-[6px]">
-            <img src={ICONS.question.src} alt={ICONS.question.alt} width={13} height={13} />
-            <span className="text-gray-500 text-center text-[12px] font-normal tracking-[-0.36px] leading-[18px]">
-              역할에 대한 정보가 궁금하다면?
-            </span>
-          </button>
         </div>
       </div>
     </div>
