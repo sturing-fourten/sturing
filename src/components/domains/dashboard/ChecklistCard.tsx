@@ -10,7 +10,6 @@ interface IChecklistCardProps {
 
 export default function ChecklistCard(props: IChecklistCardProps) {
   const { date } = props;
-  console.log("date:", date);
 
   return (
     <DashboardCardLayout>

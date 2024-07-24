@@ -1,7 +1,6 @@
 import CalendarCard from "@/components/domains/dashboard/CalendarCard";
 import MeetingCard from "@/components/domains/dashboard/MeetingCard";
 import { fetchStudyMeetingAction } from "@/lib/database/action/dashboard";
-import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 import { eachDayOfInterval, getDay } from "date-fns";
 
 interface IScheduleTabProps {
@@ -13,7 +12,6 @@ type TWeekdayMap = {
   [key: string]: number;
 };
 
-// 요일을 한글에서 숫자로 매핑하는 맵
 const weekdayMap: TWeekdayMap = {
   월요일: 1,
   화요일: 2,
