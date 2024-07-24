@@ -1,6 +1,5 @@
 import { InsideMenu } from "@/components/commons/card/element/InsideMenu";
 import StudyApplyingCard from "@/components/commons/card/StudyApplyingCard";
-import StudyOnGoingCard from "@/components/commons/card/StudyOnGoingCard";
 import StudyRecruitingCard from "@/components/commons/card/StudyRecruitingCard";
 import NoList from "@/components/domains/mystudy/NoList";
 import {
