@@ -15,11 +15,10 @@ export default function StudyMemberAttendanceCard({
   list: TAttendanceItem[];
   teamMemberList: any[];
 }) {
-  const { startDate, endDate } = useDashboardTeamStore.getState().dashboardInfo;
+  const { startDate, endDate, dashboardId, studyId } = useDashboardTeamStore.getState().dashboardInfo;
   if (!startDate || !endDate) return;
 
   const isTodayInRange = getIsTodayInRange(new Date(startDate), new Date(endDate));
-  const { dashboardId, studyId } = useDashboardTeamStore.getState().dashboardInfo;
 
   return (
     <DashboardCardLayout>
