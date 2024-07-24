@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 
 export function getDayTimeByDate(date: Date): [string, string] {
+  if (!date) return ["", ""];
   const dayOfWeek = format(date, "EEE", { locale: ko });
 
   const formattedDate = format(date, "MM.dd", { locale: ko });
