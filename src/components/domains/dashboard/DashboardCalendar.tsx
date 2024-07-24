@@ -7,10 +7,10 @@ import { ko } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/shadcn/ui/button";
 import { EventDayContent } from "./EventDayContent";
-import { getIsMeetingDay } from "@/utils/getIsMeetingDay";
+import getHasEvent from "@/utils/getHasEvent";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
-  meetingList: Date[];
+  dateList: Date[];
 };
 
 function DashboardCalendar({ classNames, showOutsideDays = true, ...props }: CalendarProps) {
@@ -64,7 +64,7 @@ function DashboardCalendar({ classNames, showOutsideDays = true, ...props }: Cal
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
         DayContent: ({ ...dateProps }) => (
-          <EventDayContent date={dateProps.date} isMeetingDay={getIsMeetingDay(props.meetingList, dateProps.date)} />
+          <EventDayContent date={dateProps.date} isMeetingDay={getHasEvent(props.dateList, dateProps.date)} />
         ),
       }}
       {...props}

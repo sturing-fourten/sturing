@@ -1,13 +1,13 @@
 "use client";
 import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
-import { useDashboardScheduleStore } from "@/store/dahboardScheduleStore";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { TMeetingItem } from "@/utils/generateMeetingList";
 import { getDayTimeByDate } from "@/utils/getDayTimeByDate";
-import { getMeetingDayCount } from "@/utils/getIsMeetingDay";
+import getMeetingDayCount from "@/utils/getMeetingDayCount";
 import NoList from "../mystudy/NoList";
+import { useDashboardScheduleStore } from "@/store/dashboardScheduleStore";
 
 interface IMeetingCardProps {
   meetingList: Date[];

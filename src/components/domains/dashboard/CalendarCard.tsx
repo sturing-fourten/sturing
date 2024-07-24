@@ -1,16 +1,17 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { DashboardCalendar } from "./DashboardCalendar";
 import DashboardCardLayout from "./DashboardCardLayout";
-import { useDashboardScheduleStore } from "@/store/dahboardScheduleStore";
+import { useDashboardScheduleStore } from "@/store/dashboardScheduleStore";
 
 type setCurrentDate = Dispatch<SetStateAction<Date | undefined>>;
+
 interface ICalendarCardProps {
-  meetingList: Date[];
+  dateList: Date[];
 }
 
-export default function CalendarCard({ meetingList }: ICalendarCardProps) {
+export default function CalendarCard({ dateList }: ICalendarCardProps) {
   const { currentDate, setCurrentDate } = useDashboardScheduleStore();
 
   return (
@@ -19,7 +20,7 @@ export default function CalendarCard({ meetingList }: ICalendarCardProps) {
         mode="single"
         selected={currentDate}
         onSelect={setCurrentDate as setCurrentDate}
-        meetingList={meetingList}
+        dateList={dateList}
       />
     </DashboardCardLayout>
   );

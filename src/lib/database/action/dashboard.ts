@@ -85,3 +85,87 @@ export const fetchStudyMeetingAction = async (id: string) => {
     throw error;
   }
 };
+
+export const fetchMyCheckListAction = async (studyId: any) => {
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  if (!studyId || !userId) {
+    throw new Error("필수 정보가 없습니다.");
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.LOCAL_URL}/api/dashboard/checklist?studyId=${studyId}&userId=${userId}`,
+    );
+    const myCheckList = await response.json();
+
+    revalidatePath(`/study/${studyId}/dashboard/me`);
+
+    return myCheckList;
+  } catch (error) {
+    console.error("Error fetching study", error);
+    throw error;
+  }
+};
+
+export const postCheckItemAction = async ({
+  studyId,
+  newCheckItemDate,
+  newCheckItemContent,
+}: {
+  studyId: any;
+  newCheckItemDate: any;
+  newCheckItemContent: any;
+}) => {
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  try {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/checklist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ studyId, userId, newCheckItemDate, newCheckItemContent }),
+    });
+
+    if (!response.ok) {
+      throw new Error("체크 리스트 생성 실패");
+    }
+
+    revalidatePath(`/study/${studyId}/dashboard/me`);
+    revalidatePath(`/study/${studyId}/dashboard`);
+  } catch (error) {
+    console.error("Error", error);
+  }
+};
+
+// export const toggleCheckItemAction = async (formData: FormData) => {
+//   const dashboardId = formData.get("dashboardId");
+//   const studyId = formData.get("studyId");
+//   const date = formData.get("date");
+//   const checkItemId = formData.get("checkItemId");
+
+//   const session = await getSession();
+//   const userId = session?.user?.id;
+
+//   try {
+//     const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/checklist`, {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ dashboardId, userId, date, checkItemId }),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error("체크 리스트 상태 변경 실패");
+//     }
+
+//     revalidatePath(`/study/${studyId}/dashboard/me`);
+//     revalidatePath(`/study/${studyId}/dashboard`);
+//   } catch (error) {
+//     console.log("error", error);
+//   }
+// };

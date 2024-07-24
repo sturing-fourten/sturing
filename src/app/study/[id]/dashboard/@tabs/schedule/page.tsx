@@ -45,7 +45,7 @@ export default async function ScheduleTab(props: IScheduleTabProps) {
 
   return (
     <section className="flex flex-col gap-3 pt-6 py-10 px-4">
-      <CalendarCard meetingList={meetingList} />
+      <CalendarCard dateList={meetingList} />
       <MeetingCard meetingList={meetingList} studyMeetingInfo={studyMeetingInfo} />
     </section>
   );
