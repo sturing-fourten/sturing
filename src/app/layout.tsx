@@ -34,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <link rel="icon" href="/icons/favicon.ico" />
+      </head>
       <body>
         <SessionProvider>
           <body
