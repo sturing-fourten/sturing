@@ -26,7 +26,7 @@ export default function Contents() {
   const { user } = useUserStore();
   const { setCategoryFilter, setLocationFilter, setSortByFilter, resetFilters } = useFilterStore();
   const { setTabMenu } = useSearchTabMenuStore();
-  const userId = user ? user._id.toString() : null;
+  const userId = user ? user._id.toString() : "";
   const { handleAddKeyword } = useRecentKeywords(userId);
 
   const router = useRouter();
@@ -45,9 +45,9 @@ export default function Contents() {
     try {
       let query = "";
       if (matching && userInterestCategory) {
-        query = `category=${userInterestCategory}`;
+        query = `&category=${userInterestCategory}`;
       }
-      const response = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR&${query}`, {
+      const response = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR${query}`, {
         headers: {
           Authorization: "Bearer " + userId,
         },
@@ -68,9 +68,9 @@ export default function Contents() {
     try {
       let query = "";
       if (matching && repLocation) {
-        query = `location=${userLocation}`;
+        query = `&location=${userLocation}`;
       }
-      const response = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST&${query}`, {
+      const response = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST${query}`, {
         headers: {
           Authorization: "Bearer " + userId,
         },
