@@ -50,7 +50,7 @@ export const getStudyBookmarkListAction = async () => {
           meeting,
           wantedMemberCount,
           acceptedTeamMemberCount: acceptedCount,
-          isBookmark: true,
+          isBookmarked: true,
         };
       }),
     );
@@ -88,9 +88,26 @@ export const getLectureBookmarkListAction = async () => {
     const lectureDataPromises = userLectureBookmarkList.map((bookmark: any) => fetchLectureData(bookmark.lectureId));
     const lectureBookmarkData = await Promise.all(lectureDataPromises);
 
+    const processedlectureBookmarks = await Promise.all(
+      lectureBookmarkData.map(async (lecture) => {
+        const { _id, online, category, platform, rating, title, instructor } = lecture;
+
+        return {
+          id: _id.toString(),
+          online,
+          category,
+          platform,
+          rating,
+          title,
+          instructor,
+          isBookmarked: true,
+        };
+      }),
+    );
+
     revalidatePath("/mypage", "layout");
 
-    return lectureBookmarkData;
+    return processedlectureBookmarks;
   } catch (error) {
     console.error("error", error);
     throw error;

@@ -8,7 +8,6 @@ import { TLectureInfoData, TLectureListCardData } from "@/types/api/lecture";
 
 interface LectureCardProps {
   variant: "card" | "info";
-
   lecture: TLectureInfoData | TLectureListCardData;
 }
 
