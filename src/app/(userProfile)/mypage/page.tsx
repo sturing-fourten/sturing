@@ -25,7 +25,7 @@ export default async function MyPage() {
   return (
     <>
       <div className="bg-gradient-to-br from-gradient-gray/30 to-gradient-to/30">
-        <TopBar variant="chat" isBackToHome showBookmark>
+        <TopBar variant="back" isBackToHome showBookmark>
           마이페이지
         </TopBar>
         <HorizontalDivider addStyle="opacity-30" />
