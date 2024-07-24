@@ -23,7 +23,7 @@ export default function SearchTag(props: SearchTagProps) {
     <>
       <div
         onClick={searchKeyword}
-        className={`border py-[6px] rounded-[5px] text-sm font-semibold leading-[22px] inline-flex items-center gap-[2px] shrink-0
+        className={`border py-[6px] rounded-[5px] text-sm font-semibold leading-[22px] inline-flex items-center gap-[2px] shrink-0 cursor-pointer
           ${
             type === "recent"
               ? "pl-[15px] pr-[10px] text-gray-800 border-gray-300"
