@@ -9,7 +9,7 @@ interface IStudyDetailInfoProps {
 }
 export function StudyDetailInfo(props: IStudyDetailInfoProps) {
   const { className, meetingDay, memberCount, task } = props;
-  console.log(memberCount);
+
   return (
     <section
       className={`flex justify-evenly items-center p-2 rounded-[3px] bg-gray-100 text-gray-1000 text-[14px] font-medium tracking-[-0.42px] ${className}`}>
