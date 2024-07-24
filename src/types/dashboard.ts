@@ -30,18 +30,7 @@ export type TAttendance = {
 export type TChecklistItem = {
   teamMemberId: Types.ObjectId;
   userId: Types.ObjectId;
-  data: TChecklistDataList[];
-};
-
-type TChecklistDataList = {
-  date: Date;
-  task: TTaskList[];
-};
-
-type TTaskList = {
-  task: string;
-  like: number;
-  isChecked: boolean;
+  data: TCheckListData[];
 };
 
 export type TChecklist = {
@@ -69,3 +58,12 @@ export type TDashboardResponse = {
 };
 
 export type TDashboardFunctionType = "progressGauge" | "attendance" | "checkList";
+
+export type TCheckListData = {
+  contentList: {
+    content: string;
+    isChecked: boolean;
+  }[];
+  date: Date;
+  _id: Types.ObjectId;
+};

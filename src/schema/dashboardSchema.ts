@@ -48,7 +48,7 @@ const dashboardSchema = new mongoose.Schema(
           data: [
             {
               date: { type: Date },
-              isChecked: { type: Boolean },
+              contentList: [{ content: String, isChecked: Boolean }],
             },
           ],
         },

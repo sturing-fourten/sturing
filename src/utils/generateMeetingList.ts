@@ -46,8 +46,8 @@ interface IGenerateUpcomingMeetingListProps {
   time: string;
 }
 
-export type TUpcomingMeetingItem = { title: string; where: string; date: Date };
-export type TUpcomingMeetingList = TUpcomingMeetingItem[];
+export type TMeetingItem = { title: string; where: string; date: Date };
+export type TUpcomingMeetingList = TMeetingItem[];
 
 export function generateUpcomingMeetingList(props: IGenerateUpcomingMeetingListProps): TUpcomingMeetingList {
   const { startDate, endDate, title, where, day, time } = props;

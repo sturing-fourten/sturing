@@ -1,13 +1,8 @@
 import { create } from "zustand";
-import { TStudyDetailInfoData } from "@/types/api/study";
 
 type TDashboardInfo = {
-  studyId: string;
-  dashboardId: string;
-  teamMember: TStudyDetailInfoData["teamMemberList"];
-};
-
-type TStudyInfo = {
+  studyId: string | null;
+  dashboardId: string | null;
   startDate: Date | null;
   endDate: Date | null;
 };
@@ -15,31 +10,29 @@ type TStudyInfo = {
 interface IInitialState {
   isEditing: boolean;
   dashboardInfo: TDashboardInfo;
-  studyInfo: TStudyInfo;
+  selectedUserId: any | null;
 }
 
 interface IDashboardTeamState extends IInitialState {
   setIsEditing: () => void;
   setDashboardInfo: (currentDashboardInfo: TDashboardInfo) => void;
-  setStudyInfo: (currentStudyInfo: TStudyInfo) => void;
+  setSelectedUserId: (newId: any) => void;
 }
 
 const initialState: IInitialState = {
   isEditing: false,
   dashboardInfo: {
-    studyId: "",
-    dashboardId: "",
-    teamMember: [],
-  },
-  studyInfo: {
+    studyId: null,
+    dashboardId: null,
     startDate: null,
     endDate: null,
   },
+  selectedUserId: null,
 };
 
 export const useDashboardTeamStore = create<IDashboardTeamState>((set) => ({
   ...initialState,
   setIsEditing: () => set((state) => ({ isEditing: !state.isEditing })),
   setDashboardInfo: (currentDashboardInfo) => set({ dashboardInfo: currentDashboardInfo }),
-  setStudyInfo: (currentStudyInfo) => set({ studyInfo: currentStudyInfo }),
+  setSelectedUserId: (newId) => set({ selectedUserId: newId }),
 }));

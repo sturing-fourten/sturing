@@ -1,16 +1,27 @@
-"use client";
-
 import CalendarCard from "@/components/domains/dashboard/CalendarCard";
 import ChecklistCard from "@/components/domains/dashboard/ChecklistCard";
-import { useState } from "react";
+import { fetchMyCheckListAction } from "@/lib/database/action/dashboard";
 
-export default function MeTab() {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+interface IMeTabProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function MeTab(props: IMeTabProps) {
+  const studyId = props.params.id;
+  const myCheckList = await fetchMyCheckListAction(studyId);
+  const { data: checkListData } = myCheckList; // checkList.list.[].data
+  const dateList = getExtractDateList(checkListData);
 
   return (
     <section className="flex flex-col gap-3 pt-6 py-10 px-4">
-      <CalendarCard date={date} setDate={setDate} />
-      <ChecklistCard date={date} />
+      <CalendarCard dateList={dateList} />
+      <ChecklistCard checkListData={checkListData} studyId={studyId} />
     </section>
   );
+}
+
+function getExtractDateList(data: any) {
+  return data.map((item: any) => new Date(item.date));
 }

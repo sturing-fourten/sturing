@@ -1,4 +1,4 @@
-import { TUpcomingMeetingItem } from "@/utils/generateMeetingList";
+import { TMeetingItem } from "@/utils/generateMeetingList";
 import { TagLight } from "../tag/TagLight";
 import { TagMain } from "../tag/TagMain";
 import { getDayTimeByDate } from "@/utils/getDayTimeByDate";
@@ -7,7 +7,7 @@ import { ko } from "date-fns/locale";
 import { getDDayByDate } from "@/utils/getDDayByDate";
 
 interface IStudyUpcomingCardProps {
-  meeting: TUpcomingMeetingItem;
+  meeting: TMeetingItem;
   className?: string;
 }
 
@@ -17,7 +17,7 @@ export default function StudyUpcomingCard(props: IStudyUpcomingCardProps) {
     className,
   } = props;
 
-  const DayTime = getDayTimeByDate(new Date(date));
+  const DayTime = getDayTimeByDate(date);
 
   return (
     <article className={`py-6 px-5 rounded-lg border border-gray-300 ${className}`}>

@@ -1,7 +1,9 @@
 import connectDB from "@/lib/database/db";
 import { Dashboard } from "@/schema/dashboardSchema";
+import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 import { User } from "@/schema/userSchema";
+import { startOfDay } from "date-fns";
 
 export async function GET(request: Request) {
   connectDB();
@@ -24,6 +26,16 @@ export async function GET(request: Request) {
 
     if (!dashboard) throw new Error("대시보드 정보가 없습니다.");
 
+    // checkList에서 오늘 날짜의 항목만 필터링
+    const todayStart = startOfDay(new Date());
+    dashboard.checkList.list = dashboard.checkList.list.map((item: any) => ({
+      ...item,
+      data: item.data.filter((dataItem: any) => {
+        const itemDateStartOfDay = startOfDay(dataItem.date);
+        return itemDateStartOfDay.getTime() === todayStart.getTime();
+      }),
+    }));
+
     const teamMembers = await TeamMembers.findOne({ studyId, "members.status": "ACCEPTED" });
 
     let acceptedTeamMembers = [];
@@ -33,7 +45,7 @@ export async function GET(request: Request) {
         teamMembers.members.map(async (member: any) => {
           const user = await User.findById(member.userId);
           return {
-            memberId: member.userId,
+            userId: member.userId,
             nickname: user.nickname,
             profileImageUrl: user.profileImageUrl,
             role: member.role,
@@ -44,7 +56,11 @@ export async function GET(request: Request) {
       );
     }
 
-    return Response.json({ dashboard, teamMemberList: acceptedTeamMembers });
+    const ownerId = acceptedTeamMembers.find((member) => member.isOwner === true).userId;
+
+    const study = await Study.findById(studyId).select("startDate endDate");
+
+    return Response.json({ dashboard, teamMemberList: acceptedTeamMembers, ownerId, study });
   } catch (error: any) {
     throw new Error(error);
   }

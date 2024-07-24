@@ -1,18 +1,13 @@
 import StudyAddFunctionCard from "@/components/domains/dashboard/StudyFunctionAddButtonCard";
 import StudyFunctionEditButton from "@/components/domains/dashboard/StudyFunctionEditButton";
 import StudyMemberProgressGaugeCard from "@/components/domains/dashboard/StudyMemberProgressGaugeCard";
-import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMemberChecklistCard/StudyMemberChecklistCard";
 import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMemberAttendanceCard";
-import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
+// import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardConnector";
-import { toggleFunctionIsActive, setIsEditingAction } from "@/lib/database/action/dashboard";
+import { toggleFunctionIsActive } from "@/lib/database/action/dashboard";
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
-
-interface ITeamTabProps {
-  params: {
-    id: string;
-  };
-}
+import { getSession } from "@/lib/database/getSession";
+import StudyMemberChecklistCard from "@/components/domains/dashboard/team/StudyMemberChecklistCard";
 
 const getDashboardInfo = async (id: string) => {
   try {
@@ -24,18 +19,30 @@ const getDashboardInfo = async (id: string) => {
   }
 };
 
+interface ITeamTabProps {
+  params: {
+    id: string;
+  };
+}
+
 export default async function TeamTab(props: ITeamTabProps) {
   const studyId = props.params.id;
 
-  const { dashboard, teamMemberList } = await getDashboardInfo(studyId);
-  if (!dashboard || !teamMemberList) return;
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  const { dashboard, teamMemberList, ownerId, study } = await getDashboardInfo(studyId);
+
+  if (!dashboard || !teamMemberList || !ownerId || !study) return;
   const { progressGauge, attendance, checkList, _id: dashboardId } = dashboard;
   useDashboardTeamStore.getState().setDashboardInfo({
-    studyId,
     dashboardId,
-    teamMember: teamMemberList,
+    studyId,
+    startDate: study.startDate,
+    endDate: study.endDate,
   });
 
+  const isOwner = userId === ownerId;
   const isProgressGaugeExist = progressGauge.isActive;
   const isAttendanceExist = attendance.isActive;
   const isCheckListExist = checkList.isActive;
@@ -52,29 +59,24 @@ export default async function TeamTab(props: ITeamTabProps) {
 
   return (
     <section className="flex flex-col py-7 px-4 relative z-[1]">
-      {isAnyFeatureExist && (
-        <form className="self-end" action={setIsEditingAction}>
-          <input type="hidden" name="studyId" value={studyId} />
-          <StudyFunctionEditButton />
-        </form>
-      )}
+      {isAnyFeatureExist && isOwner && <StudyFunctionEditButton />}
 
       <div className="flex flex-col gap-4">
         {isProgressGaugeExist && (
           <div className="relative">
-            <StudyMemberProgressGaugeCard list={progressGauge.list} />
+            <StudyMemberProgressGaugeCard list={progressGauge.list} teamMemberList={teamMemberList} />
             {progressGaugeHasNext && <FunctionCardConnector />}
           </div>
         )}
         {isAttendanceExist && (
           <div className="relative">
-            <StudyMemberAttendanceCard list={attendance.list} />
+            <StudyMemberAttendanceCard list={attendance.list} teamMemberList={teamMemberList} />
             {attendanceHasNext && <FunctionCardConnector />}
           </div>
         )}
         {isCheckListExist && (
           <div className="relative">
-            <StudyMemberChecklistCard list={checkList.list} />
+            <StudyMemberChecklistCard list={checkList.list} teamMemberList={teamMemberList} />
             {checkListExist && <FunctionCardConnector />}
           </div>
         )}

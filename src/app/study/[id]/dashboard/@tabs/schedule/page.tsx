@@ -1,17 +1,52 @@
-"use client";
-
 import CalendarCard from "@/components/domains/dashboard/CalendarCard";
 import MeetingCard from "@/components/domains/dashboard/MeetingCard";
-import { useState } from "react";
+import { fetchStudyMeetingAction } from "@/lib/database/action/dashboard";
+import { eachDayOfInterval, getDay } from "date-fns";
 
-export default function ScheduleTab() {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+interface IScheduleTabProps {
+  params: {
+    id: string;
+  };
+}
+type TWeekdayMap = {
+  [key: string]: number;
+};
+
+const weekdayMap: TWeekdayMap = {
+  월요일: 1,
+  화요일: 2,
+  수요일: 3,
+  목요일: 4,
+  금요일: 5,
+  토요일: 6,
+  일요일: 0,
+};
+
+function getMeetingListByWeekday(startDate: Date, endDate: Date, weekday: number) {
+  const allDates = eachDayOfInterval({ start: startDate, end: endDate });
+
+  const datesByWeekday = allDates.filter((date) => getDay(date) === weekday);
+
+  return datesByWeekday;
+}
+
+export default async function ScheduleTab(props: IScheduleTabProps) {
+  const studyId = props.params.id;
+
+  const { meeting, startDate, endDate, title } = await fetchStudyMeetingAction(studyId);
+
+  const weekday = weekdayMap[meeting.schedule.day];
+  const meetingList = getMeetingListByWeekday(startDate, endDate, weekday);
+
+  const studyMeetingInfo = {
+    title,
+    where: meeting.format === "ONLINE" ? meeting.platform : meeting.location,
+  };
 
   return (
     <section className="flex flex-col gap-3 pt-6 py-10 px-4">
-      <CalendarCard date={date} setDate={setDate} />
-
-      <MeetingCard date={date} />
+      <CalendarCard dateList={meetingList} />
+      <MeetingCard meetingList={meetingList} studyMeetingInfo={studyMeetingInfo} />
     </section>
   );
 }
