@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   const endDate = searchParams.get("endDate");
   //헤더로 유저정보 받기 (북마크 여부 확인)
   const token = request.headers.get("Authorization");
-  let userId = token?.split(" ")[1];
+  const userId = token?.split(" ")[1];
 
   await connectDB();
 
@@ -179,6 +179,7 @@ export async function GET(request: NextRequest) {
           const isBookmarked = userId ? Boolean(await StudyBookmark.findOne({ studyId: _id, userId })) : false;
           const acceptedCount = acceptedTeamMembers ? acceptedTeamMembers.length : 0;
           const wantedMemberCount = wantedMember?.count || "제한없음";
+
           return {
             id: _id.toString(),
             ownerId,
@@ -190,7 +191,7 @@ export async function GET(request: NextRequest) {
             meeting,
             wantedMemberCount,
             acceptedTeamMemberCount: acceptedCount,
-            isBookmarked: !!isBookmarked,
+            isBookmarked: isBookmarked,
           };
         }),
       );
@@ -203,7 +204,7 @@ export async function GET(request: NextRequest) {
 
     const totalPages = Math.ceil(totalStudiesCount / pageSize);
     const hasNextPage = totalPages > page;
-
+    console.log(studyList);
     return Response.json({ studyList, totalPages, currentPage: page, pageSize, hasNextPage });
   } catch (error: any) {
     console.error("error study list", error);
