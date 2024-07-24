@@ -3,12 +3,11 @@ import { ko } from "date-fns/locale";
 
 export function getDayTimeByDate(date: Date): [string, string] {
   if (!date) return ["", ""];
-  const dayOfWeek = format(date, "EEE", { locale: ko });
-
-  const formattedDate = format(date, "MM.dd", { locale: ko });
-
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
+  const typedDate = new Date(date);
+  const dayOfWeek = format(typedDate, "EEE", { locale: ko });
+  const formattedDate = format(typedDate, "MM.dd", { locale: ko });
+  const hours = typedDate.getHours();
+  const minutes = typedDate.getMinutes();
   const isAM = hours < 12;
   const formattedHours = hours % 12 || 12;
   const period = isAM ? "오전" : "오후";
