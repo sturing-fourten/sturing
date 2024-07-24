@@ -72,3 +72,16 @@ export const checkAttendanceAction = async (formData: FormData) => {
     console.log("error", error);
   }
 };
+
+export const fetchStudyMeetingAction = async (id: string) => {
+  try {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/schedule?studyId=${id}`);
+    const result = await response.json();
+
+    revalidatePath(`/study/${id}/dashboard/schedule`);
+    return result;
+  } catch (error) {
+    console.error("Error fetching study", error);
+    throw error;
+  }
+};
