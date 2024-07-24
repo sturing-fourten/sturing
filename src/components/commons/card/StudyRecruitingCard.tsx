@@ -34,7 +34,9 @@ export default function StudyRecruitingCard(props: IStudyRecruitingCardProps) {
   const memberCountAccepted = (teamMembersId as TTeamMembersIdAddedMember)?.members
     ?.filter((member) => member.status === "ACCEPTED")
     ?.length.toString();
-  const memberCountWanted = props?.study?.wantedMember?.count;
+  const memberCountWanted = `${props?.study?.wantedMember?.count}${
+    props?.study?.wantedMember?.count === "제한없음" ? "" : "명"
+  }`;
 
   return (
     <div className="py-6 px-5 border border-gray-300 bg-white rounded-lg">
