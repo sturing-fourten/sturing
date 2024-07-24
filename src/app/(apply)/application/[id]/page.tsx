@@ -25,6 +25,12 @@ export default async function ApplicationPage({ params }: { params: { id: string
           <ApplicationContents applicationData={application} />
         </div>
         <footer className="flex gap-4 justify-center items-center w-full px-4 py-3">
+          <Button
+            type="button"
+            varient="ghost"
+            addStyle="w-full h-[50px] rounded-[5px] border-main-500 bg-white text-main-500">
+            거절하기
+          </Button>
           <Button type="button" varient="filled" addStyle="w-full h-[50px] rounded-[5px] bg-main-500 text-white">
             수락하기
           </Button>
