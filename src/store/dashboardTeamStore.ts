@@ -10,11 +10,13 @@ type TDashboardInfo = {
 interface IInitialState {
   isEditing: boolean;
   dashboardInfo: TDashboardInfo;
+  selectedUserId: any | null;
 }
 
 interface IDashboardTeamState extends IInitialState {
   setIsEditing: () => void;
   setDashboardInfo: (currentDashboardInfo: TDashboardInfo) => void;
+  setSelectedUserId: (newId: any) => void;
 }
 
 const initialState: IInitialState = {
@@ -25,10 +27,12 @@ const initialState: IInitialState = {
     startDate: null,
     endDate: null,
   },
+  selectedUserId: null,
 };
 
 export const useDashboardTeamStore = create<IDashboardTeamState>((set) => ({
   ...initialState,
   setIsEditing: () => set((state) => ({ isEditing: !state.isEditing })),
   setDashboardInfo: (currentDashboardInfo) => set({ dashboardInfo: currentDashboardInfo }),
+  setSelectedUserId: (newId) => set({ selectedUserId: newId }),
 }));

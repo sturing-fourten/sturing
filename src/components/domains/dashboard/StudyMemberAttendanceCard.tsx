@@ -29,7 +29,7 @@ export default function StudyMemberAttendanceCard({
       {isTodayInRange ? (
         <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide mt-4">
           {list.map((item) => {
-            const member = teamMemberList.find((member) => member.memberId === item.userId.toString());
+            const member = teamMemberList.find((member) => member.userId === item.userId.toString());
             return <MemberItem key={item.teamMemberId.toString()} nickname={member?.nickname || ""} item={item} />;
           })}
         </ul>
@@ -51,11 +51,11 @@ async function MemberItem(props: IMemberItem) {
   const userId = session?.user?.id;
   const isMe = item.userId || "" === userId;
   const { studyId, dashboardId } = useDashboardTeamStore.getState().dashboardInfo;
-
+  if (!studyId || !dashboardId) return;
   const todayAttendance = getTodayAttendance(item.data);
   if (!todayAttendance) return;
   return (
-    <li className="flex-shrink-0 flex flex-col items-center justify-end gap-2 w-[66px] py-2">
+    <li className="flex-shrink-0 flex flex-col items-center justify-end gap-2 w-[72px] py-2">
       {/* 
         * @todo 추후 개발
         {!isMe && (

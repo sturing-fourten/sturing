@@ -1,13 +1,13 @@
 import StudyAddFunctionCard from "@/components/domains/dashboard/StudyFunctionAddButtonCard";
 import StudyFunctionEditButton from "@/components/domains/dashboard/StudyFunctionEditButton";
 import StudyMemberProgressGaugeCard from "@/components/domains/dashboard/StudyMemberProgressGaugeCard";
-import StudyMemberChecklistCard from "@/components/domains/dashboard/StudyMemberChecklistCard/StudyMemberChecklistCard";
 import StudyMemberAttendanceCard from "@/components/domains/dashboard/StudyMemberAttendanceCard";
 // import StudyPhotoProof from "@/components/domains/dashboard/StudyPhotoProof";
 import FunctionCardConnector from "@/components/domains/dashboard/FunctionCardConnector";
 import { toggleFunctionIsActive } from "@/lib/database/action/dashboard";
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 import { getSession } from "@/lib/database/getSession";
+import StudyMemberChecklistCard from "@/components/domains/dashboard/team/StudyMemberChecklistCard";
 
 const getDashboardInfo = async (id: string) => {
   try {

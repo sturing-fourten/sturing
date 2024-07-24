@@ -18,7 +18,7 @@ export default function StudyMemberProgressGaugeCard({
       <DashboardCardTitle type="progressGauge" dashboardId={dashboardId} studyId={studyId} />
       <ul className="flex flex-col gap-3 max-h-[196px] overflow-y-scroll scrollbar-hide">
         {list.map((item) => {
-          const member = teamMemberList.find((member) => member.memberId === item.userId.toString());
+          const member = teamMemberList.find((member) => member.userId === item.userId.toString());
           return (
             <ProgressItem
               key={item.teamMemberId.toString()}
