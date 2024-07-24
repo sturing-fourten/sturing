@@ -40,15 +40,15 @@ export default async function ScheduleTab(props: IScheduleTabProps) {
   const weekday = weekdayMap[meeting.schedule.day];
   const meetingList = getMeetingListByWeekday(startDate, endDate, weekday);
 
-  // const studyMeetingInfo = {
-  //   title,
-  //   where: meeting.format === "ONLINE" ? meeting.platform : meeting.location,
-  // };
+  const studyMeetingInfo = {
+    title,
+    where: meeting.format === "ONLINE" ? meeting.platform : meeting.location,
+  };
 
   return (
     <section className="flex flex-col gap-3 pt-6 py-10 px-4">
       <CalendarCard meetingList={meetingList} />
-      {/* <MeetingCard meetingList={meetingList} studyMeetingInfo={studyMeetingInfo} /> */}
+      <MeetingCard meetingList={meetingList} studyMeetingInfo={studyMeetingInfo} />
     </section>
   );
 }
