@@ -27,6 +27,7 @@ export function StudyRecruitCard({ isMini, recruitCardData, onClick, hideBookmar
     acceptedTeamMemberCount,
     isBookmarked,
   } = recruitCardData;
+
   const formattedStartDate = formatDate(startDate);
   const formattedEndDate = formatDate(endDate);
   const studySchedule =
