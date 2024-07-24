@@ -55,7 +55,7 @@ export const checkAttendanceAction = async (formData: FormData) => {
   const userId = session?.user?.id;
 
   try {
-    const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/check-attendance`, {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/attendance`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
