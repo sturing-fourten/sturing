@@ -4,7 +4,7 @@ import Checkbox from "./Checkbox";
 import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 import { TCheckListData } from "@/types/dashboard";
-import { postCheckItemAction } from "@/lib/database/action/dashboard";
+import { postCheckItemAction, toggleCheckItemAction } from "@/lib/database/action/dashboard";
 import { startOfDay } from "date-fns";
 import NoList from "../mystudy/NoList";
 import { useDashboardScheduleStore } from "@/store/dashboardScheduleStore";
@@ -68,7 +68,7 @@ export default function ChecklistCard({ checkListData, studyId }: IChecklistCard
       <ul className="mt-4">
         {currentDateCheckListDataItem ? (
           currentDateCheckListDataItem.contentList.map((checkItem, index) => (
-            <TodoItem key={index} checkItem={checkItem} />
+            <MyCheckItem key={index} checkItem={checkItem} studyId={studyId} />
           ))
         ) : (
           <NoList>해당 날짜에 체크리스트가 없어요.</NoList>
@@ -78,11 +78,13 @@ export default function ChecklistCard({ checkListData, studyId }: IChecklistCard
   );
 }
 
-function TodoItem({ checkItem }: { checkItem: any }) {
+function MyCheckItem({ checkItem, studyId }: { checkItem: any; studyId: any }) {
   const { content, isChecked, _id: checkItemId } = checkItem;
   return (
     <li className="flex justify-between items-center py-2 rounded-sm">
-      <form className="flex justify-start items-center gap-2" action={""}>
+      <form className="flex justify-start items-center gap-2 text-[0px]" action={toggleCheckItemAction}>
+        <input type="hidden" name="studyId" value={studyId} />
+        <input type="hidden" name="checkItemId" value={checkItemId} />
         <Checkbox isChecked={isChecked} />
         <div className="text-gray-900 text-sm font-medium leading-tight">{content}</div>
       </form>

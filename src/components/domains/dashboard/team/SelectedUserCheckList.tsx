@@ -1,8 +1,9 @@
 "use client";
 
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
-import { CheckItem } from "./CheckItem";
+
 import { useEffect } from "react";
+import { CheckItem } from "./CheckItem";
 
 export default function SelectedUserCheckList({ allMemberTodayCheckList }: { allMemberTodayCheckList: any }) {
   const { selectedUserId, setSelectedUserId } = useDashboardTeamStore();

@@ -78,51 +78,44 @@ export async function POST(request: Request) {
   }
 }
 
-// export async function PATCH(request: Request) {
-//   const { dashboardId, userId, date, checkItemId } = await request.json();
+export async function PATCH(request: Request) {
+  const { studyId, checkItemId } = await request.json();
 
-//   if (!dashboardId || !userId || !date || !checkItemId) {
-//     return Response.json({ error: "필요한 모든 데이터가 제공되지 않았습니다." }, { status: 400 });
-//   }
+  if (!studyId || !checkItemId) {
+    return Response.json({ error: "필요한 모든 데이터가 제공되지 않았습니다." }, { status: 400 });
+  }
 
-//   try {
-//     connectDB();
-//     const dashboard = await Dashboard.findById(dashboardId);
-//     if (!dashboard) {
-//       return Response.json({ message: "대시보드를 찾을 수 없습니다." }, { status: 404 });
-//     }
+  try {
+    connectDB();
 
-//     const targetDate = new Date(date);
-//     targetDate.setHours(0, 0, 0, 0);
+    const dashboard = await Dashboard.findOne({ studyId }).select("checkList");
+    if (!dashboard) {
+      return Response.json({ message: "대시보드를 찾을 수 없습니다." }, { status: 404 });
+    }
 
-//     const userCheckListTotal = dashboard.checkList.list.find(
-//       (item: { userId: { toString: () => any } }) => item.userId.toString() === userId,
-//     );
+    // checkItemId가 동일한 체크리스트 항목 조회
+    let targetCheckItem = null;
+    for (const checkListItem of dashboard.checkList.list) {
+      for (const checkListDataItem of checkListItem.data) {
+        targetCheckItem = checkListDataItem.contentList.find(
+          (contentListItem: any) => contentListItem._id.toString() === checkItemId,
+        );
+        if (targetCheckItem) break;
+      }
+      if (targetCheckItem) break;
+    }
 
-//     if (!userCheckListTotal) {
-//       return Response.json({ message: "해당 유저의 체크 리스트를 찾을 수 없습니다." }, { status: 404 });
-//     }
+    if (!targetCheckItem) {
+      return Response.json({ message: "해당 체크 리스트 항목을 찾을 수 없습니다." }, { status: 404 });
+    }
+    // isChecked 토글
+    targetCheckItem.isChecked = !targetCheckItem.isChecked;
 
-//     const targetDayCheckListData = userCheckListTotal.data.find((entry: { date: Date }) => {
-//       const entryDate = new Date(entry.date);
-//       return entryDate.getDate() === targetDate.getDate();
-//     });
+    // 변경된 대시보드 저장
+    await dashboard.save();
 
-//     if (!targetDayCheckListData) {
-//       return Response.json({ message: "해당 날짜의 체크 리스트를 찾을 수 없습니다." }, { status: 404 });
-//     }
-
-//     const targetCheckItem = targetDayCheckListData.find((checkItem: any) => checkItem._id === checkItemId);
-//     if (!targetCheckItem) {
-//       return Response.json({ message: "해당 체크 리스트 항목을 찾을 수 없습니다." }, { status: 404 });
-//     }
-
-//     targetCheckItem.isChecked = !targetCheckItem.isChecked;
-
-//     await dashboard.save();
-
-//     return Response.json({ message: "체크 리스트 상태가 성공적으로 업데이트되었습니다." }, { status: 200 });
-//   } catch (error) {
-//     return Response.json({ message: "실패" }, { status: 500 });
-//   }
-// }
+    return Response.json({ message: "체크 리스트 상태가 성공적으로 업데이트되었습니다." }, { status: 200 });
+  } catch (error) {
+    return Response.json({ message: "실패" }, { status: 500 });
+  }
+}
