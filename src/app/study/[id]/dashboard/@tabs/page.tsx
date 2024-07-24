@@ -9,12 +9,6 @@ import { toggleFunctionIsActive } from "@/lib/database/action/dashboard";
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 import { getSession } from "@/lib/database/getSession";
 
-interface ITeamTabProps {
-  params: {
-    id: string;
-  };
-}
-
 const getDashboardInfo = async (id: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard?studyId=${id}`);
@@ -24,6 +18,12 @@ const getDashboardInfo = async (id: string) => {
     throw error;
   }
 };
+
+interface ITeamTabProps {
+  params: {
+    id: string;
+  };
+}
 
 export default async function TeamTab(props: ITeamTabProps) {
   const studyId = props.params.id;
