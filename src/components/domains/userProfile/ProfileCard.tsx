@@ -56,26 +56,30 @@ export default function ProfileCard({ page, mypage, profile }: ProfileCardProps)
           <h1 className="font-bold text-[18px] leading-[150%]">
             {isProfile ? profile?.user?.nickname : mypage?.user?.nickname}님
           </h1>
-          {isProfile ? (
-            <form action={""} className="flex items-center">
-              <button className="text-xs text-main-500 font-semibold">팔로우</button>
-            </form>
-          ) : (
-            <Link href={"/edit-profile"}>
-              <button className="flex items-center text-gray-700 font-semibold text-xs leading-normal">
-                프로필 수정 <img src={ICONS.rightArrowBlackBold.src} />
-              </button>
-            </Link>
-          )}
+          {
+            !isProfile && (
+              // ? (
+              //   <form action={""} className="flex items-center">
+              //     <button className="text-xs text-main-500 font-semibold">팔로우</button>
+              //   </form>
+              // ) : (
+              <Link href={"/edit-profile"}>
+                <button className="flex items-center text-gray-700 font-semibold text-xs leading-normal">
+                  프로필 수정 <img src={ICONS.rightArrowBlackBold.src} />
+                </button>
+              </Link>
+            )
+            // )
+          }
         </div>
-        <div className="text-black text-xs leading-[18px] flex items-center gap-2">
+        {/* <div className="text-black text-xs leading-[18px] flex items-center gap-2">
           <p className="text-gray-700">
             팔로잉 <span className="font-semibold text-black ml-1">5</span>
           </p>
           <p className="text-gray-700">
             팔로워 <span className="font-semibold text-black ml-1">7</span>
           </p>
-        </div>
+        </div> */}
         {(mypage?.matching || profile?.matching) && (
           <>
             <div className="flex items-center gap-[10px]">
@@ -88,7 +92,7 @@ export default function ProfileCard({ page, mypage, profile }: ProfileCardProps)
               {isProfile
                 ? matchingLocationInfo(profile?.matching?.locationIsVisible || false, userLocation)
                 : matchingLocationInfo(mypage?.matching?.locationIsVisible || false, myLocation)}
-              <InfoTag>{getMoodAltById(isProfile ? userMood : myMood)}</InfoTag>
+              <InfoTag>{getMoodAltById(isProfile ? userMood : myMood) + " 분위기"}</InfoTag>
             </div>
           </>
         )}

@@ -90,3 +90,9 @@ export const STUDY_RECRUIT_INFO = {
   task: { title: "과제", icon: { src: ICONS.postInfoTask.src, alt: ICONS.postInfoTask.alt } },
   location: { title: "장소", icon: { src: ICONS.postInfoLocation.src, alt: ICONS.postInfoLocation.alt } },
 };
+
+export const STUDY_OVERVIEW_TITLE: { [key: string]: string } = {
+  progress: "활동 중 스터디",
+  waiting: "대기 스터디",
+  done: "완료 스터디",
+};
