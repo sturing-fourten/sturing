@@ -8,6 +8,7 @@ import { getDateRange } from "@/utils/getDateRange";
 import Link from "next/link";
 import { format } from "date-fns";
 import { useUserStore } from "@/store/userStore";
+import { cancleApply } from "@/lib/database/action/apply";
 
 interface IStudyApplyingCardProps {
   study: TMyStudy;
@@ -34,33 +35,14 @@ const StudyApplyingCard = (props: IStudyApplyingCardProps) => {
   const { user } = useUserStore();
   const userId = user ? user._id.toString() : "";
 
-  const cancleApply = async (studyId: string) => {
-    try {
-      const response = await fetch(`/api/study/${studyId}/apply-cancel`, {
-        method: "DELETE",
-        headers: {
-          Authorization: "Bearer " + userId,
-        },
-        next: { revalidate: 10 },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "지원 취소하기 실패");
-      }
-    } catch (error: any) {
-      console.error("Error fetching Image:", error.message);
-      throw error;
-    }
-  };
-
   const handleCancleApply = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (studyId) {
       try {
-        await cancleApply(studyId.toString());
+        await cancleApply(studyId.toString(), userId);
         alert("지원 취소가 완료되었습니다.");
+        window.location.reload();
       } catch (error: any) {
         alert("지원 취소에 실패했습니다. 다시 시도해 주세요.");
       }
