@@ -9,6 +9,7 @@ import { TStudyDetailInfoData } from "@/types/api/study";
 import { ROLE_LIST, TRole } from "@/constant/teamMemberInfo";
 import { RecentViewedStudy } from "@/types/localStorage";
 import { useEffect } from "react";
+import Link from "next/link";
 
 interface IRecruitedMembersListProps {
   study: TStudyDetailInfoData["study"];
@@ -54,14 +55,16 @@ export default function RecruitedMembersList({ study, memberList }: IRecruitedMe
         <HorizontalDivider addStyle="my-4" />
         <div className="flex flex-col gap-1 justify-start">
           {memberList?.map((member) => (
-            <MemberProfile
-              key={member.memberId.toString()}
-              nickname={member.nickname}
-              profileImageUrl={member.profileImageUrl}
-              role={ROLE_LIST[member.role]?.name}
-              isLeader={member.isOwner}
-              status={member.status}
-            />
+            <Link href={`/profile/${member.memberId.toString()}`}>
+              <MemberProfile
+                key={member.memberId.toString()}
+                nickname={member.nickname}
+                profileImageUrl={member.profileImageUrl}
+                role={ROLE_LIST[member.role]?.name}
+                isLeader={member.isOwner}
+                status={member.status}
+              />
+            </Link>
           ))}
         </div>
       </StudyDetailCardLayout>
