@@ -16,25 +16,27 @@ export async function GET(request: Request, { params }: { params: { id: string }
     // 2. 지원서 유저 닉네임 추가
     const { userId } = application;
 
-    const user = await User.findById(userId).select("nickname");
+    const user = await User.findById(userId);
+
     if (!user) {
       return new Response("User not found", { status: 404 });
     }
 
     const userNickname = user.nickname;
 
-    const updatedApplication = await Application.findOneAndUpdate(
-      { _id: applicationId },
-      { $set: { userNickname: userNickname } },
-      { new: true },
-    );
+    const updatedApplication = {
+      _id: application._id,
+      studyId: application.studyId,
+      userId: application.userId,
+      userNickname: userNickname,
+      title: application.title,
+      resolution: application.resolution,
+      role: application.role,
+      createdAt: application.createdAt,
+      updatedAt: application.updatedAt,
+    };
 
-    return new Response(
-      JSON.stringify({
-        updatedApplication,
-      }),
-      { status: 200 },
-    );
+    return new Response(JSON.stringify(updatedApplication), { status: 200 });
   } catch (error: any) {
     return new Response(error.message, { status: 500 });
   }
