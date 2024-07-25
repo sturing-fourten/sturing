@@ -11,7 +11,7 @@ interface LectureRatingsProps {
 }
 
 export default function LectureRatings({ lectureInfo }: LectureRatingsProps) {
-  const { rating, review } = lectureInfo;
+  const { _id, rating, review } = lectureInfo;
   return (
     <>
       <section id="rating">
@@ -22,7 +22,7 @@ export default function LectureRatings({ lectureInfo }: LectureRatingsProps) {
             </Title>
             <TagRate>{rating}</TagRate>
           </div>
-          <Link href="">
+          <Link href={`/lecture/${_id}/review-list`}>
             <Image src={ICONS.rightArrowBlack.src} alt={ICONS.rightArrowBlack.alt} width={24} height={24} />
           </Link>
         </div>
