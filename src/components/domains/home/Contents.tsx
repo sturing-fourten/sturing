@@ -60,7 +60,7 @@ export default function Contents() {
         setTopSectionStudyList(studyList);
       }
     } catch (error: any) {
-      console.error("Error fetching Image:", error.message);
+      console.error("Error fetching Image:", error);
       throw error;
     }
   };

@@ -22,6 +22,8 @@ import { matchingAction } from "@/lib/database/action/matching";
 export default function MatchingPage() {
   const { user, fetchUser } = useUserStore();
   const { matching, fetchMatching } = useMatchingStore();
+  const { levels } = useLevelsStore();
+
   const [steps, setSteps] = useState<number>(1);
   const [isInterestSelected, setIsInterestSelected] = useState<boolean>(false);
   const [isLevelSelected, setIsLevelSelected] = useState<boolean>(false);
@@ -78,10 +80,12 @@ export default function MatchingPage() {
   useEffect(() => {
     if (!user) {
       fetchUser();
-      if (!matching) {
-        fetchMatching();
-      }
-    } else {
+    }
+    if (!matching) {
+      fetchMatching();
+    }
+    if (user && matching) {
+      fetchMatching();
       setSelectedLevel(JSON.parse(matching?.levels || "[]"));
       setSelectedProgressWay(matching?.progressWay || "");
       setSelectedLocations(JSON.parse(matching?.locations || "[]"));
