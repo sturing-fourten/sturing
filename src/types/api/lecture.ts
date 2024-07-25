@@ -18,7 +18,7 @@ export type TLectureInfoData = {
     reviewer: string;
     rating: number;
     comment: string;
-    created_at: string;
+    createdAt: string;
     _id: string;
   }[];
   isBookmarked?: boolean;
