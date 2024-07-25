@@ -123,14 +123,14 @@ export default function ApplyPage({ params: { id } }: IApplyPageProps) {
               <Button
                 type="button"
                 varient="ghost"
-                addStyle="w-1/4 h-[50px] rounded-[8px] text-gray-600 font-medium"
+                addStyle="w-1/4 h-[50px] rounded-[5px] text-gray-600 font-medium"
                 onClick={handlePrevSection}>
                 이전
               </Button>
               <Button
                 type="submit"
                 varient="filled"
-                addStyle="w-3/4 h-[50px] rounded-[8px] bg-main-500 text-white font-medium">
+                addStyle="w-3/4 h-[50px] rounded-[5px] bg-main-500 text-white font-medium">
                 지원하기
               </Button>
             </>
