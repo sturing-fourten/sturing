@@ -16,10 +16,25 @@ const getProfileInfo = async (id: string) => {
   }
 };
 
+const getDoneStudyList = async (id: string) => {
+  try {
+    const url = `${process.env.LOCAL_URL}/api/my-study/list?userId=${id}&listType=DONE`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("스터디 목록을 불러오는 데 실패했습니다.");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching Done StudyList", error);
+  }
+};
+
 export default async function Profile({ params }: { params: { id: string } }) {
   const { id } = params;
   const profileData = await getProfileInfo(id);
-
+  const doneStudyList = await getDoneStudyList(id);
+  const {
+    user: { sturingIndex },
+  } = profileData;
   return (
     <>
       <div className="bg-gradient-to-br from-gradient-gray/30 to-gradient-to/30">
@@ -30,10 +45,10 @@ export default async function Profile({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="bg-white pb-10">
-        <SturingIndex />
-        <RoleTagList />
-        <PeerReviewTagList />
-        <StudyHistory />
+        <SturingIndex sturingIndex={sturingIndex} />
+        {/* <RoleTagList /> */}
+        {/* <PeerReviewTagList /> */}
+        <StudyHistory doneStudyList={doneStudyList} />
       </div>
     </>
   );

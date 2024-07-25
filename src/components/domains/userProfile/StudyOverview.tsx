@@ -1,26 +1,20 @@
 import Button from "@/components/commons/Button";
+import { STUDY_OVERVIEW_TITLE } from "@/constant/study";
+import { TMyStudyTabMenuLinkUnderlinedItem } from "@/types/study";
 import Link from "next/link";
 
-export default function StudyOverview() {
+export default async function StudyOverview({ studyCount }: { studyCount: TMyStudyTabMenuLinkUnderlinedItem[] }) {
   return (
     <>
       <article className="mt-7 flex flex-col gap-3 items-center">
         <section className="py-4">
           <div className="flex items-center gap-[23px]">
-            <div className="flex flex-col gap-1 items-center font-semibold">
-              <p className="text-base ">1</p>
-              <h3 className="text-gray-700 text-sm">활동 중 스터디</h3>
-            </div>
-            <div className="w-[1px] h-10 bg-gray-300" />
-            <div className="flex flex-col gap-1 items-center font-semibold">
-              <p className="text-base">1</p>
-              <h3 className="text-gray-700 text-sm">대기 스터디</h3>
-            </div>
-            <div className="w-[1px] h-10 bg-gray-300" />
-            <div className="flex flex-col gap-1 items-center font-semibold">
-              <p className="text-base">1</p>
-              <h3 className="text-gray-700 text-sm">완료 스터디</h3>
-            </div>
+            {studyCount.map((studyStatus) => (
+              <div key={studyStatus.id} className="flex flex-col gap-1 items-center font-semibold">
+                <p className="text-base ">{studyStatus.count}</p>
+                <h3 className="text-gray-700 text-sm">{STUDY_OVERVIEW_TITLE[studyStatus.id]}</h3>
+              </div>
+            ))}
           </div>
         </section>
         <section className="flex items-center gap-2 w-full">

@@ -40,7 +40,7 @@ export default async function StudyDoneCard(props: IStudyDoneCardProps) {
       className="flex flex-col gap-5 py-6 px-5 border border-gray-300 rounded-lg bg-white"
       href={`/study/${studyId}/dashboard`}>
       <div className="w-full text-left">
-        <StudyMeetingInfo format={"ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
+        <StudyMeetingInfo format={format === "ONLINE" ? "온라인" : "오프라인"} dateRange={dateRange} where={where} />
         <p className="mt-2 mb-3 text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
         <LectureReviewButton lectureId={lectureIdString}>강의 후기 작성하기</LectureReviewButton>
       </div>

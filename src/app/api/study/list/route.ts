@@ -204,7 +204,7 @@ export async function GET(request: NextRequest) {
 
     const totalPages = Math.ceil(totalStudiesCount / pageSize);
     const hasNextPage = totalPages > page;
-    console.log(studyList);
+
     return Response.json({ studyList, totalPages, currentPage: page, pageSize, hasNextPage });
   } catch (error: any) {
     console.error("error study list", error);

@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
     gender: { type: String, default: "" },
     genderIsVisible: { type: Boolean, default: false },
     authProvider: { type: String, enum: ["github", "kakao"], default: "github" },
+    sturingIndex: { type: Number, required: true, min: 0, max: 100 },
   },
   { timestamps: true },
 );

@@ -30,6 +30,8 @@ export default function Gnb() {
   useEffect(() => {
     if (!user) {
       fetchUser();
+    }
+    if (user) {
       checkMatching();
     }
   }, [user]);
