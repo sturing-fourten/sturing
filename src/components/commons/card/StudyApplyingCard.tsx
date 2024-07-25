@@ -1,3 +1,5 @@
+"use client";
+
 import { TMyStudy, TTeamMembersIdAddedMember } from "@/types/study";
 import StudyApplyInfo from "./element/StudyApplyInfo";
 import StudyCardButton from "./element/StudyCardButton";
@@ -5,12 +7,14 @@ import StudyMeetingInfo from "./element/StudyMeetingInfo";
 import { getDateRange } from "@/utils/getDateRange";
 import Link from "next/link";
 import { format } from "date-fns";
+import { useUserStore } from "@/store/userStore";
+import { cancleApply } from "@/lib/database/action/apply";
 
 interface IStudyApplyingCardProps {
   study: TMyStudy;
 }
 
-export default async function StudyApplyingCard(props: IStudyApplyingCardProps) {
+const StudyApplyingCard = (props: IStudyApplyingCardProps) => {
   const {
     study: {
       _id: studyId,
@@ -27,6 +31,23 @@ export default async function StudyApplyingCard(props: IStudyApplyingCardProps) 
       applicationCreatedAt,
     },
   } = props;
+
+  const { user } = useUserStore();
+  const userId = user ? user._id.toString() : "";
+
+  const handleCancleApply = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (studyId) {
+      try {
+        await cancleApply(studyId.toString(), userId);
+        alert("지원 취소가 완료되었습니다.");
+        window.location.reload();
+      } catch (error: any) {
+        alert("지원 취소에 실패했습니다. 다시 시도해 주세요.");
+      }
+    }
+  };
 
   const dateRange = getDateRange(startDate, endDate);
   const where = (meetingFormat === "ONLINE" ? platform : location) ?? "";
@@ -45,8 +66,10 @@ export default async function StudyApplyingCard(props: IStudyApplyingCardProps) 
       <hr className="bg-gray-300" />
       <div className="flex gap-2">
         <StudyCardButton>지원서 보기</StudyCardButton>
-        <StudyCardButton>지원 취소</StudyCardButton>
+        <StudyCardButton onClick={handleCancleApply}>지원 취소</StudyCardButton>
       </div>
     </Link>
   );
-}
+};
+
+export default StudyApplyingCard;

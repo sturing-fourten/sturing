@@ -58,7 +58,7 @@ export default function RecruitedMembersList({ study, memberList }: IRecruitedMe
               key={member.memberId.toString()}
               nickname={member.nickname}
               profileImageUrl={member.profileImageUrl}
-              role={ROLE_LIST[member.role].name}
+              role={ROLE_LIST[member.role]?.name}
               isLeader={member.isOwner}
               status={member.status}
             />
