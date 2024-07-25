@@ -9,7 +9,7 @@ export default async function LectureReviewList({ params }: { params: { id: stri
 
   return (
     <div className="w-full min-h-screen flex-col inline-flex">
-      <TopBar variant="back">강의 후기 리스트</TopBar>
+      <TopBar variant="back">강의 후기</TopBar>
       <div className="flex-1 px-4 mt-5">
         <RatingCards reviewData={review} reviewListPage />
       </div>
