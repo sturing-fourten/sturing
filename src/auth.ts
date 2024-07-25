@@ -32,6 +32,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             nickname: generateRandomNickName(),
             profileImageUrl: image,
             authProvider: "github",
+            sturingIndex: 50,
           }).save();
           user.id = newUser._id;
         } else {
@@ -52,6 +53,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             nickname: generateRandomNickName(),
             profileImageUrl: image,
             authProvider: "kakao",
+            sturingIndex: 50,
           }).save();
           user.id = newUser._id;
         } else {
