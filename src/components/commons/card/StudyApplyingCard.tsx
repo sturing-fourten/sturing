@@ -65,8 +65,12 @@ const StudyApplyingCard = (props: IStudyApplyingCardProps) => {
       <p className="text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
       <hr className="bg-gray-300" />
       <div className="flex gap-2">
-        <StudyCardButton>지원서 보기</StudyCardButton>
-        <StudyCardButton onClick={handleCancleApply}>지원 취소</StudyCardButton>
+        <StudyCardButton type="button">지원서 보기</StudyCardButton>
+        <form>
+          <StudyCardButton type="submit" onClick={handleCancleApply}>
+            지원 취소
+          </StudyCardButton>
+        </form>
       </div>
     </Link>
   );
