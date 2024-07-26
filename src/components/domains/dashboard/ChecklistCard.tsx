@@ -19,9 +19,9 @@ export default function ChecklistCard({ checkListData, studyId }: IChecklistCard
   const { currentDate } = useDashboardScheduleStore();
   const [newCheckItemContent, setNewCheckItemContent] = useState("");
 
-  if (!currentDate || !checkListData) return <></>;
+  if (!currentDate) return <></>;
 
-  const currentDateCheckListDataItem = checkListData.find(
+  const currentDateCheckListDataItem = checkListData?.find(
     (checkItem: any) => startOfDay(checkItem.date).getTime() === startOfDay(currentDate).getTime(),
   );
 
