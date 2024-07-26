@@ -26,7 +26,7 @@ export default function ScrapLayout({ params, tabs }: IDashboardProps) {
       <TopBar variant="back">관심 목록</TopBar>
 
       {/* Tab Menu */}
-      <TabBarLinkUnderlined defaultSegment={hrefBase} tabMenuList={SCRAP_TAB_MENU_LIST} />
+      <TabBarLinkUnderlined defaultSegment={hrefBase} tabMenuList={SCRAP_TAB_MENU_LIST} isReplace={true} />
 
       {/* Tab Panel */}
       {tabs}

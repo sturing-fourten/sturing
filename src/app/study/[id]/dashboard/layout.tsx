@@ -39,6 +39,7 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
           defaultSegment={hrefBase}
           tabMenuList={MY_STUDY_DASHBOARD_TAB_MENU_LIST}
           stickyOption="sticky top-0 z-[2]"
+          isReplace={true}
         />
         {/* Tab Panel */}
         {tabs}
