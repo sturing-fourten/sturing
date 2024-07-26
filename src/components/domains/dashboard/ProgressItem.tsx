@@ -1,22 +1,18 @@
 import Avatar from "@/components/commons/Avatar";
 import { ROLE_LIST, RoleType } from "@/constant/teamMemberInfo";
-import { getSession } from "@/lib/database/getSession";
 import { TProgressGaugeItem } from "@/types/dashboard";
 
 interface IProgressItem {
   item: TProgressGaugeItem;
   nickname: string;
   role: string;
-  isLeader: boolean;
+  isOwner: boolean;
+  isMe: boolean;
   profileImageUrl: string;
 }
 
 export default async function ProgressItem(props: IProgressItem) {
-  const { item, nickname, role, isLeader, profileImageUrl } = props;
-  const session = await getSession();
-  const userId = session?.user?.id;
-  const isMe = item.userId || "" === userId;
-  const isOwner = isLeader;
+  const { item, nickname, role, isOwner, isMe, profileImageUrl } = props;
 
   const progressWidth = `${item.data}%`;
 
