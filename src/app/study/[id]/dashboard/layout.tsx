@@ -15,19 +15,12 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
 
   const hrefBase = `/study/${id}/dashboard/`;
 
-  const MY_STUDY_DASHBOARD_TAB_MENU_LIST_FOR_MEMBER: TTabMenuLinkUnderlinedItem[] = [
+  const MY_STUDY_DASHBOARD_TAB_MENU_LIST: TTabMenuLinkUnderlinedItem[] = [
     { id: "team", title: "팀", href: `${hrefBase}` },
     { id: "me", title: "개인", href: `${hrefBase}me` },
     { id: "schedule", title: "일정", href: `${hrefBase}schedule` },
     { id: "board", title: "게시판", href: `${hrefBase}board` },
   ];
-
-  // const MY_STUDY_DASHBOARD_TAB_MENU_LIST_FOR_OTHERS: TTabMenuLinkUnderlinedItem[] = [
-  //   { id: "team", title: "팀", href: `${hrefBase}` },
-  //   { id: "me", title: "개인", href: `${hrefBase}me` },
-  //   { id: "schedule", title: "일정", href: `${hrefBase}schedule` },
-  //   { id: "board", title: "게시판", href: `${hrefBase}board` },
-  // ];
 
   const bg = `bg-[linear-gradient(0deg,#151515_0%,rgba(21,21,21,0.50)_100%),url('https://picsum.photos/200/300')]`;
 
@@ -44,7 +37,7 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
         {/* Tab Menu */}
         <TabBarLinkUnderlined
           defaultSegment={hrefBase}
-          tabMenuList={MY_STUDY_DASHBOARD_TAB_MENU_LIST_FOR_MEMBER}
+          tabMenuList={MY_STUDY_DASHBOARD_TAB_MENU_LIST}
           stickyOption="sticky top-0 z-[2]"
         />
         {/* Tab Panel */}
