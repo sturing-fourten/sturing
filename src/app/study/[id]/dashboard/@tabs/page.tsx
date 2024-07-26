@@ -14,7 +14,7 @@ const getDashboardInfo = async (id: string) => {
     const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard?studyId=${id}`);
     return await response.json();
   } catch (error) {
-    console.error("Error fetching study", error);
+    console.error("Error fetching", error);
     throw error;
   }
 };

@@ -86,6 +86,29 @@ export const fetchStudyMeetingAction = async (id: string) => {
   }
 };
 
+export const fetchIsMember = async (studyId: any) => {
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  if (!studyId || !userId) {
+    throw new Error("필수 정보가 없습니다.");
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.LOCAL_URL}/api/dashboard/checklist?studyId=${studyId}&userId=${userId}`,
+    );
+    const myCheckList = await response.json();
+
+    revalidatePath(`/study/${studyId}/dashboard/me`);
+
+    return myCheckList;
+  } catch (error) {
+    console.error("Error fetching", error);
+    throw error;
+  }
+};
+
 export const fetchMyCheckListAction = async (studyId: any) => {
   const session = await getSession();
   const userId = session?.user?.id;
@@ -104,7 +127,7 @@ export const fetchMyCheckListAction = async (studyId: any) => {
 
     return myCheckList;
   } catch (error) {
-    console.error("Error fetching study", error);
+    console.error("Error fetching", error);
     throw error;
   }
 };
