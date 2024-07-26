@@ -14,6 +14,7 @@ import { recruitAction } from "@/lib/database/action/recruit";
 import { useRecruitStore } from "@/store/recruitStore";
 import { useRecruitReset } from "@/hooks/useReset";
 import { clearDraft, loadDraft, saveDraft } from "@/utils/saveDraft";
+import { useRouter } from "next/navigation";
 
 const STORAGE_KEY = "recruitDraft";
 
@@ -22,6 +23,7 @@ export default function Recruit() {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [studyId, setStudyId] = useState<string>("");
   const resetRecruitAll = useRecruitReset();
+  const router = useRouter();
 
   // SelectLectureStore 상태와 업데이트 함수 사용
   const {
@@ -250,9 +252,11 @@ export default function Recruit() {
     saveDraft(draftData, STORAGE_KEY);
   };
 
-  if (isSubmitted) {
-    return <FindTeamMember studyId={studyId} />;
-  }
+  useEffect(() => {
+    if (isSubmitted && studyId) {
+      router.replace(`/recruit/success/${studyId}`);
+    }
+  }, [isSubmitted, studyId, router]);
 
   return (
     <form onSubmit={handleSubmit}>

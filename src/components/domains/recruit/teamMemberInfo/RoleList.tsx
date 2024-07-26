@@ -1,5 +1,5 @@
 import RoleToggle from "@/components/domains/recruit/teamMemberInfo/RoleToggle";
-import { ROLE_LIST, TRole } from "@/constant/teamMemberInfo";
+import { ROLE_LIST, TRole } from "@/constant/recruitRoleList";
 
 interface RoleListProps {
   selectedRole: string[];
