@@ -6,7 +6,7 @@ const fetchApplication = async (id: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/study-application/${id}`);
     const data = await response.json();
-    return data.updatedApplication;
+    return data;
   } catch (error) {
     console.error("Error fetching study", error);
     throw error;

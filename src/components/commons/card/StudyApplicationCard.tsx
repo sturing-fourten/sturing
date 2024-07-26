@@ -6,9 +6,10 @@ import { getFirstInterestLevel } from "@/utils/getFirstInterestLevel";
 import { CATEGORY } from "@/constant/category";
 import { CAREER_LIST } from "@/constant/teamMemberInfo";
 import { format } from "date-fns";
+import Link from "next/link";
 
 export default function StudyApplicationCard(props: TApplicationSummary) {
-  const { _id, profileImageUrl, status, nickname, title, levels, createdAt } = props;
+  const { _id, userId, profileImageUrl, status, nickname, title, levels, createdAt } = props;
   const { interest, level } = getFirstInterestLevel(levels.levels);
 
   const applicationCreatedAt = createdAt ? `${format(new Date(createdAt), "yyyy.MM.dd HH:mm")} 지원` : "";
@@ -17,9 +18,8 @@ export default function StudyApplicationCard(props: TApplicationSummary) {
     <article className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg">
       <StudyApplyInfo status={status} createAt={applicationCreatedAt} />
 
-      <section className="flex items-center justify-stretch gap-3">
+      <Link href={`/profile/${userId}`} className="flex items-center justify-stretch gap-3">
         <Avatar width={40} height={40} profileImageUrl={profileImageUrl} hasBorder={true} />
-
         <div>
           <div className="flex items-center gap-2 text-[12px] font-medium tracking-[-0.36px]">
             <span className="text-gray-700">{nickname}</span>
@@ -30,7 +30,7 @@ export default function StudyApplicationCard(props: TApplicationSummary) {
           </div>
           <p className="text-[12px] font-semibold tracking-[-0.36px] text-gray-900">{title}</p>
         </div>
-      </section>
+      </Link>
 
       <StudyCardLink href={`/application/${_id}`}>지원서 보기</StudyCardLink>
     </article>

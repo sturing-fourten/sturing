@@ -37,7 +37,7 @@ export default async function ApplicationListPage({ params: { studyId } }: IAppl
         <hr className="bg-gray-300 my-4" />
 
         <ul className="flex flex-col gap-4">
-          {applicationList && applicationList.length > 0 ? (
+          {applicationList && applicationList.length >= 1 ? (
             applicationList.map((studyApplication) => (
               <li key={studyApplication._id}>
                 <StudyApplicationCard {...studyApplication} />
