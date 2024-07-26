@@ -22,7 +22,7 @@ const getStudyInfo = async (id: string) => {
   }
 };
 
-export const getCommentsInfo = async (id: string) => {
+const getCommentsInfo = async (id: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/study/${id}/comment`, { cache: "no-store" });
     const commentData = await response.json();
