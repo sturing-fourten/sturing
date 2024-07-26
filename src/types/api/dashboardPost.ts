@@ -1,5 +1,5 @@
 export type TTaskPost = {
-  id: string;
+  _id: string;
   studyId: string;
   writer: { writerId: string; role: string; nickname: string; profileImageUrl: string };
   title: string;
