@@ -8,7 +8,7 @@ export type TTaskPost = {
   postType: "notice" | "task" | "free";
   commentCount: number;
   createdAt: Date;
-  updateAt: Date;
+  updatedAt: Date;
 };
 
 export type TFreePost = TTaskPost;

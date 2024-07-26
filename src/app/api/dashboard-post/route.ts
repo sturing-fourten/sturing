@@ -113,7 +113,7 @@ export async function GET(request: Request) {
     if (taskPostListData) {
       taskPostList = await Promise.all(
         taskPostListData.map(async (post: any) => {
-          const { _id, studyId, writerId, title, content, imageUrl, postType, isImportant, createdAt, updateAt } = post;
+          const { _id, studyId, writerId, title, content, imageUrl, postType, createdAt, updatedAt } = post;
           const user = await User.findById(writerId);
           const writerInTeamMember = teamMembers.members.find((member: any) => {
             return member.userId.toString() === writerId.toString();
@@ -135,7 +135,7 @@ export async function GET(request: Request) {
             postType,
             commentCount: 0,
             createdAt,
-            updateAt,
+            updatedAt,
           };
         }),
       );
@@ -145,7 +145,7 @@ export async function GET(request: Request) {
     if (freePostListData) {
       freePostList = await Promise.all(
         freePostListData.map(async (post: any) => {
-          const { _id, studyId, writerId, title, content, imageUrl, postType, isImportant, createdAt, updateAt } = post;
+          const { _id, studyId, writerId, title, content, imageUrl, postType, createdAt, updatedAt } = post;
           const user = await User.findById(writerId);
           const writerInTeamMember = teamMembers.members.find((member: any) => {
             return member.userId.toString() === writerId.toString();
@@ -168,7 +168,7 @@ export async function GET(request: Request) {
             postType,
             commentCount: 0,
             createdAt,
-            updateAt,
+            updatedAt,
           };
         }),
       );
