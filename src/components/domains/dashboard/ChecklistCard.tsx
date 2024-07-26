@@ -85,7 +85,7 @@ function MyCheckItem({ checkItem, studyId }: { checkItem: any; studyId: any }) {
       <form className="flex justify-start items-center gap-2 text-[0px]" action={toggleCheckItemAction}>
         <input type="hidden" name="studyId" value={studyId} />
         <input type="hidden" name="checkItemId" value={checkItemId} />
-        <Checkbox isChecked={isChecked} />
+        <Checkbox isChecked={isChecked} type="checkList" />
         <div className="text-gray-900 text-sm font-medium leading-tight">{content}</div>
       </form>
     </li>
