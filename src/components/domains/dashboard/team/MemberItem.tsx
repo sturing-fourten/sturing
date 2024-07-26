@@ -23,12 +23,14 @@ export function MemberItem(props: IMemberItem) {
 
   return (
     <li className="flex-shrink-0 flex flex-col items-center justify-end gap-2 w-[72px]">
-      {!isMe && (
+      {/* @todo 추후 구현 _ 카톡 알림
+        * {!isMe && (
         <button className="w-[56px] h-[28px] pb-[5px] bg-[url('/icons/alert-bg-56.svg')] bg-center bg-[length:56px] bg-no-repeat text-center text-[#787878] text-[11px] font-medium leading-none">
           노크하기
         </button>
-      )}
-      <div
+      )} */}
+      <button
+        onClick={() => setSelectedUserId(memberUserId)}
         className={`flex flex-col justify-center items-center gap-1 w-full py-[10px] px-1 rounded border cursor-pointer ${
           isSelected ? "border-main-500 bg-main-100" : "border-transparent"
         }`}>
@@ -42,7 +44,7 @@ export function MemberItem(props: IMemberItem) {
         <div className="text-center text-stone-500 text-xs font-normal leading-none">
           {ROLE_LIST[role as keyof RoleType].name}
         </div>
-      </div>
+      </button>
     </li>
   );
 }

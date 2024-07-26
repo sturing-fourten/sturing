@@ -24,7 +24,7 @@ export default async function StudyMemberChecklistCard({
       </DashboardCardTitle>
 
       {/* 팀 멤버 리스트 */}
-      <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide my-4">
+      <ul className="flex gap-4 overflow-y-scroll scrollbar-hide my-4">
         {teamMemberList?.map((member: any) => {
           const memberUserId = member.userId.toString();
           const isMe = memberUserId === userId;
