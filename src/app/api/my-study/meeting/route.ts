@@ -28,7 +28,7 @@ export async function GET(request: Request) {
       },
       { meeting: 1, startDate: 1, endDate: 1, title: 1 },
     );
-    // 2) 모든 스터디의 7일 내 미팅으로 리스트 생성
+    // 2) 모든 스터디의 14일 내 미팅으로 리스트 생성
     let upcomingMeetingList: TUpcomingMeetingList = [];
     studyList.forEach((study) => {
       const {
@@ -38,7 +38,6 @@ export async function GET(request: Request) {
           schedule: { time, day },
           location,
         },
-        startDate,
         endDate,
         title,
       } = study;
@@ -46,12 +45,14 @@ export async function GET(request: Request) {
       const where = format === "ONLINE" ? platform : location;
       const meetingInfo = {
         title,
-        startDate,
         endDate,
         where,
         day,
         time,
       };
+
+      console.log("studyList", meetingInfo);
+
       upcomingMeetingList = [...upcomingMeetingList, ...generateUpcomingMeetingList(meetingInfo)].sort(
         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
       );
