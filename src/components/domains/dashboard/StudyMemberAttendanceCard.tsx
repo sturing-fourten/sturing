@@ -49,11 +49,12 @@ async function MemberItem(props: IMemberItem) {
   const { item, nickname } = props;
   const session = await getSession();
   const userId = session?.user?.id;
-  const isMe = item.userId || "" === userId;
+  const isMe = item.userId.toString() === userId;
   const { studyId, dashboardId } = useDashboardTeamStore.getState().dashboardInfo;
   if (!studyId || !dashboardId) return;
   const todayAttendance = getTodayAttendance(item.data);
   if (!todayAttendance) return;
+
   return (
     <li className="flex-shrink-0 flex flex-col items-center justify-end gap-2 w-[72px] py-2">
       {/* 
@@ -71,7 +72,7 @@ async function MemberItem(props: IMemberItem) {
           <input type="hidden" name="dashboardId" value={dashboardId} />
           <input type="hidden" name="studyId" value={studyId} />
           <input type="hidden" name="date" value={todayAttendance.date.toString()} />
-          <Checkbox isChecked={todayAttendance.isAttended} />
+          <Checkbox isChecked={todayAttendance.isAttended} isMyCheckItem={isMe} />
         </form>
         <div
           className={`text-center text-[14px] font-medium leading-tight tracking-[-0.28px] ${

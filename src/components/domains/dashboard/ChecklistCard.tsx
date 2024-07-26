@@ -9,6 +9,8 @@ import { startOfDay } from "date-fns";
 import NoList from "../mystudy/NoList";
 import { useDashboardScheduleStore } from "@/store/dashboardScheduleStore";
 import { useState } from "react";
+import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
+import { useUserStore } from "@/store/userStore";
 
 interface IChecklistCardProps {
   checkListData: TCheckListData[];
@@ -80,12 +82,17 @@ export default function ChecklistCard({ checkListData, studyId }: IChecklistCard
 
 function MyCheckItem({ checkItem, studyId }: { checkItem: any; studyId: any }) {
   const { content, isChecked, _id: checkItemId } = checkItem;
+  const { selectedUserId } = useDashboardTeamStore();
+  const { user } = useUserStore();
+  const userId = user ? user._id.toString() : null;
+  const isMyCheckItem = userId === selectedUserId;
+
   return (
     <li className="flex justify-between items-center py-2 rounded-sm">
       <form className="flex justify-start items-center gap-2 text-[0px]" action={toggleCheckItemAction}>
         <input type="hidden" name="studyId" value={studyId} />
         <input type="hidden" name="checkItemId" value={checkItemId} />
-        <Checkbox isChecked={isChecked} type="checkList" />
+        <Checkbox isChecked={isChecked} type="checkList" isMyCheckItem={isMyCheckItem} />
         <div className="text-gray-900 text-sm font-medium leading-tight">{content}</div>
       </form>
     </li>
