@@ -61,7 +61,7 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
           isStudy && "before:-z-[2] before:bg-black/20 before:inset-0 before:absolute"
         }  `}
         style={style}>
-        <TopBar variant="share" showMore={isStudy && isLeader} isWhite={isStudy} />
+        <TopBar variant="share" showMore={isStudy && isLeader} isWhite={isStudy} isBackToHome />
         <div className="flex items-center gap-1 mt-10 mb-4">
           <TagMain>{getStatus()}</TagMain>
           <TagLight>{CATEGORY(isStudy ? studyCategory : lectureCategory)}</TagLight>
