@@ -21,7 +21,7 @@ export default function LectureRelatedStudies({ relatedStudyList }: LectureRelat
           <>
             <CardList>
               {relatedStudyList.slice(0, 4).map((study) => (
-                <Link href={`/study/${study.id}`}>
+                <Link key={study.id} href={`/study/${study.id}`}>
                   <StudyRecruitCard key={study.id} isMini recruitCardData={study} />
                 </Link>
               ))}
