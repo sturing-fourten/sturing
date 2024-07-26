@@ -58,11 +58,12 @@ const StudyApplyingCard = (props: IStudyApplyingCardProps) => {
   return (
     <div className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg">
       <Link href={`/study/${studyId}`} className="flex flex-col gap-4">
-        {status && <StudyApplyInfo status={status} createAt={myApplicationCreatedAt} />}
+        {/* {status && <StudyApplyInfo status={status} createAt={myApplicationCreatedAt} />} */}
         <StudyMeetingInfo
           format={meetingFormat === "ONLINE" ? "온라인" : "오프라인"}
           dateRange={dateRange}
           where={where}
+          createAt={myApplicationCreatedAt}
         />
         <p className="text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
       </Link>

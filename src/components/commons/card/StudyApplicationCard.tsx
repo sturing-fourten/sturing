@@ -16,7 +16,7 @@ export default function StudyApplicationCard(props: TApplicationSummary) {
 
   return (
     <article className="flex flex-col gap-4 px-5 py-6 bg-white border border-gray-300 rounded-lg">
-      <StudyApplyInfo status={status} createAt={applicationCreatedAt} />
+      {/* <StudyApplyInfo status={status} createAt={applicationCreatedAt} /> */}
 
       <Link href={`/profile/${userId}`} className="flex items-center justify-stretch gap-3">
         <Avatar width={40} height={40} profileImageUrl={profileImageUrl} hasBorder={true} />
