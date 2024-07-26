@@ -23,5 +23,5 @@ export default async function MeTab(props: IMeTabProps) {
 }
 
 function getExtractDateList(data: any) {
-  return data.map((item: any) => new Date(item.date));
+  return data?.map((item: any) => new Date(item.date));
 }
