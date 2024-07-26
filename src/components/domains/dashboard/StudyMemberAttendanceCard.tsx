@@ -89,7 +89,7 @@ function getTodayAttendance(data: TAttendanceItem["data"]) {
   return data.find((item) => new Date(item.date).getDate() === today);
 }
 
-function getIsTodayInRange(startDate: Date, endDate: Date) {
+export function getIsTodayInRange(startDate: Date, endDate: Date) {
   const today = new Date();
   return today >= startDate && today <= endDate;
 }
