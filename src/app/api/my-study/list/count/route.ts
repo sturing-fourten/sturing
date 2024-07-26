@@ -11,7 +11,6 @@ export async function GET(request: Request) {
   try {
     const teamMembers = await TeamMembers.find({
       "members.userId": userId,
-      $or: [{ "members.isOwner": true }, { "members.status": "ACCEPTED" }],
     });
     const studyIdList = teamMembers.map((member) => member.studyId);
     const [progressCount, waitingCount, doneCount] = await Promise.all([
