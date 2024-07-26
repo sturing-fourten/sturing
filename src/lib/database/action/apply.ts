@@ -1,6 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import connectDB from "../db";
+import { Application } from "@/schema/applicationSchema";
 
 export const cancleApply = async (studyId: string, userId: string) => {
   try {
@@ -20,6 +22,21 @@ export const cancleApply = async (studyId: string, userId: string) => {
     revalidatePath(`/study/${studyId}`);
   } catch (error: any) {
     console.error("Error fetching Image:", error.message);
+    throw error;
+  }
+};
+
+export const getApplication = async (studyId: string, userId: string) => {
+  await connectDB();
+
+  try {
+    const application = await Application.findOne({ studyId, userId });
+
+    const response = await fetch(`${process.env.LOCAL_URL}/api/study-application/${application._id}`);
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    console.error("Error getting application:", error.message);
     throw error;
   }
 };

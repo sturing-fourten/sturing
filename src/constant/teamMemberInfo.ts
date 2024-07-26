@@ -6,7 +6,8 @@ export type TRole =
   | "record"
   | "environment"
   | "schedule"
-  | "attendance";
+  | "attendance"
+  | "member";
 
 export type RoleType = {
   [key in TRole]: {
@@ -63,5 +64,9 @@ export const ROLE_LIST: RoleType = {
   schedule: {
     name: "일정팀장",
     role: "일정 조율",
+  },
+  member: {
+    name: "팀원",
+    role: "팀원",
   },
 };
