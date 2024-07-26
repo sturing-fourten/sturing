@@ -1,13 +1,12 @@
 import connectDB from "@/lib/database/db";
 import { Application } from "@/schema/applicationSchema";
-
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 import { User } from "@/schema/userSchema";
-import { revalidatePath } from "next/cache";
 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
   const token = req.headers.get("Authorization");
+
   let userId = token?.split(" ")[1];
   if (!userId) {
     return Response.json({ error: "user id 가 필요합니다." }, { status: 400 });
@@ -44,9 +43,6 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
     teamMembersData.members = updatedMembers;
     await teamMembersData.save();
-
-    revalidatePath("/mystudy/waiting");
-    revalidatePath(`/study/${studyId}`);
 
     return new Response(JSON.stringify({ message: "지원을 취소하였습니다." }), { status: 200 });
   } catch (error: any) {

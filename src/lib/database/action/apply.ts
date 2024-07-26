@@ -1,6 +1,10 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+
 export const cancleApply = async (studyId: string, userId: string) => {
   try {
-    const response = await fetch(`/api/study/${studyId}/apply-cancel`, {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/study/${studyId}/apply-cancel`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + userId,
@@ -11,6 +15,9 @@ export const cancleApply = async (studyId: string, userId: string) => {
       const errorData = await response.json();
       throw new Error(errorData.message || "지원 취소하기 실패");
     }
+
+    revalidatePath("/mystudy/waiting");
+    revalidatePath(`/study/${studyId}`);
   } catch (error: any) {
     console.error("Error fetching Image:", error.message);
     throw error;
