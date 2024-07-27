@@ -7,12 +7,12 @@ export default function Avatar({
   height,
   hasBorder = false,
 }: {
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   width: number;
   height: number;
   hasBorder?: boolean;
 }) {
-  const imageSrc = profileImageUrl ? profileImageUrl : IMAGES_DEFAUlT.profile.src;
+  const imageSrc = profileImageUrl || IMAGES_DEFAUlT.profile.src;
 
   return (
     <>
