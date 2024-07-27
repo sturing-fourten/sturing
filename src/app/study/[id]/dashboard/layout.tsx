@@ -1,6 +1,8 @@
 import TabBarLinkUnderlined from "@/components/commons/TabBarLinkUnderlined";
 import TopBar from "@/components/commons/TopBar";
 import StudyInfo from "@/components/domains/dashboard/StudyInfo";
+import { IMAGES_DEFAUlT } from "@/constant/images";
+import { fetchStudyInfo } from "@/lib/database/action/dashboard";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 
 interface IDashboardProps {
@@ -22,17 +24,27 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
     { id: "board", title: "게시판", href: `${hrefBase}board` },
   ];
 
-  const bg = `bg-[linear-gradient(0deg,#151515_0%,rgba(21,21,21,0.50)_100%),url('https://picsum.photos/200/300')]`;
+  const study = await fetchStudyInfo(id);
+  const studyData = study.study;
+
+  const { study: studyBg } = IMAGES_DEFAUlT;
+
+  const backgroundImageUrl = studyData.imageUrl || studyBg.src;
+  const bgStyle = {
+    background: `linear-gradient(0deg, #151515 0%, rgba(21, 21, 21, 0.50) 100%), url(${backgroundImageUrl})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
 
   return (
     <>
       <section className="min-h-dvh bg-gray-100">
         {/* Header */}
-        <div className={`relative bg-no-repeat bg-cover bg-top ${bg}`}>
+        <div className="relative" style={bgStyle}>
           {/* TODO 공통 레이아웃 처리 */}
           <TopBar variant="share" showMore={false} isWhite={true} isBackToHome />
           {/* Study Info */}
-          <StudyInfo params={id} />
+          <StudyInfo study={study} studyData={studyData} />
         </div>
         {/* Tab Menu */}
         <TabBarLinkUnderlined

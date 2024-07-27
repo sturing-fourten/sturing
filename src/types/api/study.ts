@@ -20,7 +20,7 @@ export type TTeamMember = {
   status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
 };
 
-type TStudyDetail = {
+export type TStudyDetail = {
   _id: string;
   ownerId: string;
   category: TCategory;

@@ -7,7 +7,7 @@ import LectureLinkBanner from "@/components/commons/LectureLinkBanner";
 import { getDateRangeWithWeeks } from "@/utils/getDateRangeWithWeeks";
 import { getDateRange } from "@/utils/getDateRange";
 import { CATEGORY } from "@/constant/category";
-import { fetchStudyInfo } from "@/lib/database/action/dashboard";
+import { TStudyDetail, TStudyDetailInfoData } from "@/types/api/study";
 
 const { meeting, task, location } = STUDY_RECRUIT_INFO;
 
@@ -32,10 +32,12 @@ const getWhere = (meeting: any) => {
   }
 };
 
-export default async function StudyInfo({ params }: { params: string }) {
-  const study = await fetchStudyInfo(params);
-  const studyData = study.study;
+interface StudyInfoProps {
+  studyData: TStudyDetail;
+  study: TStudyDetailInfoData;
+}
 
+export default async function StudyInfo({ studyData, study }: StudyInfoProps) {
   return (
     <div className="pt-[10px] pb-11 px-4">
       <div className="flex items-center gap-[10px] mb-[14px]">

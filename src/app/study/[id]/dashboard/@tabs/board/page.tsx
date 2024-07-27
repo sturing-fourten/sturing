@@ -15,7 +15,6 @@ const fetchBoardList = async (id: string) => {
 export default async function BoardTab({ params }: { params: { id: string } }) {
   const { id } = params;
   const boardList = await fetchBoardList(id);
-  console.log(boardList);
 
   return (
     <section className="flex flex-col gap-5 pt-6 py-10 px-4">
