@@ -9,14 +9,20 @@ export async function GET(request: Request) {
   const userId = searchParams.get("userId");
 
   try {
-    const teamMembers = await TeamMembers.find({
+    const myAcceptedTeamMember = await TeamMembers.find({
+      members: {
+        $elemMatch: { userId: userId, status: "ACCEPTED" },
+      },
+    }).select("studyId members");
+    const myAcceptedStudyIdList = myAcceptedTeamMember.map((member) => member.studyId);
+    const myApplyingTeamMembers = await TeamMembers.find({
       "members.userId": userId,
-    });
-    const studyIdList = teamMembers.map((member) => member.studyId);
+    }).select("studyId members");
+    const myApplyingStudyIdList = myApplyingTeamMembers.map((member) => member.studyId);
     const [progressCount, waitingCount, doneCount] = await Promise.all([
-      Study.countDocuments({ _id: { $in: studyIdList }, status: { $in: ["PROGRESS", "RECRUIT_END"] } }),
-      Study.countDocuments({ _id: { $in: studyIdList }, status: "RECRUIT_START" }),
-      Study.countDocuments({ _id: { $in: studyIdList }, status: "DONE" }),
+      Study.countDocuments({ _id: { $in: myAcceptedStudyIdList }, status: { $in: ["PROGRESS", "RECRUIT_END"] } }),
+      Study.countDocuments({ _id: { $in: myApplyingStudyIdList }, status: "RECRUIT_START" }),
+      Study.countDocuments({ _id: { $in: myAcceptedStudyIdList }, status: "DONE" }),
     ]);
     const myStudyTabMenuList: TMyStudyTabMenuLinkUnderlinedItem[] = [
       { id: "progress", title: "진행", href: "/mystudy/progress", count: progressCount },

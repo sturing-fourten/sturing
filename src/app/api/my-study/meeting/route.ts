@@ -13,20 +13,12 @@ export async function GET(request: Request) {
   connectDB();
 
   try {
-    const teamMembersOwnerPromise = TeamMembers.find({
-      "members.userId": userId,
-      "members.isOwner": true,
-    }).exec();
-    const teamMembersAcceptedPromise = TeamMembers.find({
-      "members.userId": userId,
-      "members.status": "ACCEPTED",
-    }).exec();
-    const [teamMembersOwner, teamMembersAccepted] = await Promise.all([
-      teamMembersOwnerPromise,
-      teamMembersAcceptedPromise,
-    ]);
-    const teamMembers = [...teamMembersOwner, teamMembersAccepted];
-    const studyIdList = teamMembers.map((member) => member.studyId);
+    const myAcceptedTeamMember = await TeamMembers.find({
+      members: {
+        $elemMatch: { userId: userId, status: "ACCEPTED" },
+      },
+    }).select("studyId members");
+    const studyIdList = myAcceptedTeamMember.map((member) => member.studyId);
 
     // 1) 내가 참여하고 있는 모든 스터디 중 PROGRESS 상태인 것만 조회
     const studyList = await Study.find(
