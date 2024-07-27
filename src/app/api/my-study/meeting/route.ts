@@ -13,22 +13,30 @@ export async function GET(request: Request) {
   connectDB();
 
   try {
-    const teamMembers = await TeamMembers.find({
+    const teamMembersOwnerPromise = TeamMembers.find({
       "members.userId": userId,
-      $or: [{ "members.isOwner": true }, { "members.status": "ACCEPTED" }],
-    });
-
-    const studyIds = teamMembers.map((member) => member.studyId);
+      "members.isOwner": true,
+    }).exec();
+    const teamMembersAcceptedPromise = TeamMembers.find({
+      "members.userId": userId,
+      "members.status": "ACCEPTED",
+    }).exec();
+    const [teamMembersOwner, teamMembersAccepted] = await Promise.all([
+      teamMembersOwnerPromise,
+      teamMembersAcceptedPromise,
+    ]);
+    const teamMembers = [...teamMembersOwner, teamMembersAccepted];
+    const studyIdList = teamMembers.map((member) => member.studyId);
 
     // 1) 내가 참여하고 있는 모든 스터디 중 PROGRESS 상태인 것만 조회
     const studyList = await Study.find(
       {
-        _id: { $in: studyIds },
+        _id: { $in: studyIdList },
         status: "PROGRESS",
       },
       { meeting: 1, startDate: 1, endDate: 1, title: 1 },
     );
-    // 2) 모든 스터디의 7일 내 미팅으로 리스트 생성
+    // 2) 모든 스터디의 14일 내 미팅으로 리스트 생성
     let upcomingMeetingList: TUpcomingMeetingList = [];
     studyList.forEach((study) => {
       const {
@@ -38,7 +46,6 @@ export async function GET(request: Request) {
           schedule: { time, day },
           location,
         },
-        startDate,
         endDate,
         title,
       } = study;
@@ -46,12 +53,12 @@ export async function GET(request: Request) {
       const where = format === "ONLINE" ? platform : location;
       const meetingInfo = {
         title,
-        startDate,
         endDate,
         where,
         day,
         time,
       };
+
       upcomingMeetingList = [...upcomingMeetingList, ...generateUpcomingMeetingList(meetingInfo)].sort(
         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
       );

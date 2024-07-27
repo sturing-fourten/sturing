@@ -10,10 +10,11 @@ interface ITabBarUnderlined {
   defaultSegment: string;
   tabMenuList: TTabMenuLinkUnderlinedItem[];
   stickyOption?: string;
+  isReplace?: boolean;
 }
 
 export default function TabBarLinkUnderlined(props: ITabBarUnderlined) {
-  const { defaultSegment, tabMenuList, stickyOption } = props;
+  const { defaultSegment, tabMenuList, stickyOption, isReplace } = props;
   const currentTab = useSelectedLayoutSegment("tabs") ?? "";
 
   return (
@@ -22,6 +23,7 @@ export default function TabBarLinkUnderlined(props: ITabBarUnderlined) {
         <TabMenuLinkUnderlined
           key={item.id}
           isCurrent={getIsCurrent(`${defaultSegment}${currentTab}`, item.href)}
+          isReplace={isReplace}
           {...item}
         />
       ))}

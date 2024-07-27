@@ -8,7 +8,7 @@ import { CheckItem } from "./CheckItem";
 export default function SelectedUserCheckList({ allMemberTodayCheckList }: { allMemberTodayCheckList: any }) {
   const { selectedUserId, setSelectedUserId } = useDashboardTeamStore();
   const selectedUserCheckList = allMemberTodayCheckList.find((item: any) => item.userId === selectedUserId)?.data[0]
-    .contentList;
+    ?.contentList;
 
   useEffect(() => {
     if (!selectedUserId) setSelectedUserId(allMemberTodayCheckList[0].userId);

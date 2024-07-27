@@ -50,7 +50,7 @@ export type TMeetingItem = { title: string; where: string; date: Date };
 export type TUpcomingMeetingList = TMeetingItem[];
 
 export function generateUpcomingMeetingList(props: IGenerateUpcomingMeetingListProps): TUpcomingMeetingList {
-  const { startDate, endDate, title, where, day, time } = props;
+  const { endDate, title, where, day, time } = props;
   const meetingDayOfWeek = dayMap[day];
   const meetingTime = timeMap[time][0];
   const meetingMinutes = timeMap[time][1];
@@ -61,12 +61,11 @@ export function generateUpcomingMeetingList(props: IGenerateUpcomingMeetingListP
   let meetingList = [];
   let current = today;
 
-  while (current >= startDate && current >= today && current <= twoWeekFromToday && current <= endDate) {
+  while (current >= today && current <= twoWeekFromToday && current <= endDate) {
     // 1. 오늘 이후
     // 2. 2주 이내
-    // 3. startDate 이후
-    // 4. endDate 이내
-    // 5. current의 요일 === 미팅 요일
+    // 3. endDate 이내
+    // 4. current의 요일 === 미팅 요일
     const targetDayOfWeek = getDay(current);
 
     if (targetDayOfWeek === meetingDayOfWeek) {

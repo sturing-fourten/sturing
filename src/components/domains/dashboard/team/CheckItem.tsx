@@ -2,6 +2,8 @@
 import { toggleCheckItemAction } from "@/lib/database/action/dashboard";
 import Checkbox from "../Checkbox";
 import { useParams } from "next/navigation";
+import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
+import { useUserStore } from "@/store/userStore";
 
 interface ICheckItemProps {
   checkItem: any;
@@ -10,8 +12,12 @@ interface ICheckItemProps {
 export function CheckItem(props: ICheckItemProps) {
   const { checkItem } = props;
   const { _id: checkItemId, isChecked } = checkItem;
-
   const { id: studyId } = useParams();
+
+  const { selectedUserId } = useDashboardTeamStore();
+  const { user } = useUserStore();
+  const userId = user ? user._id.toString() : null;
+  const isMyCheckItem = userId === selectedUserId;
 
   if (!studyId) return <></>;
   return (
@@ -20,7 +26,7 @@ export function CheckItem(props: ICheckItemProps) {
         <form className="text-[0px]" action={toggleCheckItemAction}>
           <input type="hidden" name="checkItemId" value={checkItemId} />
           <input type="hidden" name="studyId" value={studyId} />
-          <Checkbox isChecked={isChecked} type="checkList" />
+          <Checkbox isChecked={isChecked} type="checkList" isMyCheckItem={isMyCheckItem} />
         </form>
         <div className="text-gray-900 text-sm font-medium leading-tight">{checkItem.content}</div>
       </div>

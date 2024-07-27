@@ -10,7 +10,7 @@ interface IDashboardProps {
   tabs: React.ReactNode;
 }
 
-export default function DashboardLayout({ params, tabs }: IDashboardProps) {
+export default async function DashboardLayout({ params, tabs }: IDashboardProps) {
   const { id } = params;
 
   const hrefBase = `/study/${id}/dashboard/`;
@@ -25,22 +25,25 @@ export default function DashboardLayout({ params, tabs }: IDashboardProps) {
   const bg = `bg-[linear-gradient(0deg,#151515_0%,rgba(21,21,21,0.50)_100%),url('https://picsum.photos/200/300')]`;
 
   return (
-    <section className="min-h-dvh bg-gray-100">
-      <div className={`relative bg-no-repeat bg-cover bg-top ${bg}`}>
+    <>
+      <section className="min-h-dvh bg-gray-100">
         {/* Header */}
-        {/* TODO 공통 레이아웃 처리 */}
-        <TopBar variant="share" showMore={false} isWhite={true} />
-        {/* Study Info */}
-        <StudyInfo params={id} />
-      </div>
-      {/* Tab Menu */}
-      <TabBarLinkUnderlined
-        defaultSegment={hrefBase}
-        tabMenuList={MY_STUDY_DASHBOARD_TAB_MENU_LIST}
-        stickyOption="sticky top-0 z-[2]"
-      />
-      {/* Tab Panel */}
-      {tabs}
-    </section>
+        <div className={`relative bg-no-repeat bg-cover bg-top ${bg}`}>
+          {/* TODO 공통 레이아웃 처리 */}
+          <TopBar variant="share" showMore={false} isWhite={true} isBackToHome />
+          {/* Study Info */}
+          <StudyInfo params={id} />
+        </div>
+        {/* Tab Menu */}
+        <TabBarLinkUnderlined
+          defaultSegment={hrefBase}
+          tabMenuList={MY_STUDY_DASHBOARD_TAB_MENU_LIST}
+          stickyOption="sticky top-0 z-[2]"
+          isReplace={true}
+        />
+        {/* Tab Panel */}
+        {tabs}
+      </section>
+    </>
   );
 }

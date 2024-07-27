@@ -41,6 +41,7 @@ export default function DetailTabMenu({ type }: IDetailTabMenuLinkUnderlinedProp
           isCurrent={currentTab === tab.href}
           href={tab.href}
           onClick={() => handleClick(tab.href)}
+          isReplace={true}
         />
       ))}
     </nav>
