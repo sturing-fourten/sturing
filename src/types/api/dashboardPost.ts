@@ -13,3 +13,17 @@ export type TTaskPost = {
 };
 
 export type TFreePost = TTaskPost;
+
+export type TPostComment = {
+  id: string;
+  postId: string;
+  studyId: string;
+  userId: string;
+  role: string;
+  nickname: string;
+  profileImageUrl: string;
+  content: string;
+  isMine: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
