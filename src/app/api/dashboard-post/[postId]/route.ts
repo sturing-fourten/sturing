@@ -1,4 +1,5 @@
 import connectDB from "@/lib/database/db";
+import { DashboardComment } from "@/schema/dashboardCommentSchema";
 import { DashboardPost } from "@/schema/dashboardPostSchema";
 import { User } from "@/schema/userSchema";
 
@@ -28,6 +29,10 @@ export async function DELETE(request: Request, { params }: { params: { postId: s
     if (post.writerId.toString() !== userId) {
       return Response.json({ message: "권한이 없습니다." }, { status: 403 });
     }
+
+    const commentListData = await DashboardComment.find({ postId });
+    await Promise.all(commentListData.map(async (comment) => await DashboardComment.findByIdAndDelete(comment._id)));
+
     await DashboardPost.findByIdAndDelete(postId);
 
     return Response.json({ message: "해당 게시글이 삭제되었습니다." }, { status: 200 });
