@@ -1,3 +1,5 @@
+import getApplicationStatusTagText from "@/utils/getApplicationStatusTagText";
+
 interface IStudyApplyInfoProps {
   status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
   createAt: string;
@@ -7,19 +9,27 @@ interface IApplyStatusProps {
   status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
 }
 
+/**
+ * @todo 열람 상태 구현 후 수정
+ */
 const APPLY_STATUS_TYPE = {
-  APPLIED: { color: "text-[#FF4141]", bgColor: "bg-[#FF4141]/5", dotColor: "bg-[#FF4141]", label: "미열람" },
+  APPLIED: {
+    color: "text-gray-800",
+    bgColor: "bg-gray-300",
+    dotColor: "bg-gray-800",
+    label: "미응답",
+  },
   APPLIED_VIEW: {
     color: "text-gray-800",
     bgColor: "bg-gray-300",
     dotColor: "bg-gray-800",
-    label: "열람",
+    label: "미응답",
   },
   ACCEPTED: {
     color: "text-main-500",
     bgColor: "bg-main-100",
     dotColor: "bg-main-500",
-    label: "지원서 수락",
+    label: "수락",
   },
 };
 
