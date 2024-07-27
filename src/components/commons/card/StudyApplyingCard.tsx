@@ -40,8 +40,6 @@ const StudyApplyingCard = (props: IStudyApplyingCardProps) => {
   const handleCancelApply: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    // if ()
-    console;
     if (studyId) {
       try {
         await cancelApply(studyId.toString(), userId);
