@@ -1,4 +1,5 @@
 import connectDB from "@/lib/database/db";
+import { DashboardComment } from "@/schema/dashboardCommentSchema";
 import { DashboardPost } from "@/schema/dashboardPostSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
@@ -118,7 +119,8 @@ export async function GET(request: Request) {
           const writerInTeamMember = teamMembers.members.find((member: any) => {
             return member.userId.toString() === writerId.toString();
           });
-          //commentCount 추가
+
+          const commentList = await DashboardComment.find({ postId: _id });
 
           return {
             _id: _id.toString(),
@@ -133,7 +135,7 @@ export async function GET(request: Request) {
             content,
             imageUrl,
             postType,
-            commentCount: 0,
+            commentCount: commentList.length,
             createdAt,
             updatedAt,
           };
@@ -150,9 +152,7 @@ export async function GET(request: Request) {
           const writerInTeamMember = teamMembers.members.find((member: any) => {
             return member.userId.toString() === writerId.toString();
           });
-
-          //commentCount 추가
-
+          const commentList = await DashboardComment.find({ postId: _id });
           return {
             _id: _id.toString(),
             studyId,
@@ -166,7 +166,7 @@ export async function GET(request: Request) {
             content,
             imageUrl,
             postType,
-            commentCount: 0,
+            commentCount: commentList.length,
             createdAt,
             updatedAt,
           };
