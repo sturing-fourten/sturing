@@ -3,14 +3,15 @@ import DashboardCardTitle from "../DashboardCardTitle";
 import WriteBoardLink from "./WriteBoardLink";
 import TaskItem from "./TaskItem";
 import NoBoard from "./NoBoard";
+import { TBoardCardProps } from "@/types/board";
 
 const SAMPLE_TASK_LIST: any[] = [];
 
-export default function FreeCard() {
+export default function FreeCard({ studyId }: TBoardCardProps) {
   return (
     <DashboardCardPaginationLayout hasMore={false}>
       <DashboardCardTitle title="자유 게시판">
-        <WriteBoardLink />
+        <WriteBoardLink studyId={studyId} type="free" />
       </DashboardCardTitle>
 
       <ul className="flex flex-col gap-[1px]">

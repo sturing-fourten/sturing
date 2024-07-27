@@ -17,3 +17,7 @@ export type TNestedComment = Omit<TComment, "nestedComments">;
 export type TCommentList = TComment[];
 
 export type TCommentType = "comment" | "nestedComment";
+
+export type TBoardCardProps = {
+  studyId: string;
+};

@@ -3,14 +3,15 @@ import DashboardCardTitle from "../DashboardCardTitle";
 import WriteBoardLink from "./WriteBoardLink";
 import NoticeItem from "./NoticeItem";
 import NoBoard from "./NoBoard";
+import { TBoardCardProps } from "@/types/board";
 
 const SAMPLE_NOTICE_LIST = [{ important: false }, { important: true }, { important: false }, { important: true }];
 
-export default function NoticeCard() {
+export default function NoticeCard({ studyId }: TBoardCardProps) {
   return (
     <DashboardCardPaginationLayout hasMore={true}>
       <DashboardCardTitle title="공지사항">
-        <WriteBoardLink />
+        <WriteBoardLink studyId={studyId} type="notice" />
       </DashboardCardTitle>
 
       <ul className="flex flex-col gap-2 mb-3">
