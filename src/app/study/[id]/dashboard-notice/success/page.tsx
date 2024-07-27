@@ -3,11 +3,9 @@
 import AlertMessage from "@/components/commons/AlertMessage";
 import Button from "@/components/commons/Button";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
-export default function SuccessPage() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+export default function SuccessPage({ params }: { params: { id: string } }) {
+  const { id } = params;
 
   return (
     <div className="flex flex-col px-4 w-full h-dvh">
