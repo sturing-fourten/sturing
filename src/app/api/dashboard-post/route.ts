@@ -17,18 +17,18 @@ export async function POST(request: Request) {
   const { studyId, title, content, postType, isImportant, imageUrl } = await request.json();
 
   if (!studyId) {
-    Response.json({ error: "studyId 가 필요합니다." }, { status: 400 });
+    return Response.json({ error: "studyId 가 필요합니다." }, { status: 400 });
   }
   if (!title) {
-    Response.json({ error: "title이 필요합니다." }, { status: 400 });
+    return Response.json({ error: "title이 필요합니다." }, { status: 400 });
   }
 
   if (!content) {
-    Response.json({ error: "content가 필요합니다." }, { status: 400 });
+    return Response.json({ error: "content가 필요합니다." }, { status: 400 });
   }
 
   if (!postType) {
-    Response.json({ error: "postType이 필요합니다." }, { status: 400 });
+    return Response.json({ error: "postType이 필요합니다." }, { status: 400 });
   }
 
   try {
