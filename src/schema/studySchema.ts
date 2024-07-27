@@ -14,9 +14,6 @@ const studySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    /**
-     * @todo 이미지 저장방식 확인 후 수정 예정
-     */
     imageUrl: {
       type: String,
     },
@@ -32,15 +29,9 @@ const studySchema = new mongoose.Schema(
       },
       platform: {
         type: String,
-        /**
-         * @todo sessionFormat.type === "ONLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
-         */
       },
       location: {
         type: String,
-        /**
-         * @todo sessionFormat.type === "OFFLINE" 일 경우 required 설정이 필요한지와 그 방법 확인 후 수정 예정
-         */
       },
       schedule: {
         day: {
