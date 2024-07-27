@@ -1,6 +1,10 @@
 "use server";
 
+import { DashboardPost } from "@/schema/dashboardPostSchema";
+import connectDB from "../db";
 import { getSession } from "../getSession";
+import { User } from "@/schema/userSchema";
+import { TeamMembers } from "@/schema/teamMemberSchema";
 
 export const postBoardAction = async (formData: FormData) => {
   try {
@@ -41,6 +45,42 @@ export const postBoardAction = async (formData: FormData) => {
 
     const data = await response.json();
     return { status: 200, data };
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};
+
+export const getBoardAction = async (postId: string) => {
+  connectDB();
+
+  try {
+    const board = await DashboardPost.findOne({ _id: postId });
+
+    const { studyId, writerId } = board;
+    const user = await User.findById(writerId);
+
+    const teamMembers = await TeamMembers.findOne({ studyId });
+
+    const writerInTeamMember = teamMembers.members.find((member: any) => {
+      return member.userId.toString() === writerId.toString();
+    });
+
+    const updatedBoard = {
+      _id: board._id.toString(),
+      writer: {
+        writerId: user._id.toString(),
+        role: writerInTeamMember.role,
+        nickname: user.nickname,
+        profileImageUrl: user.profileImageUrl,
+      },
+      title: board.title,
+      content: board.content,
+      imageUrl: board.imageUrl,
+      commentCount: board.commentCount,
+      createdAt: board.createdAt,
+    };
+
+    return { updatedBoard };
   } catch (error: any) {
     return { success: false, message: error.message };
   }

@@ -3,7 +3,7 @@ import { ICONS } from "@/constant/icons";
 
 export default function PostCommentForm() {
   return (
-    <form className="fixed bottom-0 w-full py-2 px-4 bg-white border-t border-gray-200" action="">
+    <form className="absolute bottom-0 w-full py-2 px-4 bg-white border-t border-gray-200" action="">
       <div className="relative">
         <input
           type="text"
