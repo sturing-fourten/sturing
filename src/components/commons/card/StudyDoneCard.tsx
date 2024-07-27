@@ -44,11 +44,11 @@ export default async function StudyDoneCard(props: IStudyDoneCardProps) {
         <p className="mt-2 mb-3 text-[#212121] text-[16px] font-semibold tracking-[-0.32px]">{title}</p>
         <LectureReviewButton lectureId={lectureIdString}>강의 후기 작성하기</LectureReviewButton>
       </div>
-      <hr className="bg-gray-300" />
-      {teamMemberList.map((member) => (
+      {/* <hr className="bg-gray-300" /> */}
+      {/* {teamMemberList.map((member) => (
         <TeamMemberReviewItem key={member.userId?._id.toString()} member={member} />
       ))}
-      <ReceivedReviewButton>내가 받은 후기 보기</ReceivedReviewButton>
+      <ReceivedReviewButton>내가 받은 후기 보기</ReceivedReviewButton> */}
     </LinkCardWrapper>
   );
 }

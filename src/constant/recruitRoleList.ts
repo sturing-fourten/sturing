@@ -1,13 +1,12 @@
 export type TRole =
-  | "leader"
+  | "member"
   | "viceLeader"
   | "assignment"
   | "notification"
   | "record"
   | "environment"
   | "schedule"
-  | "attendance"
-  | "member";
+  | "attendance";
 
 export type RoleType = {
   [key in TRole]: {
@@ -16,26 +15,10 @@ export type RoleType = {
   };
 };
 
-export const CAREER_LIST: { [key: string]: string } = {
-  beginner: "비기너",
-  newcomer: "신입(1년 이하)",
-  junior: "주니어(1~3년차)",
-  senior: "시니어(4년 이상)",
-  all: "상관없음",
-};
-
-export const AGE_LIST: { [key: string]: string } = {
-  all: "누구나",
-  "20s": "20대",
-  "30s": "30대",
-  "40s": "40대",
-  "50s": "50대",
-};
-
 export const ROLE_LIST: RoleType = {
-  leader: {
-    name: "팀장",
-    role: "팀의 리더",
+  member: {
+    name: "팀원",
+    role: "팀원",
   },
   viceLeader: {
     name: "부팀장",
@@ -64,9 +47,5 @@ export const ROLE_LIST: RoleType = {
   schedule: {
     name: "일정팀장",
     role: "일정 조율",
-  },
-  member: {
-    name: "팀원",
-    role: "팀원",
   },
 };

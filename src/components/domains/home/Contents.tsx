@@ -195,7 +195,7 @@ export default function Contents() {
             )}
           </CardList>
         </div>
-        <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
+        {/* <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
           <Title onClick={() => {}}>{matching ? `${userName}님에게 딱 맞는 팀원 추천` : "스터링 활동 우수 팀원"}</Title>
           <CardList isSingleLine>
             <UserCard />
@@ -205,7 +205,7 @@ export default function Contents() {
             <UserCard />
             <UserCard />
           </CardList>
-        </div>
+        </div> */}
         <Event />
       </div>
     </>
