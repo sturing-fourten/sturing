@@ -31,19 +31,19 @@ export default function TaskItem() {
           </p>
         </div>
 
-        <div className="grid grid-cols-[1fr_62px] items-center justify-between gap-x-3">
-          <ul className="flex gap-2 overflow-x-scroll scrollbar-hide">
+        {/* <div className="grid grid-cols-[1fr_62px] items-center justify-between gap-x-3"> */}
+        {/* <ul className="flex gap-2 overflow-x-scroll scrollbar-hide">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((emoji, index) => (
               <span className="flex-shrink-0" key={index}>
                 <EmojiTag isIncludingMe={true} emoji="🖤" count={10} />
               </span>
             ))}
-          </ul>
-          <span className="inline-flex gap-1 items-center justify-end text-gray-700 text-xs font-medium leading-none">
-            <img src="/icons/comment.svg" alt="comment" width={20} height={20} />
-            2개
-          </span>
-        </div>
+          </ul> */}
+        <span className="inline-flex gap-1 items-center justify-end text-gray-700 text-xs font-medium leading-none">
+          <img src="/icons/comment.svg" alt="comment" width={20} height={20} />
+          2개
+        </span>
+        {/* </div> */}
       </Link>
     </li>
   );
