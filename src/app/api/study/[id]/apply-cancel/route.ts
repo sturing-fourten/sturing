@@ -22,6 +22,11 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     if (!study) {
       return Response.json({ message: "스터디가 존재하지 않습니다." }, { status: 404 });
     }
+
+    if (study.status !== "RECRUIT_START") {
+      return Response.json({ message: "스터디가 모집중일때 취소/탈퇴가 가능합니다." }, { status: 404 });
+    }
+
     const user = await User.findById(userId);
     if (!user) {
       return Response.json({ message: "유저가 존재하지 않습니다." }, { status: 404 });
