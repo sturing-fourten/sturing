@@ -6,6 +6,7 @@ export type TTaskPost = {
   content: string;
   imageUrl: string | null;
   postType: "notice" | "task" | "free";
+  isImportant?: boolean;
   commentCount: number;
   createdAt: Date;
   updatedAt: Date;

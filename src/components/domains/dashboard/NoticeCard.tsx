@@ -5,9 +5,7 @@ import NoticeItem from "./NoticeItem";
 import NoBoard from "./NoBoard";
 import { TBoardCardProps } from "@/types/board";
 
-const SAMPLE_NOTICE_LIST = [{ important: false }, { important: true }, { important: false }, { important: true }];
-
-export default function NoticeCard({ studyId }: TBoardCardProps) {
+export default function NoticeCard({ studyId, data: noticeBoardsData }: TBoardCardProps) {
   return (
     <DashboardCardPaginationLayout hasMore={true}>
       <DashboardCardTitle title="공지사항">
@@ -15,8 +13,10 @@ export default function NoticeCard({ studyId }: TBoardCardProps) {
       </DashboardCardTitle>
 
       <ul className="flex flex-col gap-2 mb-3">
-        {SAMPLE_NOTICE_LIST?.length > 0 ? (
-          SAMPLE_NOTICE_LIST.map((item, index) => <NoticeItem key={index} important={item.important} />)
+        {noticeBoardsData?.length > 0 ? (
+          noticeBoardsData.map((noticeBoard) => (
+            <NoticeItem key={noticeBoard._id} noticeBoardData={noticeBoard} important={noticeBoard.isImportant} />
+          ))
         ) : (
           <NoBoard />
         )}

@@ -5,9 +5,7 @@ import TaskItem from "./TaskItem";
 import NoBoard from "./NoBoard";
 import { TBoardCardProps } from "@/types/board";
 
-const SAMPLE_TASK_LIST: any[] = [];
-
-export default function FreeCard({ studyId }: TBoardCardProps) {
+export default function FreeCard({ studyId, data: freeBoardsData }: TBoardCardProps) {
   return (
     <DashboardCardPaginationLayout hasMore={false}>
       <DashboardCardTitle title="자유 게시판">
@@ -15,7 +13,11 @@ export default function FreeCard({ studyId }: TBoardCardProps) {
       </DashboardCardTitle>
 
       <ul className="flex flex-col gap-[1px]">
-        {SAMPLE_TASK_LIST?.length > 0 ? SAMPLE_TASK_LIST.map((item, index) => <TaskItem key={index} />) : <NoBoard />}
+        {freeBoardsData?.length > 0 ? (
+          freeBoardsData.map((freeBoard) => <TaskItem key={freeBoard._id} taskData={freeBoard} />)
+        ) : (
+          <NoBoard />
+        )}
       </ul>
     </DashboardCardPaginationLayout>
   );
