@@ -20,7 +20,7 @@ export default function SuccessPage() {
             type="button"
             varient="filled"
             addStyle="w-full h-[50px] bg-main-500 rounded-[5px] shrink-0 text-white font-semibold text-4">
-            해당 스터디로 가기
+            해당 게시판으로 가기
           </Button>
         </Link>
       </div>

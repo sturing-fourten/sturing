@@ -7,58 +7,67 @@ import WriteContent from "@/components/domains/dashboard/board/WriteContent";
 import Title from "@/components/domains/recruit/commons/Title";
 import { ICONS } from "@/constant/icons";
 import { useDashBordNoticestore } from "@/store/dashboard-noticeStore";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { postBoardAction } from "@/lib/database/action/board";
 
-export default function DashBoardNoticePage() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+export default function DashBoardNoticePage({ params }: { params: { id: string } }) {
+  const { id: studyId } = params;
+  const router = useRouter();
 
-  const { title, textarea, mustRead, setTitle, setTextarea, setMustRead } = useDashBordNoticestore();
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(true);
+  const { title, content, isImportant, setTitle, setContent, setIsImportant } = useDashBordNoticestore();
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleWriteChange = (title: string, text: string) => {
     setTitle(title);
-    setTextarea(text);
+    setContent(text);
   };
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = event.target.value;
     setTitle(newTitle);
-    handleWriteChange(newTitle, textarea);
+    handleWriteChange(newTitle, content);
   };
 
-  const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = event.target.value;
-    setTextarea(newText);
-    handleWriteChange(title, newText);
+  const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newContent = event.target.value;
+    setContent(newContent);
+    handleWriteChange(title, newContent);
   };
 
-  const handleMustRead = () => {
-    setMustRead(!mustRead);
+  const handleIsImportant = () => {
+    setIsImportant(!isImportant);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("studyId", studyId);
     formData.append("title", title);
-    formData.append("textarea", textarea);
-    formData.append("mustRead", mustRead.toString());
+    formData.append("content", content);
+    formData.append("postType", "notice");
+    formData.append("isImportant", isImportant.toString());
 
     try {
+      const res = await postBoardAction(formData);
+
+      if (res.status !== 200) {
+        throw new Error(res.message);
+      }
+      setIsSubmitted(true);
+      router.push(`/study/${studyId}/dashboard-notice/success`);
     } catch (error) {
       console.error("POST 요청 실패:", error);
     }
   };
 
-  const isInputEmpty = title.trim().length === 0 || textarea.trim().length === 0;
+  const isInputEmpty = title.trim().length === 0 || content.trim().length === 0;
 
   useEffect(() => {
     if (isSubmitted) {
       setTitle("");
-      setTextarea("");
-      setMustRead(false);
+      setContent("");
+      setIsImportant(false);
     }
   }, [isSubmitted]);
 
@@ -71,14 +80,14 @@ export default function DashBoardNoticePage() {
           <Title>공지 글을 작성해 주세요</Title>
           <WriteContent
             title={title}
-            textarea={textarea}
+            content={content}
             onTitleChange={handleTitleChange}
-            onTextareaChange={handleTextareaChange}
+            onContentChange={handleContentChange}
           />
           <div
             className="flex items-center gap-[6px] w-fit text-neutral-400 text-m font-normal leading-snug cursor-pointer"
-            onClick={handleMustRead}>
-            {mustRead ? (
+            onClick={handleIsImportant}>
+            {isImportant ? (
               <img src={ICONS.toggleCheckBlue.src} alt={ICONS.toggleCheckBlue.alt} />
             ) : (
               <img src={ICONS.toggleCheckGray.src} alt={ICONS.toggleCheckGray.alt} />
@@ -86,17 +95,15 @@ export default function DashBoardNoticePage() {
             필독
           </div>
         </div>
-        <Link href={`/study/${id}/dashboard-free/success`}>
-          <div className="w-full py-3 px-4 flex gap-2.5">
-            <Button
-              type="submit"
-              varient="filled"
-              addStyle="w-full h-12 bg-blue-500 text-white font-semibold rounded"
-              disabled={isInputEmpty}>
-              등록하기
-            </Button>
-          </div>
-        </Link>
+        <div className="w-full py-3 px-4 flex gap-2.5">
+          <Button
+            type="submit"
+            varient="filled"
+            addStyle="w-full h-12 bg-blue-500 text-white font-semibold rounded"
+            disabled={isInputEmpty}>
+            등록하기
+          </Button>
+        </div>
       </div>
     </form>
   );

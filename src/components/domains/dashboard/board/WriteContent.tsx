@@ -5,12 +5,12 @@ import BoardTextarea from "./BoardTextarea";
 
 interface WriteContentProps {
   title: string;
-  textarea: string;
+  content: string;
   onTitleChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onTextareaChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onContentChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-export default function WriteContent({ title, textarea, onTitleChange, onTextareaChange }: WriteContentProps) {
+export default function WriteContent({ title, content, onTitleChange, onContentChange }: WriteContentProps) {
   return (
     <>
       <div className="flex-col gap-3 inline-flex">
@@ -19,7 +19,7 @@ export default function WriteContent({ title, textarea, onTitleChange, onTextare
       </div>
       <div className="flex-col gap-2 inline-flex">
         <Subtitle>내용</Subtitle>
-        <BoardTextarea boardTextarea={textarea} handleTextareaChange={onTextareaChange} />
+        <BoardTextarea boardTextarea={content} handleTextareaChange={onContentChange} />
       </div>
     </>
   );
