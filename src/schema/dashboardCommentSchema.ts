@@ -5,6 +5,7 @@ const dashboardCommentSchema = new mongoose.Schema(
     studyId: { type: mongoose.Schema.Types.ObjectId, ref: "Study", required: true },
     postId: { type: mongoose.Schema.Types.ObjectId, ref: "DashboardPost", required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    role: { type: String, required: true },
     content: { type: String, required: true },
   },
   { timestamps: true },

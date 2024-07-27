@@ -1,7 +1,10 @@
+"use client";
 import Button from "@/components/commons/Button";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Success({ params }: { params: { id: string } }) {
+  const router = useRouter();
+
   return (
     <div className="w-full h-dvh px-[22px] py-[16px] flex-col inline-flex">
       <div className="flex-col inline-flex justify-center items-center gap-[13px] flex-1">
@@ -14,11 +17,12 @@ export default function Success({ params }: { params: { id: string } }) {
           </p>
         </div>
       </div>
-      <Link href={`/study/${params.id}`}>
-        <Button varient="filled" addStyle="w-full h-12 bg-blue-500 text-white font-semibold rounded">
-          확인
-        </Button>
-      </Link>
+      <Button
+        onClick={() => router.replace(`/study/${params.id}`)}
+        varient="filled"
+        addStyle="w-full h-12 bg-blue-500 text-white font-semibold rounded">
+        확인
+      </Button>
     </div>
   );
 }

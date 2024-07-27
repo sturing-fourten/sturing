@@ -1,4 +1,5 @@
 import connectDB from "@/lib/database/db";
+import { DashboardComment } from "@/schema/dashboardCommentSchema";
 import { DashboardPost } from "@/schema/dashboardPostSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
@@ -17,18 +18,18 @@ export async function POST(request: Request) {
   const { studyId, title, content, postType, isImportant, imageUrl } = await request.json();
 
   if (!studyId) {
-    Response.json({ error: "studyId 가 필요합니다." }, { status: 400 });
+    return Response.json({ error: "studyId 가 필요합니다." }, { status: 400 });
   }
   if (!title) {
-    Response.json({ error: "title이 필요합니다." }, { status: 400 });
+    return Response.json({ error: "title이 필요합니다." }, { status: 400 });
   }
 
   if (!content) {
-    Response.json({ error: "content가 필요합니다." }, { status: 400 });
+    return Response.json({ error: "content가 필요합니다." }, { status: 400 });
   }
 
   if (!postType) {
-    Response.json({ error: "postType이 필요합니다." }, { status: 400 });
+    return Response.json({ error: "postType이 필요합니다." }, { status: 400 });
   }
 
   try {
@@ -78,7 +79,6 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const studyId = searchParams.get("studyId");
-  // const type = searchParams.get("type");
 
   await connectDB();
 
@@ -118,7 +118,8 @@ export async function GET(request: Request) {
           const writerInTeamMember = teamMembers.members.find((member: any) => {
             return member.userId.toString() === writerId.toString();
           });
-          //commentCount 추가
+
+          const commentList = await DashboardComment.find({ postId: _id });
 
           return {
             _id: _id.toString(),
@@ -133,7 +134,7 @@ export async function GET(request: Request) {
             content,
             imageUrl,
             postType,
-            commentCount: 0,
+            commentCount: commentList.length,
             createdAt,
             updatedAt,
           };
@@ -150,9 +151,7 @@ export async function GET(request: Request) {
           const writerInTeamMember = teamMembers.members.find((member: any) => {
             return member.userId.toString() === writerId.toString();
           });
-
-          //commentCount 추가
-
+          const commentList = await DashboardComment.find({ postId: _id });
           return {
             _id: _id.toString(),
             studyId,
@@ -166,7 +165,7 @@ export async function GET(request: Request) {
             content,
             imageUrl,
             postType,
-            commentCount: 0,
+            commentCount: commentList.length,
             createdAt,
             updatedAt,
           };
