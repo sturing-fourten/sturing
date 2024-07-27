@@ -3,6 +3,7 @@ import TopBar from "@/components/commons/TopBar";
 import PostComment from "@/components/domains/dashboard/post/PostComment";
 import PostCommentForm from "@/components/domains/dashboard/post/PostCommentForm";
 import PostContent from "@/components/domains/dashboard/post/PostContent";
+import { getBoardAction } from "@/lib/database/action/board";
 import { TCommentList } from "@/types/board";
 
 const SAMPLE_COMMENT_LIST: TCommentList = [
@@ -60,14 +61,18 @@ const SAMPLE_COMMENT_LIST: TCommentList = [
   },
 ];
 
-export default function PostPage() {
+export default async function PostPage({ params }: { params: { postId: string } }) {
+  const { postId } = params;
+  const data = await getBoardAction(postId);
+  const { updatedBoard } = data;
+
   return (
     <>
       <section>
         <TopBar variant="share" showMore={true} isWhite={false} />
       </section>
 
-      <PostContent />
+      {updatedBoard && <PostContent board={updatedBoard} />}
 
       <HorizontalDivider addStyle="mb-6" />
 

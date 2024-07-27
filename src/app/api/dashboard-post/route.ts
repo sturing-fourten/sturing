@@ -121,7 +121,7 @@ export async function GET(request: Request) {
           //commentCount 추가
 
           return {
-            id: _id.toString(),
+            _id: _id.toString(),
             studyId,
             writer: {
               writerId,
@@ -154,7 +154,7 @@ export async function GET(request: Request) {
           //commentCount 추가
 
           return {
-            id: _id.toString(),
+            _id: _id.toString(),
             studyId,
             writer: {
               writerId,

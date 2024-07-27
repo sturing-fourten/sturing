@@ -1,3 +1,5 @@
+import { TTaskPost } from "./api/dashboardPost";
+
 export type TComment = {
   user: {
     _id: string;
@@ -17,3 +19,8 @@ export type TNestedComment = Omit<TComment, "nestedComments">;
 export type TCommentList = TComment[];
 
 export type TCommentType = "comment" | "nestedComment";
+
+export type TBoardCardProps = {
+  studyId: string;
+  data: TTaskPost[];
+};

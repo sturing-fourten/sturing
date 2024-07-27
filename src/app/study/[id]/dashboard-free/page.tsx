@@ -8,14 +8,14 @@ import Title from "@/components/domains/recruit/commons/Title";
 import { useDashBordFreestore } from "@/store/dashboard-noticeStore";
 import ImageContent from "@/components/domains/dashboard/board/ImageContent";
 import { PutBlobResult } from "@vercel/blob";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { postBoardAction } from "@/lib/database/action/board";
 
-export default function DashBoardFreePage() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+export default function DashBoardFreePage({ params }: { params: { id: string } }) {
+  const { id: studyId } = params;
+  const router = useRouter();
 
-  const { title, textarea, image, setTitle, setTextarea, setImage } = useDashBordFreestore();
+  const { title, content, imageUrl, setTitle, setContent, setImageUrl } = useDashBordFreestore();
   const [fileToRead, setFileToRead] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(true);
@@ -37,8 +37,8 @@ export default function DashBoardFreePage() {
   };
 
   const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = event.target.value;
-    setTextarea(newText);
+    const newContent = event.target.value;
+    setContent(newContent);
   };
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function DashBoardFreePage() {
         });
         const newBlob = (await response.json()) as PutBlobResult;
         const uploadImage = newBlob.url;
-        setImage(uploadImage);
+        setImageUrl(uploadImage);
       } catch (error: any) {
         console.error("Error uploading Image:", error.message);
         throw error;
@@ -67,29 +67,38 @@ export default function DashBoardFreePage() {
     reader.readAsDataURL(fileToRead);
 
     uploadImageToServer(fileToRead).finally(() => setFileToRead(null));
-  }, [fileToRead, setImage]);
+  }, [fileToRead, setImageUrl]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("studyId", studyId);
     formData.append("title", title);
-    formData.append("textarea", textarea);
-    formData.append("image", image);
+    formData.append("content", content);
+    formData.append("postType", "free");
+    formData.append("imageUrl", imageUrl);
 
     try {
+      const res = await postBoardAction(formData);
+
+      if (res.status !== 200) {
+        throw new Error(res.message);
+      }
+      setIsSubmitted(true);
+      router.push(`/study/${studyId}/dashboard-free/success`);
     } catch (error) {
       console.error("POST 요청 실패:", error);
     }
   };
 
-  const isInputEmpty = title.trim().length === 0 || textarea.trim().length === 0;
+  const isInputEmpty = title.trim().length === 0 || content.trim().length === 0;
 
   useEffect(() => {
     if (isSubmitted) {
       setTitle("");
-      setTextarea("");
-      setImage("");
+      setContent("");
+      setImageUrl("");
     }
   }, [isSubmitted]);
 
@@ -102,28 +111,26 @@ export default function DashBoardFreePage() {
           <Title>자유롭게 글을 작성해 주세요</Title>
           <WriteContent
             title={title}
-            textarea={textarea}
+            content={content}
             onTitleChange={handleTitleChange}
-            onTextareaChange={handleTextareaChange}
+            onContentChange={handleTextareaChange}
           />
           <ImageContent
             handleFileChange={handleFileChange}
-            setImage={setImage}
+            setImage={setImageUrl}
             setPreviewImage={setPreviewImage}
             previewImage={previewImage}
           />
         </div>
-        <Link href={`/study/${id}/dashboard-free/success`}>
-          <div className="w-full py-3 px-4 flex gap-2.5">
-            <Button
-              type="submit"
-              varient="filled"
-              addStyle="w-full h-12 bg-blue-500 text-white font-semibold rounded"
-              disabled={isInputEmpty}>
-              등록하기
-            </Button>
-          </div>
-        </Link>
+        <div className="w-full py-3 px-4 flex gap-2.5">
+          <Button
+            type="submit"
+            varient="filled"
+            addStyle="w-full h-12 bg-blue-500 text-white font-semibold rounded"
+            disabled={isInputEmpty}>
+            등록하기
+          </Button>
+        </div>
       </div>
     </form>
   );

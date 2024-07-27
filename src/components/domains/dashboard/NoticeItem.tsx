@@ -1,22 +1,24 @@
 import TagBase from "@/components/commons/TagBase";
+import { TTaskPost } from "@/types/api/dashboardPost";
 import Link from "next/link";
 
 interface INoticeItemProps {
-  important: boolean;
+  important?: boolean;
+  noticeBoardData: TTaskPost;
 }
 
-export default function NoticeItem({ important }: INoticeItemProps) {
+export default function NoticeItem({ important, noticeBoardData }: INoticeItemProps) {
+  const { _id, studyId, title } = noticeBoardData;
+
   return (
     <li>
-      <Link className="grid grid-cols-[auto_1fr] items-center gap-3" href="">
+      <Link className="grid grid-cols-[auto_1fr] items-center gap-3" href={`/study/${studyId}/post/${_id}`}>
         {important ? (
           <TagBase className="bg-main-100 text-main-500 border-transparent">필독</TagBase>
         ) : (
           <TagBase className="bg-gray-100 text-gray-700 border-transparent">일반</TagBase>
         )}
-        <p className="truncate text-black text-xs font-normal leading-none">
-          이번주 스터디 시간 및 장소 확인 하시고 문의 사항 있으이번주 스터디 시간 및 장소 확인 하시고 문의 사항 있으
-        </p>
+        <p className="truncate text-black text-xs font-normal leading-none">{title}</p>
       </Link>
     </li>
   );
