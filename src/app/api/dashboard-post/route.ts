@@ -79,7 +79,6 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const studyId = searchParams.get("studyId");
-  // const type = searchParams.get("type");
 
   await connectDB();
 

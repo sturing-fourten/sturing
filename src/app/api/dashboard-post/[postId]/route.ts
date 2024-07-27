@@ -5,17 +5,13 @@ import { User } from "@/schema/userSchema";
 
 export async function DELETE(request: Request, { params }: { params: { postId: string } }) {
   const postId = params.postId;
-  if (!postId) {
-    return Response.json({ error: "post id 가 필요합니다." }, { status: 400 });
-  }
-
   const token = request.headers.get("Authorization");
   const userId = token?.split(" ")[1];
   if (!userId) {
     return Response.json({ error: "user id 가 필요합니다." }, { status: 400 });
   }
-  await connectDB();
   try {
+    await connectDB();
     const post = await DashboardPost.findById(postId);
     if (!post) {
       return Response.json({ message: "게시글이 존재하지 않습니다." }, { status: 404 });
