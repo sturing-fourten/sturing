@@ -1,17 +1,16 @@
-import { TTaskPost } from "./api/dashboardPost";
-
 export type TComment = {
-  user: {
-    _id: string;
-    nickname: string;
-    // taskId: string;
-    profileImageUrl: string;
-    role: string;
-  };
+  id: string;
+  postId: string;
+  userId: string;
+  role: string;
+  nickname: string;
+  profileImageUrl: string;
   content: string;
-  created_at: string;
-  like: { userId: string }[];
-  nestedComments: TNestedComment[];
+  createdAt: Date;
+  updatedAt: Date;
+  isMine: boolean;
+  like?: { userId: string }[];
+  // nestedComments: TNestedComment[];
 };
 
 export type TNestedComment = Omit<TComment, "nestedComments">;
@@ -22,5 +21,4 @@ export type TCommentType = "comment" | "nestedComment";
 
 export type TBoardCardProps = {
   studyId: string;
-  data: TTaskPost[];
 };

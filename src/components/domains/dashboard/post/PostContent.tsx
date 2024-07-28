@@ -23,7 +23,7 @@ export default function PostContent({ board }: PostCommentProps) {
 
         <div className="mb-4 text-gray-700 text-base font-normal leading-normal">{content}</div>
 
-        <div className={`relative ${imageUrl ? "aspect-square" : ""}`}>
+        <div className={`relative ${imageUrl ? "aspect-square mb-5" : ""}`}>
           {imageUrl && <Image className="rounded-lg shrink-0" src={imageUrl} alt="과제 이미지" fill={true} />}
         </div>
       </article>
