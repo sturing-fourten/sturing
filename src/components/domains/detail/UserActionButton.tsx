@@ -2,7 +2,7 @@
 import Button from "@/components/commons/Button";
 import userActionButtonConfig from "@/constant/userActionButtonConfig";
 import { cancelApply } from "@/lib/database/action/apply";
-import { deleteMember, endRecurit } from "@/lib/database/action/teamMemberStatus";
+import { endRecruit, leaveTeamMember } from "@/lib/database/action/teamMemberStatus";
 import { TStudyDetailInfoData } from "@/types/api/study";
 import { useParams, useRouter } from "next/navigation";
 
@@ -22,21 +22,27 @@ export default function UserActionButton({ page, userId, study }: UserActionButt
   const studyData = study?.study;
 
   switch (true) {
-    case userId === studyData?.ownerId:
+    case userId === studyData?.ownerId && studyData?.status === "RECRUIT_START":
       userStatus = "OWNER";
-      userAction = endRecurit;
+      userAction = endRecruit;
       break;
-    case teamMemberInfo?.status === "ACCEPTED":
-      userStatus = "ACCEPTED";
-      userAction = deleteMember;
-      break;
-    case teamMemberInfo?.status === "APPLIED" || teamMemberInfo?.status === "APPLIED_VIEW":
-      userStatus = "APPLIED";
-      userAction = deleteMember;
-      break;
-    case studyData?.status === "RECURIT_END" || studyData?.status === "PROGRESS" || studyData?.status === "DONE":
+    case userId === studyData?.ownerId && studyData?.status !== "RECRUIT_START":
       userStatus = "RECRUIT_END";
       userAction = undefined;
+      break;
+    case teamMemberInfo?.status === "ACCEPTED" && studyData?.status === "RECRUIT_START":
+      userStatus = "ACCEPTED";
+      userAction = leaveTeamMember;
+      break;
+    case (teamMemberInfo?.status === "APPLIED" || teamMemberInfo?.status === "APPLIED_VIEW") &&
+      studyData?.status === "RECRUIT_START":
+      userStatus = "APPLIED";
+      userAction = leaveTeamMember;
+      break;
+    case studyData?.status === "RECRUIT_END" || studyData?.status === "PROGRESS" || studyData?.status === "DONE":
+      userStatus = "RECRUIT_END";
+      userAction = undefined;
+      break;
     default:
       userStatus = "NOT_APPLIED";
       userAction = undefined;
@@ -46,12 +52,12 @@ export default function UserActionButton({ page, userId, study }: UserActionButt
 
   const goToApplyPage = () => {
     if (userStatus === "NOT_APPLIED") {
-      router.push(`/apply/${id}`); // 지원서 작성 페이지로 연결, 스터디 아이디 가져가야함
+      router.push(`/apply/${id}`);
     }
   };
 
   const recruitStudy = () => {
-    router.push(`/recruit?lectureId=${id}`); //강의 아이디 저장해서 모집할때 써야함
+    router.push(`/recruit?lectureId=${id}`);
   };
 
   const handleCancelApply: React.FormEventHandler<HTMLFormElement> = async (e) => {

@@ -43,7 +43,7 @@ const userActionButtonConfig: TUserActionButtonConfig = {
       disabled: false,
     },
     RECRUIT_END: {
-      text: "모집 마감",
+      text: "모집이 마감되었습니다.",
       disabled: true,
     },
   },
