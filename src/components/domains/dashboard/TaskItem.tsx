@@ -26,7 +26,7 @@ export default function TaskItem({ taskData }: ITaskItemProps) {
 
           <span className="mr-1 text-gray-900 text-sm font-semibold leading-snug">{writer.nickname}</span>
           <span className="text-gray-700 text-xs font-normal leading-normal">
-            {ROLE_LIST[writer.role as TRole].role}
+            {ROLE_LIST[writer.role as TRole].name}
           </span>
           <span className="ml-auto text-gray-600 text-xs font-medium leading-normal">{timeAgo}</span>
         </div>
