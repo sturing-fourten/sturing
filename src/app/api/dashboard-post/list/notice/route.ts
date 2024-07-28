@@ -20,10 +20,9 @@ export async function GET(request: Request) {
 
     const studyData = await Study.findById(studyId);
 
-    if (studyData.status !== "PROGRESS") {
-      return Response.json({ message: "진행중인 스터디가 아닙니다." }, { status: 404 });
+    if (studyData.status === "RECRUIT_START") {
+      return Response.json({ message: "모집중인 스터디 입니다." }, { status: 404 });
     }
-
     const noticePostListData = await DashboardPost.find({ studyId, postType: "notice" })
       .sort({ createdAt: -1 })
       .skip((page - 1) * pageSize)

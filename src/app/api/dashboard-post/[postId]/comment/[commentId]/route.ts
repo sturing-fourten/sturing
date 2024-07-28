@@ -11,6 +11,7 @@ export async function DELETE(request: Request, { params }: { params: { commentId
 
   const token = request.headers.get("Authorization");
   const userId = token?.split(" ")[1];
+
   if (!userId) {
     return Response.json({ error: "user id 가 필요합니다." }, { status: 400 });
   }
