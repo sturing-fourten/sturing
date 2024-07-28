@@ -4,7 +4,8 @@ import { User } from "@/schema/userSchema";
 
 export async function PATCH(req: Request, { params }: { params: { id: string } }) {
   const studyId = params.id;
-  const { userId } = await req.json();
+  const token = req.headers.get("Authorization");
+  const userId = token?.split(" ")[1];
 
   if (!studyId) {
     return Response.json({ error: "스터디 id 가 필요합니다." }, { status: 400 });
