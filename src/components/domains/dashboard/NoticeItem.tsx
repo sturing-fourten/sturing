@@ -1,10 +1,10 @@
 import TagBase from "@/components/commons/TagBase";
-import { TTaskPost } from "@/types/api/dashboardPost";
+import { TNoticePost } from "@/types/api/dashboardPost";
 import Link from "next/link";
 
 interface INoticeItemProps {
   important?: boolean;
-  noticeBoardData: TTaskPost;
+  noticeBoardData: TNoticePost;
 }
 
 export default function NoticeItem({ important, noticeBoardData }: INoticeItemProps) {

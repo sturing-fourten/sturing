@@ -65,6 +65,12 @@ export const getBoardAction = async (postId: string) => {
       return member.userId.toString() === writerId.toString();
     });
 
+    const comments = await fetch(`${process.env.LOCAL_URL}/api/dashboard-post/${postId}/comment`);
+    if (!comments.ok) {
+      return { status: 400, message: "게시글 작성을 실패하였습니다." };
+    }
+    const comment = await comments.json();
+
     const updatedBoard = {
       _id: board._id.toString(),
       writer: {
@@ -76,8 +82,10 @@ export const getBoardAction = async (postId: string) => {
       title: board.title,
       content: board.content,
       imageUrl: board.imageUrl,
-      commentCount: board.commentCount,
+      comment: comment,
+      postType: board.postType,
       createdAt: board.createdAt,
+      commentCount: board.commentCount,
     };
 
     return { updatedBoard };
