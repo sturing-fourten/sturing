@@ -13,6 +13,7 @@ interface TopBarProps {
   isBackToHome?: boolean;
   onCancel?: () => void;
   onSave?: () => void;
+  onClick?: () => void;
 }
 
 export default function TopBar({
@@ -22,6 +23,7 @@ export default function TopBar({
   showMore,
   onCancel,
   onSave,
+  onClick,
   isBackToHome = false,
 }: TopBarProps) {
   return (
@@ -29,7 +31,7 @@ export default function TopBar({
       {(variant === "share" || variant === "back" || variant === "edit") && (
         <GoBackButton isBackToHome={isBackToHome} isWhite={isWhite} />
       )}
-      {variant === "share" && <ShareButton showMore={showMore} isWhite={isWhite} />}
+      {variant === "share" && onClick && <ShareButton showMore={showMore} isWhite={isWhite} onClick={onClick} />}
       {variant === "back" && (
         <>
           <span className="text-[18px] font-semibold tracking-[-0.36px] leading-[27px] mr-6">{children}</span>
