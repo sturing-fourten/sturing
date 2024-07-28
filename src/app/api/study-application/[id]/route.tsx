@@ -1,5 +1,6 @@
 import connectDB from "@/lib/database/db";
 import { Application } from "@/schema/applicationSchema";
+import { TeamMembers } from "@/schema/teamMemberSchema";
 import { User } from "@/schema/userSchema";
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
@@ -24,6 +25,8 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
     const userNickname = user.nickname;
 
+    const teamMember = await TeamMembers.findOne({ studyId: application.studyId });
+
     const updatedApplication = {
       _id: application._id,
       studyId: application.studyId,
@@ -34,6 +37,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
       role: application.role,
       createdAt: application.createdAt,
       updatedAt: application.updatedAt,
+      status: teamMember.members[0].status,
     };
 
     return new Response(JSON.stringify(updatedApplication), { status: 200 });
