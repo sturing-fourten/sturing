@@ -5,10 +5,8 @@ import Button from "@/components/commons/Button";
 import TopBar from "@/components/commons/TopBar";
 import WriteContent from "@/components/domains/dashboard/board/WriteContent";
 import Title from "@/components/domains/recruit/commons/Title";
-import { useDashBordTaskstore } from "@/store/dashboard-noticeStore";
 import ImageContent from "@/components/domains/dashboard/board/ImageContent";
 import { PutBlobResult } from "@vercel/blob";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { postBoardAction } from "@/lib/database/action/board";
 
@@ -16,7 +14,9 @@ export default function DashBoardTaskPage({ params }: { params: { id: string } }
   const { id: studyId } = params;
   const router = useRouter();
 
-  const { title, content, imageUrl, setTitle, setContent, setImageUrl } = useDashBordTaskstore();
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
   const [fileToRead, setFileToRead] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(true);
@@ -87,7 +87,7 @@ export default function DashBoardTaskPage({ params }: { params: { id: string } }
         throw new Error(res.message);
       }
       setIsSubmitted(true);
-      router.push(`/study/${studyId}/dashboard-task/success`);
+      router.replace(`/study/${studyId}/dashboard-task/success`);
     } catch (error) {
       console.error("POST 요청 실패:", error);
     }
