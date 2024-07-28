@@ -48,6 +48,8 @@ export default function TaskCard({ studyId }: TBoardCardProps) {
   const handleLoadMore = () => {
     if (hasMore) {
       setPage((prevPage) => prevPage + 1);
+    } else {
+      setPage(1);
     }
   };
 

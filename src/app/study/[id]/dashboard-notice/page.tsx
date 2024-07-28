@@ -55,7 +55,7 @@ export default function DashBoardNoticePage({ params }: { params: { id: string }
         throw new Error(res.message);
       }
       setIsSubmitted(true);
-      router.push(`/study/${studyId}/dashboard-notice/success`);
+      router.replace(`/study/${studyId}/dashboard-notice/success`);
     } catch (error) {
       console.error("POST 요청 실패:", error);
     }

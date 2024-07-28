@@ -19,8 +19,12 @@ export default function DashboardCardPaginationLayout(props: IDashboardCardLayou
       }`}>
       {children}
 
-      {hasMore && (
+      {hasMore ? (
         <button type="button" className="relative z-[1] block my-0 mx-auto" onClick={onLoadMore}>
+          <Image src={downArrowDark} alt="" width={24} height={24} />
+        </button>
+      ) : (
+        <button type="button" className="relative z-[1] block my-0 rotate-180 mx-auto" onClick={onLoadMore}>
           <Image src={downArrowDark} alt="" width={24} height={24} />
         </button>
       )}

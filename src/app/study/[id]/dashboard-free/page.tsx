@@ -86,7 +86,7 @@ export default function DashBoardFreePage({ params }: { params: { id: string } }
         throw new Error(res.message);
       }
       setIsSubmitted(true);
-      router.push(`/study/${studyId}/dashboard-free/success`);
+      router.replace(`/study/${studyId}/dashboard-free/success`);
     } catch (error) {
       console.error("POST 요청 실패:", error);
     }
