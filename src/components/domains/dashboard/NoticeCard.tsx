@@ -23,6 +23,7 @@ export default function NoticeCard({ studyId }: TBoardCardProps) {
   const [page, setPage] = useState(1);
   const [noticeBoardsData, setNoticeBoardsData] = useState<TNoticePost[]>([]);
   const [hasMore, setHasMore] = useState(true);
+  const [allLoaded, setAllLoaded] = useState(false);
 
   useEffect(() => {
     const loadBoardList = async () => {
@@ -48,19 +49,21 @@ export default function NoticeCard({ studyId }: TBoardCardProps) {
   const handleLoadMore = () => {
     if (hasMore) {
       setPage((prevPage) => prevPage + 1);
+      setAllLoaded(false);
     } else {
       setPage(1);
+      setAllLoaded(true);
     }
   };
 
   return (
-    <DashboardCardPaginationLayout hasMore={hasMore} onLoadMore={handleLoadMore}>
+    <DashboardCardPaginationLayout hasMore={hasMore} allLoaded={allLoaded} onLoadMore={handleLoadMore}>
       <DashboardCardTitle title="공지사항">
         <WriteBoardLink studyId={studyId} type="notice" />
       </DashboardCardTitle>
 
       <ul className="flex flex-col gap-2 mb-3">
-        {noticeBoardsData && noticeBoardsData?.length > 0 ? (
+        {noticeBoardsData && noticeBoardsData.length > 0 ? (
           noticeBoardsData.map((noticeBoard: TNoticePost) => (
             <NoticeItem key={noticeBoard._id} noticeBoardData={noticeBoard} important={noticeBoard.isImportant} />
           ))

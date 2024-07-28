@@ -23,6 +23,7 @@ export default function TaskCard({ studyId }: TBoardCardProps) {
   const [page, setPage] = useState(1);
   const [taskBoardsData, setTaskBoardsData] = useState<TTaskPost[]>([]);
   const [hasMore, setHasMore] = useState(true);
+  const [allLoaded, setAllLoaded] = useState(false);
 
   useEffect(() => {
     const loadBoardList = async () => {
@@ -48,13 +49,15 @@ export default function TaskCard({ studyId }: TBoardCardProps) {
   const handleLoadMore = () => {
     if (hasMore) {
       setPage((prevPage) => prevPage + 1);
+      setAllLoaded(false);
     } else {
       setPage(1);
+      setAllLoaded(true);
     }
   };
 
   return (
-    <DashboardCardPaginationLayout hasMore={hasMore} onLoadMore={handleLoadMore}>
+    <DashboardCardPaginationLayout hasMore={hasMore} allLoaded={allLoaded} onLoadMore={handleLoadMore}>
       <DashboardCardTitle title="과제 게시판">
         <WriteBoardLink studyId={studyId} type="task" />
       </DashboardCardTitle>
