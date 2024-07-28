@@ -15,20 +15,12 @@ export async function GET(request: Request) {
        * PROGRESS, RECRUIT_END, DOME : 내가 참여하고 있는 모든 스터디 (개설 or 지원 후 ACCEPTED) 중 각 status로 필터링한 목록 조회
        */
       case "PROGRESS": {
-        const teamMembersOwnerPromise = TeamMembers.find({
-          "members.userId": userId,
-          "members.isOwner": true,
-        }).exec();
-        const teamMembersAcceptedPromise = TeamMembers.find({
-          "members.userId": userId,
-          "members.status": "ACCEPTED",
-        }).exec();
-        const [teamMembersOwner, teamMembersAccepted] = await Promise.all([
-          teamMembersOwnerPromise,
-          teamMembersAcceptedPromise,
-        ]);
-        const teamMembers = [...teamMembersOwner, teamMembersAccepted];
-        const studyIdList = teamMembers.map((member) => member.studyId);
+        const myAcceptedTeamMember = await TeamMembers.find({
+          members: {
+            $elemMatch: { userId: userId, status: "ACCEPTED" },
+          },
+        }).select("studyId members");
+        const studyIdList = myAcceptedTeamMember.map((member) => member.studyId);
         const studyList = await Study.find({
           _id: { $in: studyIdList },
           status: listType,
@@ -36,6 +28,7 @@ export async function GET(request: Request) {
           path: "teamMembersId",
           select: "members",
         });
+
         return Response.json({
           progressStudyList: studyList,
           recruitEndStudyListCount: await Study.countDocuments({
@@ -46,20 +39,12 @@ export async function GET(request: Request) {
       }
 
       case "RECRUIT_END": {
-        const teamMembersOwnerPromise = TeamMembers.find({
-          "members.userId": userId,
-          "members.isOwner": true,
-        }).exec();
-        const teamMembersAcceptedPromise = TeamMembers.find({
-          "members.userId": userId,
-          "members.status": "ACCEPTED",
-        }).exec();
-        const [teamMembersOwner, teamMembersAccepted] = await Promise.all([
-          teamMembersOwnerPromise,
-          teamMembersAcceptedPromise,
-        ]);
-        const teamMembers = [...teamMembersOwner, teamMembersAccepted];
-        const studyIdList = teamMembers.map((member) => member.studyId);
+        const myAcceptedTeamMember = await TeamMembers.find({
+          members: {
+            $elemMatch: { userId: userId, status: "ACCEPTED" },
+          },
+        }).select("studyId members");
+        const studyIdList = myAcceptedTeamMember.map((member) => member.studyId);
         const studyList = await Study.find({
           _id: { $in: studyIdList },
           status: listType,
@@ -152,20 +137,12 @@ export async function GET(request: Request) {
       }
 
       case "DONE": {
-        const teamMembersOwnerPromise = TeamMembers.find({
-          "members.userId": userId,
-          "members.isOwner": true,
-        }).exec();
-        const teamMembersAcceptedPromise = TeamMembers.find({
-          "members.userId": userId,
-          "members.status": "ACCEPTED",
-        }).exec();
-        const [teamMembersOwner, teamMembersAccepted] = await Promise.all([
-          teamMembersOwnerPromise,
-          teamMembersAcceptedPromise,
-        ]);
-        const teamMembers = [...teamMembersOwner, teamMembersAccepted];
-        const studyIdList = teamMembers.map((member) => member.studyId);
+        const myAcceptedTeamMember = await TeamMembers.find({
+          members: {
+            $elemMatch: { userId: userId, status: "ACCEPTED" },
+          },
+        }).select("studyId members");
+        const studyIdList = myAcceptedTeamMember.map((member) => member.studyId);
         const studyList = await Study.find({
           _id: { $in: studyIdList },
           status: listType,

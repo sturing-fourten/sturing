@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import connectDB from "../db";
 import { Application } from "@/schema/applicationSchema";
 
-export const cancleApply = async (studyId: string, userId: string) => {
+export const cancelApply = async (studyId: string, userId: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/study/${studyId}/apply-cancel`, {
       method: "DELETE",
