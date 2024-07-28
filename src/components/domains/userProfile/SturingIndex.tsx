@@ -9,7 +9,7 @@ export default function SturingIndex({ sturingIndex }: { sturingIndex: number })
       <section className="w-full px-4 py-7">
         <Title>스터링 지수</Title>
         <div className="mt-[14px] w-full px-6 py-5 border border-gray-300 rounded-[5px]">
-          <SturingProgressBar progress={sturingIndex} />
+          <SturingProgressBar progress={sturingIndex > 100 ? 100 : sturingIndex} />
           {/* <HorizontalDivider addStyle="my-6" />
           <div className="text-sm tracking-[-0.42px] flex items-center justify-between">
             <p className="font-medium">{`팀원 희망률 100%`}</p>

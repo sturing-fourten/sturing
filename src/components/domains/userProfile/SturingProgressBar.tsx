@@ -16,9 +16,9 @@ export default function SturingProgressBar({ progress }: ProgressBarProps) {
               <div className="absolute bottom-4 -right-[27px]">
                 <div className="relative ">
                   <img src={ICONS.toolTipBlue.src} alt={ICONS.toolTipBlue.alt} />
-                  <span className="text-white text-base font-medium absolute inset-y-0 top-1 left-[11px]">
-                    {progress}%
-                  </span>
+                  <p className="text-white text-base text-center font-medium absolute inset-y-0 top-1 left-[11px]">
+                    {`${progress}%`}
+                  </p>
                 </div>
               </div>
             </div>
