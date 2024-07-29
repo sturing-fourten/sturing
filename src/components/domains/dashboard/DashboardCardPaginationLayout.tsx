@@ -4,12 +4,12 @@ import { downArrowDark } from "@/../public/icons/icons";
 interface IDashboardCardLayoutProps {
   children: React.ReactNode;
   hasMore: boolean;
-  allLoaded: boolean;
+  cardCount: number;
   onLoadMore: () => void;
 }
 
 export default function DashboardCardPaginationLayout(props: IDashboardCardLayoutProps) {
-  const { children, hasMore, allLoaded, onLoadMore } = props;
+  const { children, hasMore, onLoadMore, cardCount } = props;
 
   return (
     <article
@@ -19,8 +19,7 @@ export default function DashboardCardPaginationLayout(props: IDashboardCardLayou
           : "pb-6"
       }`}>
       {children}
-
-      {(hasMore || !allLoaded) && (
+      {((cardCount === 2 && hasMore) || cardCount >= 3) && (
         <button
           type="button"
           className={`relative z-[1] block my-0 mx-auto ${!hasMore ? "rotate-180" : ""}`}

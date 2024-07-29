@@ -23,7 +23,6 @@ export default function FreeCard({ studyId }: TBoardCardProps) {
   const [page, setPage] = useState(1);
   const [freeBoardsData, setfreeBoardsData] = useState<TTaskPost[]>([]);
   const [hasMore, setHasMore] = useState(true);
-  const [allLoaded, setAllLoaded] = useState(false);
 
   useEffect(() => {
     const loadBoardList = async () => {
@@ -49,15 +48,13 @@ export default function FreeCard({ studyId }: TBoardCardProps) {
   const handleLoadMore = () => {
     if (hasMore) {
       setPage((prevPage) => prevPage + 1);
-      setAllLoaded(false);
     } else {
       setPage(1);
-      setAllLoaded(true);
     }
   };
-
+  const cardCount = freeBoardsData.length || 0;
   return (
-    <DashboardCardPaginationLayout hasMore={hasMore} allLoaded={allLoaded} onLoadMore={handleLoadMore}>
+    <DashboardCardPaginationLayout cardCount={cardCount} hasMore={hasMore} onLoadMore={handleLoadMore}>
       <DashboardCardTitle title="자유 게시판">
         <WriteBoardLink studyId={studyId} type="free" />
       </DashboardCardTitle>
