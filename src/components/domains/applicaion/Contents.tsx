@@ -38,9 +38,9 @@ export default function ApplicationContents({ applicationData }: ApplicationCont
           <span className="text-gray-900 text-4 font-semibold tracking-[-0.42px] leading-[22px]">
             지원자가 희망하는 역할
           </span>
-          <div className="grid grid-cols-3 flex-col gap-[15px]">
-            <div className="w-full h-12 flex justify-start items-center px-3 border rounded-[3px] text-[14px] font-medium tracking-[-0.42px] flex-grow border-main-500 bg-main-100 text-main-500">
-              <div className="flex gap-[7px] justify-start items-center">
+          <div className="flex-col flex gap-[15px] w-fit">
+            <div className="w-full h-12 flex items-center px-3 border rounded-[3px] text-[14px] font-medium tracking-[-0.42px] border-main-500 bg-main-100 text-main-500">
+              <div className="flex gap-[7px] items-center">
                 <span className="text-blue-500 text-sm font-medium leading-snug">{ROLE_LIST[role as TRole].name}</span>
                 <span className="text-stone-500 text-xs font-medium leading-none">{ROLE_LIST[role as TRole].role}</span>
               </div>
