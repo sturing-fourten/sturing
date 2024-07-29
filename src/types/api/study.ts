@@ -78,7 +78,7 @@ export type TStudyRecruitCardData = {
   isBookmarked?: boolean;
 };
 
-export type TStudyListData = TStudyRecruitCardData[];
+export type TStudyListData = { studyList: TStudyRecruitCardData[]; hasNextPage: boolean; currentPage: number };
 
 export type TComment = {
   id: string;
@@ -89,3 +89,5 @@ export type TComment = {
   content: string;
   createdAt: string;
 };
+
+// export type TFetchStudyList
