@@ -1,3 +1,5 @@
+"use client";
+
 import LectureLinkBanner from "@/components/commons/LectureLinkBanner";
 import TopBar from "@/components/commons/TopBar";
 import { TagLight } from "@/components/commons/tag/TagLight";
@@ -8,7 +10,8 @@ import { CATEGORY } from "@/constant/category";
 import { TLectureInfoData } from "@/types/api/lecture";
 import { TStudyDetailInfoData } from "@/types/api/study";
 import { getDateRangeWithWeeks } from "@/utils/getDateRangeWithWeeks";
-
+import { deleteStudyAction } from "@/lib/database/action/study";
+import { useRouter } from "next/navigation";
 interface BannerProps {
   page: "study" | "lecture";
   lectureInfo: TLectureInfoData;
@@ -20,7 +23,7 @@ const { study, lecture } = IMAGES_DEFAUlT;
 export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
   const { online: lectureOnline, platform, category: lectureCategory, rating, title: lectureTitle, link } = lectureInfo;
   const studyOnline = studyInfo?.meeting?.format || "ONLINE";
-  const { category: studyCategory = "", title: studyTitle, startDate, endDate } = studyInfo || {};
+  const { category: studyCategory = "", title: studyTitle, startDate, endDate, isMine, _id: studyId } = studyInfo || {};
   const studyImageUrl = studyInfo?.imageUrl;
   const isStudy = page === "study";
   const defaultImageUrl = isStudy ? study.src : lecture.src;
@@ -37,7 +40,7 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
     backgroundSize: "cover",
     backgroundImage: `url(${imageUrl || defaultImageUrl})`,
   };
-  const isLeader = true;
+  const router = useRouter();
 
   const getStatus = () => {
     if (isStudy) {
@@ -54,6 +57,18 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
     }
   };
 
+  const handleDeleteBoard = async () => {
+    if (!studyId) return;
+    const result = await deleteStudyAction(studyId);
+
+    if (result.status == 200) {
+      alert(result.message);
+      router.push("/mystudy/waiting");
+    } else {
+      alert(result.message);
+    }
+  };
+
   return (
     <>
       <section
@@ -61,7 +76,7 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
           isStudy && "before:-z-[2] before:bg-black/20 before:inset-0 before:absolute"
         }  `}
         style={style}>
-        <TopBar variant="share" showMore={isStudy && isLeader} isWhite={isStudy} />
+        <TopBar variant="share" showMore={isStudy} isWhite={isStudy} isMine={isMine} onClick={handleDeleteBoard} />
         <div className="flex items-center gap-1 mt-10 mb-4">
           <TagMain>{getStatus()}</TagMain>
           <TagLight>{CATEGORY(isStudy ? studyCategory : lectureCategory)}</TagLight>

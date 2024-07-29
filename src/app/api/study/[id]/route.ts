@@ -23,6 +23,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 
     const ownerId = study.ownerId;
+    const isMine = userId === ownerId.toString();
 
     const isOwnerExisted = await User.findById(ownerId);
     if (!isOwnerExisted) {
@@ -57,7 +58,12 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 
     return Response.json(
-      { study, lecture: lectureResult, teamMemberList: acceptedTeamMembers, isBookmarked },
+      {
+        study: { ...study.toObject(), isMine },
+        lecture: lectureResult,
+        teamMemberList: acceptedTeamMembers,
+        isBookmarked,
+      },
       { status: 200 },
     );
   } catch (error: any) {
@@ -88,11 +94,9 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       return Response.json({ message: "스터디가 존재하지 않습니다." }, { status: 404 });
     }
 
-    // if (study.status !== "RECRUIT_START") {
-    //   return Response.json({ message: "모집중인 스터디가 아닙니다." }, { status: 403 });
-    // }
+    const isMine = study.ownerId.toString() === userId;
 
-    if (study.ownerId !== userId) {
+    if (!isMine) {
       return Response.json({ message: "권한이 없습니다." }, { status: 403 });
     }
 
@@ -109,7 +113,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     await Study.findByIdAndDelete(studyId); //스터디 삭제
     await Dashboard.findOneAndDelete({ studyId }); //대시보드 삭제
 
-    return Response.json({ message: "스터디가 삭제되었습니다." }, { status: 200 });
+    return Response.json({ message: "스터디가 삭제되었습니다.", isMine }, { status: 200 });
   } catch (error: any) {
     if (error.name === "CastError") {
       return Response.json({ message: "스터디가 존재하지 않습니다." }, { status: 404 });

@@ -96,7 +96,7 @@ export const getComments = async (postId: string, sortBy: string) => {
   }
 };
 
-export const deletePostCommentAction = async (postId: string, commentId: string, studyId: string) => {
+export const deletePostCommentAction = async (postId: string, commentId: string) => {
   try {
     const session = await getSession();
     const userId = session?.user?.id || "";
