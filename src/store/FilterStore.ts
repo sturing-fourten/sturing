@@ -94,7 +94,10 @@ export const useFilterStore = create<Filter>((set) => ({
     resetPages();
     set({ searchQuery: query });
   },
-  resetFilters: () => set(initialState),
+  resetFilters: () => {
+    resetPages();
+    set(initialState);
+  },
   resetCategoryFilter: () => set({ categories: [] }),
 }));
 
