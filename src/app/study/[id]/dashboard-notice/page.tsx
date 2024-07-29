@@ -6,7 +6,6 @@ import TopBar from "@/components/commons/TopBar";
 import WriteContent from "@/components/domains/dashboard/board/WriteContent";
 import Title from "@/components/domains/recruit/commons/Title";
 import { ICONS } from "@/constant/icons";
-import { useDashBordNoticestore } from "@/store/dashboard-noticeStore";
 import { useRouter } from "next/navigation";
 import { postBoardAction } from "@/lib/database/action/board";
 
@@ -14,7 +13,9 @@ export default function DashBoardNoticePage({ params }: { params: { id: string }
   const { id: studyId } = params;
   const router = useRouter();
 
-  const { title, content, isImportant, setTitle, setContent, setIsImportant } = useDashBordNoticestore();
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [isImportant, setIsImportant] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleWriteChange = (title: string, text: string) => {

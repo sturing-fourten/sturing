@@ -5,7 +5,6 @@ import Button from "@/components/commons/Button";
 import TopBar from "@/components/commons/TopBar";
 import WriteContent from "@/components/domains/dashboard/board/WriteContent";
 import Title from "@/components/domains/recruit/commons/Title";
-import { useDashBordFreestore } from "@/store/dashboard-noticeStore";
 import ImageContent from "@/components/domains/dashboard/board/ImageContent";
 import { PutBlobResult } from "@vercel/blob";
 import { useRouter } from "next/navigation";
@@ -15,7 +14,9 @@ export default function DashBoardFreePage({ params }: { params: { id: string } }
   const { id: studyId } = params;
   const router = useRouter();
 
-  const { title, content, imageUrl, setTitle, setContent, setImageUrl } = useDashBordFreestore();
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
   const [fileToRead, setFileToRead] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(true);
