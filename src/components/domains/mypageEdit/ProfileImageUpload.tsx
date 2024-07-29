@@ -35,13 +35,7 @@ export default function ProfileImageUpload(props: ProfileImageUploadProps) {
   useEffect(() => {
     if (!fileToRead) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const newImage = reader.result as string;
-      setImage(newImage);
-    };
-
-    const fetchImage = async (file: any) => {
+    const uploadImageToServer = async (file: File) => {
       try {
         const response = await fetch(`/api/image-test?filename=${file.name}`, {
           method: "POST",
@@ -51,15 +45,15 @@ export default function ProfileImageUpload(props: ProfileImageUploadProps) {
         const uploadImage = newBlob.url;
         setImage(uploadImage);
       } catch (error: any) {
-        console.error("Error fetching Image:", error.message);
+        console.error("Error uploading Image:", error.message);
         throw error;
       }
     };
 
-    fetchImage(fileToRead);
-
+    const reader = new FileReader();
     reader.readAsDataURL(fileToRead);
-    setFileToRead(null);
+
+    uploadImageToServer(fileToRead).finally(() => setFileToRead(null));
   }, [fileToRead, setImage]);
 
   return (

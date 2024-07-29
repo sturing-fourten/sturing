@@ -7,7 +7,7 @@ export type TTaskPost = {
   imageUrl: string | null;
   postType?: "notice" | "task" | "free";
   commentCount: number;
-  isMine: boolean;
+  isMine?: boolean;
   createdAt: Date;
   updatedAt?: Date;
 };

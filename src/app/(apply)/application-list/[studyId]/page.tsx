@@ -4,16 +4,25 @@ import StudyMeetingInfo from "@/components/commons/card/element/StudyMeetingInfo
 import NoList from "@/components/domains/mystudy/NoList";
 import { TApplicationListResponse } from "@/types/application";
 import { getDateRange } from "@/utils/getDateRange";
+import { notFound } from "next/navigation";
 
 interface IApplicationListPageProps {
   params: {
     studyId: string;
   };
 }
+
+const getApplicationList = async (studyId: string) => {
+  const res = await fetch(`${process.env.LOCAL_URL}/api/study-application-list?studyId=${studyId}`);
+  if (!res.ok) {
+    notFound();
+  }
+  const data = await res.json();
+  return data;
+};
+
 export default async function ApplicationListPage({ params: { studyId } }: IApplicationListPageProps) {
-  const { study, applicationList }: TApplicationListResponse = await (
-    await fetch(`${process.env.LOCAL_URL}/api/study-application-list?studyId=${studyId}`)
-  ).json();
+  const { study, applicationList }: TApplicationListResponse = await getApplicationList(studyId);
 
   const {
     title,

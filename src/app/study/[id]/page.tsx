@@ -2,6 +2,7 @@ import FixedBottomBar from "@/components/domains/detail/FixedBottomBar";
 import Header from "@/components/domains/detail/Header";
 import Contents from "@/components/domains/detail/study/Contents";
 import { getSession } from "@/lib/database/getSession";
+import { notFound } from "next/navigation";
 
 const getStudyInfo = async (id: string) => {
   const session = await getSession();
@@ -36,6 +37,9 @@ export default async function StudyDetail({ params }: { params: { id: string } }
   const { id } = params;
   const studyData = await getStudyInfo(id);
   const commentData = await getCommentsInfo(id);
+
+  const studyId = studyData?.study?._id;
+  if (!studyId) notFound();
 
   return (
     <>

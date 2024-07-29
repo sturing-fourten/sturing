@@ -2,13 +2,14 @@ import FixedBottomBar from "@/components/domains/detail/FixedBottomBar";
 import Header from "@/components/domains/detail/Header";
 import Contents from "@/components/domains/detail/lecture/Contents";
 import { getLectureAction } from "@/lib/database/action/lecture";
+import { notFound } from "next/navigation";
 
 export default async function LectureDetail({ params }: { params: { id: string } }) {
   const { id } = params;
   const lectureData = await getLectureAction(id);
 
   const lectureId = lectureData.lecture?._id;
-  if (!lectureId) return <div>강의를 찾을 수 없습니다</div>; //에러처리 필요
+  if (!lectureId) notFound();
 
   return (
     <>
