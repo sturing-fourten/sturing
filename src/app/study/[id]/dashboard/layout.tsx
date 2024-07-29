@@ -6,8 +6,7 @@ import { IMAGES_DEFAUlT } from "@/constant/images";
 import { fetchStudyInfo } from "@/lib/database/action/dashboard";
 import { getSession } from "@/lib/database/getSession";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
-import { getIsTodayAfterEndDate } from "@/utils/getIsTodayAfterEndDate";
-import { getIsTodayInRange } from "@/utils/getIsTodayInRange";
+import { getIsTodayAfterTargetDate } from "@/utils/getIsTodayAfterTargetDate";
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
 
@@ -43,8 +42,8 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
   const myUserId = session?.user?.id;
   const isOwner = myUserId === ownerId;
   const isShowStartButton =
-    isOwner && getIsTodayInRange(new Date(startDate), new Date(endDate)) === true && status === "RECRUIT_END";
-  const isShowDoneButton = isOwner && getIsTodayAfterEndDate(new Date(endDate)) === true && status === "PROGRESS";
+    isOwner && getIsTodayAfterTargetDate(new Date(startDate)) === true && status === "RECRUIT_END";
+  const isShowDoneButton = isOwner && getIsTodayAfterTargetDate(new Date(endDate)) === true && status === "PROGRESS";
 
   const { study: studyBg } = IMAGES_DEFAUlT;
 
