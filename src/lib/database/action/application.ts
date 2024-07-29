@@ -2,6 +2,7 @@
 
 import { Application } from "@/schema/applicationSchema";
 import { getSession } from "../getSession";
+import { redirect } from "next/navigation";
 
 export const applyAction = async (formData: FormData) => {
   try {
@@ -52,5 +53,31 @@ export const applyAction = async (formData: FormData) => {
     return { status: 200, data };
   } catch (error: any) {
     return { success: false, message: error.message };
+  }
+};
+
+export const acceptApplication = async (formData: FormData) => {
+  const session = await getSession();
+  const userId = session?.user?.id || "";
+  const appliedUserId = formData.get("appliedUserId");
+  const studyId = formData.get("studyId");
+
+  try {
+    const response = await fetch(`${process.env.LOCAL_URL}/api/study/${studyId}/apply-accept`, {
+      method: "PATCH",
+      headers: {
+        Authorization: "Bearer " + userId,
+      },
+      body: JSON.stringify({ appliedUserId }),
+    });
+
+    if (!response.ok) {
+      throw new Error("지원 거절 실패");
+    }
+
+    redirect(`/application-list/${studyId}`);
+  } catch (error: any) {
+    console.error("error", error.message);
+    throw error;
   }
 };

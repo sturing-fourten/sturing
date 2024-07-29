@@ -34,6 +34,7 @@ export async function GET(request: Request) {
           title: application.title,
           resolution: application.resolution,
           role: application.role,
+          createdAt: application.createdAt,
           nickname: user.nickname,
           profileImageUrl: user.profileImageUrl,
           status: members[0].status,

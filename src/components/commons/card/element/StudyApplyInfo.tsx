@@ -1,5 +1,3 @@
-import getApplicationStatusTagText from "@/utils/getApplicationStatusTagText";
-
 interface IStudyApplyInfoProps {
   status: "APPLIED" | "APPLIED_VIEW" | "ACCEPTED";
   createAt: string;
