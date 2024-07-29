@@ -42,8 +42,8 @@ export default function RootLayout({
           <body
             className={`${pretendard.variable} font-pretendard bg-[#f5f5f5] min-w-screen flex flex-col items-center`}>
             <main className="w-screen sm:w-[600px] bg-white min-h-screen shadow-xl relative">
-              <div className="flex-col inline-flex w-full max-h-dvh">
-                <div className="overflow-auto scrollbar-hide">{children}</div>
+              <div className="w-[inherit] flex-col inline-flex max-h-dvh">
+                <div className="w-[inherit] overflow-auto scrollbar-hide">{children}</div>
               </div>
             </main>
             <div id="modal"></div>
