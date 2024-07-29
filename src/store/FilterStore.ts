@@ -2,6 +2,7 @@ import { TCategory } from "@/types/api/study";
 import { SearchTabMenu, TSeachTabMenu, TSortBy } from "@/types/filter";
 import toggleFilterInArray from "@/utils/toggleFilterInArray";
 import { create } from "zustand";
+import { useSearchResultStore } from "@/store/SearchResultStore";
 
 interface InitialState {
   sortBy: TSortBy;
@@ -40,30 +41,57 @@ const initialState: InitialState = {
   endDate: null,
 };
 
+const resetPages = () => {
+  const { setStudyPage, setLecturePage } = useSearchResultStore.getState();
+  setStudyPage(1);
+  setLecturePage(1);
+};
+
 export const useFilterStore = create<Filter>((set) => ({
   ...initialState,
   searchQuery: "",
-  setSortByFilter: (sortBy) => set({ sortBy: sortBy }),
-  setCategoryFilter: (category) =>
+  setSortByFilter: (sortBy) => {
+    resetPages();
+    set({ sortBy: sortBy });
+  },
+  setCategoryFilter: (category) => {
+    resetPages();
     set((state) => ({
       categories: toggleFilterInArray(state.categories, category),
-    })),
-  setRoleFilter: (role) =>
+    }));
+  },
+  setRoleFilter: (role) => {
+    resetPages();
     set((state) => ({
       roles: toggleFilterInArray(state.roles, role),
-    })),
-  setLevelFilter: (level) =>
+    }));
+  },
+  setLevelFilter: (level) => {
+    resetPages();
     set((state) => ({
       levels: toggleFilterInArray(state.levels, level),
-    })),
-  setLocationFilter: (location) =>
+    }));
+  },
+  setLocationFilter: (location) => {
+    resetPages();
     set((state) => ({
       locations: toggleFilterInArray(state.locations, location),
-    })),
-  setMemberCountFilter: (count) => set({ memberCount: count }),
-  setStartDate: (startDate) => set({ startDate }),
-  setEndDate: (endDate) => set({ endDate }),
+    }));
+  },
+  setMemberCountFilter: (count) => {
+    resetPages();
+    set({ memberCount: count });
+  },
+  setStartDate: (startDate) => {
+    resetPages();
+    set({ startDate });
+  },
+  setEndDate: (endDate) => {
+    resetPages();
+    set({ endDate });
+  },
   setSearchQuery: (query) => {
+    resetPages();
     set({ searchQuery: query });
   },
   resetFilters: () => set(initialState),
