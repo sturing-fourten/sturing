@@ -216,3 +216,34 @@ export const changeStudyToProgressAction = async (formData: FormData) => {
     console.log("error", error);
   }
 };
+
+export const changeStudyToDoneAction = async (formData: FormData) => {
+  try {
+    const studyId = formData.get("studyId");
+    const session = await getSession();
+    const userId = session?.user?.id || "";
+
+    if (userId && studyId) {
+      const response = await fetch(`${process.env.LOCAL_URL}/api/my-study/${studyId}/done`, {
+        method: "PATCH",
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("스터디 종료 처리 실패");
+      }
+
+      revalidatePath(`/study/${studyId}/dashboard`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/me`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/schedule`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/board`, "layout");
+      return { status: 200, message: "스터디 종료 처리 성공" };
+    } else {
+      throw new Error("유저 아이디와 스터디 아이디가 필요합니다.");
+    }
+  } catch (error: any) {
+    console.log("error", error);
+  }
+};

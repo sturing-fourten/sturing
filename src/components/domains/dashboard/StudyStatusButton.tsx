@@ -2,7 +2,7 @@
 
 import Button from "@/components/commons/Button";
 import { showToast } from "@/components/commons/Toast";
-import { changeStudyToProgressAction } from "@/lib/database/action/dashboard";
+import { changeStudyToDoneAction, changeStudyToProgressAction } from "@/lib/database/action/dashboard";
 import { FormEvent } from "react";
 
 const STUDY_STATUS_BUTTON_TYPE = {
@@ -10,7 +10,7 @@ const STUDY_STATUS_BUTTON_TYPE = {
     label: "스터디 시작하기",
   },
   toDone: {
-    label: "스터디 종료하기",
+    label: "스터디 완료하기",
   },
 };
 export default function StudyStatusButton({ studyId, type }: { studyId: any; type: "toProgress" | "toDone" }) {
@@ -25,6 +25,8 @@ export default function StudyStatusButton({ studyId, type }: { studyId: any; typ
       showToast("스터디가 시작되었어요.🎉");
     }
     if (type === "toDone") {
+      await changeStudyToDoneAction(formData);
+      showToast("스터디가 완료되었어요. 수고하셨습니다.✨");
     }
   };
 
