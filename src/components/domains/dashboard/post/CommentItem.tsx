@@ -5,14 +5,15 @@ import CommentReaction from "./CommentReaction";
 
 interface ICommentItemProps {
   comment: TComment;
+  refreshComments: () => void;
 }
 
 export default function CommentItem(props: ICommentItemProps) {
-  const { comment } = props;
+  const { comment, refreshComments } = props;
 
   return (
-    <div className="grid grid-cols-[38px_1fr] grid-rows-[auto_auto_auto] gap-x-2 gap-y-1">
-      <CommentHeader comment={comment} />
+    <div className="flex flex-col">
+      <CommentHeader comment={comment} refreshComments={refreshComments} />
 
       <span></span>
 

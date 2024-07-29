@@ -1,6 +1,7 @@
 export type TComment = {
   id: string;
   postId: string;
+  studyId: string;
   userId: string;
   role: string;
   nickname: string;

@@ -21,7 +21,6 @@ export default function PostCommentForm({ studyId, postId, onCommentPosted }: Po
     formData.append("studyId", studyId);
     formData.append("postId", postId);
     formData.append("comment", comment);
-
     try {
       const res = await PostComment(formData);
       if (!res) {

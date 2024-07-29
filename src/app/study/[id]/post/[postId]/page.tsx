@@ -31,7 +31,7 @@ export default function PostPage({ params }: { params: { id: string; postId: str
     const result = await deleteBoardAction(postId, studyId);
 
     if (result.status !== 200) {
-      throw new Error("게시글 삭제를 실패하였습니다.");
+      alert("게시글 삭제를 실패하였습니다.");
     }
     router.push(`/study/${studyId}/dashboard/board`);
   }, [postId, studyId]);
@@ -49,7 +49,7 @@ export default function PostPage({ params }: { params: { id: string; postId: str
           <>
             <PostContent board={updatedBoard} />
             <HorizontalDivider addStyle="mb-6" />
-            <PostComment postId={postId} commentsUpdated={commentsUpdated} />
+            <PostComment postId={postId} commentsUpdated={commentsUpdated} refreshComments={refreshComments} />
             <PostCommentForm studyId={studyId} postId={postId} onCommentPosted={refreshComments} />
           </>
         )

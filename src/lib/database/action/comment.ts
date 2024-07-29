@@ -1,7 +1,7 @@
 "use server";
 import { RecruitComment } from "@/schema/RecruitCommentSchema";
 import connectDB from "../db";
-import { getSession } from "../getSession";
+import { getSession } from "@/lib/database/getSession";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -15,7 +15,7 @@ export async function recruitComment(formData: FormData) {
 
   try {
     const session = await getSession();
-    const userId = session?.user?.id;
+    const userId = session?.user?.id || "";
 
     if (userId) {
       const newComment = new RecruitComment({
@@ -44,7 +44,7 @@ export async function PostComment(formData: FormData) {
 
   try {
     const session = await getSession();
-    const userId = session?.user?.id;
+    const userId = session?.user?.id || "";
 
     const newComment = {
       studyId: studyId,
@@ -55,7 +55,6 @@ export async function PostComment(formData: FormData) {
       const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard-post/${postId}/comment`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: "Bearer " + userId,
         },
         body: JSON.stringify(newComment),
@@ -73,3 +72,50 @@ export async function PostComment(formData: FormData) {
     console.error("댓글 작성하는 데 에러 발생:", error);
   }
 }
+
+export const getComments = async (postId: string, sortBy: string) => {
+  try {
+    const session = await getSession();
+    const userId = session?.user?.id || "";
+    if (userId) {
+      const res = await fetch(`${process.env.LOCAL_URL}/api/dashboard-post/${postId}/comment?sortBy=${sortBy}`, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
+
+      if (!res.ok) {
+        return { status: 400, message: "댓글을 불러오는 데 실패하였습니다." };
+      }
+      const comments = await res.json();
+      return comments;
+    }
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};
+
+export const deletePostCommentAction = async (postId: string, commentId: string, studyId: string) => {
+  try {
+    const session = await getSession();
+    const userId = session?.user?.id || "";
+
+    if (userId) {
+      const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard-post/${postId}/comment/${commentId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
+
+      if (!response.ok) {
+        return { status: 400, message: "댓글 삭제를 실패하였습니다." };
+      }
+
+      return { status: 200, message: "댓글이 성공적으로 삭제되었습니다." };
+    }
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};
