@@ -2,8 +2,9 @@ import Button from "@/components/commons/Button";
 import TabBarLinkUnderlined from "@/components/commons/TabBarLinkUnderlined";
 import TopBar from "@/components/commons/TopBar";
 import StudyInfo from "@/components/domains/dashboard/StudyInfo";
+import StudyStatusButton from "@/components/domains/dashboard/StudyStatusButton";
 import { IMAGES_DEFAUlT } from "@/constant/images";
-import { fetchStudyInfo } from "@/lib/database/action/dashboard";
+import { fetchStudyInfo, startStudyAction } from "@/lib/database/action/dashboard";
 import { getSession } from "@/lib/database/getSession";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 import { getIsTodayAfterTargetDate } from "@/utils/getIsTodayAfterTargetDate";
@@ -77,24 +78,12 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
         {/* CTA Button */}
         {isShowStartButton && (
           <footer className="fixed bottom-0 z-[2] w-[inherit] py-3 px-4 bg-white">
-            <form>
-              <Button
-                varient="filled"
-                className="w-full h-12 bg-blue-500 rounded text-white text-base font-semibold leading-normal">
-                스터디 시작하기
-              </Button>
-            </form>
+            <StudyStatusButton type="toProgress" studyId={studyId} />
           </footer>
         )}
         {isShowDoneButton && (
           <footer className="fixed bottom-0 z-[2] w-[inherit] py-3 px-4 bg-white">
-            <form>
-              <Button
-                varient="filled"
-                className="w-full h-12 bg-blue-500 rounded text-white text-base font-semibold leading-normal">
-                스터디 종료하기
-              </Button>
-            </form>
+            <StudyStatusButton type="toDone" studyId={studyId} />
           </footer>
         )}
       </section>
