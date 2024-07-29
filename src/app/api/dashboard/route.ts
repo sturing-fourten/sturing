@@ -3,6 +3,7 @@ import { Dashboard } from "@/schema/dashboardSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 import { User } from "@/schema/userSchema";
+import { calculateProgressGauge } from "@/utils/calculateProgressGauge";
 import { startOfDay } from "date-fns";
 
 export async function GET(request: Request) {
@@ -26,15 +27,35 @@ export async function GET(request: Request) {
 
     if (!dashboard) throw new Error("대시보드 정보가 없습니다.");
 
-    // checkList에서 오늘 날짜의 항목만 필터링
+    // 2. checkList에서 오늘 날짜의 항목만 필터링, 진척도 계산
     const todayStart = startOfDay(new Date());
-    dashboard.checkList.list = dashboard.checkList.list.map((item: any) => ({
-      ...item,
-      data: item.data.filter((dataItem: any) => {
+
+    dashboard.checkList.list.forEach((item: any, userIndex: number) => {
+      // 오늘 날짜의 항목만 필터링
+      const userTodayCheckList = item.data.filter((dataItem: any) => {
         const itemDateStartOfDay = startOfDay(dataItem.date);
         return itemDateStartOfDay.getTime() === todayStart.getTime();
-      }),
-    }));
+      });
+
+      dashboard.checkList.list[userIndex].data = userTodayCheckList;
+
+      // 진척도 계산
+      const { totalContentListCount, totalCheckedContentListCount } = item.data.reduce(
+        (acc: any, dataItem: any) => {
+          dataItem.contentList.forEach((contentItem: any) => {
+            acc.totalContentListCount += 1;
+            if (contentItem.isChecked) {
+              acc.totalCheckedContentListCount += 1;
+            }
+          });
+          return acc;
+        },
+        { totalContentListCount: 0, totalCheckedContentListCount: 0 },
+      );
+
+      dashboard.progressGauge.list[userIndex].data =
+        totalContentListCount > 0 ? calculateProgressGauge(totalCheckedContentListCount, totalContentListCount) : 0;
+    });
 
     const teamMembers = await TeamMembers.findOne({ studyId, "members.status": "ACCEPTED" });
 
