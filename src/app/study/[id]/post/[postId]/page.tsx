@@ -21,7 +21,11 @@ export default function PostPage({ params }: { params: { id: string; postId: str
   useEffect(() => {
     const fetchBoardData = async () => {
       const data = await getBoardAction(postId);
-      if (data.updatedBoard) setUpdatedBoard(data.updatedBoard);
+      if (data.updatedBoard) {
+        setUpdatedBoard(data.updatedBoard);
+      } else {
+        router.push("/not-found");
+      }
     };
 
     fetchBoardData();
@@ -31,8 +35,9 @@ export default function PostPage({ params }: { params: { id: string; postId: str
     const result = await deleteBoardAction(postId, studyId);
 
     if (result.status !== 200) {
-      alert("게시글 삭제를 실패하였습니다.");
+      alert(result.message);
     } else {
+      alert(result.message);
       router.push(`/study/${studyId}/dashboard/board`);
     }
   }, [postId, studyId]);

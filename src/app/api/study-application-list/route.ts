@@ -45,11 +45,18 @@ export async function GET(request: Request) {
 
     // 3. 스터디 정보 조회
     const study = await Study.findById(studyId).select("title startDate endDate meeting");
-    return Response.json({
-      study,
-      applicationList: enhancedApplicationList,
-    });
+    return Response.json(
+      {
+        study,
+        applicationList: enhancedApplicationList,
+      },
+      { status: 200 },
+    );
   } catch (error: any) {
-    throw new Error(error);
+    if (error.name === "CastError") {
+      return Response.json({ message: "지원서 리스트가 존재하지 않습니다." }, { status: 404 });
+    } else {
+      return Response.json({ error }, { status: 500 });
+    }
   }
 }

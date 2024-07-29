@@ -2,10 +2,14 @@ import Button from "@/components/commons/Button";
 import TopBar from "@/components/commons/TopBar";
 import ApplicationContents from "@/components/domains/applicaion/Contents";
 import { acceptApplication } from "@/lib/database/action/application";
+import { notFound } from "next/navigation";
 
 const fetchApplication = async (id: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/study-application/${id}`);
+    if (!response.ok) {
+      notFound();
+    }
     const data = await response.json();
     return data;
   } catch (error) {

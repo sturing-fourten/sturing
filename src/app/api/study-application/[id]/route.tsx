@@ -42,6 +42,10 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
     return new Response(JSON.stringify(updatedApplication), { status: 200 });
   } catch (error: any) {
-    return new Response(error.message, { status: 500 });
+    if (error.name === "CastError") {
+      return Response.json({ message: "지원서가 존재하지 않습니다." }, { status: 404 });
+    } else {
+      return Response.json({ error }, { status: 500 });
+    }
   }
 }
