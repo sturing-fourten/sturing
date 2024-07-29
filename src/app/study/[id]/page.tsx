@@ -2,7 +2,6 @@ import FixedBottomBar from "@/components/domains/detail/FixedBottomBar";
 import Header from "@/components/domains/detail/Header";
 import Contents from "@/components/domains/detail/study/Contents";
 import { getSession } from "@/lib/database/getSession";
-import { RecentViewedStudy } from "@/types/localStorage";
 
 const getStudyInfo = async (id: string) => {
   const session = await getSession();
