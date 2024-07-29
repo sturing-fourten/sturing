@@ -6,7 +6,6 @@ import SearchBar from "@/components/commons/SearchBar";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import SearchTag from "@/components/domains/search/SearchTag";
 import useRecentKeywords from "@/hooks/useRecentKeywords";
-import { useUserStore } from "@/store/userStore";
 import { TStudyRecruitCardData } from "@/types/api/study";
 import { RecentKeyword, RecentViewedStudy } from "@/types/localStorage";
 import Link from "next/link";
@@ -14,10 +13,8 @@ import { useEffect, useState } from "react";
 
 export default function Content() {
   const [recentStudyList, setRecentStudyList] = useState<RecentViewedStudy[]>();
-  const { user } = useUserStore();
-  const userId = user ? user._id.toString() : null;
 
-  const { recentKeywords, handleRemoveKeyword, handleClearKeywords, handleAddKeyword } = useRecentKeywords(userId);
+  const { recentKeywords, handleRemoveKeyword, handleClearKeywords, handleAddKeyword } = useRecentKeywords();
   useEffect(() => {
     const recentStudyList = localStorage.getItem("recentStudy");
     const parsedRecentStudyList = recentStudyList ? JSON.parse(recentStudyList) : [];
