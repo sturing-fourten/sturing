@@ -1,9 +1,11 @@
+import { useUserStore } from "@/store/userStore";
 import { RecentKeyword } from "@/types/localStorage";
 import { useState, useEffect } from "react";
 
-const useRecentKeywords = (userId: string | null) => {
+const useRecentKeywords = () => {
   const [recentKeywords, setRecentKeywords] = useState<RecentKeyword[]>([]);
-
+  const { user } = useUserStore();
+  const userId = user ? user._id.toString() : "";
   const handleAddKeyword = (text: string) => {
     const newKeyword = {
       id: Date.now(),

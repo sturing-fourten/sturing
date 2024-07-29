@@ -14,10 +14,8 @@ import { useEffect, useState } from "react";
 
 export default function Content() {
   const [recentStudyList, setRecentStudyList] = useState<RecentViewedStudy[]>();
-  const { user } = useUserStore();
-  const userId = user ? user._id.toString() : null;
 
-  const { recentKeywords, handleRemoveKeyword, handleClearKeywords, handleAddKeyword } = useRecentKeywords(userId);
+  const { recentKeywords, handleRemoveKeyword, handleClearKeywords, handleAddKeyword } = useRecentKeywords();
   useEffect(() => {
     const recentStudyList = localStorage.getItem("recentStudy");
     const parsedRecentStudyList = recentStudyList ? JSON.parse(recentStudyList) : [];

@@ -14,10 +14,8 @@ export default function TopSearchBar() {
   const { setSearchQuery, resetFilters } = useFilterStore();
   const [inputValue, setValue] = useState("");
   const router = useRouter();
-  const { user } = useUserStore();
-  const userId = user ? user._id.toString() : null;
 
-  const { handleAddKeyword } = useRecentKeywords(userId);
+  const { handleAddKeyword } = useRecentKeywords();
 
   const handleInputSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
