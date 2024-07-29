@@ -38,10 +38,9 @@ export async function POST(request: Request, { params }: { params: { postId: str
 
     const studyData = await Study.findById(studyId);
 
-    if (studyData.status !== "PROGRESS") {
-      return Response.json({ message: "진행중인 스터디가 아닙니다." }, { status: 404 });
+    if (studyData.status === "RECRUIT_START") {
+      return Response.json({ message: "모집중인 스터디 입니다." }, { status: 404 });
     }
-
     const teamMembers = await TeamMembers.findOne({ studyId });
 
     const isTeamMember = teamMembers.members.some(

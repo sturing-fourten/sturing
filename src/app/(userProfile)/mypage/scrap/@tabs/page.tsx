@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default async function ScrapStudyPage() {
   const studyBookmarkList = await getStudyBookmarkListAction();
-  console.log(studyBookmarkList);
 
   return (
     <ul className="grid grid-cols-2 gap-2 py-5 px-4">
