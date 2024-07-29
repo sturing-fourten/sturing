@@ -5,7 +5,7 @@ import CardList from "@/components/commons/CardList";
 import TabMenuButton from "@/components/commons/TabMenuButton";
 import LectureCard from "@/components/commons/card/LectureCard";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SortFilterButton from "./SortFilterButton";
 import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
 import Link from "next/link";
@@ -19,7 +19,7 @@ import { useSearchResultStore } from "@/store/SearchResultStore";
 
 export default function Content() {
   const { menu, setTabMenu } = useSearchTabMenuStore();
-
+  const [isLoading, setIsLoading] = useState(false);
   const {
     studyList,
     lectureList,
@@ -52,8 +52,16 @@ export default function Content() {
   const lectureQuery: TLectureListQuery = { categories, search: searchQuery };
 
   const fetchSearchResult = async () => {
-    await fetchStudyList(studyQuery, studyPage);
-    await fetchLectureList(lectureQuery, lecturePage);
+    setIsLoading(true);
+    try {
+      await fetchStudyList(studyQuery, studyPage);
+      await fetchLectureList(lectureQuery, lecturePage);
+      setIsLoading(false);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleStudyLoadMore = () => {
@@ -140,6 +148,7 @@ export default function Content() {
               <Button
                 onClick={handleStudyLoadMore}
                 varient="ghost"
+                disabled={isLoading}
                 addStyle="text-gray-800 border-gray-400 w-full px-5 py-[14px] rounded-lg mt-6">
                 스터디 더 불러오기
               </Button>
@@ -182,6 +191,7 @@ export default function Content() {
             {lectureList?.length !== 0 && hasLectureNextPage && menu === "lecture" && (
               <Button
                 onClick={handleLectureLoadMore}
+                disabled={isLoading}
                 varient="ghost"
                 addStyle="text-gray-800 border-gray-400 w-full px-5 py-[14px] rounded-lg mt-6">
                 강의 더 불러오기
