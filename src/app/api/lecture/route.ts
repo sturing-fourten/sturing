@@ -64,11 +64,36 @@ export async function GET(request: Request) {
       );
     }
 
-    const totalLectureCount = await Lecture.countDocuments(query);
+    const totalLectureList = await Lecture.find(query);
+
+    const categories = [
+      "DESIGN",
+      "DEVELOP",
+      "BUSINESS",
+      "MARKETING",
+      "ECONOMY",
+      "LANGUAGE",
+      "LICENSE",
+      "SELF-DEVELOPMENT",
+    ];
+    const categoriesCount: { [key: string]: number } = {};
+
+    categories.forEach((category) => {
+      categoriesCount[category] = totalLectureList.filter((lecture) => lecture.category === category).length;
+    });
+
+    const totalLectureCount = totalLectureList.length;
     const totalPages = Math.ceil(totalLectureCount / pageSize);
     const hasNextPage = totalPages > page;
 
-    return Response.json({ lectureList, totalPages, currentPage: page, hasNextPage });
+    return Response.json({
+      lectureList,
+      totalPages,
+      currentPage: page,
+      hasNextPage,
+      totalLectureCount,
+      categoriesCount,
+    });
   } catch (error: any) {
     console.error("Error fetching lectures:", error);
     return new Response(JSON.stringify({ error: "강의 리스트를 불러오는데 실패하였습니다." }), {

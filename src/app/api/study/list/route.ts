@@ -1,7 +1,7 @@
 import connectDB from "@/lib/database/db";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
-import { TStudyListData } from "@/types/api/study";
+import { TStudyRecruitCardData } from "@/types/api/study";
 import { CATEGORY_MAP_TO_ENG } from "@/utils/categoryMap";
 import { NextRequest } from "next/server";
 import { StudyBookmark } from "@/schema/bookmarkSchema";
@@ -167,7 +167,7 @@ export async function GET(request: NextRequest) {
       ]);
     }
 
-    let studyList: TStudyListData = [];
+    let studyList: TStudyRecruitCardData[] = [];
 
     //isBookmark 추가 예정.
     if (studyListData) {
@@ -200,12 +200,37 @@ export async function GET(request: NextRequest) {
     const totalStudies = (await Study.find(query).populate({ path: "ownerId" }).exec()).filter(
       (study) => study.ownerId !== null,
     );
-    const totalStudiesCount = totalStudies.length;
 
-    const totalPages = Math.ceil(totalStudiesCount / pageSize);
+    const categories = [
+      "DESIGN",
+      "DEVELOP",
+      "BUSINESS",
+      "MARKETING",
+      "ECONOMY",
+      "LANGUAGE",
+      "LICENSE",
+      "SELF-DEVELOPMENT",
+    ];
+    const categoriesCount: { [key: string]: number } = {};
+
+    categories.forEach((category) => {
+      categoriesCount[category] = totalStudies.filter((study) => study.category === category).length;
+    });
+
+    const totalStudiesResultCount = totalStudies.length;
+
+    const totalPages = Math.ceil(totalStudiesResultCount / pageSize);
     const hasNextPage = totalPages > page;
 
-    return Response.json({ studyList, totalPages, currentPage: page, pageSize, hasNextPage });
+    return Response.json({
+      studyList,
+      totalPages,
+      currentPage: page,
+      pageSize,
+      hasNextPage,
+      totalStudiesResultCount,
+      categoriesCount,
+    });
   } catch (error: any) {
     console.error("error study list", error);
     return Response.json({ error }, { status: 500 });

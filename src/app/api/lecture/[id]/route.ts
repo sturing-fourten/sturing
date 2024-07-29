@@ -3,7 +3,7 @@ import { LectureBookmark } from "@/schema/bookmarkSchema";
 import { Lecture } from "@/schema/lectureSchema";
 import { Study } from "@/schema/studySchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
-import { TStudyListData } from "@/types/api/study";
+import { TStudyRecruitCardData } from "@/types/api/study";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   const id = params.id;
@@ -18,7 +18,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
     const relatedStudyListData = await Study.find({ lectureId: id, status: "RECRUIT_START" });
 
-    let relatedStudyList: TStudyListData = [];
+    let relatedStudyList: TStudyRecruitCardData[] = [];
     const lectureBookmark = await LectureBookmark.find({ lectureId: id });
     const scrapCount = lectureBookmark.length;
     const isBookmarked = userId ? Boolean(await LectureBookmark.findOne({ lectureId: id, userId })) : false;
