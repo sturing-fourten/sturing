@@ -10,8 +10,9 @@ interface IShareButtonProps {
   showMore?: boolean;
   isWhite: boolean;
   onClick: () => void;
+  isMine: boolean;
 }
-export default function ShareButton({ showMore, isWhite, onClick }: IShareButtonProps) {
+export default function ShareButton({ showMore, isWhite, onClick, isMine }: IShareButtonProps) {
   const shareIcon = isWhite ? shareWhite : share;
   const moreIcon = isWhite ? moreWhite : more;
   const { isOpen, setIsOpen, openToggle } = useOpenToggle();
@@ -31,7 +32,7 @@ export default function ShareButton({ showMore, isWhite, onClick }: IShareButton
         <img src={shareIcon.src} alt={shareIcon.alt} width={24} height={24} />
       </button>
       {isOpen && <ShareModal onClose={openToggle} />}
-      {showMore && (
+      {isMine && showMore && (
         <button type="button" onClick={handleMoreClick} className="relative">
           <img src={moreIcon.src} alt={moreIcon.alt} width={24} height={24} />
         </button>

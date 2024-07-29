@@ -12,7 +12,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export default function PostPage({ params }: { params: { id: string; postId: string } }) {
   const { id: studyId, postId } = params;
-  const [updatedBoard, setUpdatedBoard] = useState<TTaskPost>();
+  const [updatedBoard, setUpdatedBoard] = useState<TTaskPost | null>(null);
   const router = useRouter();
   const [commentsUpdated, setCommentsUpdated] = useState(false);
 
@@ -21,7 +21,7 @@ export default function PostPage({ params }: { params: { id: string; postId: str
   useEffect(() => {
     const fetchBoardData = async () => {
       const data = await getBoardAction(postId);
-      setUpdatedBoard(data.updatedBoard);
+      if (data.updatedBoard) setUpdatedBoard(data.updatedBoard);
     };
 
     fetchBoardData();
@@ -32,14 +32,23 @@ export default function PostPage({ params }: { params: { id: string; postId: str
 
     if (result.status !== 200) {
       alert("게시글 삭제를 실패하였습니다.");
+    } else {
+      router.push(`/study/${studyId}/dashboard/board`);
     }
-    router.push(`/study/${studyId}/dashboard/board`);
   }, [postId, studyId]);
 
   return (
     <>
       <section>
-        <TopBar variant="share" showMore={true} isWhite={false} onClick={handleDeleteBoard} />
+        {updatedBoard && (
+          <TopBar
+            variant="share"
+            showMore={true}
+            isWhite={false}
+            onClick={handleDeleteBoard}
+            isMine={updatedBoard.isMine}
+          />
+        )}
       </section>
 
       {updatedBoard && updatedBoard.postType === "notice" ? (

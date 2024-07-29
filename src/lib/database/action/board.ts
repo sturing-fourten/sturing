@@ -65,6 +65,11 @@ export const getBoardAction = async (postId: string) => {
       return member.userId.toString() === writerId.toString();
     });
 
+    const session = await getSession();
+    const userId = session?.user?.id;
+
+    const isMine = userId === writerId.toString();
+
     const updatedBoard = {
       _id: board._id.toString(),
       writer: {
@@ -79,6 +84,7 @@ export const getBoardAction = async (postId: string) => {
       postType: board.postType,
       createdAt: board.createdAt,
       commentCount: board.commentCount,
+      isMine: isMine,
     };
 
     return { updatedBoard };
