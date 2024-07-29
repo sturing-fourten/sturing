@@ -67,10 +67,10 @@ export function StudyRecruitCard({ isMini, recruitCardData, onClick, hideBookmar
         <p className="mb-3 text-4 font-semibold tracking-[-0.32px] text-black leading-normal line-clamp-1 ">{title}</p>
         <div className="flex items-center text-[12px] font-medium tracking-[-0.36px] text-gray-600">
           <Image className="mr-[2px]" src={date} alt="date icon" width={18} height={18} />
-          <span>{`${formattedStartDate}-${formattedEndDate}`}</span>
+          <span className="min-w-fit">{`${formattedStartDate}-${formattedEndDate}`}</span>
           <span className="w-[1px] h-3 mx-2 bg-gray-400"></span>
           <Image className="mr-[2px]" src={location} alt="location icon" width={18} height={18} />
-          <span>{meeting.location ? meeting.location : meeting.platform}</span>
+          <span className="truncate">{meeting.location ? meeting.location : meeting.platform}</span>
         </div>
         <hr className="my-[8px] bg-gray-300" />
         <p className="text-[12px] font-medium tracking-[-0.36px] text-gray-700">
