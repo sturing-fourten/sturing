@@ -93,6 +93,7 @@ import {
   closeBright,
   reset,
   starEmpty,
+  wastebasket,
 } from "../../public/icons/icons";
 
 type TIcon = {
@@ -116,6 +117,8 @@ export const ICONS: { [key: string]: TIcon } = {
     alt: "메뉴",
   },
   close: { src: close.src, alt: "닫기" },
+
+  wastebasket: { src: wastebasket.src, alt: "휴지통" },
 
   closeBright: { src: closeBright.src, alt: "삭제하기" },
   closeBlue: {

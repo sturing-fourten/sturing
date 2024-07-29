@@ -41,6 +41,7 @@ import minusCircle from "./minus-circle-icon.svg";
 import plusCircle from "./plus-circle-icon.svg";
 import toolTipBlue from "./tooltip_blue.svg";
 import reset from "./reset.svg";
+import wastebasket from "./delete.svg";
 
 // arrow
 import rightArrowBlack from "./rightarrow-black.svg";
@@ -224,4 +225,5 @@ export {
   locationBlack,
   toolTipBlue,
   reset,
+  wastebasket,
 };

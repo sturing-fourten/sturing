@@ -23,7 +23,7 @@ export default function PostContent({ board }: PostCommentProps) {
 
         <div className="mb-4 text-gray-700 text-base font-normal leading-normal">{content}</div>
 
-        <div className={`relative ${imageUrl ? "aspect-square" : ""}`}>
+        <div className={`relative ${imageUrl ? "aspect-square mb-5" : ""}`}>
           {imageUrl && <Image className="rounded-lg shrink-0" src={imageUrl} alt="과제 이미지" fill={true} />}
         </div>
       </article>
@@ -49,10 +49,10 @@ function PostInfo({
       <div className="flex flex-col">
         <div className="text-gray-900 text-sm font-semibold leading-snug">{nickname}</div>
         <div className="flex justify-start items-center gap-1 text-gray-700 text-xs font-normal leading-none">
-          <span>{ROLE_LIST[role as TRole].role}</span>
+          <span>{ROLE_LIST[role as TRole].name}</span>
           <span>∙</span>
           <span>{timeAgo}</span>
-          <span>∙</span>
+          {/* <span>∙</span> */}
           {/* <span>{"조회 3"}</span> */}
         </div>
       </div>

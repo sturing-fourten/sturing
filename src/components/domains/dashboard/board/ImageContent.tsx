@@ -38,7 +38,6 @@ export default function ImageContent(props: ImageUploadProps) {
             name="file"
             ref={fileInputRef}
             accept="image/*"
-            required
             onChange={handleFileChange}
             style={{ display: "none" }}
           />

@@ -1,84 +1,68 @@
+"use client";
+
 import HorizontalDivider from "@/components/commons/HorizontalDivider";
 import TopBar from "@/components/commons/TopBar";
 import PostComment from "@/components/domains/dashboard/post/PostComment";
 import PostCommentForm from "@/components/domains/dashboard/post/PostCommentForm";
 import PostContent from "@/components/domains/dashboard/post/PostContent";
-import { getBoardAction } from "@/lib/database/action/board";
-import { TCommentList } from "@/types/board";
+import { getBoardAction, deleteBoardAction } from "@/lib/database/action/board";
+import { TTaskPost } from "@/types/api/dashboardPost";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
-const SAMPLE_COMMENT_LIST: TCommentList = [
-  {
-    user: {
-      _id: "1",
-      // taskId: "task-1",
-      profileImageUrl: "https://picsum.photos/200/300",
-      nickname: "웅진2",
-      role: "어쩌구 팀장",
-    },
-    content: "첫 번째 댓글입니다.",
-    created_at: "1시간 전",
-    like: [{ userId: "user1" }, { userId: "user2" }],
-    nestedComments: [
-      {
-        user: {
-          _id: "1",
-          // taskId: "task-1",
-          profileImageUrl: "https://picsum.photos/200/300",
-          nickname: "웅진1",
-          role: "팀장",
-        },
-        content: "답글1",
-        created_at: "1시간 전",
-        like: [],
-      },
-    ],
-  },
-  {
-    user: {
-      _id: "3",
-      // taskId: "task-1",
-      profileImageUrl: "https://picsum.photos/200/300",
-      nickname: "웅진3",
-      role: "나도 팀장",
-    },
-    content: "두 번째 댓글입니다.",
-    created_at: "1시간 전",
-    like: [{ userId: "user3" }],
-    nestedComments: [
-      {
-        user: {
-          _id: "1",
-          // taskId: "task-1",
-          profileImageUrl: "https://picsum.photos/200/300",
-          nickname: "웅진1",
-          role: "팀장",
-        },
-        content: "답글2",
-        created_at: "1시간 전",
-        like: [],
-      },
-    ],
-  },
-];
+export default function PostPage({ params }: { params: { id: string; postId: string } }) {
+  const { id: studyId, postId } = params;
+  const [updatedBoard, setUpdatedBoard] = useState<TTaskPost | null>(null);
+  const router = useRouter();
+  const [commentsUpdated, setCommentsUpdated] = useState(false);
 
-export default async function PostPage({ params }: { params: { postId: string } }) {
-  const { postId } = params;
-  const data = await getBoardAction(postId);
-  const { updatedBoard } = data;
+  const refreshComments = () => setCommentsUpdated(!commentsUpdated);
+
+  useEffect(() => {
+    const fetchBoardData = async () => {
+      const data = await getBoardAction(postId);
+      if (data.updatedBoard) setUpdatedBoard(data.updatedBoard);
+    };
+
+    fetchBoardData();
+  }, [postId]);
+
+  const handleDeleteBoard = useCallback(async () => {
+    const result = await deleteBoardAction(postId, studyId);
+
+    if (result.status !== 200) {
+      alert("게시글 삭제를 실패하였습니다.");
+    } else {
+      router.push(`/study/${studyId}/dashboard/board`);
+    }
+  }, [postId, studyId]);
 
   return (
     <>
       <section>
-        <TopBar variant="share" showMore={true} isWhite={false} />
+        {updatedBoard && (
+          <TopBar
+            variant="share"
+            showMore={true}
+            isWhite={false}
+            onClick={handleDeleteBoard}
+            isMine={updatedBoard.isMine}
+          />
+        )}
       </section>
 
-      {updatedBoard && <PostContent board={updatedBoard} />}
-
-      <HorizontalDivider addStyle="mb-6" />
-
-      <PostComment commentList={SAMPLE_COMMENT_LIST} />
-
-      <PostCommentForm />
+      {updatedBoard && updatedBoard.postType === "notice" ? (
+        <PostContent board={updatedBoard} />
+      ) : (
+        updatedBoard && (
+          <>
+            <PostContent board={updatedBoard} />
+            <HorizontalDivider addStyle="mb-6" />
+            <PostComment postId={postId} commentsUpdated={commentsUpdated} refreshComments={refreshComments} />
+            <PostCommentForm studyId={studyId} postId={postId} onCommentPosted={refreshComments} />
+          </>
+        )
+      )}
     </>
   );
 }

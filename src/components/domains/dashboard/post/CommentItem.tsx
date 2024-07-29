@@ -4,24 +4,24 @@ import CommentContent from "./CommentContent";
 import CommentReaction from "./CommentReaction";
 
 interface ICommentItemProps {
-  isQualified: boolean;
   comment: TComment;
+  refreshComments: () => void;
 }
 
 export default function CommentItem(props: ICommentItemProps) {
-  const { isQualified, comment } = props;
+  const { comment, refreshComments } = props;
 
   return (
-    <div className="grid grid-cols-[38px_1fr] grid-rows-[auto_auto_auto] gap-x-2 gap-y-1">
-      <CommentHeader user={comment.user} created_at={comment.created_at} type={"comment"} />
+    <div className="flex flex-col">
+      <CommentHeader comment={comment} refreshComments={refreshComments} />
 
       <span></span>
 
-      {isQualified ? <CommentContent content={comment.content} /> : <div> 더미 이미지</div>}
+      <CommentContent content={comment.content} />
 
       <span></span>
 
-      <CommentReaction type={"comment"} like={comment.like} nestedComments={comment.nestedComments} />
+      <CommentReaction type={"comment"} like={comment.like} />
     </div>
   );
 }
