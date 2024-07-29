@@ -17,7 +17,7 @@ export const getLectureListAction = async (query: TLectureListQuery, page: numbe
 
   try {
     const response = await fetch(
-      `${process.env.LOCAL_URL}/api/lecture?category=${categoryQuery}&search=${searchQuery}`,
+      `${process.env.LOCAL_URL}/api/lecture?category=${categoryQuery}&search=${searchQuery}&page=${page}&pageSize=8`,
       {
         headers: {
           Authorization: "Bearer " + userId,

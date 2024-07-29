@@ -10,7 +10,7 @@ import CardList from "@/components/commons/CardList";
 import { useMatchingStore } from "@/store/matchingStore";
 import { useUserStore } from "@/store/userStore";
 import { getInterestsTitleById } from "@/utils/getTitleById";
-import { TCategory, TStudyListData } from "@/types/api/study";
+import { TCategory, TStudyRecruitCardData } from "@/types/api/study";
 import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -21,8 +21,8 @@ import useRecentKeywords from "@/hooks/useRecentKeywords";
 import { getHomeStudyList } from "@/lib/database/action/home";
 
 export default function Contents() {
-  const [TopSectionStudyList, setTopSectionStudyList] = useState<TStudyListData>([]);
-  const [BottomSectionStudyList, setBottomSectionStudyList] = useState<TStudyListData>([]);
+  const [TopSectionStudyList, setTopSectionStudyList] = useState<TStudyRecruitCardData[]>([]);
+  const [BottomSectionStudyList, setBottomSectionStudyList] = useState<TStudyRecruitCardData[]>([]);
   const [userLocation, setUserLocation] = useState("");
   const [userInterestCategory, setUserInterestCategory] = useState<TCategory | "">("");
   const [userNickname, setUserNickname] = useState("");

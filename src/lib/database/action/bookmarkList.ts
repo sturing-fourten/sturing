@@ -5,7 +5,7 @@ import connectDB from "../db";
 import { getSession } from "../getSession";
 import { revalidatePath } from "next/cache";
 import { TeamMembers } from "@/schema/teamMemberSchema";
-import { TStudyListData } from "@/types/api/study";
+import { TStudyRecruitCardData } from "@/types/api/study";
 
 export const getStudyBookmarkListAction = async () => {
   await connectDB();
@@ -31,7 +31,7 @@ export const getStudyBookmarkListAction = async () => {
     const studyBookmarkDataPromises = userStudyBookmarkList.map((bookmark: any) => getStudyInfo(bookmark.studyId));
     const studyBookmarkList = await Promise.all(studyBookmarkDataPromises);
 
-    const processedStudyBookmarks: TStudyListData = await Promise.all(
+    const processedStudyBookmarks: TStudyRecruitCardData[] = await Promise.all(
       studyBookmarkList.map(async (study) => {
         const { _id, ownerId, category, title, imageUrl, startDate, endDate, meeting, wantedMember } = study;
         const teamMembers = await TeamMembers.findOne({ studyId: _id });

@@ -55,9 +55,8 @@ export default function RecruitedMembersList({ study, memberList }: IRecruitedMe
         <HorizontalDivider addStyle="my-4" />
         <div className="flex flex-col gap-1 justify-start">
           {memberList?.map((member) => (
-            <Link href={`/profile/${member.memberId.toString()}`}>
+            <Link key={member.memberId.toString()} href={`/profile/${member.memberId.toString()}`}>
               <MemberProfile
-                key={member.memberId.toString()}
                 nickname={member.nickname}
                 profileImageUrl={member.profileImageUrl}
                 role={ROLE_LIST[member.role]?.name}
