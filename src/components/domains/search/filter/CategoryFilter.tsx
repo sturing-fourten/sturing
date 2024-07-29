@@ -7,7 +7,14 @@ import { TCategory } from "@/types/api/study";
 export default function CategoryFilter() {
   const { menu } = useSearchTabMenuStore();
   const { categories, setCategoryFilter, resetCategoryFilter } = useFilterStore();
-  const { studyList, lectureList } = useSearchResultStore();
+  const {
+    studyList,
+    lectureList,
+    totalStudiesResultCount,
+    totalLectureCount,
+    studyCategoriesCount,
+    lectureCategoriesCount,
+  } = useSearchResultStore();
 
   const isCheckedCategory = (category: TCategory) => {
     return categories.includes(category);
@@ -19,24 +26,25 @@ export default function CategoryFilter() {
   const countTotalResult = () => {
     switch (menu) {
       case "total":
-        return studyList.length + lectureList.length;
+        return totalStudiesResultCount + totalLectureCount;
       case "study":
-        return studyList.length;
+        return totalStudiesResultCount;
       case "lecture":
-        return lectureList.length;
+        return totalLectureCount;
     }
   };
 
   const countCategoryResult = (category: TCategory) => {
-    const categoryStudyList = studyList.filter((study) => study.category === category);
-    const categoryLectureList = lectureList.filter((lecture) => lecture.category === category);
+    const studyCategoryCount = studyCategoriesCount[category];
+    const lectureCategoryCount = lectureCategoriesCount[category];
+
     switch (menu) {
       case "total":
-        return categoryStudyList.length + categoryLectureList.length;
+        return studyCategoryCount + lectureCategoryCount;
       case "study":
-        return categoryStudyList.length;
+        return studyCategoryCount;
       case "lecture":
-        return categoryLectureList.length;
+        return lectureCategoryCount;
     }
   };
 

@@ -23,7 +23,7 @@ interface FilterModalProps {
 
 export default function FilterModal({ onClose, onClick, menu }: FilterModalProps) {
   const { resetFilters, categories, levels, locations, memberCount, roles, startDate } = useFilterStore();
-  const { studyList, lectureList } = useSearchResultStore();
+  const { totalStudiesResultCount, totalLectureCount } = useSearchResultStore();
   const { menu: SearchTabMenu } = useSearchTabMenuStore();
   const handleFilterModalClose = () => {
     onClick(CATEGORY.id);
@@ -33,11 +33,11 @@ export default function FilterModal({ onClose, onClick, menu }: FilterModalProps
   const resultCount = () => {
     switch (SearchTabMenu) {
       case "total":
-        return studyList.length + lectureList.length;
+        return totalStudiesResultCount + totalLectureCount;
       case "study":
-        return studyList.length;
+        return totalStudiesResultCount;
       case "lecture":
-        return lectureList.length;
+        return totalLectureCount;
     }
   };
 
