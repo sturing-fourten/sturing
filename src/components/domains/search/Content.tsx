@@ -6,7 +6,6 @@ import SearchBar from "@/components/commons/SearchBar";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
 import SearchTag from "@/components/domains/search/SearchTag";
 import useRecentKeywords from "@/hooks/useRecentKeywords";
-import { useUserStore } from "@/store/userStore";
 import { TStudyRecruitCardData } from "@/types/api/study";
 import { RecentKeyword, RecentViewedStudy } from "@/types/localStorage";
 import Link from "next/link";

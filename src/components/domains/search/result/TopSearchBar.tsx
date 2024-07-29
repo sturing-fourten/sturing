@@ -4,7 +4,6 @@ import GoBackButton from "@/components/commons/GoBackButton";
 import { ICONS } from "@/constant/icons";
 import useRecentKeywords from "@/hooks/useRecentKeywords";
 import { useFilterStore } from "@/store/FilterStore";
-import { useUserStore } from "@/store/userStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
