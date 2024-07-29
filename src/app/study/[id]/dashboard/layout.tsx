@@ -57,7 +57,8 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
 
   return (
     <>
-      <section className="w-[inherit] min-h-dvh bg-gray-100">
+      <section
+        className={`w-[inherit] min-h-dvh bg-gray-100 ${(isShowStartButton || isShowDoneButton) && "pb-[56px]"}`}>
         {/* Header */}
         <div className="relative" style={bgStyle}>
           {/* TODO 공통 레이아웃 처리 */}
