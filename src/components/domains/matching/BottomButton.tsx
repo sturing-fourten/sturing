@@ -39,16 +39,14 @@ export default function BottomButton({
         />
       </Button>
       {isSubmitted ? (
-        <Link href="/matching/success">
-          <Button
-            varient="circle"
-            type="button"
-            addStyle="w-[50px] h-[50px] transform transition-transform duration-200 hover:scale-105"
-            onClick={steps !== 5 ? handleNextSection : goToSuccessPage}
-            disabled={isNextButtonDisabled()}>
-            <img src={ICONS.rightArrowWhite.src} alt={ICONS.rightArrowWhite.alt} width={24} height={24} />
-          </Button>
-        </Link>
+        <Button
+          varient="circle"
+          type="button"
+          addStyle="w-[50px] h-[50px] transform transition-transform duration-200 hover:scale-105"
+          onClick={goToSuccessPage}
+          disabled={isNextButtonDisabled()}>
+          <img src={ICONS.rightArrowWhite.src} alt={ICONS.rightArrowWhite.alt} width={24} height={24} />
+        </Button>
       ) : (
         <Button
           varient="circle"
