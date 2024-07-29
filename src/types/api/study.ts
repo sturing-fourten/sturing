@@ -23,6 +23,7 @@ export type TTeamMember = {
 export type TStudyDetail = {
   _id: string;
   ownerId: string;
+  isMine?: boolean;
   category: TCategory;
   lectureId: string;
   title: string;

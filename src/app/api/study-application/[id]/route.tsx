@@ -15,29 +15,31 @@ export async function GET(request: Request, { params }: { params: { id: string }
     }
 
     // 2. 지원서 유저 닉네임 추가
-    const { userId } = application;
-
-    const user = await User.findById(userId);
-
-    if (!user) {
+    const { userId: appliedMemberUserId } = application;
+    const appliedUser = await User.findById(appliedMemberUserId);
+    if (!appliedUser) {
       return new Response("User not found", { status: 404 });
     }
 
-    const userNickname = user.nickname;
+    const appliedMemberNickname = appliedUser.nickname;
 
-    const teamMember = await TeamMembers.findOne({ studyId: application.studyId });
+    // 3. 지원 상태 추가
+    const teamMember = await TeamMembers.findOne({ studyId: application.studyId }).select("members");
+    const appliedMember = teamMember.members.find((member: any) => member.userId.equals(appliedMemberUserId));
 
+    // 4. 스터디 개설자 추가
     const updatedApplication = {
       _id: application._id,
       studyId: application.studyId,
       userId: application.userId,
-      userNickname: userNickname,
+      userNickname: appliedMemberNickname,
       title: application.title,
       resolution: application.resolution,
       role: application.role,
       createdAt: application.createdAt,
       updatedAt: application.updatedAt,
-      status: teamMember.members[0].status,
+      status: appliedMember.status,
+      isOwner: appliedMember.isOwner,
     };
 
     return new Response(JSON.stringify(updatedApplication), { status: 200 });

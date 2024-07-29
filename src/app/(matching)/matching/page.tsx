@@ -22,7 +22,6 @@ import { matchingAction } from "@/lib/database/action/matching";
 export default function MatchingPage() {
   const { user, fetchUser } = useUserStore();
   const { matching, fetchMatching } = useMatchingStore();
-  const { levels } = useLevelsStore();
 
   const [steps, setSteps] = useState<number>(1);
   const [isInterestSelected, setIsInterestSelected] = useState<boolean>(false);
@@ -72,7 +71,7 @@ export default function MatchingPage() {
     }
   }, [isModeSelected]);
 
-  const goToSuccessPage = () => {
+  const goToSuccessPage = async () => {
     setIsSubmitted(true);
     document.getElementById("submitButton")?.click();
   };
@@ -85,7 +84,6 @@ export default function MatchingPage() {
       fetchMatching();
     }
     if (user && matching) {
-      fetchMatching();
       setSelectedLevel(JSON.parse(matching?.levels || "[]"));
       setSelectedProgressWay(matching?.progressWay || "");
       setSelectedLocations(JSON.parse(matching?.locations || "[]"));
@@ -94,7 +92,11 @@ export default function MatchingPage() {
   }, [user, fetchUser, fetchMatching]);
 
   return (
-    <form action={matchingAction}>
+    <form
+      action={async (FormData) => {
+        await matchingAction(FormData);
+        await fetchMatching();
+      }}>
       <div className="flex flex-col w-full min-h-screen sm:h-dvh gap-5">
         <div className="flex flex-col w-full">
           <TopBar variant="back" />

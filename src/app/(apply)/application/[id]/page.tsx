@@ -29,17 +29,19 @@ export default async function ApplicationPage({ params }: { params: { id: string
         <ApplicationContents applicationData={application} />
       </div>
 
-      <form className="w-full px-4 py-3" action={acceptApplication}>
-        <input type="hidden" name="studyId" value={application.studyId} />
-        <input type="hidden" name="appliedUserId" value={application.userId} />
-        <Button
-          type="submit"
-          varient="filled"
-          addStyle="w-full h-[50px] rounded-[5px] bg-main-500 text-white"
-          disabled={application.status === "ACCEPTED"}>
-          {application.status === "ACCEPTED" ? "이미 수락된 지원서 입니다" : "수락하기"}
-        </Button>
-      </form>
+      {application.isOwner && (
+        <form className="w-full px-4 py-3" action={acceptApplication}>
+          <input type="hidden" name="studyId" value={application.studyId} />
+          <input type="hidden" name="appliedUserId" value={application.userId} />
+          <Button
+            type="submit"
+            varient="filled"
+            addStyle="w-full h-[50px] rounded-[5px] bg-main-500 text-white"
+            disabled={application.status === "ACCEPTED"}>
+            {application.status === "ACCEPTED" ? "이미 수락된 지원서 입니다" : "수락하기"}
+          </Button>
+        </form>
+      )}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import connectDB from "../db";
 import { getSession } from "../getSession";
 import { Matching } from "@/schema/matchingSchema";
 import { TCategory, TStudyRecruitCardData } from "@/types/api/study";
-import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function matchingAction(formData: FormData) {
   const levels = formData.get("levels");
@@ -45,6 +45,8 @@ export async function matchingAction(formData: FormData) {
       );
     }
   }
+
+  redirect("/matching/success");
 }
 
 export async function getMatchingStudyList(): Promise<{

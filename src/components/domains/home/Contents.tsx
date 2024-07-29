@@ -18,82 +18,51 @@ import NoResultText from "@/components/commons/NoResultText";
 import { CATEGORY_MAP_TO_KO } from "@/utils/categoryMap";
 import SearchBar from "@/components/commons/SearchBar";
 import useRecentKeywords from "@/hooks/useRecentKeywords";
+import { getHomeStudyList } from "@/lib/database/action/home";
 
 export default function Contents() {
   const [TopSectionStudyList, setTopSectionStudyList] = useState<TStudyListData>([]);
   const [BottomSectionStudyList, setBottomSectionStudyList] = useState<TStudyListData>([]);
-  const { matching } = useMatchingStore();
-  const { user } = useUserStore();
+  const [userLocation, setUserLocation] = useState("");
+  const [userInterestCategory, setUserInterestCategory] = useState<TCategory | "">("");
+  const [userNickname, setUserNickname] = useState("");
   const { setCategoryFilter, setLocationFilter, setSortByFilter, resetFilters } = useFilterStore();
+  const [isLoading, setIsLoading] = useState(false);
+
   const { setTabMenu } = useSearchTabMenuStore();
-  const userId = user ? user._id.toString() : "";
-  const { handleAddKeyword } = useRecentKeywords(userId);
+
+  const { handleAddKeyword } = useRecentKeywords();
 
   const router = useRouter();
 
-  const userName = user?.nickname;
-  const repLevel = JSON.parse(matching?.levels || "[]")[0];
-  const userInterestCategory = repLevel?.interest;
-  const repLocation = JSON.parse(matching?.locations || "[]")[0];
-  const userMood = JSON.parse(matching?.moods || "[]")[0]; //유저 검색
-
-  const userLocation = repLocation?.city && repLocation?.district && `${repLocation?.city} ${repLocation?.district}`;
-
   const interest = getInterestsTitleById(userInterestCategory);
 
-  const fetchTopSectionStudyList = async () => {
+  const fetchStudyList = async () => {
     try {
-      let query = "";
-      if (matching && userInterestCategory) {
-        query = `&category=${userInterestCategory}`;
+      setIsLoading(true);
+      const res = await getHomeStudyList();
+      const { success, data } = res;
+      if (success) {
+        const { topSectionStudyList, bottomSectionStudyList, userInterestCategory, userLocation, userNickname } = data;
+        setTopSectionStudyList(topSectionStudyList || []);
+        setBottomSectionStudyList(bottomSectionStudyList || []);
+        setUserInterestCategory((userInterestCategory as TCategory) || "");
+        setUserLocation(userLocation || "");
+        setUserNickname(userNickname);
+        setIsLoading(false);
       }
-      const response = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR${query}`, {
-        headers: {
-          Authorization: "Bearer " + userId,
-        },
-        next: { revalidate: 10 },
-      });
-      if (response.ok) {
-        const studyListData = await response.json();
-        const { studyList } = studyListData;
-
-        setTopSectionStudyList(studyList);
-      }
-    } catch (error: any) {
-      console.error("Error fetching Image:", error);
-      throw error;
-    }
-  };
-  const fetchBottomSectionStudyList = async () => {
-    try {
-      let query = "";
-      if (matching && repLocation) {
-        query = `&location=${userLocation}`;
-      }
-      const response = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST${query}`, {
-        headers: {
-          Authorization: "Bearer " + userId,
-        },
-        next: { revalidate: 10 },
-      });
-      if (response.ok) {
-        const studyListData = await response.json();
-        const { studyList } = studyListData;
-
-        setBottomSectionStudyList(studyList);
-      }
-    } catch (error: any) {
-      console.error("Error fetching Image:", error.message);
-      throw error;
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchTopSectionStudyList();
-    fetchBottomSectionStudyList();
+    fetchStudyList();
     resetFilters();
     setTabMenu("total");
-  }, [user, matching]);
+  }, []);
 
   const handleCategoryButtonClick = (key: TCategory) => {
     setCategoryFilter(key);
@@ -104,13 +73,13 @@ export default function Contents() {
   const handleStudyListSearchClick = (section?: "top" | "bottom") => {
     switch (section) {
       case "top":
-        if (matching && userInterestCategory) {
+        if (userInterestCategory) {
           setCategoryFilter(userInterestCategory);
         }
         setSortByFilter("POPULAR");
         break;
       case "bottom":
-        if (matching && userLocation) {
+        if (userLocation) {
           setLocationFilter(userLocation);
           setSortByFilter("POPULAR");
         } else {
@@ -148,7 +117,7 @@ export default function Contents() {
         <div className="w-full h-[8px] shrink-0 bg-[#F7F7F7] mb-[40px]" />
         <div className="flex flex-col gap-5 w-full h-full mb-[50px]">
           <Title onClick={() => handleStudyListSearchClick("top")}>
-            {matching && userInterestCategory ? `${userName}님을 위한 ${interest} 스터디` : "이번주 인기 스터디"}
+            {userInterestCategory ? `${userNickname}님을 위한 ${interest} 스터디` : "이번주 인기 스터디"}
           </Title>
           <CardList isSingleLine>
             {TopSectionStudyList.length !== 0 ? (
@@ -175,7 +144,7 @@ export default function Contents() {
             onClick={() => {
               handleStudyListSearchClick("bottom");
             }}>
-            {matching && repLocation ? "내 주변에 새로 개설된 스터디" : "새로 개설된 스터디"}
+            {userLocation ? "내 주변에 새로 개설된 스터디" : "새로 개설된 스터디"}
           </Title>
           <CardList isSingleLine>
             {BottomSectionStudyList.length !== 0 ? (

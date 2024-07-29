@@ -1,8 +1,6 @@
 "use client";
 import { ICONS } from "@/constant/icons";
-import useRecentKeywords from "@/hooks/useRecentKeywords";
 import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
-import { useUserStore } from "@/store/userStore";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 interface SearchBarProps {
