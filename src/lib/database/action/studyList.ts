@@ -22,7 +22,7 @@ export const getStudyListAction = async (query: TStudyListQuery, page: number) =
 
   try {
     const res = await fetch(
-      `${process.env.LOCAL_URL}/api/study/list?sortBy=${sortBy}&${filterQuery}&page=${page}&pageSize=8`,
+      `${process.env.LOCAL_URL}/api/study/list?sortBy=${sortBy}&${filterQuery}&page=${page}&pageSize=6`,
       {
         headers: {
           Authorization: "Bearer " + userId,

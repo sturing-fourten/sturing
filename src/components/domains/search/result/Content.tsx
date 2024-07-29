@@ -5,7 +5,7 @@ import CardList from "@/components/commons/CardList";
 import TabMenuButton from "@/components/commons/TabMenuButton";
 import LectureCard from "@/components/commons/card/LectureCard";
 import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import SortFilterButton from "./SortFilterButton";
 import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";
 import Link from "next/link";
@@ -19,14 +19,17 @@ import { useSearchResultStore } from "@/store/SearchResultStore";
 
 export default function Content() {
   const { menu, setTabMenu } = useSearchTabMenuStore();
+
   const {
     studyList,
     lectureList,
-    fetchLectureList,
-    setLectureList,
-    lecturePage,
-    setStudyList,
     studyPage,
+    lecturePage,
+    setStudyPage,
+    setLecturePage,
+    hasStudyNextPage,
+    hasLectureNextPage,
+    fetchLectureList,
     fetchStudyList,
   } = useSearchResultStore();
 
@@ -49,15 +52,37 @@ export default function Content() {
   const lectureQuery: TLectureListQuery = { categories, search: searchQuery };
 
   const fetchSearchResult = async () => {
-    const studyListData = await fetchStudyList(studyQuery, studyPage);
-    setStudyList(studyListData);
-    const lectureListData = await fetchLectureList(lectureQuery, lecturePage);
-    setLectureList(lectureListData);
+    await fetchStudyList(studyQuery, studyPage);
+    await fetchLectureList(lectureQuery, lecturePage);
+  };
+
+  const handleStudyLoadMore = () => {
+    if (hasStudyNextPage) {
+      setStudyPage(studyPage + 1);
+    }
+  };
+
+  const handleLectureLoadMore = () => {
+    if (hasLectureNextPage) {
+      setLecturePage(lecturePage + 1);
+    }
   };
 
   useEffect(() => {
     fetchSearchResult();
-  }, [searchQuery, memberCount, categories, locations, startDate, endDate, levels, roles, sortBy]);
+  }, [
+    searchQuery,
+    memberCount,
+    categories,
+    locations,
+    startDate,
+    endDate,
+    levels,
+    roles,
+    sortBy,
+    studyPage,
+    lecturePage,
+  ]);
 
   return (
     <>
@@ -103,12 +128,20 @@ export default function Content() {
                 <NoResultText>검색 결과가 없습니다.</NoResultText>
               )}
             </div>
-            {studyList?.length !== 0 && menu === "total" && (
+            {studyList?.length !== 0 && studyList.length > 4 && menu === "total" && (
               <Button
                 onClick={() => setTabMenu("study")}
                 varient="ghost"
                 addStyle="text-gray-800 border-gray-400 w-full px-5 py-[14px] rounded-lg mt-6">
                 스터디 전체보기
+              </Button>
+            )}
+            {studyList?.length !== 0 && hasStudyNextPage && menu === "study" && (
+              <Button
+                onClick={handleStudyLoadMore}
+                varient="ghost"
+                addStyle="text-gray-800 border-gray-400 w-full px-5 py-[14px] rounded-lg mt-6">
+                스터디 더 불러오기
               </Button>
             )}
           </section>
@@ -138,12 +171,20 @@ export default function Content() {
                 <NoResultText>검색 결과가 없습니다.</NoResultText>
               )}
             </div>
-            {lectureList?.length !== 0 && menu === "total" && (
+            {lectureList?.length !== 0 && lectureList.length > 2 && menu === "total" && (
               <Button
                 onClick={() => setTabMenu("lecture")}
                 varient="ghost"
                 addStyle="text-gray-800 border-gray-400 w-full px-5 py-[14px] rounded-lg mt-6">
                 강의 전체보기
+              </Button>
+            )}
+            {lectureList?.length !== 0 && hasLectureNextPage && menu === "lecture" && (
+              <Button
+                onClick={handleLectureLoadMore}
+                varient="ghost"
+                addStyle="text-gray-800 border-gray-400 w-full px-5 py-[14px] rounded-lg mt-6">
+                강의 더 불러오기
               </Button>
             )}
           </section>
