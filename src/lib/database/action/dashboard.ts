@@ -151,15 +151,16 @@ export const postCheckItemAction = async ({
       body: JSON.stringify({ studyId, userId, newCheckItemDate, newCheckItemContent }),
     });
 
+    const result = await response.json();
     if (!response.ok) {
-      throw new Error("체크 리스트 생성 실패");
+      throw new Error(`체크 리스트 생성 실패 : ${result?.error ?? ""}`);
     }
-
-    revalidatePath(`/study/${studyId}/dashboard/me`);
-    revalidatePath(`/study/${studyId}/dashboard`);
   } catch (error) {
     console.error("Error", error);
   }
+
+  revalidatePath(`/study/${studyId}/dashboard/me`);
+  revalidatePath(`/study/${studyId}/dashboard`);
 };
 
 export const toggleCheckItemAction = async (formData: FormData) => {
