@@ -14,15 +14,13 @@ interface IApplicationListPageProps {
 
 const getApplicationList = async (studyId: string) => {
   const res = await fetch(`${process.env.LOCAL_URL}/api/study-application-list?studyId=${studyId}`);
-  if (!res.ok) {
-    notFound();
-  }
   const data = await res.json();
   return data;
 };
 
 export default async function ApplicationListPage({ params: { studyId } }: IApplicationListPageProps) {
   const { study, applicationList }: TApplicationListResponse = await getApplicationList(studyId);
+  if (!study?._id) notFound();
 
   const {
     title,
