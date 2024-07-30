@@ -31,9 +31,6 @@ export default function ChecklistCard({ checkListData, studyId }: IChecklistCard
             ? `${checkedListCount}/${currentDateCheckListDataItem?.contentList.length}`
             : ""}
         </span>
-        {/* <button className="ml-auto">
-          <Image src={addBlue} alt="" width={24} height={24} />
-        </button> */}
       </DashboardCardTitle>
 
       <MyCheckList

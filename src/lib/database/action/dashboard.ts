@@ -163,10 +163,7 @@ export const postCheckItemAction = async ({
   revalidatePath(`/study/${studyId}/dashboard`);
 };
 
-export const toggleCheckItemAction = async (formData: FormData) => {
-  const checkItemId = formData.get("checkItemId");
-  const studyId = formData.get("studyId");
-
+export const toggleCheckItemAction = async ({ studyId, checkItemId }: { studyId: any; checkItemId: any }) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/checklist`, {
       method: "PATCH",
@@ -179,12 +176,11 @@ export const toggleCheckItemAction = async (formData: FormData) => {
     if (!response.ok) {
       throw new Error("체크 리스트 상태 변경 실패");
     }
-
-    revalidatePath(`/study/${studyId}/dashboard/me`);
-    revalidatePath(`/study/${studyId}/dashboard`);
   } catch (error) {
     console.log("error", error);
   }
+  revalidatePath(`/study/${studyId}/dashboard/me`);
+  revalidatePath(`/study/${studyId}/dashboard`);
 };
 
 export const changeStudyToProgressAction = async (formData: FormData) => {

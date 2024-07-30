@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { checkBlueOn } from "@/../public/icons/icons";
 
