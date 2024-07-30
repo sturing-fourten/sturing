@@ -14,6 +14,9 @@ interface IApplicationListPageProps {
 
 const getApplicationList = async (studyId: string) => {
   const res = await fetch(`${process.env.LOCAL_URL}/api/study-application-list?studyId=${studyId}`);
+  if (!res.ok) {
+    return { status: 400, message: "받은 지원서 리스트를 불러오는 데 실패하였습니다." };
+  }
   const data = await res.json();
   return data;
 };
@@ -32,6 +35,7 @@ export default async function ApplicationListPage({ params: { studyId } }: IAppl
   const dateRange = getDateRange(startDate, endDate);
   const where = (format === "ONLINE" ? platform : location) ?? "";
 
+  console.log(applicationList);
   return (
     <>
       <TopBar variant="back">받은 지원서 리스트</TopBar>
