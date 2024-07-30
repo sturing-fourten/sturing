@@ -126,7 +126,7 @@ export default function Recruit() {
     if (steps === 1) {
       return !lecture || !category;
     } else if (steps === 2) {
-      return !title || title.length <= 5 || !introduction || introduction.length <= 20 || !progressWay;
+      return !title || title.length < 5 || !introduction || introduction.length < 20 || !progressWay;
     } else if (steps === 3) {
       return !date || !day || !time;
     } else if (steps === 4) {
