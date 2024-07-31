@@ -27,8 +27,9 @@ export default function Contents() {
   const [userInterestCategory, setUserInterestCategory] = useState<TCategory | "">("");
   const [userNickname, setUserNickname] = useState("");
   const { setCategoryFilter, setLocationFilter, setSortByFilter, resetFilters } = useFilterStore();
-  const [isLoading, setIsLoading] = useState(false);
 
+  const { user } = useUserStore();
+  const { matching } = useMatchingStore();
   const { setTabMenu } = useSearchTabMenuStore();
 
   const { handleAddKeyword } = useRecentKeywords();
@@ -39,7 +40,6 @@ export default function Contents() {
 
   const fetchStudyList = async () => {
     try {
-      setIsLoading(true);
       const res = await getHomeStudyList();
       const { success, data } = res;
       if (success) {
@@ -49,12 +49,9 @@ export default function Contents() {
         setUserInterestCategory((userInterestCategory as TCategory) || "");
         setUserLocation(userLocation || "");
         setUserNickname(userNickname);
-        setIsLoading(false);
       }
     } catch (e) {
       console.error(e);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -62,7 +59,7 @@ export default function Contents() {
     fetchStudyList();
     resetFilters();
     setTabMenu("total");
-  }, []);
+  }, [user, matching]);
 
   const handleCategoryButtonClick = (key: TCategory) => {
     setCategoryFilter(key);
