@@ -3,6 +3,7 @@ import TabBarLinkUnderlined from "@/components/commons/TabBarLinkUnderlined";
 import TopBar from "@/components/commons/TopBar";
 import StudyInfo from "@/components/domains/dashboard/StudyInfo";
 import StudyStatusButton from "@/components/domains/dashboard/StudyStatusButton";
+import { TShareInfo } from "@/components/modal/ShareModal";
 import { IMAGES_DEFAUlT } from "@/constant/images";
 import { fetchStudyInfo } from "@/lib/database/action/dashboard";
 import { getSession } from "@/lib/database/getSession";
@@ -73,6 +74,11 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
     backgroundPosition: "center",
   };
 
+  const shareInfo: TShareInfo = {
+    title: studyData?.title,
+    thumbnail: backgroundImageUrl,
+  };
+
   return (
     <>
       <section
@@ -80,7 +86,7 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
         {/* Header */}
         <div className="relative" style={bgStyle}>
           {/* TODO 공통 레이아웃 처리 */}
-          <TopBar variant="share" showMore={false} isWhite={true} isBackToHome />
+          <TopBar variant="share" showMore={false} isWhite={true} isBackToHome shareInfo={shareInfo} />
           {/* Study Info */}
           <StudyInfo study={study} studyData={studyData} />
         </div>

@@ -12,10 +12,12 @@ import { TStudyDetailInfoData } from "@/types/api/study";
 import { getDateRangeWithWeeks } from "@/utils/getDateRangeWithWeeks";
 import { deleteStudyAction } from "@/lib/database/action/study";
 import { useRouter } from "next/navigation";
+import { TShareInfo } from "@/components/modal/ShareModal";
 interface BannerProps {
   page: "study" | "lecture";
   lectureInfo: TLectureInfoData;
   studyInfo?: TStudyDetailInfoData["study"];
+  shareInfo?: TShareInfo;
 }
 
 const { study, lecture } = IMAGES_DEFAUlT;
@@ -69,6 +71,16 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
     }
   };
 
+  const shareInfo: {} = studyInfo
+    ? {
+        title: studyInfo?.title,
+        thumbnail: studyInfo?.imageUrl,
+      }
+    : {
+        title: lectureInfo?.title,
+        type: "강의",
+      };
+
   return (
     <>
       <section
@@ -76,7 +88,14 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
           isStudy && "before:-z-[2] before:bg-black/20 before:inset-0 before:absolute"
         }  `}
         style={style}>
-        <TopBar variant="share" showMore={isStudy} isWhite={isStudy} isMine={isMine} onClick={handleDeleteBoard} />
+        <TopBar
+          variant="share"
+          showMore={isStudy}
+          isWhite={isStudy}
+          isMine={isMine}
+          onClick={handleDeleteBoard}
+          shareInfo={shareInfo}
+        />
         <div className="flex items-center gap-1 mt-10 mb-4">
           <TagMain>{getStatus()}</TagMain>
           <TagLight>{CATEGORY(isStudy ? studyCategory : lectureCategory)}</TagLight>

@@ -1,5 +1,6 @@
 import TopBar from "@/components/commons/TopBar";
 import LectureReviewForm from "@/components/domains/review/LectureReviewForm";
+import { TShareInfo } from "@/components/modal/ShareModal";
 import { getLectureAction } from "@/lib/database/action/lecture";
 
 export default async function LectureReviewPage({ params }: { params: { id: string } }) {
@@ -7,10 +8,15 @@ export default async function LectureReviewPage({ params }: { params: { id: stri
   const data = await getLectureAction(id);
   const { title, instructor } = data.lecture;
 
+  const shareInfo: TShareInfo = {
+    title: title,
+    type: "강의",
+  };
+
   return (
     <>
       <section className="flex flex-col min-h-screen sm:h-dvh">
-        <TopBar variant="share" showMore={false} isWhite={false} />
+        <TopBar variant="share" showMore={false} isWhite={false} shareInfo={shareInfo} />
         <section className="flex flex-col justify-start items-start py-5 px-4">
           <p className="text-gray-1000 text-base font-semibold leading-normal">{title}</p>
           <p className="text-gray-600 text-xs font-medium leading-snug">{instructor}</p>
