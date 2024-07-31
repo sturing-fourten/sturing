@@ -2,6 +2,7 @@ import Button from "@/components/commons/Button";
 import TopBar from "@/components/commons/TopBar";
 import ApplicationContents from "@/components/domains/applicaion/Contents";
 import { acceptApplication } from "@/lib/database/action/application";
+import { getSession } from "@/lib/database/getSession";
 import { notFound } from "next/navigation";
 
 const fetchApplication = async (id: string) => {
@@ -18,7 +19,11 @@ const fetchApplication = async (id: string) => {
 export default async function ApplicationPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const application = await fetchApplication(id);
+
   if (!application?._id) notFound();
+  const session = await getSession();
+  const myUserId = session?.user?.id;
+  const isOwner = application.ownerId === myUserId;
 
   return (
     <div className="w-full h-dvh flex-col inline-flex">
@@ -27,7 +32,7 @@ export default async function ApplicationPage({ params }: { params: { id: string
         <ApplicationContents applicationData={application} />
       </div>
 
-      {application.isOwner && (
+      {isOwner && (
         <form className="w-full px-4 py-3" action={acceptApplication}>
           <input type="hidden" name="studyId" value={application.studyId} />
           <input type="hidden" name="appliedUserId" value={application.userId} />

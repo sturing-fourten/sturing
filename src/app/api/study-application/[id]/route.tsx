@@ -26,6 +26,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     // 3. 지원 상태 추가
     const teamMember = await TeamMembers.findOne({ studyId: application.studyId }).select("members");
     const appliedMember = teamMember.members.find((member: any) => member.userId.equals(appliedMemberUserId));
+    const ownerMember = teamMember.members.find((member: any) => member.isOwner === true);
 
     // 4. 스터디 개설자 추가
     const updatedApplication = {
@@ -39,7 +40,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
       createdAt: application.createdAt,
       updatedAt: application.updatedAt,
       status: appliedMember.status,
-      isOwner: appliedMember.isOwner,
+      ownerId: ownerMember.userId,
     };
 
     return new Response(JSON.stringify(updatedApplication), { status: 200 });
