@@ -4,10 +4,11 @@ import { TeamMembers } from "@/schema/teamMemberSchema";
 export async function GET(request: Request) {
   connectDB();
 
+  const { searchParams } = new URL(request.url);
+  const userId = searchParams.get("userId");
+  const studyId = searchParams.get("studyId");
+
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("userId");
-    const studyId = searchParams.get("studyId");
     if (!userId) return Response.json(false);
     if (!studyId) return Response.json(false);
 
