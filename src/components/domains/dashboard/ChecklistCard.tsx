@@ -3,9 +3,10 @@
 import DashboardCardLayout from "./DashboardCardLayout";
 import DashboardCardTitle from "../DashboardCardTitle";
 import { TCheckListData } from "@/types/dashboard";
-import { startOfDay } from "date-fns";
+import { format, startOfDay } from "date-fns";
 import { useDashboardScheduleStore } from "@/store/dashboardScheduleStore";
 import MyCheckList from "./MyCheckList";
+import { DASHBOARD_FUNCTION_TYPE } from "@/constant/dashboard";
 
 interface IChecklistCardProps {
   checkListData: TCheckListData[];
@@ -25,8 +26,10 @@ export default function ChecklistCard({ checkListData, studyId }: IChecklistCard
 
   return (
     <DashboardCardLayout>
-      <DashboardCardTitle title="체크리스트">
-        <span className="pb-0.5 text-main-500 text-sm font-medium leading-snug">
+      <DashboardCardTitle title={DASHBOARD_FUNCTION_TYPE.checkList}>
+        <span className="text-gray-600 text-sm font-medium leading-snug">{format(new Date(), "M월 d일")}</span>
+
+        <span className="ml-auto pb-0.5 text-main-500 text-sm font-medium leading-snug">
           {currentDateCheckListDataItem
             ? `${checkedListCount}/${currentDateCheckListDataItem?.contentList.length}`
             : ""}
