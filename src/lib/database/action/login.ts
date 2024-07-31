@@ -8,7 +8,7 @@ export async function githubLogin() {
 }
 
 export async function logout() {
-  await signOut();
+  await signOut({ redirect: true, redirectTo: "/" });
 }
 
 export async function kakaoLogin() {

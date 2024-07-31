@@ -40,10 +40,6 @@ export const FooterLinks = ({ user }: { user: EditProfileType | null }) => {
     useMatchingStore.getState().reset();
 
     showToast("성공적으로 로그아웃되었습니다.");
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
   };
 
   return (
