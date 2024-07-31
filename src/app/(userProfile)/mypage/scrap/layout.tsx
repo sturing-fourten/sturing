@@ -3,15 +3,10 @@ import TopBar from "@/components/commons/TopBar";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 
 interface IDashboardProps {
-  params: {
-    id: string;
-  };
   tabs: React.ReactNode;
 }
 
-export default function ScrapLayout({ params, tabs }: IDashboardProps) {
-  const { id } = params;
-
+export default function ScrapLayout({ tabs }: IDashboardProps) {
   const hrefBase = `/mypage/scrap/`;
 
   const SCRAP_TAB_MENU_LIST: TTabMenuLinkUnderlinedItem[] = [
