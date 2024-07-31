@@ -79,12 +79,12 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
         {/* CTA Button */}
         {isShowStartButton && (
           <footer className="fixed bottom-0 z-[2] w-[inherit] py-3 px-4 bg-white">
-            <StudyStatusButton type="toProgress" studyId={studyId} />
+            <StudyStatusButton type="toProgress" studyId={id} />
           </footer>
         )}
         {isShowDoneButton && (
           <footer className="fixed bottom-0 z-[2] w-[inherit] py-3 px-4 bg-white">
-            <StudyStatusButton type="toDone" studyId={studyId} />
+            <StudyStatusButton type="toDone" studyId={id} />
           </footer>
         )}
       </section>
