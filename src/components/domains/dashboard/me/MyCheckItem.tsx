@@ -8,7 +8,15 @@ import mongoose from "mongoose";
 type State = { isChecked: boolean; requestIds: string[] };
 type Value = { requestId: string };
 
-export default function MyCheckItem({ checkItem, studyId }: { checkItem: any; studyId: any }) {
+export default function MyCheckItem({
+  checkItem,
+  studyId,
+  isMyCheckItem,
+}: {
+  checkItem: any;
+  studyId: any;
+  isMyCheckItem: boolean;
+}) {
   const { content, isChecked, _id: checkItemId } = checkItem;
 
   const initState = {
@@ -43,7 +51,7 @@ export default function MyCheckItem({ checkItem, studyId }: { checkItem: any; st
   return (
     <li className="flex justify-between items-center py-2 rounded-sm">
       <form className="flex justify-start items-center gap-2 text-[0px]" action={formAction}>
-        <Checkbox isChecked={optimisticState.isChecked} type="checkList" isMyCheckItem={true} />
+        <Checkbox isChecked={optimisticState.isChecked} type="checkList" isMyCheckItem={isMyCheckItem} />
         <div className="text-gray-900 text-sm font-medium leading-tight">{content}</div>
       </form>
     </li>

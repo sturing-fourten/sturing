@@ -56,7 +56,7 @@ export default function MyCheckList({
       <ul className="mt-4">
         {optimisticCheckList?.length > 0 ? (
           optimisticCheckList.map((checkItem: any) => (
-            <MyCheckItem key={checkItem._id} studyId={studyId} checkItem={checkItem} />
+            <MyCheckItem key={checkItem._id} studyId={studyId} checkItem={checkItem} isMyCheckItem={true} />
           ))
         ) : (
           <NoList>해당 날짜에 체크리스트가 없어요.</NoList>

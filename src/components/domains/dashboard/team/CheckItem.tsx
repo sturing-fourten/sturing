@@ -4,6 +4,8 @@ import Checkbox from "../Checkbox";
 import { useParams } from "next/navigation";
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 import { useUserStore } from "@/store/userStore";
+import { useEffect } from "react";
+import MyCheckItem from "../me/MyCheckItem";
 
 interface ICheckItemProps {
   checkItem: any;
@@ -15,21 +17,20 @@ export function CheckItem(props: ICheckItemProps) {
   const { id: studyId } = useParams();
 
   const { selectedUserId } = useDashboardTeamStore();
-  const { user } = useUserStore();
+  const { user, fetchUser } = useUserStore();
   const userId = user ? user._id.toString() : null;
   const isMyCheckItem = userId === selectedUserId;
+
+  useEffect(() => {
+    if (!user) {
+      fetchUser();
+    }
+  }, [user, fetchUser]);
 
   if (!studyId) return <></>;
   return (
     <li className="flex justify-between items-center py-2 rounded-sm">
-      <div className="flex justify-start items-center gap-2">
-        <form className="text-[0px]" action={toggleCheckItemAction}>
-          <input type="hidden" name="checkItemId" value={checkItemId} />
-          <input type="hidden" name="studyId" value={studyId} />
-          <Checkbox isChecked={isChecked} type="checkList" isMyCheckItem={isMyCheckItem} />
-        </form>
-        <div className="text-gray-900 text-sm font-medium leading-tight">{checkItem.content}</div>
-      </div>
+      <MyCheckItem checkItem={checkItem} studyId={studyId} isMyCheckItem={isMyCheckItem} />
       {/* @todo 리액션 추후 개발
       <form>
         <label
