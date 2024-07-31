@@ -16,6 +16,10 @@ interface BannerProps {
   page: "study" | "lecture";
   lectureInfo: TLectureInfoData;
   studyInfo?: TStudyDetailInfoData["study"];
+  shareInfo?: {
+    title?: string;
+    shareThumbnail?: string;
+  };
 }
 
 const { study, lecture } = IMAGES_DEFAUlT;
@@ -69,6 +73,10 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
     }
   };
 
+  const shareInfo = {
+    title: studyInfo?.title,
+    shareThumbnail: studyInfo?.imageUrl,
+  };
   return (
     <>
       <section
@@ -76,7 +84,14 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
           isStudy && "before:-z-[2] before:bg-black/20 before:inset-0 before:absolute"
         }  `}
         style={style}>
-        <TopBar variant="share" showMore={isStudy} isWhite={isStudy} isMine={isMine} onClick={handleDeleteBoard} />
+        <TopBar
+          variant="share"
+          showMore={isStudy}
+          isWhite={isStudy}
+          isMine={isMine}
+          onClick={handleDeleteBoard}
+          shareInfo={shareInfo}
+        />
         <div className="flex items-center gap-1 mt-10 mb-4">
           <TagMain>{getStatus()}</TagMain>
           <TagLight>{CATEGORY(isStudy ? studyCategory : lectureCategory)}</TagLight>

@@ -3,10 +3,15 @@ import { kakaoLogo } from "../../../public/icons/icons";
 import Image from "next/image";
 
 type KakaoShareButtonProps = {
-  studyTitle?: string;
+  title?: string;
+  shareInfo?: {
+    title?: string;
+    shareThumbnail?: string;
+  };
+  type?: "스터디" | "강의";
 };
 
-export default function KakaoShareButton({ studyTitle }: KakaoShareButtonProps) {
+export default function KakaoShareButton({ title, shareInfo, type = "스터디" }: KakaoShareButtonProps) {
   // const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareUrl = window.location.href;
 
@@ -26,9 +31,9 @@ export default function KakaoShareButton({ studyTitle }: KakaoShareButtonProps) 
     Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
-        title: studyTitle ?? "Sturing",
-        description: "이 스터디 정보 같이 봐요!",
-        imageUrl: "icons/defaultProfileImage.svg",
+        title: shareInfo?.title ?? "스터링 | 모집부터 진행까지 올인원 스터디 플랫폼",
+        description: `이 ${type} 정보 같이 봐요!`,
+        imageUrl: shareInfo?.shareThumbnail ?? "icons/defaultProfileImage.svg",
         link: {
           mobileWebUrl: shareUrl,
           webUrl: shareUrl,
@@ -36,7 +41,7 @@ export default function KakaoShareButton({ studyTitle }: KakaoShareButtonProps) 
       },
       buttons: [
         {
-          title: "이 스터디 정보 같이 봐요!",
+          title: `스터링에서 ${type} 확인하기`,
           link: {
             mobileWebUrl: shareUrl,
             webUrl: shareUrl,

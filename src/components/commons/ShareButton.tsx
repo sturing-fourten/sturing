@@ -9,10 +9,15 @@ import Popover from "./Popover";
 interface IShareButtonProps {
   showMore?: boolean;
   isWhite: boolean;
-  onClick: () => void;
   isMine: boolean;
+  shareInfo?: {
+    title?: string;
+    shareThumbnail?: string;
+  };
+  onPopoverClick?: () => void;
 }
-export default function ShareButton({ showMore, isWhite, onClick, isMine }: IShareButtonProps) {
+
+export default function ShareButton({ showMore, isWhite, isMine, shareInfo, onPopoverClick }: IShareButtonProps) {
   const shareIcon = isWhite ? shareWhite : share;
   const moreIcon = isWhite ? moreWhite : more;
   const { isOpen, setIsOpen, openToggle } = useOpenToggle();
@@ -31,13 +36,13 @@ export default function ShareButton({ showMore, isWhite, onClick, isMine }: ISha
       <button type="button" onClick={handleShareClick}>
         <img src={shareIcon.src} alt={shareIcon.alt} width={24} height={24} />
       </button>
-      {isOpen && <ShareModal onClose={openToggle} />}
+      {isOpen && <ShareModal onClose={openToggle} shareInfo={shareInfo} />}
       {isMine && showMore && (
         <button type="button" onClick={handleMoreClick} className="relative">
           <img src={moreIcon.src} alt={moreIcon.alt} width={24} height={24} />
         </button>
       )}
-      {isPopoverOpen && <Popover onClick={onClick} />}
+      {isPopoverOpen && onPopoverClick && <Popover onClick={onPopoverClick} />}
     </div>
   );
 }

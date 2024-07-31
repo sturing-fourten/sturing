@@ -55,6 +55,11 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
     backgroundPosition: "center",
   };
 
+  const shareInfo = {
+    title: studyData?.title,
+    shareThumbnail: backgroundImageUrl,
+  };
+
   return (
     <>
       <section
@@ -62,7 +67,7 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
         {/* Header */}
         <div className="relative" style={bgStyle}>
           {/* TODO 공통 레이아웃 처리 */}
-          <TopBar variant="share" showMore={false} isWhite={true} isBackToHome />
+          <TopBar variant="share" showMore={false} isWhite={true} isBackToHome shareInfo={shareInfo} />
           {/* Study Info */}
           <StudyInfo study={study} studyData={studyData} />
         </div>
