@@ -52,6 +52,11 @@ export default function RecruitInfo({ study, lecture }: IRecruitInfoProps) {
       </section>
       <HorizontalDivider />
       <StudyDetailCardLayout addStyle="mt-5">
+        <Title>스터디 소개</Title>
+        <HorizontalDivider addStyle="my-4" />
+        <div className="text-[14px] font-normal leading-normal text-gray-800">{study.description}</div>
+      </StudyDetailCardLayout>
+      <StudyDetailCardLayout addStyle="mt-4">
         <Title href={`/lecture/${lecture.id}`}>진행 강의 정보</Title>
         <HorizontalDivider addStyle="my-4" />
         <LectureCard variant="info" lecture={lecture} />
