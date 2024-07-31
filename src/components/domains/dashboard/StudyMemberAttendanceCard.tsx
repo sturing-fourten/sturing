@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 import { checkAttendanceAction } from "@/lib/database/action/dashboard";
 import NoList from "../mystudy/NoList";
+import { isWithinInterval, startOfDay, endOfDay } from "date-fns";
 
 export default function StudyMemberAttendanceCard({
   list,
@@ -92,5 +93,8 @@ function getTodayAttendance(data: TAttendanceItem["data"]) {
 
 export function getIsTodayInRange(startDate: Date, endDate: Date) {
   const today = new Date();
-  return today.getDate() >= startDate.getDate() && today.getDate() <= endDate.getDate();
+  const start = startOfDay(startDate); // 시작일의 자정
+  const end = endOfDay(endDate); // 종료일의 자정
+
+  return isWithinInterval(today, { start, end });
 }
