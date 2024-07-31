@@ -3,7 +3,7 @@ import { STUDY_OVERVIEW_TITLE } from "@/constant/study";
 import { TMyStudyTabMenuLinkUnderlinedItem } from "@/types/study";
 import Link from "next/link";
 
-export default async function StudyOverview({ studyCount }: { studyCount: TMyStudyTabMenuLinkUnderlinedItem[] }) {
+export default function StudyOverview({ studyCount }: { studyCount: TMyStudyTabMenuLinkUnderlinedItem[] }) {
   return (
     <>
       <article className="mt-7 flex flex-col gap-3 items-center">

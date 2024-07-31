@@ -4,20 +4,21 @@ import { getSession } from "@/lib/database/getSession";
 import { Matching } from "@/schema/matchingSchema";
 
 export async function GET(request: Request) {
-  await connectDB();
   const session = await getSession();
   const userId = session?.user?.id;
-  let matching;
-  const existing = await Matching.findOne({
-    userId: `${userId}`,
-  });
+  await connectDB();
+  try {
+    let matching;
+    const existing = await Matching.findOne({
+      userId: `${userId}`,
+    });
 
-  if (existing !== null) {
-    matching = existing;
+    if (existing !== null) {
+      matching = existing;
+    }
+
+    return Response.json(matching, { status: 200 });
+  } catch (error) {
+    return Response.json({ error });
   }
-
-  return new Response(JSON.stringify(matching), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
 }
