@@ -4,7 +4,7 @@ import TopBar from "@/components/commons/TopBar";
 import StudyInfo from "@/components/domains/dashboard/StudyInfo";
 import StudyStatusButton from "@/components/domains/dashboard/StudyStatusButton";
 import { IMAGES_DEFAUlT } from "@/constant/images";
-import { fetchStudyInfo, startStudyAction } from "@/lib/database/action/dashboard";
+import { fetchStudyInfo } from "@/lib/database/action/dashboard";
 import { getSession } from "@/lib/database/getSession";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 import { getIsTodayAfterTargetDate } from "@/utils/getIsTodayAfterTargetDate";
@@ -79,12 +79,12 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
         {/* CTA Button */}
         {isShowStartButton && (
           <footer className="fixed bottom-0 z-[2] w-[inherit] py-3 px-4 bg-white">
-            <StudyStatusButton type="toProgress" studyId={studyId} />
+            <StudyStatusButton type="toProgress" studyId={id} />
           </footer>
         )}
         {isShowDoneButton && (
           <footer className="fixed bottom-0 z-[2] w-[inherit] py-3 px-4 bg-white">
-            <StudyStatusButton type="toDone" studyId={studyId} />
+            <StudyStatusButton type="toDone" studyId={id} />
           </footer>
         )}
       </section>

@@ -1,5 +1,5 @@
 interface CardListProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isSingleLine?: boolean;
 }
 

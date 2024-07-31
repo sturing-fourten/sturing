@@ -8,11 +8,11 @@ import { User } from "@/schema/userSchema";
 export async function GET(request: Request) {
   connectDB();
 
-  try {
-    const { searchParams } = new URL(request.url);
-    const studyId = searchParams.get("studyId");
-    if (!studyId) throw new Error("스터디 아이디가 없습니다.");
+  const { searchParams } = new URL(request.url);
+  const studyId = searchParams.get("studyId");
+  if (!studyId) throw new Error("스터디 아이디가 없습니다.");
 
+  try {
     // 1. 지원서 목록 조회
     const applicationList = await Application.find({ studyId });
 

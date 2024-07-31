@@ -9,11 +9,10 @@ import { startOfDay } from "date-fns";
 export async function GET(request: Request) {
   connectDB();
 
+  const { searchParams } = new URL(request.url);
+  const studyId = searchParams.get("studyId");
+  if (!studyId) throw new Error("대시보드 정보가 없습니다.");
   try {
-    const { searchParams } = new URL(request.url);
-    const studyId = searchParams.get("studyId");
-    if (!studyId) throw new Error("대시보드 정보가 없습니다.");
-
     // 1. 대시보드 조회, 유저 프로필 정보, 팀 역할 정보 추가
     const dashboard = await Dashboard.findOne({ studyId }).populate({
       path: "studyId",
