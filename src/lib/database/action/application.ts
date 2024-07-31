@@ -3,6 +3,7 @@
 import { Application } from "@/schema/applicationSchema";
 import { getSession } from "../getSession";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const applyAction = async (formData: FormData) => {
   try {
@@ -61,6 +62,7 @@ export const acceptApplication = async (formData: FormData) => {
   const userId = session?.user?.id || "";
   const appliedUserId = formData.get("appliedUserId");
   const studyId = formData.get("studyId");
+  const applicationId = formData.get("applicationId");
 
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/study/${studyId}/apply-accept`, {
@@ -75,6 +77,8 @@ export const acceptApplication = async (formData: FormData) => {
       throw new Error("지원 거절 실패");
     }
 
+    revalidatePath(`/application/${applicationId}`);
+    revalidatePath(`/application-list/${studyId}`);
     redirect(`/application-list/${studyId}`);
   } catch (error: any) {
     console.error("error", error.message);
