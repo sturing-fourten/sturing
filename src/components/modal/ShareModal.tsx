@@ -4,13 +4,14 @@ import Button from "../commons/Button";
 import KakaoShareButton from "../commons/KakaoShare";
 import { showToast } from "../commons/Toast";
 
+export type TShareInfo = {
+  title?: string;
+  thumbnail?: string;
+  type?: "스터디" | "강의";
+};
 interface ShareModalProps {
   onClose: () => void;
-  shareInfo?: {
-    title?: string;
-    shareThumbnail?: string;
-    type?: "스터디" | "강의";
-  };
+  shareInfo?: TShareInfo;
 }
 
 const copyURL = async (currentUrl: string) => {

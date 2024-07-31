@@ -2,7 +2,7 @@
 
 import useOpenToggle from "@/hooks/useOpenToggle";
 import { more, moreWhite, share, shareWhite } from "../../../public/icons/icons";
-import ShareModal from "../modal/ShareModal";
+import ShareModal, { TShareInfo } from "../modal/ShareModal";
 import { useState } from "react";
 import Popover from "./Popover";
 
@@ -10,11 +10,7 @@ interface IShareButtonProps {
   showMore?: boolean;
   isWhite: boolean;
   isMine: boolean;
-  shareInfo?: {
-    title?: string;
-    shareThumbnail?: string;
-    type?: "스터디" | "강의";
-  };
+  shareInfo?: TShareInfo;
   onPopoverClick?: () => void;
 }
 

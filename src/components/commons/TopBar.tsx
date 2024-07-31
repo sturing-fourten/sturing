@@ -1,3 +1,4 @@
+import { TShareInfo } from "../modal/ShareModal";
 import GoBackButton from "./GoBackButton";
 import SaveButton from "./SaveButton";
 import ShareButton from "./ShareButton";
@@ -15,11 +16,7 @@ interface TopBarProps {
   onSave?: () => void;
   onClick?: () => void;
   isMine?: boolean;
-  shareInfo?: {
-    title?: string;
-    shareThumbnail?: string;
-    type?: "스터디" | "강의";
-  };
+  shareInfo?: TShareInfo;
 }
 
 export default function TopBar({

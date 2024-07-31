@@ -1,5 +1,6 @@
 import TopBar from "@/components/commons/TopBar";
 import LectureReviewForm from "@/components/domains/review/LectureReviewForm";
+import { TShareInfo } from "@/components/modal/ShareModal";
 import { getLectureAction } from "@/lib/database/action/lecture";
 
 export default async function LectureReviewPage({ params }: { params: { id: string } }) {
@@ -7,7 +8,7 @@ export default async function LectureReviewPage({ params }: { params: { id: stri
   const data = await getLectureAction(id);
   const { title, instructor } = data.lecture;
 
-  const shareInfo: { title?: string; type: "스터디" | "강의" } = {
+  const shareInfo: TShareInfo = {
     title: title,
     type: "강의",
   };

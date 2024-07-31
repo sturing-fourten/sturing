@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import { kakaoLogo } from "../../../public/icons/icons";
 import Image from "next/image";
+import { TShareInfo } from "../modal/ShareModal";
 
 type KakaoShareButtonProps = {
-  shareInfo?: {
-    title?: string;
-    shareThumbnail?: string;
-    type?: "스터디" | "강의";
-  };
+  shareInfo?: TShareInfo;
 };
 
 export default function KakaoShareButton({ shareInfo }: KakaoShareButtonProps) {
   const type = shareInfo?.type || "스터디";
+  const imageUrl =
+    shareInfo?.thumbnail ??
+    `https://ifowwhoiz6eixak7.public.blob.vercel-storage.com/sturing-dy4GhVsEjAcGKFmvN6LMaIM42R1V2F.png`;
+
   // const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareUrl = window.location.href;
 
@@ -33,7 +34,7 @@ export default function KakaoShareButton({ shareInfo }: KakaoShareButtonProps) {
       content: {
         title: shareInfo?.title ?? "스터링 | 모집부터 진행까지 올인원 스터디 플랫폼",
         description: `이 ${type} 정보 같이 봐요!`,
-        imageUrl: shareInfo?.shareThumbnail ?? "icons/defaultProfileImage.svg",
+        imageUrl: imageUrl,
         link: {
           mobileWebUrl: shareUrl,
           webUrl: shareUrl,
@@ -41,7 +42,7 @@ export default function KakaoShareButton({ shareInfo }: KakaoShareButtonProps) {
       },
       buttons: [
         {
-          title: `스터링에서 ${type} 확인하기`,
+          title: `스터링에서 확인하기`,
           link: {
             mobileWebUrl: shareUrl,
             webUrl: shareUrl,

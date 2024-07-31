@@ -12,15 +12,12 @@ import { TStudyDetailInfoData } from "@/types/api/study";
 import { getDateRangeWithWeeks } from "@/utils/getDateRangeWithWeeks";
 import { deleteStudyAction } from "@/lib/database/action/study";
 import { useRouter } from "next/navigation";
+import { TShareInfo } from "@/components/modal/ShareModal";
 interface BannerProps {
   page: "study" | "lecture";
   lectureInfo: TLectureInfoData;
   studyInfo?: TStudyDetailInfoData["study"];
-  shareInfo?: {
-    title?: string;
-    shareThumbnail?: string;
-    type?: "스터디" | "강의";
-  };
+  shareInfo?: TShareInfo;
 }
 
 const { study, lecture } = IMAGES_DEFAUlT;
@@ -74,10 +71,10 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
     }
   };
 
-  const shareInfo = studyInfo
+  const shareInfo: {} = studyInfo
     ? {
         title: studyInfo?.title,
-        shareThumbnail: studyInfo?.imageUrl,
+        thumbnail: studyInfo?.imageUrl,
       }
     : {
         title: lectureInfo?.title,

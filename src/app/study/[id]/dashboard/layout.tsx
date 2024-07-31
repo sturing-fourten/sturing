@@ -3,6 +3,7 @@ import TabBarLinkUnderlined from "@/components/commons/TabBarLinkUnderlined";
 import TopBar from "@/components/commons/TopBar";
 import StudyInfo from "@/components/domains/dashboard/StudyInfo";
 import StudyStatusButton from "@/components/domains/dashboard/StudyStatusButton";
+import { TShareInfo } from "@/components/modal/ShareModal";
 import { IMAGES_DEFAUlT } from "@/constant/images";
 import { fetchStudyInfo } from "@/lib/database/action/dashboard";
 import { getSession } from "@/lib/database/getSession";
@@ -55,9 +56,9 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
     backgroundPosition: "center",
   };
 
-  const shareInfo = {
+  const shareInfo: TShareInfo = {
     title: studyData?.title,
-    shareThumbnail: backgroundImageUrl,
+    thumbnail: backgroundImageUrl,
   };
 
   return (
