@@ -1,3 +1,4 @@
+import { TShareInfo } from "../modal/ShareModal";
 import GoBackButton from "./GoBackButton";
 import SaveButton from "./SaveButton";
 import ShareButton from "./ShareButton";
@@ -15,6 +16,7 @@ interface TopBarProps {
   onSave?: () => void;
   onClick?: () => void;
   isMine?: boolean;
+  shareInfo?: TShareInfo;
 }
 
 export default function TopBar({
@@ -27,14 +29,21 @@ export default function TopBar({
   onClick,
   isMine,
   isBackToHome = false,
+  shareInfo,
 }: TopBarProps) {
   return (
     <div className="w-full h-[54px] flex justify-between items-center px-4">
       {(variant === "share" || variant === "back" || variant === "edit") && (
         <GoBackButton isBackToHome={isBackToHome} isWhite={isWhite} />
       )}
-      {variant === "share" && onClick && (
-        <ShareButton showMore={showMore} isWhite={isWhite} onClick={onClick} isMine={isMine ?? false} />
+      {variant === "share" && (
+        <ShareButton
+          showMore={showMore}
+          isWhite={isWhite}
+          onPopoverClick={onClick}
+          isMine={isMine ?? false}
+          shareInfo={shareInfo}
+        />
       )}
       {variant === "back" && (
         <>

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   verification: {
     google: METADATA.googleSiteVerification,
     other: {
-      "naver-site-verification": METADATA.naverSiteVerification,
+      "naver-site-verification": METADATA.naverSiteVerification
     },
   },
 };

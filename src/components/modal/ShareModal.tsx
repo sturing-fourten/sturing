@@ -4,8 +4,14 @@ import Button from "../commons/Button";
 import KakaoShareButton from "../commons/KakaoShare";
 import { showToast } from "../commons/Toast";
 
+export type TShareInfo = {
+  title?: string;
+  thumbnail?: string;
+  type?: "스터디" | "강의";
+};
 interface ShareModalProps {
   onClose: () => void;
+  shareInfo?: TShareInfo;
 }
 
 const copyURL = async (currentUrl: string) => {
@@ -15,7 +21,7 @@ const copyURL = async (currentUrl: string) => {
     if (navigator.share) {
       navigator
         .share({
-          title: "스터링",
+          title: "Sturing : 스터링",
           text: "공유하기",
           url: currentUrl.toString(),
         })
@@ -35,7 +41,7 @@ const copyURL = async (currentUrl: string) => {
   }
 };
 
-export default function ShareModal({ onClose }: ShareModalProps) {
+export default function ShareModal({ onClose, shareInfo }: ShareModalProps) {
   const pathname = usePathname();
   const currentUrl = `${process.env.NEXT_PUBLIC_APP_URL}${pathname}`;
   return (
@@ -53,7 +59,7 @@ export default function ShareModal({ onClose }: ShareModalProps) {
           </Button>
         </div>
 
-        <KakaoShareButton />
+        <KakaoShareButton shareInfo={shareInfo} />
       </div>
     </ModalContainer>
   );
