@@ -37,20 +37,17 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/icons/favicon.ico" />
       </head>
-      <body>
-        <SessionProvider>
-          <body
-            className={`${pretendard.variable} font-pretendard bg-[#f5f5f5] min-w-screen flex flex-col items-center`}>
-            <main className="w-screen sm:w-[600px] bg-white min-h-screen shadow-xl relative">
-              <div className="w-[inherit] flex-col inline-flex max-h-dvh">
-                <div className="w-[inherit] overflow-auto scrollbar-hide">{children}</div>
-              </div>
-            </main>
-            <div id="modal"></div>
-            <ToastContainer />
-          </body>
-        </SessionProvider>
-      </body>
+      <SessionProvider>
+        <body className={`${pretendard.variable} font-pretendard bg-[#f5f5f5] min-w-screen flex flex-col items-center`}>
+          <main className="w-screen sm:w-[600px] bg-white min-h-screen shadow-xl relative">
+            <div className="w-[inherit] flex-col inline-flex max-h-dvh">
+              <div className="w-[inherit] overflow-auto scrollbar-hide">{children}</div>
+            </div>
+          </main>
+          <div id="modal"></div>
+          <ToastContainer />
+        </body>
+      </SessionProvider>
       <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="afterInteractive" />
     </html>
   );
