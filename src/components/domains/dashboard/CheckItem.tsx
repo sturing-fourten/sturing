@@ -1,14 +1,14 @@
 "use client";
 
 import { toggleCheckItemAction } from "@/lib/database/action/dashboard";
-import Checkbox from "../Checkbox";
+import Checkbox from "./Checkbox";
 import { useOptimistic } from "react";
 import mongoose from "mongoose";
 
 type State = { isChecked: boolean; requestIds: string[] };
 type Value = { requestId: string };
 
-export default function MyCheckItem({
+export default function CheckItem({
   checkItem,
   studyId,
   isMyCheckItem,

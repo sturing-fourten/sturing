@@ -5,7 +5,7 @@ import NoList from "../mystudy/NoList";
 import { postCheckItemAction } from "@/lib/database/action/dashboard";
 import { TCheckItem } from "@/types/dashboard";
 import mongoose from "mongoose";
-import MyCheckItem from "./me/MyCheckItem";
+import CheckItem from "./CheckItem";
 
 export default function MyCheckList({
   studyId,
@@ -56,7 +56,7 @@ export default function MyCheckList({
       <ul className="mt-4">
         {optimisticCheckList?.length > 0 ? (
           optimisticCheckList.map((checkItem: any) => (
-            <MyCheckItem key={checkItem._id} studyId={studyId} checkItem={checkItem} isMyCheckItem={true} />
+            <CheckItem key={checkItem._id} studyId={studyId} checkItem={checkItem} isMyCheckItem={true} />
           ))
         ) : (
           <NoList>해당 날짜에 체크리스트가 없어요.</NoList>
