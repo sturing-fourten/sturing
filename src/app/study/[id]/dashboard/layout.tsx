@@ -4,7 +4,7 @@ import TopBar from "@/components/commons/TopBar";
 import StudyInfo from "@/components/domains/dashboard/StudyInfo";
 import StudyStatusButton from "@/components/domains/dashboard/StudyStatusButton";
 import { IMAGES_DEFAUlT } from "@/constant/images";
-import { fetchStudyInfo, startStudyAction } from "@/lib/database/action/dashboard";
+import { fetchStudyInfo } from "@/lib/database/action/dashboard";
 import { getSession } from "@/lib/database/getSession";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 import { getIsTodayAfterTargetDate } from "@/utils/getIsTodayAfterTargetDate";
