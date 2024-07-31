@@ -33,6 +33,11 @@ export const getApplication = async (studyId: string, userId: string) => {
     const application = await Application.findOne({ studyId, userId });
 
     const response = await fetch(`${process.env.LOCAL_URL}/api/study-application/${application._id}`);
+
+    if (!response.ok) {
+      throw new Error("지원서 불러오기 실패");
+    }
+
     const data = await response.json();
     return data;
   } catch (error: any) {

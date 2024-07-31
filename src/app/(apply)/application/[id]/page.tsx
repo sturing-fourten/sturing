@@ -36,6 +36,7 @@ export default async function ApplicationPage({ params }: { params: { id: string
         <form className="w-full px-4 py-3" action={acceptApplication}>
           <input type="hidden" name="studyId" value={application.studyId} />
           <input type="hidden" name="appliedUserId" value={application.userId} />
+          <input type="hidden" name="applicationId" value={application._id} />
           <Button
             type="submit"
             varient="filled"

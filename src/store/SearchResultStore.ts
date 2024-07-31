@@ -21,7 +21,6 @@ interface SearchResult {
   hasLectureNextPage: boolean;
 
   fetchStudyList: (query: TStudyListQuery, page: number) => Promise<TStudyRecruitCardData[]>;
-  // fetchStudyList: (query: TStudyListQuery, page: number) => void;
   fetchLectureList: (query: TLectureListQuery, page: number) => Promise<TLectureListData>;
 }
 
