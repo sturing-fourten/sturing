@@ -7,10 +7,15 @@ export default async function LectureReviewPage({ params }: { params: { id: stri
   const data = await getLectureAction(id);
   const { title, instructor } = data.lecture;
 
+  const shareInfo: { title?: string; type: "스터디" | "강의" } = {
+    title: title,
+    type: "강의",
+  };
+
   return (
     <>
       <section className="flex flex-col min-h-screen sm:h-dvh">
-        <TopBar variant="share" showMore={false} isWhite={false} />
+        <TopBar variant="share" showMore={false} isWhite={false} shareInfo={shareInfo} />
         <section className="flex flex-col justify-start items-start py-5 px-4">
           <p className="text-gray-1000 text-base font-semibold leading-normal">{title}</p>
           <p className="text-gray-600 text-xs font-medium leading-snug">{instructor}</p>

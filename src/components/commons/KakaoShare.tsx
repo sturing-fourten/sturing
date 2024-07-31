@@ -3,15 +3,15 @@ import { kakaoLogo } from "../../../public/icons/icons";
 import Image from "next/image";
 
 type KakaoShareButtonProps = {
-  title?: string;
   shareInfo?: {
     title?: string;
     shareThumbnail?: string;
+    type?: "스터디" | "강의";
   };
-  type?: "스터디" | "강의";
 };
 
-export default function KakaoShareButton({ title, shareInfo, type = "스터디" }: KakaoShareButtonProps) {
+export default function KakaoShareButton({ shareInfo }: KakaoShareButtonProps) {
+  const type = shareInfo?.type || "스터디";
   // const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareUrl = window.location.href;
 

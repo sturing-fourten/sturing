@@ -13,6 +13,7 @@ interface IShareButtonProps {
   shareInfo?: {
     title?: string;
     shareThumbnail?: string;
+    type?: "스터디" | "강의";
   };
   onPopoverClick?: () => void;
 }

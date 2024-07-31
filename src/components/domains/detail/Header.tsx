@@ -19,6 +19,7 @@ interface BannerProps {
   shareInfo?: {
     title?: string;
     shareThumbnail?: string;
+    type?: "스터디" | "강의";
   };
 }
 
@@ -73,10 +74,16 @@ export default function Header({ page, lectureInfo, studyInfo }: BannerProps) {
     }
   };
 
-  const shareInfo = {
-    title: studyInfo?.title,
-    shareThumbnail: studyInfo?.imageUrl,
-  };
+  const shareInfo = studyInfo
+    ? {
+        title: studyInfo?.title,
+        shareThumbnail: studyInfo?.imageUrl,
+      }
+    : {
+        title: lectureInfo?.title,
+        type: "강의",
+      };
+
   return (
     <>
       <section
