@@ -2,6 +2,7 @@ import FixedBottomBar from "@/components/domains/detail/FixedBottomBar";
 import Header from "@/components/domains/detail/Header";
 import Contents from "@/components/domains/detail/study/Contents";
 import { getSession } from "@/lib/database/getSession";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 const getStudyInfo = async (id: string) => {
@@ -15,6 +16,7 @@ const getStudyInfo = async (id: string) => {
     });
     const studyData = await response.json();
 
+    console.log(studyData);
     return studyData;
   } catch (error) {
     console.error("Error fetching study", error);
@@ -32,6 +34,23 @@ const getCommentsInfo = async (id: string) => {
     throw error;
   }
 };
+
+interface IGenerateMetadataProps {
+  params: { id: string };
+}
+
+export async function generateMetadata({ params }: IGenerateMetadataProps): Promise<Metadata> {
+  const id = params.id;
+
+  const { study } = await getStudyInfo(id);
+
+  return {
+    title: study?.title,
+    openGraph: {
+      images: [study?.imageUrl],
+    },
+  };
+}
 
 export default async function StudyDetail({ params }: { params: { id: string } }) {
   const { id } = params;

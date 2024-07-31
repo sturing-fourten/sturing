@@ -10,12 +10,30 @@ import { TTabMenuLinkUnderlinedItem } from "@/types/study";
 import { getIsTodayAfterTargetDate } from "@/utils/getIsTodayAfterTargetDate";
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
-
+import { Metadata, ResolvingMetadata } from "next";
 interface IDashboardProps {
   params: {
     id: string;
   };
   tabs: React.ReactNode;
+}
+
+interface IDashboardGenerateMetadataProps {
+  params: { id: string };
+}
+
+export async function generateMetadata({ params }: IDashboardGenerateMetadataProps): Promise<Metadata> {
+  const id = params.id;
+
+  const study = await fetchStudyInfo(id);
+  const studyData = study.study;
+
+  return {
+    title: studyData?.title,
+    openGraph: {
+      images: [studyData?.imageUrl],
+    },
+  };
 }
 
 export default async function DashboardLayout({ params, tabs }: IDashboardProps) {
