@@ -92,5 +92,5 @@ function getTodayAttendance(data: TAttendanceItem["data"]) {
 
 export function getIsTodayInRange(startDate: Date, endDate: Date) {
   const today = new Date();
-  return today >= startDate && today <= endDate;
+  return today.getDate() >= startDate.getDate() && today.getDate() <= endDate.getDate();
 }
