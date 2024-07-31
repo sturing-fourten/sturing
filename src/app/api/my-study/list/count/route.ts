@@ -7,7 +7,9 @@ export async function GET(request: Request) {
   connectDB();
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
-
+  if (!userId) {
+    return Response.json({ error: "유저 id 가 필요합니다." }, { status: 400 });
+  }
   try {
     const myAcceptedTeamMember = await TeamMembers.find({
       members: {
