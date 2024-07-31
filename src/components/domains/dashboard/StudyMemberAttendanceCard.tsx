@@ -27,7 +27,7 @@ export default function StudyMemberAttendanceCard({
       </DashboardCardTitle>
 
       {isTodayInRange ? (
-        <ul className="flex gap-4 justify-between overflow-y-scroll scrollbar-hide mt-4">
+        <ul className="flex gap-4 overflow-y-scroll scrollbar-hide mt-4">
           {list.map((item) => {
             const member = teamMemberList.find((member) => member.userId === item.userId.toString());
             return <MemberItem key={item.teamMemberId.toString()} nickname={member?.nickname || ""} item={item} />;
@@ -92,5 +92,5 @@ function getTodayAttendance(data: TAttendanceItem["data"]) {
 
 export function getIsTodayInRange(startDate: Date, endDate: Date) {
   const today = new Date();
-  return today >= startDate && today <= endDate;
+  return today.getDate() >= startDate.getDate() && today.getDate() <= endDate.getDate();
 }

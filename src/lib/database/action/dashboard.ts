@@ -2,8 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { getSession } from "../getSession";
-import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
-
 export const fetchStudyInfo = async (id: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/study/${id}`);
@@ -153,21 +151,19 @@ export const postCheckItemAction = async ({
       body: JSON.stringify({ studyId, userId, newCheckItemDate, newCheckItemContent }),
     });
 
+    const result = await response.json();
     if (!response.ok) {
-      throw new Error("체크 리스트 생성 실패");
+      throw new Error(`체크 리스트 생성 실패 : ${result?.error ?? ""}`);
     }
-
-    revalidatePath(`/study/${studyId}/dashboard/me`);
-    revalidatePath(`/study/${studyId}/dashboard`);
   } catch (error) {
     console.error("Error", error);
   }
+
+  revalidatePath(`/study/${studyId}/dashboard/me`);
+  revalidatePath(`/study/${studyId}/dashboard`);
 };
 
-export const toggleCheckItemAction = async (formData: FormData) => {
-  const checkItemId = formData.get("checkItemId");
-  const studyId = formData.get("studyId");
-
+export const toggleCheckItemAction = async ({ studyId, checkItemId }: { studyId: any; checkItemId: any }) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/dashboard/checklist`, {
       method: "PATCH",
@@ -180,10 +176,71 @@ export const toggleCheckItemAction = async (formData: FormData) => {
     if (!response.ok) {
       throw new Error("체크 리스트 상태 변경 실패");
     }
-
-    revalidatePath(`/study/${studyId}/dashboard/me`);
-    revalidatePath(`/study/${studyId}/dashboard`);
   } catch (error) {
+    console.log("error", error);
+  }
+  revalidatePath(`/study/${studyId}/dashboard/me`);
+  revalidatePath(`/study/${studyId}/dashboard`);
+};
+
+export const changeStudyToProgressAction = async (formData: FormData) => {
+  try {
+    const studyId = formData.get("studyId");
+    const session = await getSession();
+    const userId = session?.user?.id || "";
+
+    if (userId && studyId) {
+      const response = await fetch(`${process.env.LOCAL_URL}/api/my-study/${studyId}/start`, {
+        method: "PATCH",
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("스터디 시작 처리 실패");
+      }
+
+      revalidatePath(`/study/${studyId}/dashboard`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/me`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/schedule`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/board`, "layout");
+      return { status: 200, message: "스터디 시작 처리 성공" };
+    } else {
+      throw new Error("유저 아이디와 스터디 아이디가 필요합니다.");
+    }
+  } catch (error: any) {
+    console.log("error", error);
+  }
+};
+
+export const changeStudyToDoneAction = async (formData: FormData) => {
+  try {
+    const studyId = formData.get("studyId");
+    const session = await getSession();
+    const userId = session?.user?.id || "";
+
+    if (userId && studyId) {
+      const response = await fetch(`${process.env.LOCAL_URL}/api/my-study/${studyId}/done`, {
+        method: "PATCH",
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("스터디 종료 처리 실패");
+      }
+
+      revalidatePath(`/study/${studyId}/dashboard`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/me`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/schedule`, "layout");
+      revalidatePath(`/study/${studyId}/dashboard/board`, "layout");
+      return { status: 200, message: "스터디 종료 처리 성공" };
+    } else {
+      throw new Error("유저 아이디와 스터디 아이디가 필요합니다.");
+    }
+  } catch (error: any) {
     console.log("error", error);
   }
 };

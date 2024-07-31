@@ -8,6 +8,7 @@ import { toggleFunctionIsActive } from "@/lib/database/action/dashboard";
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
 import { getSession } from "@/lib/database/getSession";
 import StudyMemberChecklistCard from "@/components/domains/dashboard/team/StudyMemberChecklistCard";
+import { DASHBOARD_FUNCTION_TYPE } from "@/constant/dashboard";
 
 const getDashboardInfo = async (id: string) => {
   try {
@@ -90,7 +91,7 @@ export default async function TeamTab(props: ITeamTabProps) {
               <input type="hidden" name="functionType" value="progressGauge" />
               <input type="hidden" name="dashboardId" value={dashboardId} />
               <input type="hidden" name="studyId" value={studyId} />
-              <StudyAddFunctionCard title="진척도" />
+              <StudyAddFunctionCard title={DASHBOARD_FUNCTION_TYPE.progressGauge} />
             </form>
           )}
           {!isAttendanceExist && (
@@ -98,7 +99,7 @@ export default async function TeamTab(props: ITeamTabProps) {
               <input type="hidden" name="functionType" value="attendance" />
               <input type="hidden" name="dashboardId" value={dashboardId} />
               <input type="hidden" name="studyId" value={studyId} />
-              <StudyAddFunctionCard title="출석체크" />
+              <StudyAddFunctionCard title={DASHBOARD_FUNCTION_TYPE.attendance} />
             </form>
           )}
           {!isCheckListExist && (
@@ -106,7 +107,7 @@ export default async function TeamTab(props: ITeamTabProps) {
               <input type="hidden" name="functionType" value="checkList" />
               <input type="hidden" name="dashboardId" value={dashboardId} />
               <input type="hidden" name="studyId" value={studyId} />
-              <StudyAddFunctionCard title="체크리스트" />
+              <StudyAddFunctionCard title={DASHBOARD_FUNCTION_TYPE.checkList} />
             </form>
           )}
           {/* {!isProofListExist && <StudyAddFunctionCard title="사진 인증" />} */}

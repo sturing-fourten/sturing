@@ -1,9 +1,8 @@
 "use client";
 
 import { useDashboardTeamStore } from "@/store/dashboardTeamStore";
-
 import { useEffect } from "react";
-import { CheckItem } from "./CheckItem";
+import { CheckItemWrapper } from "./CheckItemWrapper";
 
 export default function SelectedUserCheckList({ allMemberTodayCheckList }: { allMemberTodayCheckList: any }) {
   const { selectedUserId, setSelectedUserId } = useDashboardTeamStore();
@@ -18,7 +17,7 @@ export default function SelectedUserCheckList({ allMemberTodayCheckList }: { all
     <ul className="flex flex-col gap-0.5">
       {selectedUserId &&
         selectedUserCheckList &&
-        selectedUserCheckList.map((checkItem: any) => <CheckItem key={checkItem._id} checkItem={checkItem} />)}
+        selectedUserCheckList.map((checkItem: any) => <CheckItemWrapper key={checkItem._id} checkItem={checkItem} />)}
     </ul>
   );
 }

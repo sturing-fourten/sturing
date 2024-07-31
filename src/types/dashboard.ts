@@ -59,11 +59,14 @@ export type TDashboardResponse = {
 
 export type TDashboardFunctionType = "progressGauge" | "attendance" | "checkList";
 
+export type TCheckItem = {
+  _id: Types.ObjectId;
+  content: string;
+  isChecked: boolean;
+};
+
 export type TCheckListData = {
-  contentList: {
-    content: string;
-    isChecked: boolean;
-  }[];
+  contentList: TCheckItem[];
   date: Date;
   _id: Types.ObjectId;
 };
