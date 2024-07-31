@@ -26,7 +26,7 @@ export default function CommentHeader({ comment, refreshComments }: ICommentHead
     async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
-      const result = await deletePostCommentAction(postId, commentId, studyId);
+      const result = await deletePostCommentAction(postId, commentId);
 
       if (result?.status === 200) {
         alert(result?.message);

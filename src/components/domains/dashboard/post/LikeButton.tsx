@@ -8,7 +8,7 @@ export function LikeButton({ like, isIncludingMe }: { like: TComment["like"]; is
         alt={isIncludingMe ? "눌린 상태의 좋아요 아이콘" : "눌리지 않은 상태의 좋아요 아이콘"}
       />
       <span>좋아요</span>
-      {like.length > 0 && <span>{like.length}</span>}
+      {like && like.length > 0 && <span>{like.length}</span>}
     </button>
   );
 }
