@@ -22,7 +22,7 @@ export type TNoticePost = {
   content: string;
   postType?: "notice" | "task" | "free";
   isImportant?: boolean;
-  isMine: boolean;
+  isMine?: boolean;
   createdAt: Date;
   updatedAt?: Date;
 };
@@ -36,7 +36,7 @@ export type TPostComment = {
   nickname: string;
   profileImageUrl: string;
   content: string;
-  isMine: boolean;
+  isMine?: boolean;
   createdAt: Date;
   updatedAt: Date;
 };
