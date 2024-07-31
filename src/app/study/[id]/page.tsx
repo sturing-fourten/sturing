@@ -16,7 +16,6 @@ const getStudyInfo = async (id: string) => {
     });
     const studyData = await response.json();
 
-    console.log(studyData);
     return studyData;
   } catch (error) {
     console.error("Error fetching study", error);
