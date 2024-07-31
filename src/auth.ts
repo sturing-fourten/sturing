@@ -15,4 +15,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET,
     }),
   ],
+  trustHost: true,
 });
