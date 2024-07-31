@@ -2,10 +2,8 @@ import connectDB from "@/lib/database/db";
 import { Matching } from "@/schema/matchingSchema";
 import { User } from "@/schema/userSchema";
 
-export async function GET(req: Request) {
-  const token = req.headers.get("Authorization");
-  const userId = token?.split(" ")[1];
-
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+  const userId = params.id;
   if (!userId) {
     return Response.json({ error: "id 가 필요합니다." }, { status: 400 });
   }

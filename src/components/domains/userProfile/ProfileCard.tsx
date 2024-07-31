@@ -8,7 +8,7 @@ import { MatchingType } from "@/types/matching";
 
 interface ProfileCardProps {
   page: "mypage" | "profile";
-  mypage?: { user: EditProfileType; matching: MatchingType };
+  mypage?: { user: EditProfileType; matching: MatchingType } | null;
   profile?: { user: EditProfileType; matching: MatchingType };
 }
 

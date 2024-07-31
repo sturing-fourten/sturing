@@ -30,7 +30,7 @@ export const useMatchingStore = create<MatchingState>((set) => ({
   setMatching: (matching) => set({ matching }),
   fetchMatching: async () => {
     try {
-      const response = await fetch(`/api/matching/`);
+      const response = await fetch(`/api/matching`);
       if (!response.ok) {
         throw new Error("해당 사용자의 매칭 정보를 가져오는 데 실패했습니다.");
       }
