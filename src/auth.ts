@@ -7,12 +7,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   providers: [
     GitHub({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
     KakaoProvider({
-      clientId: process.env.AUTH_KAKAO_CLIENT_ID,
-      clientSecret: process.env.AUTH_KAKAO_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET,
     }),
   ],
 });
