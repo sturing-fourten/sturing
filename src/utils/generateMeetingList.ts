@@ -38,7 +38,6 @@ const timeMap: { [key: string]: string[] } = {
 };
 
 interface IGenerateUpcomingMeetingListProps {
-  startDate: Date;
   endDate: Date;
   title: string;
   where: string;
