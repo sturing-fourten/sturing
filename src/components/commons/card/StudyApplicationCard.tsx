@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function StudyApplicationCard(props: TApplicationSummary) {
   const { _id, userId, profileImageUrl, status, nickname, title, levels, createdAt } = props;
-  const { interest, level } = getFirstInterestLevel(levels.levels);
+  const { interest, level } = levels ? getFirstInterestLevel(levels.levels) : { interest: null, level: null };
 
   const applicationCreatedAt = createdAt ? `${format(new Date(createdAt), "yyyy.MM.dd HH:mm")} 지원` : "";
 
@@ -23,10 +23,14 @@ export default function StudyApplicationCard(props: TApplicationSummary) {
         <div>
           <div className="flex items-center gap-2 text-[12px] font-medium tracking-[-0.36px]">
             <span className="text-gray-700">{nickname}</span>
-            <span className="w-[1px] h-3 bg-gray-400"></span>
-            <span className="text-gray-600">{CATEGORY(interest)}</span>
-            <span className="w-[1px] h-3 bg-gray-400"></span>
-            <span className="text-gray-600">{CAREER_LIST[level]}</span>
+            {interest && level && (
+              <>
+                <span className="w-[1px] h-3 bg-gray-400"></span>
+                <span className="text-gray-600">{CATEGORY(interest)}</span>
+                <span className="w-[1px] h-3 bg-gray-400"></span>
+                <span className="text-gray-600">{CAREER_LIST[level]}</span>
+              </>
+            )}
           </div>
           <p className="text-[12px] font-semibold tracking-[-0.36px] text-gray-900">{title}</p>
         </div>

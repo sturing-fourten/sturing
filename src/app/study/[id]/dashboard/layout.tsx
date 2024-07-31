@@ -4,6 +4,7 @@ import StudyInfo from "@/components/domains/dashboard/StudyInfo";
 import { IMAGES_DEFAUlT } from "@/constant/images";
 import { fetchStudyInfo } from "@/lib/database/action/dashboard";
 import { TTabMenuLinkUnderlinedItem } from "@/types/study";
+import { notFound } from "next/navigation";
 
 interface IDashboardProps {
   params: {
@@ -26,6 +27,8 @@ export default async function DashboardLayout({ params, tabs }: IDashboardProps)
 
   const study = await fetchStudyInfo(id);
   const studyData = study.study;
+
+  if (!studyData?._id) notFound();
 
   const { study: studyBg } = IMAGES_DEFAUlT;
 

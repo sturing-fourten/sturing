@@ -5,6 +5,7 @@ import StudyHistory from "@/components/domains/userProfile/StudyHistory";
 import SturingIndex from "@/components/domains/userProfile/SturingIndex";
 import TopBar from "@/components/commons/TopBar";
 import HorizontalDivider from "@/components/commons/HorizontalDivider";
+import { notFound } from "next/navigation";
 
 const getProfileInfo = async (id: string) => {
   try {
@@ -31,10 +32,12 @@ const getDoneStudyList = async (id: string) => {
 export default async function Profile({ params }: { params: { id: string } }) {
   const { id } = params;
   const profileData = await getProfileInfo(id);
+  if (!profileData?.user?._id) notFound();
   const doneStudyList = await getDoneStudyList(id);
   const {
     user: { sturingIndex },
   } = profileData;
+
   return (
     <>
       <div className="bg-gradient-to-br from-gradient-gray/30 to-gradient-to/30">

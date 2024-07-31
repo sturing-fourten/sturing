@@ -7,9 +7,6 @@ import { notFound } from "next/navigation";
 const fetchApplication = async (id: string) => {
   try {
     const response = await fetch(`${process.env.LOCAL_URL}/api/study-application/${id}`);
-    if (!response.ok) {
-      notFound();
-    }
     const data = await response.json();
     return data;
   } catch (error) {
@@ -21,6 +18,7 @@ const fetchApplication = async (id: string) => {
 export default async function ApplicationPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const application = await fetchApplication(id);
+  if (!application?._id) notFound();
 
   return (
     <div className="w-full h-dvh flex-col inline-flex">

@@ -136,7 +136,7 @@ export default function Content() {
                 <NoResultText>검색 결과가 없습니다.</NoResultText>
               )}
             </div>
-            {studyList?.length !== 0 && studyList.length > 4 && menu === "total" && (
+            {studyList?.length !== 0 && menu === "total" && (
               <Button
                 onClick={() => setTabMenu("study")}
                 varient="ghost"
