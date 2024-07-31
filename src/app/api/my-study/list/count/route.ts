@@ -5,8 +5,8 @@ import { TMyStudyTabMenuLinkUnderlinedItem } from "@/types/study";
 
 export async function GET(request: Request) {
   connectDB();
-  const { searchParams } = new URL(request.url);
-  const userId = searchParams.get("userId");
+  const token = request.headers.get("Authorization");
+  const userId = token?.split(" ")[1];
 
   try {
     const myAcceptedTeamMember = await TeamMembers.find({

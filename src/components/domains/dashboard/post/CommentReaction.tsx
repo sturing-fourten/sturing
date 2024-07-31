@@ -1,6 +1,6 @@
 import { TComment, TCommentType, TNestedComment } from "@/types/board";
 import { LikeButton } from "./LikeButton";
-import { NestedCommentItem } from "./NestedCommentItem";
+// import { NestedCommentItem } from "./NestedCommentItem";
 import PostNestedCommentForm from "./PostNestedCommentForm";
 
 export default function CommentReaction({

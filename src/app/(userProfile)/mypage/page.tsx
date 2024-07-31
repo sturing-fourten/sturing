@@ -6,33 +6,8 @@ import RoleTagList from "@/components/domains/userProfile/RoleTagList";
 import StudyHistory from "@/components/domains/userProfile/StudyHistory";
 import StudyOverview from "@/components/domains/userProfile/StudyOverview";
 import SturingIndex from "@/components/domains/userProfile/SturingIndex";
+import { getMyProfileInfo, getMyStudyCount } from "@/lib/database/action/mypage";
 import { fetchDoneStudyListAction } from "@/lib/database/action/myStudyList";
-import { getSession } from "@/lib/database/getSession";
-
-const getMyProfileInfo = async () => {
-  try {
-    const session = await getSession();
-    const id = session?.user?.id;
-    const data = await (await fetch(`${process.env.LOCAL_URL}/api/userProfile/${id}`)).json();
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching profile", error);
-  }
-};
-
-const getMyStudyCount = async () => {
-  try {
-    const session = await getSession();
-    const id = session?.user?.id;
-
-    const data = await (await fetch(`${process.env.LOCAL_URL}/api/my-study/list/count?userId=${id}`)).json();
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching profile", error);
-  }
-};
 
 export default async function MyPage() {
   const myProfileData = await getMyProfileInfo();
@@ -55,7 +30,7 @@ export default async function MyPage() {
         </div>
       </div>
       <div className="bg-white pb-10">
-        <SturingIndex sturingIndex={sturingIndex} />
+        {sturingIndex && <SturingIndex sturingIndex={sturingIndex} />}
         {/* <RoleTagList />
         <PeerReviewTagList /> */}
         <StudyHistory doneStudyList={myDoneStudyList} />
