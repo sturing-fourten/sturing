@@ -4,7 +4,7 @@ import Button from "@/components/commons/Button";
 import CardList from "@/components/commons/CardList";
 import TabMenuButton from "@/components/commons/TabMenuButton";
 import LectureCard from "@/components/commons/card/LectureCard";
-import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
+import StudyRecruitCard from "@/components/commons/card/StudyRecruitCard";
 import { useEffect, useState } from "react";
 import SortFilterButton from "./SortFilterButton";
 import { useFilterStore, useSearchTabMenuStore } from "@/store/FilterStore";

@@ -1,4 +1,4 @@
-import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
+import StudyRecruitCard from "@/components/commons/card/StudyRecruitCard";
 import NoResultText from "@/components/commons/NoResultText";
 import { getStudyBookmarkListAction } from "@/lib/database/action/bookmarkList";
 import { TStudyRecruitCardData } from "@/types/api/study";

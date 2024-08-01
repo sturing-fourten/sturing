@@ -3,7 +3,7 @@
 import CardList from "@/components/commons/CardList";
 import NoResultText from "@/components/commons/NoResultText";
 import SearchBar from "@/components/commons/SearchBar";
-import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
+import StudyRecruitCard from "@/components/commons/card/StudyRecruitCard";
 import SearchTag from "@/components/domains/search/SearchTag";
 import useRecentKeywords from "@/hooks/useRecentKeywords";
 import { TStudyRecruitCardData } from "@/types/api/study";

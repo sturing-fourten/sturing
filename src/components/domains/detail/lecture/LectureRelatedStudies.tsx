@@ -1,5 +1,5 @@
 import Button from "@/components/commons/Button";
-import { StudyRecruitCard } from "../../../commons/card/StudyRecruitCard";
+import StudyRecruitCard from "../../../commons/card/StudyRecruitCard";
 import CardList from "../../../commons/CardList";
 import Title from "../Title";
 import { TStudyRecruitCardData } from "@/types/api/study";

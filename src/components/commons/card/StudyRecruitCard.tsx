@@ -15,7 +15,12 @@ interface IStudyRecruitCardProps {
   onClick?: () => void;
 }
 
-export function StudyRecruitCard({ isMini, recruitCardData, onClick, hideBookmark = false }: IStudyRecruitCardProps) {
+export default function StudyRecruitCard({
+  isMini,
+  recruitCardData,
+  onClick,
+  hideBookmark = false,
+}: IStudyRecruitCardProps) {
   const {
     category,
     title,

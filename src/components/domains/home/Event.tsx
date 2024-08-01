@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function Event() {
   return (
     <>
-      <div className="flex flex-col gap-[20px] w-full pr-[16px]">
+      <div className="flex flex-col gap-[20px] w-full pr-[16px] pl-[16px]">
         <div className="flex flex-col full gap-1">
           <span className="text-gray-1000 text-[18px] font-semibold tracking-[-0.54px] leading-[24px]">
             스터링 환급 챌린지
