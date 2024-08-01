@@ -110,6 +110,9 @@ export default function Contents() {
     if (!matching) {
       fetchPopularStudyList();
       fetchLatestStudyList();
+      setUserNickname("");
+      setUserInterestCategory(null);
+      setUserLocation(null);
     }
 
     if (matching) {
