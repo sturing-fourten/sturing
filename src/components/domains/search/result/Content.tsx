@@ -16,10 +16,13 @@ import NoResultText from "@/components/commons/NoResultText";
 
 import { TLectureListQuery, TStudyListQuery } from "@/types/filter";
 import { useSearchResultStore } from "@/store/SearchResultStore";
+import SearchResultStudyListSkeletons from "@/components/commons/skeleton/SearchResultStudyListSkeletons";
+import LectureListSkeletons from "@/components/commons/skeleton/LectureListSkeletons";
 
 export default function Content() {
   const { menu, setTabMenu } = useSearchTabMenuStore();
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
   const {
     studyList,
     lectureList,
@@ -56,22 +59,24 @@ export default function Content() {
     try {
       await fetchStudyList(studyQuery, studyPage);
       await fetchLectureList(lectureQuery, lecturePage);
-      setIsLoading(false);
     } catch (e) {
       console.error(e);
     } finally {
       setIsLoading(false);
+      setIsFetchingMore(false);
     }
   };
 
   const handleStudyLoadMore = () => {
     if (hasStudyNextPage) {
+      setIsFetchingMore(true);
       setStudyPage(studyPage + 1);
     }
   };
 
   const handleLectureLoadMore = () => {
     if (hasLectureNextPage) {
+      setIsFetchingMore(true);
       setLecturePage(lecturePage + 1);
     }
   };
@@ -107,7 +112,9 @@ export default function Content() {
             )}
             <div className="flex flex-col gap-5 items-end">
               {menu === "study" && <SortFilterButton />}
-              {studyList?.length !== 0 ? (
+              {(isLoading && !isFetchingMore) || studyList === null ? (
+                <SearchResultStudyListSkeletons cardCount={menu === "total" ? 4 : 6} />
+              ) : studyList?.length !== 0 ? (
                 <CardList>
                   {menu === "total"
                     ? studyList?.slice(0, 4).map((study: TStudyRecruitCardData) => (
@@ -162,7 +169,9 @@ export default function Content() {
               <h1 className="text-base text-gray-1000 font-semibold leading-snug mb-[17px]">강의</h1>
             )}
             <div className="flex flex-col gap-[14px]">
-              {lectureList?.length !== 0 ? (
+              {(isLoading && !isFetchingMore) || lectureList === null ? (
+                <LectureListSkeletons cardCount={menu === "total" ? 2 : 8} />
+              ) : lectureList?.length !== 0 ? (
                 menu === "total" ? (
                   lectureList.slice(0, 2).map((lecture: TLectureListCardData) => (
                     <Link key={lecture.id} href={`/lecture/${lecture.id}`}>
@@ -180,7 +189,7 @@ export default function Content() {
                 <NoResultText>검색 결과가 없습니다.</NoResultText>
               )}
             </div>
-            {lectureList?.length !== 0 && lectureList.length > 2 && menu === "total" && (
+            {lectureList?.length !== 0 && menu === "total" && (
               <Button
                 onClick={() => setTabMenu("lecture")}
                 varient="ghost"

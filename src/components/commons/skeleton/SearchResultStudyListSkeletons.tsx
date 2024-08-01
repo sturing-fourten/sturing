@@ -6,7 +6,7 @@ export default function SearchResultStudyListSkeletons({ cardCount = 4 }: { card
     <>
       <CardList>
         {new Array(cardCount).fill("").map((_, i) => (
-          <StudyRecruitCardSkeleton key={i} />
+          <StudyRecruitCardSkeleton isMini key={i} />
         ))}
       </CardList>
     </>

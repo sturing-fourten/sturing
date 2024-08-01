@@ -7,8 +7,8 @@ import { TLectureListQuery, TStudyListQuery } from "@/types/filter";
 import { create } from "zustand";
 
 interface SearchResult {
-  lectureList: TLectureListData;
-  studyList: TStudyRecruitCardData[];
+  lectureList: TLectureListData | null;
+  studyList: TStudyRecruitCardData[] | null;
   totalStudiesResultCount: number;
   totalLectureCount: number;
   studyCategoriesCount: { [key: string]: number };
@@ -25,8 +25,8 @@ interface SearchResult {
 }
 
 export const useSearchResultStore = create<SearchResult>((set) => ({
-  lectureList: [],
-  studyList: [],
+  lectureList: null,
+  studyList: null,
   totalStudiesResultCount: 0,
   totalLectureCount: 0,
   studyCategoriesCount: {},
@@ -50,9 +50,9 @@ export const useSearchResultStore = create<SearchResult>((set) => ({
           page === 1
             ? studyList
             : [
-                ...state.studyList,
+                ...(state.studyList || []),
                 ...studyList.filter(
-                  (newItem: TStudyRecruitCardData) => !state.studyList.some((prevItem) => prevItem.id === newItem.id),
+                  (newItem: TStudyRecruitCardData) => !state.studyList?.some((prevItem) => prevItem.id === newItem.id),
                 ),
               ],
       }));
@@ -73,9 +73,9 @@ export const useSearchResultStore = create<SearchResult>((set) => ({
           page === 1
             ? lectureList
             : [
-                ...state.lectureList,
+                ...(state.lectureList || []),
                 ...lectureList.filter(
-                  (newItem: TLectureListCardData) => !state.lectureList.some((prevItem) => prevItem.id === newItem.id),
+                  (newItem: TLectureListCardData) => !state.lectureList?.some((prevItem) => prevItem.id === newItem.id),
                 ),
               ],
       }));
