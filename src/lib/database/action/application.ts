@@ -4,6 +4,7 @@ import { Application } from "@/schema/applicationSchema";
 import { getSession } from "../getSession";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import connectDB from "../db";
 
 export const applyAction = async (formData: FormData) => {
   try {
@@ -17,6 +18,8 @@ export const applyAction = async (formData: FormData) => {
     if (!userId || !studyId || !title || !resolution) {
       return { status: 400, message: "필수 정보가 누락되었습니다." };
     }
+
+    await connectDB();
 
     const newApplication = {
       userId,
