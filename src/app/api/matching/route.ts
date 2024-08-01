@@ -13,7 +13,7 @@ export async function GET(request: Request) {
       userId: `${userId}`,
     });
 
-    if (existing !== null) {
+    if (!!existing) {
       matching = existing;
     }
 
