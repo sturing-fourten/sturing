@@ -65,8 +65,9 @@ details[open] summary img {
   transform: rotate(180deg);
 }
 
-/* Scroll Bar Custom _ Chrome, Edge, Safari */
-/* body {
+/* Scroll Bar Custom _ Chrome,
+Edge,
+Safari body {
   @apply [overflow:overlay];
 }
 
@@ -81,3 +82,18 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
   @apply bg-transparent;
 } */
+
+::-webkit-scrollbar {
+  display: block;
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #e4e4e4;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff; /* 스크롤바 트랙의 배경 색상 */
+}
