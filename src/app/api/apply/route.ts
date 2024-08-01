@@ -1,5 +1,7 @@
+export const maxDuration = 300; // 추가한 코드
+export const dynamic = "force-dynamic"; // 추가한 코드
+
 import connectDB from "@/lib/database/db";
-import { getSession } from "@/lib/database/getSession";
 import { Application } from "@/schema/applicationSchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 
