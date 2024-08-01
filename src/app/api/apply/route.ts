@@ -6,7 +6,7 @@ import { Application } from "@/schema/applicationSchema";
 import { TeamMembers } from "@/schema/teamMemberSchema";
 
 export async function PATCH(request: Request) {
-  connectDB();
+  await connectDB();
 
   try {
     const { studyId, newApplication, newTeamMember } = await request.json();

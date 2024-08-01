@@ -22,7 +22,7 @@ const applicationSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true, bufferCommands: false },
+  { timestamps: true },
 );
 
 export const Application = mongoose.models.Application || mongoose.model("Application", applicationSchema);
