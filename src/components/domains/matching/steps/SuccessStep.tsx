@@ -3,7 +3,7 @@
 import { useState } from "react";
 import AlertMessage from "@/components/commons/AlertMessage";
 import CardList from "@/components/commons/CardList";
-import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
+import StudyRecruitCard from "@/components/commons/card/StudyRecruitCard";
 import Button from "@/components/commons/Button";
 
 export default function SuccessStep() {

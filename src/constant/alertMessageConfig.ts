@@ -6,7 +6,7 @@ export const ALERT_MESSAGE_CONFIG: AlertMessageConfig = {
     src: ICONS.success.src,
     alt: ICONS.success.alt,
     title: "매칭 선택을 완료했습니다!",
-    content: `선택하신 매칭 요소는 내 프로필에서 확인할 수 있으며\n웅진님을 위한 스터디 추천에 반영됩니다.`,
+    content: `선택하신 매칭 요소는 내 프로필에서 확인할 수 있으며\n회원님을 위한 스터디 추천에 반영됩니다.`,
   },
   recruit: {
     src: ICONS.success.src,

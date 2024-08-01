@@ -1,6 +1,6 @@
 import AlertMessage from "@/components/commons/AlertMessage";
 import CardList from "@/components/commons/CardList";
-import { StudyRecruitCard } from "@/components/commons/card/StudyRecruitCard";
+import StudyRecruitCard from "@/components/commons/card/StudyRecruitCard";
 import Button from "@/components/commons/Button";
 import Link from "next/link";
 import NoResultText from "@/components/commons/NoResultText";
