@@ -8,16 +8,11 @@ export async function GET(request: Request) {
   const userId = session?.user?.id;
   await connectDB();
   try {
-    let matching;
     const existing = await Matching.findOne({
       userId: `${userId}`,
     });
 
-    if (!!existing) {
-      matching = existing;
-    }
-
-    return Response.json(matching, { status: 200 });
+    return Response.json(existing ?? null);
   } catch (error) {
     return Response.json({ error });
   }
