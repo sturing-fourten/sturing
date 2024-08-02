@@ -54,17 +54,19 @@ export default function RecruitedMembersList({ study, memberList }: IRecruitedMe
         </Title>
         <HorizontalDivider addStyle="my-4" />
         <div className="flex flex-col gap-1 justify-start">
-          {memberList?.map((member) => (
-            <Link key={member.memberId.toString()} href={`/profile/${member.memberId.toString()}`}>
-              <MemberProfile
-                nickname={member.nickname}
-                profileImageUrl={member.profileImageUrl}
-                role={ROLE_LIST[member.role]?.name}
-                isLeader={member.isOwner}
-                status={member.status}
-              />
-            </Link>
-          ))}
+          {memberList
+            .filter((member) => member.status === "ACCEPTED")
+            .map((member) => (
+              <Link key={member.memberId.toString()} href={`/profile/${member.memberId.toString()}`}>
+                <MemberProfile
+                  nickname={member.nickname}
+                  profileImageUrl={member.profileImageUrl}
+                  role={ROLE_LIST[member.role]?.name}
+                  isLeader={member.isOwner}
+                  status={member.status}
+                />
+              </Link>
+            ))}
         </div>
       </StudyDetailCardLayout>
     </article>
