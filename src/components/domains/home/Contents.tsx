@@ -18,7 +18,6 @@ import NoResultText from "@/components/commons/NoResultText";
 import { CATEGORY_MAP_TO_KO } from "@/utils/categoryMap";
 import SearchBar from "@/components/commons/SearchBar";
 import useRecentKeywords from "@/hooks/useRecentKeywords";
-
 import HomeStudyListSkeletons from "@/components/commons/skeleton/HomeStudyListSkeletons";
 
 export default function Contents() {
@@ -40,10 +39,15 @@ export default function Contents() {
 
   const router = useRouter();
 
-  const fetchPopularStudyList = async () => {
+  const fetchPopularStudyList = async (userId: string) => {
     setIsPopularListLoading(true);
+
     try {
-      const res = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR`);
+      const res = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR`, {
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
       if (!res.ok) {
         return console.error("popular study list fetch error");
       }
@@ -56,10 +60,15 @@ export default function Contents() {
       setIsPopularListLoading(false);
     }
   };
-  const fetchLatestStudyList = async () => {
+  const fetchLatestStudyList = async (userId: string) => {
     setIsLatestListLoading(true);
+
     try {
-      const res = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST`);
+      const res = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST`, {
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
       if (!res.ok) {
         return console.error("latest study list fetch error");
       }
@@ -73,10 +82,15 @@ export default function Contents() {
     }
   };
 
-  const fetchUserCategoryStudyList = async (userCategory: string) => {
+  const fetchUserCategoryStudyList = async (userCategory: string, userId: string) => {
     setIsCategoryListLoading(true);
+
     try {
-      const res = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR&category=${userCategory}`);
+      const res = await fetch(`/api/study/list?pageSize=5&sortBy=POPULAR&category=${userCategory}`, {
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
       if (!res.ok) {
         return console.error("category matching study list fetch error");
       }
@@ -90,10 +104,15 @@ export default function Contents() {
     }
   };
 
-  const fetchUserLocationStudyList = async (userLocation: string) => {
+  const fetchUserLocationStudyList = async (userLocation: string, userId: string) => {
     setIsLocationListLoading(true);
+
     try {
-      const res = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST&location=${userLocation}`);
+      const res = await fetch(`/api/study/list?pageSize=5&sortBy=LATEST&location=${userLocation}`, {
+        headers: {
+          Authorization: "Bearer " + userId,
+        },
+      });
       if (!res.ok) {
         return console.error("location matching study list fetch error");
       }
@@ -108,8 +127,9 @@ export default function Contents() {
   };
   useEffect(() => {
     if (!matching) {
-      fetchPopularStudyList();
-      fetchLatestStudyList();
+      const userId = user ? user._id.toString() : "";
+      fetchPopularStudyList(userId);
+      fetchLatestStudyList(userId);
       setUserNickname("");
       setUserInterestCategory(null);
       setUserLocation(null);
@@ -122,11 +142,12 @@ export default function Contents() {
       const userLocation =
         repLocation?.city && repLocation?.district && `${repLocation?.city} ${repLocation?.district}`;
       const userNickname = user?.nickname || "";
+      const userId = user ? user._id.toString() : "";
       setUserNickname(userNickname);
       setUserInterestCategory(userInterestCategory);
       setUserLocation(userLocation);
-      fetchUserCategoryStudyList(userInterestCategory);
-      fetchUserLocationStudyList(userLocation);
+      fetchUserCategoryStudyList(userInterestCategory, userId);
+      fetchUserLocationStudyList(userLocation, userId);
     }
 
     resetFilters();
